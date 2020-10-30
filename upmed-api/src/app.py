@@ -10,7 +10,7 @@ Create app and register blueprints
 app = Flask(__name__)
 api_endpoints.bind_to_app(app)
 
-@app.route('/api')
+@app.route('/')
 def hello_world():
     target = os.environ.get('TARGET', 'World')
     return 'Hello {}!\n'.format(target)
