@@ -1,0 +1,11 @@
+# Web server
+flask
+
+# Code coverage
+coverage
+
+# Linting/style checking
+pylint
+
+# External database
+firebase-admin

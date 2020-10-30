@@ -1,0 +1,21 @@
+from typing import List
+
+from flask import Flask, Blueprint
+
+class SuperBlueprint(Blueprint):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.blueprints = []
+        self.prefix = kwargs['url_prefix']
+
+    def register_blueprint(self, blueprint: Blueprint, url_prefix: str = "") -> List[Blueprint]:
+        endpoint = self.prefix + (url_prefix if url_prefix != "" else blueprint.url_prefix)
+        blueprint.url_prefix = endpoint
+        print(endpoint)
+        self.blueprints.append(blueprint)
+        return self.blueprints
+
+    def bind_to_app(self, app: Flask):
+        for blueprint in self.blueprints:
+            app.register_blueprint(blueprint)

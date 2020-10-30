@@ -1,0 +1,28 @@
+{
+    "extends": [ "tslint:latest", "tslint-config-prettier", "tslint-etc", "tslint-lines-between-class-members" ],
+    "rules": {
+        "radix": false,
+        "interface-name" : [ true, "never-prefix" ],
+        "ban-types": false,
+        "object-literal-sort-keys": false,
+        "no-unused-declaration": true,
+        "no-console": false,
+        "prefer-const": true,
+        "no-object-literal-type-assertion": false,
+        "prefer-conditional-expression": false,
+        "no-empty": false,
+        "no-unused-expression": false,
+        "lines-between-class-members": true,
+        "no-bitwise": false,
+        "no-submodule-imports": false,
+        "prefer-for-of": false,
+        "no-useless-escape": false
+    },
+    "linterOptions": {
+        "exclude": [
+            "build/**/*",
+            "public/**/*",
+            "node_modules/**/*"
+        ]
+    }
+}

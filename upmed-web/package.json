@@ -1,0 +1,69 @@
+{
+  "name": "upmed",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/chai": "^4.2.14",
+    "@types/jest": "^26.0.15",
+    "@types/mocha": "^8.0.3",
+    "@types/node": "^12.0.0",
+    "@types/node-sass": "^4.11.1",
+    "@types/prettier": "^2.1.5",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8",
+    "chai": "^4.2.0",
+    "jest-dom": "^4.0.0",
+    "mocha": "^8.2.0",
+    "node-sass": "^4.14.1",
+    "prettier": "^2.1.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.0",
+    "typescript": "^4.0.3",
+    "web-vitals": "^0.2.4"
+  },
+  "devDependencies": {
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.19.1",
+    "tslint": "^6.0.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-etc": "^1.10.0",
+    "tslint-lines-between-class-members": "^1.3.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"src/**/*.tsx\" \"src/**/*.ts\" \"src/**/*.jsx\" \"src/**/*.js\"",
+    "soft-format": "prettier \"src/**/*.tsx\" \"src/**/*.ts\" \"src/**/*.jsx\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json --fix",
+    "soft-lint": "tslint -p tsconfig.json"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "pre-commit": [
+    "lint",
+    "format",
+    "build"
+  ]
+}

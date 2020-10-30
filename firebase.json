@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "upmed-web/build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
