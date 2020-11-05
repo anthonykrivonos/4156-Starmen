@@ -1,1 +1,1 @@
-worker: cd upmed-api && export FLASK_APP=$PWD/src/app.py && pip3 install -r requirements.txt && flask run
+web: cd upmed-api && pip3 install -r requirements.txt && cd src && gunicorn app:app

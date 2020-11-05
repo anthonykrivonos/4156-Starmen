@@ -1,5 +1,6 @@
 # Web server
 flask
+gunicorn
 
 # Code coverage
 coverage
