@@ -12,7 +12,6 @@ class SuperBlueprint(Blueprint):
     def register_blueprint(self, blueprint: Blueprint, url_prefix: str = "") -> List[Blueprint]:
         endpoint = self.prefix + (url_prefix if url_prefix != "" else blueprint.url_prefix)
         blueprint.url_prefix = endpoint
-        print(endpoint)
         self.blueprints.append(blueprint)
         return self.blueprints
 

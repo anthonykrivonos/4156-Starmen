@@ -5,7 +5,8 @@
 1. Import the `.env` file shared privately within the Starmen team and place it
 in the `upmed-api/` directory.
 2. Install requirements with `pip3 install -r requirements.txt`.
-3. Start the server by running `python3 src/app.py`.
+3. Run `export FLASK_APP=$PWD/src/app.py` to add the `FLASK_APP` environment variable.
+4. Start the server by running `flask run -p 8080`. Run `export FLASK_DEBUG=true` to enter debugging mode.
 
 ## Submitting Code & Deploying
 

@@ -9,3 +9,9 @@ pylint
 
 # External database
 firebase-admin
+
+# Reading from .env (.env MUST BE INSIDE upmed-api/)
+python-dotenv
+
+# For basic encryption/decryption
+simple-crypt
