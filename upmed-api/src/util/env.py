@@ -11,6 +11,10 @@ load_dotenv(dotenv_path=env_path)
 
 class Env:
     @staticmethod
+    def PORT() -> str:
+        return os.getenv("PORT")
+
+    @staticmethod
     def UPMED_PRIVATE_KEY() -> str:
         return os.getenv("UPMED_PRIVATE_KEY")
 
