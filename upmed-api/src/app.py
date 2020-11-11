@@ -1,9 +1,9 @@
 import os
 
-from .util.env import Env
+from util.env import Env
 from flask import Flask
 
-from .api import api_endpoints
+from api import api_endpoints
 
 """
 Create app and register blueprints
