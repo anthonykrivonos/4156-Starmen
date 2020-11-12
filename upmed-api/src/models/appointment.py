@@ -7,6 +7,7 @@ class Appointment:
     startDate: int
     endDate: int
     doctor: DoctorId
+    patient: PatientId
     subject: str
     notes: Optional[str]
     videoUrl: Optional[str]
@@ -17,6 +18,7 @@ class Appointment:
         startDate: int,
         endDate: int,
         doctor: DoctorId,
+        patient: PatientId,
         subject: str,
         notes: Optional[str],
         videoUrl: Optional[str],
@@ -25,6 +27,7 @@ class Appointment:
         self.startDate = startDate
         self.endDate = endDate
         self.doctor = doctor
+        self.patient = patient
         self.subject = subject
         self.notes = notes
         self.videoUrl = videoUrl

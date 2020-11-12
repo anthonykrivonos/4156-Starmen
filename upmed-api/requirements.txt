@@ -16,3 +16,9 @@ python-dotenv
 
 # For basic encryption/decryption
 simple-crypt
+
+# JWT
+PyJWT==1.4.2
+
+# Twilio API
+twilio

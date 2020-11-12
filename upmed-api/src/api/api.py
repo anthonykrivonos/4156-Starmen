@@ -1,4 +1,4 @@
-from util import SuperBlueprint
+from ..util import SuperBlueprint
 
 from .hcp import hcp_endpoints
 from .patient import patient_endpoints

@@ -9,3 +9,9 @@ class Day:
     ):
         self.startTime = startTime
         self.endTime = endTime
+
+    def list(self):
+        res = []
+        res.append(self.startTime)
+        res.append(self.endTime)
+        return res

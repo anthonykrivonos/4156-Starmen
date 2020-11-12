@@ -5,8 +5,8 @@
 1. Import the `.env` file shared privately within the Starmen team and place it
 in the `upmed-api/` directory.
 2. Install requirements with `pip3 install -r requirements.txt`.
-3. Run `export FLASK_APP=$PWD/src/app.py` to add the `FLASK_APP` environment variable.
-4. Start the server by running `flask run -p 8080`. Run `export FLASK_DEBUG=true` to enter debugging mode.
+3. Run `export FLASK_APP=$PWD/src/app.py && export PORT=8080` to add the `FLASK_APP` and `PORT` environment variables.
+4. Start the server by running `gunicorn app:app`. Run `export FLASK_DEBUG=true` to enter debugging mode.
 
 ## Submitting Code & Deploying
 

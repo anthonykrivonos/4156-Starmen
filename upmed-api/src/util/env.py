@@ -34,6 +34,10 @@ class Env:
     def TWILIO_API_KEY_SECRET() -> str:
         return os.getenv("TWILIO_API_KEY_SECRET")
 
+    @staticmethod
+    def TWILIO_AUTH_TOKEN_SECRET() -> str:
+        return os.getenv("TWILIO_AUTH_TOKEN")
+
 # Ensure .env file is up to date, or exit promptly
 missing_envs: List[str] = []
 for key in Env.__dict__.keys():
