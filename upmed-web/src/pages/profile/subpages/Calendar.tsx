@@ -39,30 +39,33 @@ export const Calendar = (props: ProfileSubpageProps) => {
     // Search for new doctors or patients
     const [newDoctors, setNewDoctors] = useState([] as HCP[])
     const [newPatients, setNewPatients] = useState([] as Patient[])
+    const [newLoaded, setNewLoaded] = useState(false)
 
     useEffect(() => {
-        const token = Users.getUserToken()
-        console.log('loading people')
-        if (props.isPatient) {
-            Client.HCP.getAll(token).then((doctors) => {
-                setNewDoctors(doctors.sort((a, b) => Number(a.lastName < b.lastName)))
-                if (newDoctors.length > 0) {
-                    setDoctor(newDoctors[0])
-                }
-            }).catch(() => {
-                setScheduleError('Could not load doctors.')
-            })
-        } else {
-            Client.Patient.getAll(token).then((patients) => {
-                setNewPatients(patients.sort((a, b) => Number(a.lastName < b.lastName)))
-                if (newPatients.length > 0) {
-                    setPatient(newPatients[0])
-                }
-            }).catch(() => {
-                setScheduleError('Could not load patients.')
-            })
+        if (!newLoaded) {
+            setNewLoaded(true)
+            const token = Users.getUserToken()
+            if (props.isPatient) {
+                Client.HCP.getAll(token).then((doctors) => {
+                    setNewDoctors(doctors.sort((a, b) => Number(a.lastName < b.lastName)))
+                    if (newDoctors.length > 0) {
+                        setDoctor(newDoctors[0])
+                    }
+                }).catch(() => {
+                    setScheduleError('Could not load doctors.')
+                })
+            } else {
+                Client.Patient.getAll(token).then((patients) => {
+                    setNewPatients(patients.sort((a, b) => Number(a.lastName < b.lastName)))
+                    if (newPatients.length > 0) {
+                        setPatient(newPatients[0])
+                    }
+                }).catch(() => {
+                    setScheduleError('Could not load patients.')
+                })
+            }
         }
-    }, [location.pathname, newDoctors, newPatients, props.isPatient])
+    }, [location.pathname, newDoctors, newLoaded, newPatients, props.isPatient])
 
 	useEffect(() => {
         // Perform one-line validation on all the inputs

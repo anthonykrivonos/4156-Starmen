@@ -54,9 +54,15 @@ const getSubpageProps = async () => {
 		patients = await Client.HCP.getPatients(token)
 	}
 
-	appointments = await Client.Appointment.getCalendar(token)
-
-	console.log(appointments)
+	// Band-aid for empty calendar bug
+	try {
+		appointments = await Client.Appointment.getCalendar(token)
+		setTimeout(() => {
+			throw new Error('')
+		}, 2000)
+	} catch {
+		appointments = []
+	}
 
 	return {
 		user,
