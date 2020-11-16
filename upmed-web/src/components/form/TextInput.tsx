@@ -109,8 +109,8 @@ export class TextInput extends Component<TextInputProps> {
 					{rows === 1 ? (
 						<input
 							className={`${styles.text_input} ${isValid ? '' : styles.text_input_error} ${className}`}
-							onChange={e => this.onChangeText(e.target.value)}
-							onFocus={_ => onFocus && onFocus(this.state.value)}
+							onChange={(e) => this.onChangeText(e.target.value)}
+							onFocus={(_) => onFocus && onFocus(this.state.value)}
 							onBlur={() => onBlur && onBlur(this.state.value)}
 							placeholder={placeholder}
 							value={this.state.value}
@@ -118,8 +118,8 @@ export class TextInput extends Component<TextInputProps> {
 					) : (
 						<textarea
 							className={`${styles.text_input} ${isValid ? '' : styles.text_input_error} ${className}`}
-							onChange={e => this.onChangeText(e.target.value)}
-							onFocus={_ => onFocus && onFocus(this.state.value)}
+							onChange={(e) => this.onChangeText(e.target.value)}
+							onFocus={(_) => onFocus && onFocus(this.state.value)}
 							onBlur={() => onBlur && onBlur(this.state.value)}
 							placeholder={placeholder}
 							rows={rows}

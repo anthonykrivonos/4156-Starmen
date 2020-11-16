@@ -1,0 +1,2 @@
+============ upmed-web Styling Report Generated on 1605545969 ============
+$ prettier --list-different "src/**/*.tsx" "src/**/*.ts"

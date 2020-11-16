@@ -1,0 +1,116 @@
+============ upmed-web Coverage and Unit Report Generated on 1605544127 ============
+$ nyc env TS_NODE_PROJECT="tsconfig.tst.json" mocha --require ts-node/register ./tst/**/*.spec.ts
+
+
+  DateTime
+    ✓ hoursOffset.success
+    ✓ getMinutes.success
+    ✓ minutesToHHMMAA.success
+    ✓ hhmmAAToMinutes.success
+    ✓ minutesToHHMM.success
+    ✓ hhmmToMinutes.success
+
+  Formatter
+    ✓ phone.success
+
+  Hasher
+    ✓ encode.success
+    ✓ decode.success
+    ✓ decode.failure
+
+  Objects
+    ✓ isNullish
+    ✓ isArray
+    ✓ isString
+    ✓ isNumber
+    ✓ objToArray
+    ✓ copy
+
+  Validator
+    1) badWords.positive
+    2) badWords.negative
+    ✓ realName.positive
+    3) realName.negative
+    ✓ email.positive
+    4) email.negative
+
+
+  18 passing (63ms)
+  4 failing
+
+  1) Validator
+       badWords.positive:
+
+      AssertionError: expected false to equal true
+      + expected - actual
+
+      -false
+      +true
+      
+      at Context.<anonymous> (tst/utils/Validator.spec.ts:2:590)
+      at processImmediate (internal/timers.js:458:21)
+
+  2) Validator
+       badWords.negative:
+
+      AssertionError: expected true to equal false
+      + expected - actual
+
+      -true
+      +false
+      
+      at Context.<anonymous> (tst/utils/Validator.spec.ts:2:774)
+      at processImmediate (internal/timers.js:458:21)
+
+  3) Validator
+       realName.negative:
+
+      AssertionError: expected true to equal false
+      + expected - actual
+
+      -true
+      +false
+      
+      at Context.<anonymous> (tst/utils/Validator.spec.ts:2:1221)
+      at processImmediate (internal/timers.js:458:21)
+
+  4) Validator
+       email.negative:
+
+      AssertionError: expected false to equal true
+      + expected - actual
+
+      -false
+      +true
+      
+      at Context.<anonymous> (tst/utils/Validator.spec.ts:2:1843)
+      at processImmediate (internal/timers.js:458:21)
+
+
+
+--------------------|---------|----------|---------|---------|--------------------------
+File                | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s        
+--------------------|---------|----------|---------|---------|--------------------------
+All files           |   82.94 |    59.21 |   85.48 |   84.78 |                          
+ src/constants      |     100 |      100 |     100 |     100 |                          
+  calendar.ts       |     100 |      100 |     100 |     100 |                          
+  colors.ts         |     100 |      100 |     100 |     100 |                          
+  index.ts          |     100 |      100 |     100 |     100 |                          
+  models.ts         |     100 |      100 |     100 |     100 |                          
+  storage.ts        |     100 |      100 |     100 |     100 |                          
+ src/utils          |   74.17 |    59.21 |   73.53 |   76.15 |                          
+  DateTime.ts       |   59.02 |       50 |   63.64 |   67.31 | 13-18,97-102,117-121,130 
+  Formatter.ts      |   43.75 |    33.33 |   66.67 |      40 | 8-20                     
+  Hasher.ts         |     100 |      100 |     100 |     100 |                          
+  Objects.ts        |   96.77 |    80.77 |     100 |   95.65 | 68                       
+  URL.ts            |   83.33 |      100 |      50 |      80 | 6                        
+  Validator.ts      |   82.35 |       50 |   57.14 |   81.25 | 17,22,27                 
+  index.ts          |     100 |      100 |     100 |     100 |                          
+ tst/utils          |   95.45 |      100 |     100 |    95.4 |                          
+  DateTime.spec.ts  |     100 |      100 |     100 |     100 |                          
+  Formatter.spec.ts |     100 |      100 |     100 |     100 |                          
+  Hasher.spec.ts    |     100 |      100 |     100 |     100 |                          
+  Objects.spec.ts   |     100 |      100 |     100 |     100 |                          
+  Validator.spec.ts |   81.82 |      100 |     100 |   81.82 | 23-24,34-35              
+--------------------|---------|----------|---------|---------|--------------------------
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

@@ -1,0 +1,41 @@
+============ upmed-web Styling Report Generated on 1605544127 ============
+$ prettier --list-different "src/**/*.tsx" "src/**/*.ts"
+src/components/bars/NavigationBar.tsx
+src/components/bars/Sidebar.tsx
+src/components/bars/UMNavigationBar.tsx
+src/components/button/Button.tsx
+src/components/button/GoogleButton.tsx
+src/components/elements/Avatar.tsx
+src/components/elements/Popup.tsx
+src/components/form/Counter.tsx
+src/components/form/DateInput.tsx
+src/components/form/Dropdown.tsx
+src/components/form/HoursInputs.tsx
+src/components/form/RadioButtons.tsx
+src/components/form/SuggestionInput.tsx
+src/components/form/TextInput.tsx
+src/index.tsx
+src/pages/account/OnSignIn.tsx
+src/pages/account/SignIn.tsx
+src/pages/App.tsx
+src/pages/home/Home.tsx
+src/pages/profile/Profile.tsx
+src/pages/profile/subpages/Calendar.tsx
+src/pages/profile/subpages/EditProfile.tsx
+src/pages/profile/subpages/MedicalInfo.tsx
+src/constants/calendar.ts
+src/constants/models.ts
+src/models/Appointment.ts
+src/models/Day.ts
+src/models/enums.ts
+src/models/HCP.ts
+src/models/HealthEvent.ts
+src/models/Hours.ts
+src/models/Patient.ts
+src/reportWebVitals.ts
+src/utils/Client.ts
+src/utils/DateTime.ts
+src/utils/Formatter.ts
+src/utils/Objects.ts
+src/utils/Users.ts
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

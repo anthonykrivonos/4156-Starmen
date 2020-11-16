@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useHistory } from 'react-router-dom'
-import { Button, TextInput, Loading, DateInput, RadioButtons, Counter, HoursInputs, SuggestionInput } from '../../components'
+import {
+	Button,
+	TextInput,
+	Loading,
+	DateInput,
+	RadioButtons,
+	Counter,
+	HoursInputs,
+	SuggestionInput,
+} from '../../components'
 import { INITIAL_HOURS, SPECIALTIES } from '../../constants'
 import { Hasher, URL, Validator, Formatter, Users, Objects, DateTime, Client } from '../../utils'
 import styles from './OnSignIn.module.sass'
@@ -48,7 +57,8 @@ export const OnSignIn = () => {
 
 	useEffect(() => {
 		console.log({
-			smoker, drinker
+			smoker,
+			drinker,
 		})
 	}, [smoker, drinker])
 
@@ -84,15 +94,15 @@ export const OnSignIn = () => {
 			setLoading(false)
 
 			// Attempt to log in
-			isPatient ?
-			Client.Patient.logIn(id, email).then(({ token }) => {
-				setUserToken(token)
-				setLoading(false)
-			}) :
-			Client.HCP.logIn(id, email).then(({ token }) => {
-				setUserToken(token)
-				setLoading(false)
-			})
+			isPatient
+				? Client.Patient.logIn(id, email).then(({ token }) => {
+						setUserToken(token)
+						setLoading(false)
+				  })
+				: Client.HCP.logIn(id, email).then(({ token }) => {
+						setUserToken(token)
+						setLoading(false)
+				  })
 		} catch (e) {
 			console.error(e)
 			// In case something goes wrong, go to sign-in
@@ -102,40 +112,40 @@ export const OnSignIn = () => {
 
 	const createAccount = async () => {
 		setLoading(true)
-		
+
 		try {
-			const { token } = 
-			isPatient ? await Client.Patient.signUp(
-				id,
-				firstName,
-				lastName,
-				phone,
-				email,
-				dateOfBirth,
-				sex,
-				height,
-				weight,
-				drinker,
-				smoker,
-				profilePicture || undefined,
-			) :
-			await Client.HCP.signUp(
-				id,
-				hours,
-				firstName,
-				lastName,
-				phone,
-				email,
-				specialty,
-				title,
-				profilePicture || undefined,
-			)
+			const { token } = isPatient
+				? await Client.Patient.signUp(
+						id,
+						firstName,
+						lastName,
+						phone,
+						email,
+						dateOfBirth,
+						sex,
+						height,
+						weight,
+						drinker,
+						smoker,
+						profilePicture || undefined,
+				  )
+				: await Client.HCP.signUp(
+						id,
+						hours,
+						firstName,
+						lastName,
+						phone,
+						email,
+						specialty,
+						title,
+						profilePicture || undefined,
+				  )
 			Users.setUserToken(token)
 			history.push('/profile/')
 		} catch (e) {
 			setError(e)
 		}
-		
+
 		setLoading(false)
 	}
 
@@ -161,25 +171,44 @@ export const OnSignIn = () => {
 	useEffect(() => {
 		// Perform one-line validation on all the inputs
 		setIsValid(
-			firstName.length > 0 && Validator.realName(firstName) &&
-			lastName.length > 0 && Validator.realName(lastName) &&
-			email.length > 0 && Validator.email(email) &&
-			phone.length > 0 && Validator.phone(phone) &&
-
-			// Patient validation
-			(isPatient ? Validator.stringDate(dateOfBirth) : true) &&
-			(isPatient ? Validator.text(sex) : true) &&
-			(isPatient ? weight > 0 : true) &&
-			(isPatient ? height > 0 : true) &&
-			(isPatient ? !Objects.isNullish(drinker) : true) &&
-			(isPatient ? !Objects.isNullish(smoker) : true) &&
-
-			// Doctor validation
-			(!isPatient ? hoursValid : true) &&
-			(!isPatient ? (specialty ? Validator.text(specialty) : true) : true) &&
-			(!isPatient ? (title ? Validator.text(title) : true) : true)
+			firstName.length > 0 &&
+				Validator.realName(firstName) &&
+				lastName.length > 0 &&
+				Validator.realName(lastName) &&
+				email.length > 0 &&
+				Validator.email(email) &&
+				phone.length > 0 &&
+				Validator.phone(phone) &&
+				// Patient validation
+				(isPatient ? Validator.stringDate(dateOfBirth) : true) &&
+				(isPatient ? Validator.text(sex) : true) &&
+				(isPatient ? weight > 0 : true) &&
+				(isPatient ? height > 0 : true) &&
+				(isPatient ? !Objects.isNullish(drinker) : true) &&
+				(isPatient ? !Objects.isNullish(smoker) : true) &&
+				// Doctor validation
+				(!isPatient ? hoursValid : true) &&
+				(!isPatient ? (specialty ? Validator.text(specialty) : true) : true) &&
+				(!isPatient ? (title ? Validator.text(title) : true) : true),
 		)
-	}, [profilePicture, firstName, lastName, email, specialty, title, phone, isPatient, dateOfBirth, sex, weight, height, drinker, smoker, hours, hoursValid])
+	}, [
+		profilePicture,
+		firstName,
+		lastName,
+		email,
+		specialty,
+		title,
+		phone,
+		isPatient,
+		dateOfBirth,
+		sex,
+		weight,
+		height,
+		drinker,
+		smoker,
+		hours,
+		hoursValid,
+	])
 
 	return loading ? (
 		<Loading containerClassName={styles.loading} text={'Loading...'} />
@@ -213,7 +242,7 @@ export const OnSignIn = () => {
 								label={'First Name'}
 								errorLabel={'Invalid first name.'}
 								validator={Validator.realName}
-								onChange={t => setFirstName(t)}
+								onChange={(t) => setFirstName(t)}
 								required
 							/>
 							<TextInput
@@ -222,7 +251,7 @@ export const OnSignIn = () => {
 								label={'Last Name'}
 								errorLabel={'Invalid last name.'}
 								validator={Validator.realName}
-								onChange={t => setLastName(t)}
+								onChange={(t) => setLastName(t)}
 								required
 							/>
 							<TextInput
@@ -231,7 +260,7 @@ export const OnSignIn = () => {
 								label={'Email'}
 								errorLabel={'Invalid email.'}
 								validator={Validator.email}
-								onChange={t => setEmail(t)}
+								onChange={(t) => setEmail(t)}
 								required
 							/>
 							<TextInput
@@ -241,30 +270,28 @@ export const OnSignIn = () => {
 								errorLabel={'Invalid phone number.'}
 								validator={Validator.phone}
 								formatter={Formatter.phone}
-								onChange={t => setPhone(t)}
+								onChange={(t) => setPhone(t)}
 								required
 							/>
-							{
-								isPatient &&
+							{isPatient && (
 								<DateInput
 									label={'Date of Birth'}
 									containerClassName={styles.input_short}
-									onDateChange={d => setDateOfBirth(Formatter.stringDate(d))}
+									onDateChange={(d) => setDateOfBirth(Formatter.stringDate(d))}
 									maxDate={DateTime.getModifiedDate(new Date(), -18)}
 									required
 								/>
-							}
+							)}
 						</div>
-						{
-							isPatient &&
+						{isPatient && (
 							<div className={styles.basic_info}>
 								<h4 className={`${styles.section_title} font-title`}>Personal Information</h4>
 								<RadioButtons
-									displayOptions={[ 'Male', 'Female' ]}
-									options={[ 'M', 'F' ]}
+									displayOptions={['Male', 'Female']}
+									options={['M', 'F']}
 									label={'Sex'}
 									className={styles.input_short}
-									onChange={option => setSex(option)}
+									onChange={(option) => setSex(option)}
 									required
 								/>
 								<div className={'d-flex flex-row align-items-start'}>
@@ -273,7 +300,7 @@ export const OnSignIn = () => {
 										value={height}
 										label={'Height (cm)'}
 										errorLabel={'Invalid height.'}
-										onChange={t => setHeight(Number(t))}
+										onChange={(t) => setHeight(Number(t))}
 										min={0}
 										required
 									/>
@@ -282,33 +309,32 @@ export const OnSignIn = () => {
 										value={weight}
 										label={'Weight (kg)'}
 										errorLabel={'Invalid weight.'}
-										onChange={t => setWeight(Number(t))}
+										onChange={(t) => setWeight(Number(t))}
 										min={0}
 										required
 									/>
 								</div>
 								<RadioButtons
-									options={[ Status.ACTIVE, Status.PAST, Status.NEVER ]}
-									displayOptions={[ 'Yes', 'Past', 'Never' ]}
+									options={[Status.ACTIVE, Status.PAST, Status.NEVER]}
+									displayOptions={['Yes', 'Past', 'Never']}
 									label={'Are you a drinker?'}
 									className={styles.input_short}
 									selectedIdx={2}
-									onChange={option => setDrinker(option)}
+									onChange={(option) => setDrinker(option)}
 									required
 								/>
 								<RadioButtons
-									options={[ Status.ACTIVE, Status.PAST, Status.NEVER ]}
-									displayOptions={[ 'Yes', 'Past', 'Never' ]}
+									options={[Status.ACTIVE, Status.PAST, Status.NEVER]}
+									displayOptions={['Yes', 'Past', 'Never']}
 									label={'Are you a smoker?'}
 									className={styles.input_short}
 									selectedIdx={2}
-									onChange={option => setSmoker(option)}
+									onChange={(option) => setSmoker(option)}
 									required
 								/>
 							</div>
-						}
-						{
-							!isPatient &&
+						)}
+						{!isPatient && (
 							<div className={styles.basic_info}>
 								<h4 className={`${styles.section_title} font-title`}>Professional Info</h4>
 								<TextInput
@@ -317,14 +343,14 @@ export const OnSignIn = () => {
 									label={'Business Name'}
 									errorLabel={'Invalid first name.'}
 									validator={Validator.text}
-									onChange={t => setTitle(t)}
+									onChange={(t) => setTitle(t)}
 									required={false}
 								/>
 								<SuggestionInput
 									containerClassName={styles.input_short}
 									value={specialty}
 									label={'Specialty'}
-									onChange={t => setSpecialty(t)}
+									onChange={(t) => setSpecialty(t)}
 									required={false}
 									suggestionLimit={4}
 									getSuggestions={getSpecialties}
@@ -340,7 +366,7 @@ export const OnSignIn = () => {
 									required
 								/>
 							</div>
-						}
+						)}
 					</div>
 					<div className={'d-flex col-md-4 flex-column-reverse justify-content-between'}>
 						<div className={'d-flex flex-row justify-content-end'}>

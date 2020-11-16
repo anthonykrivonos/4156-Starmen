@@ -48,7 +48,6 @@ const ROUTES: Route[] = [
 ]
 
 export class App extends Component {
-
 	private isLoggedIn: boolean
 
 	constructor(props: any) {
@@ -60,14 +59,12 @@ export class App extends Component {
 		return (
 			<Router>
 				<Switch>
-					{
-						this.isLoggedIn && <Redirect exact from={'/'} to={'/profile/'} />
-					}
-					{ROUTES.filter(r => this.isLoggedIn || !r.auth).map(route => (
+					{this.isLoggedIn && <Redirect exact from={'/'} to={'/profile/'} />}
+					{ROUTES.filter((r) => this.isLoggedIn || !r.auth).map((route) => (
 						<ReactRoute exact key={route.name} path={route.path}>
-							{ route.navbar !== false && <UMNavigationBar /> }
+							{route.navbar !== false && <UMNavigationBar />}
 							{route.page}
-							{ route.footer !== false && <Footer /> }
+							{route.footer !== false && <Footer />}
 						</ReactRoute>
 					))}
 					<Redirect exact from={'/*'} to={this.isLoggedIn ? '/profile/' : '/'} />

@@ -61,13 +61,13 @@ export const SuggestionInput = (props: SuggestionInputProps) => {
 		containerProps.className = ''
 		return (
 			<div {...containerProps} className={styles.suggestions}>
-				{suggestions.map(s => renderSuggestion(s, { isHighlighted: false, query }))}
+				{suggestions.map((s) => renderSuggestion(s, { isHighlighted: false, query }))}
 			</div>
 		)
 	}
 
-	const onSuggestionsFetchRequested: SuggestionsFetchRequested = res => {
-		props.getSuggestions(res.value).then(s => setSuggestions(s))
+	const onSuggestionsFetchRequested: SuggestionsFetchRequested = (res) => {
+		props.getSuggestions(res.value).then((s) => setSuggestions(s))
 	}
 
 	const onSuggestionsClearRequested = () => {

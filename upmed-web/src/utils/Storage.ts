@@ -25,8 +25,7 @@ export class Storage {
 		if (!Objects.isNullish(item)) {
 			try {
 				// Try to parse the JSON object
-				const jsonItem = JSON.parse(item!)
-				return jsonItem
+				return JSON.parse(item!)
 			} catch (e) {
 				// Could not parse the item, that means its a string
 				if (!isNaN(item as any)) {

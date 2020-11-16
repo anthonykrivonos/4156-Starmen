@@ -53,14 +53,19 @@
     "react-scripts": "^4.0.0",
     "react-svg": "^11.1.0",
     "reactjs-popup": "^2.0.4",
+    "tslint": "^6.1.3",
     "typescript": "^4.0.3",
     "urijs": "^1.19.2",
     "web-vitals": "^0.2.4",
     "yarn": "^1.22.10"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.7.0",
+    "@typescript-eslint/parser": "^4.7.0",
     "babel-core": "^6.26.3",
     "babel-register": "^6.26.0",
+    "eslint": "^7.13.0",
+    "eslint-plugin-sonarjs": "^0.5.0",
     "pre-commit": "^1.2.2",
     "ts-node": "^9.0.0",
     "tslint-config-prettier": "^1.18.0",
@@ -71,11 +76,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "nyc env TS_NODE_PROJECT=\"tsconfig.tst.json\" mocha --require ts-node/register ./tst/**/*.spec.ts",
-    "eject": "react-scripts eject",
-    "format": "prettier --write \"src/**/*.tsx\" \"src/**/*.ts\" \"src/**/*.jsx\" \"src/**/*.js\"",
-    "soft-format": "prettier \"src/**/*.tsx\" \"src/**/*.ts\" \"src/**/*.jsx\" \"src/**/*.js\"",
+    "report": "./report.sh",
+    "format": "prettier --write \"src/**/*.tsx\" \"src/**/*.ts\"",
+    "soft-format": "prettier --list-different \"src/**/*.tsx\" \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json --fix",
-    "soft-lint": "tslint -p tsconfig.json"
+    "soft-lint": "tslint -p tsconfig.json",
+    "bugs": "eslint . --ext .ts"
   },
   "eslintConfig": {
     "extends": [

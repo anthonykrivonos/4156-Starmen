@@ -1,0 +1,7 @@
+node_modules
+build
+reports
+public
+src/pages
+src/components
+.nyc_output

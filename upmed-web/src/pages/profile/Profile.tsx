@@ -99,42 +99,44 @@ export const Profile = () => {
 
 		if (!didSetSubpageProps) {
 			setDidSetSubpageProps(true)
-			getSubpageProps().then(p => {
-				setSubpageProps(p)
-				console.log(p)
-				setLoading(false)
-			}).catch(() => setLoading(false))
+			getSubpageProps()
+				.then((p) => {
+					setSubpageProps(p)
+					console.log(p)
+					setLoading(false)
+				})
+				.catch(() => setLoading(false))
 		} else {
 			setLoading(false)
 		}
 	}, [didSetSubpageProps, history, location.pathname])
 
-	return (loading || !subpage || !subpageProps) ?
+	return loading || !subpage || !subpageProps ? (
 		<Loading containerClassName={styles.loading} text={'Loading...'} />
-	: <main className={styles.profile_outter}>
-		<div className={styles.sideBar}>
-			<Sidebar
-				className={styles.sideBar_inner}
-				user={subpageProps.user}
-				isPatient={subpageProps.isPatient}
-				buttons={PROFILE_SUBPAGES.map(sp => ({
-					text: sp.name,
-					onClick: () => history.push(sp.path),
-					active: location.pathname === sp.path,
-				})).concat([
-					{
-						text: 'Log Out',
-						isBottom: true,
-						onClick: () => {
-							Users.logOut()
-							window.open(window.location.origin, '_self')
+	) : (
+		<main className={styles.profile_outter}>
+			<div className={styles.sideBar}>
+				<Sidebar
+					className={styles.sideBar_inner}
+					user={subpageProps.user}
+					isPatient={subpageProps.isPatient}
+					buttons={PROFILE_SUBPAGES.map((sp) => ({
+						text: sp.name,
+						onClick: () => history.push(sp.path),
+						active: location.pathname === sp.path,
+					})).concat([
+						{
+							text: 'Log Out',
+							isBottom: true,
+							onClick: () => {
+								Users.logOut()
+								window.open(window.location.origin, '_self')
+							},
 						},
-					},
-				] as any[])}
-			/>
-		</div>
-		<div className={styles.subpage}>
-			{<subpage.component {...subpageProps} />}
-		</div>
-	</main>
+					] as any[])}
+				/>
+			</div>
+			<div className={styles.subpage}>{<subpage.component {...subpageProps} />}</div>
+		</main>
+	)
 }

@@ -1,0 +1,13 @@
+============ upmed-web Bug Report Generated on 1605544127 ============
+$ eslint . --ext .ts
+
+/Users/Anthony/dev/4156-Starmen/upmed-web/src/utils/Formatter.ts
+  19:19  error  Immediately return this expression instead of assigning it to the temporary variable "dateStr"  sonarjs/prefer-immediate-return
+
+/Users/Anthony/dev/4156-Starmen/upmed-web/src/utils/Storage.ts
+  28:22  error  Immediately return this expression instead of assigning it to the temporary variable "jsonItem"  sonarjs/prefer-immediate-return
+
+✖ 2 problems (2 errors, 0 warnings)
+  2 errors and 0 warnings potentially fixable with the `--fix` option.
+
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

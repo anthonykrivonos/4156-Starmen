@@ -20,17 +20,21 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 
 	const getDoctorById = (id: DoctorId): HCP | null => {
 		for (const d of props.doctors) {
-			if (d.id === id) { return d }
+			if (d.id === id) {
+				return d
+			}
 		}
 		return null
 	}
 	const getPatientById = (id: PatientId): Patient | null => {
 		for (const p of props.patients) {
-			if (p.id === id) { return p }
+			if (p.id === id) {
+				return p
+			}
 		}
 		return null
 	}
-	
+
 	let toggleAppointmentPopup = null as any
 	const openAppointment = (apt: Appointment, patient: Patient | null, doctor: HCP | null = null) => {
 		if (toggleAppointmentPopup) {
@@ -62,11 +66,22 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 		setIsCurrentlyEditingHealthEvent(true)
 	}
 
-	const updateHealthEvents = (index: number, event: string | null = null, remarks: string | null = null, status: Status | null = null) => {
+	const updateHealthEvents = (
+		index: number,
+		event: string | null = null,
+		remarks: string | null = null,
+		status: Status | null = null,
+	) => {
 		const newHealthEvents = Objects.copy(healthEvents) as HealthEvent[]
-		if (event !== null) { newHealthEvents[index].event = event! }
-		if (remarks !== null) { newHealthEvents[index].remarks = remarks! }
-		if (status !== null) { newHealthEvents[index].status = status! }
+		if (event !== null) {
+			newHealthEvents[index].event = event!
+		}
+		if (remarks !== null) {
+			newHealthEvents[index].remarks = remarks!
+		}
+		if (status !== null) {
+			newHealthEvents[index].status = status!
+		}
 		if (event !== null || remarks !== null || status !== null) {
 			if (!newHealthEvents[index].remarks) {
 				newHealthEvents[index].remarks = undefined
@@ -126,34 +141,53 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 		}
 	}
 
-	return (
-		(isCurrentlyEditingHealthEvents && currentPatient) ?
+	return isCurrentlyEditingHealthEvents && currentPatient ? (
 		<main id="editingHealthEvent">
 			<div className={styles.editing_health_event}>
 				<div className={'d-flex flex-row justify-content-between align-items-center'}>
 					<div>
 						<h2 className="font-title mb-1">Editing Health Records</h2>
-						<div className="h5">{currentPatient.firstName} {currentPatient.lastName}</div>
+						<div className="h5">
+							{currentPatient.firstName} {currentPatient.lastName}
+						</div>
 					</div>
-					<Button
-						text={'Close'}
-						onClick={() => setIsCurrentlyEditingHealthEvent(false)}
-					/>
+					<Button text={'Close'} onClick={() => setIsCurrentlyEditingHealthEvent(false)} />
 				</div>
 				<div className={'mt-3'}>
-					<Avatar
-						user={currentPatient}
-						size={'6rem'}
-					/>
+					<Avatar user={currentPatient} size={'6rem'} />
 					<h4 className={`font-title mt-2 mb-3`}>Patient Details</h4>
-					<div className={'row p-0 m-0'}><div className={'col-3 m-0 p-0 font-weight-bolder'}>DOB</div><div className={'col-9 m-0 p-0'}>{currentPatient.dateOfBirth}</div></div>
-					<div className={'row p-0 m-0'}><div className={'col-3 m-0 p-0 font-weight-bolder'}>Sex</div><div className={'col-9 m-0 p-0'}>{currentPatient.sex}</div></div>
-					<div className={'row p-0 m-0'}><div className={'col-3 m-0 p-0 font-weight-bolder'}>Height</div><div className={'col-9 m-0 p-0'}>{currentPatient.height} cm</div></div>
-					<div className={'row p-0 m-0'}><div className={'col-3 m-0 p-0 font-weight-bolder'}>Weight</div><div className={'col-9 m-0 p-0'}>{currentPatient.weight} kg</div></div>
-					<div className={'row p-0 m-0'}><div className={'col-3 m-0 p-0 font-weight-bolder'}>Drinker</div><div className={'col-9 m-0 p-0'}>{STATUS[currentPatient.drinker]}</div></div>
-					<div className={'row p-0 m-0'}><div className={'col-3 m-0 p-0 font-weight-bolder'}>Smoker</div><div className={'col-9 m-0 p-0'}>{STATUS[currentPatient.smoker]}</div></div>
-					<div className={'row p-0 m-0 mt-3'}><div className={'col-3 m-0 p-0 font-weight-bolder'}>Email</div><div className={'col-9 m-0 p-0'}>{currentPatient.email}</div></div>
-					<div className={'row p-0 m-0'}><div className={'col-3 m-0 p-0 font-weight-bolder'}>Phone</div><div className={'col-9 m-0 p-0'}>{currentPatient.phone}</div></div>
+					<div className={'row p-0 m-0'}>
+						<div className={'col-3 m-0 p-0 font-weight-bolder'}>DOB</div>
+						<div className={'col-9 m-0 p-0'}>{currentPatient.dateOfBirth}</div>
+					</div>
+					<div className={'row p-0 m-0'}>
+						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Sex</div>
+						<div className={'col-9 m-0 p-0'}>{currentPatient.sex}</div>
+					</div>
+					<div className={'row p-0 m-0'}>
+						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Height</div>
+						<div className={'col-9 m-0 p-0'}>{currentPatient.height} cm</div>
+					</div>
+					<div className={'row p-0 m-0'}>
+						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Weight</div>
+						<div className={'col-9 m-0 p-0'}>{currentPatient.weight} kg</div>
+					</div>
+					<div className={'row p-0 m-0'}>
+						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Drinker</div>
+						<div className={'col-9 m-0 p-0'}>{STATUS[currentPatient.drinker]}</div>
+					</div>
+					<div className={'row p-0 m-0'}>
+						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Smoker</div>
+						<div className={'col-9 m-0 p-0'}>{STATUS[currentPatient.smoker]}</div>
+					</div>
+					<div className={'row p-0 m-0 mt-3'}>
+						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Email</div>
+						<div className={'col-9 m-0 p-0'}>{currentPatient.email}</div>
+					</div>
+					<div className={'row p-0 m-0'}>
+						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Phone</div>
+						<div className={'col-9 m-0 p-0'}>{currentPatient.phone}</div>
+					</div>
 					<h4 className={`font-title mt-4 mb-3`}>Health Records</h4>
 					<div className={styles.edit_health_events}>
 						<Button
@@ -162,206 +196,293 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 							disabled={!areHealthEventsValid}
 							className={'mb-2'}
 						/>
-						{
-							healthEvents.map((hE, idx) => (
-								<div key={`edit-he-${hE.date}`} className={'row p-0 m-0 mb-2 align-items-start'}>
-									<div className={'col-3 m-0 p-0 pr-2 align-items-center'}>
-										<TextInput
-											value={hE.event}
-											label={'Subject'}
-											validator={Validator.text}
-											onChange={value => updateHealthEvents(idx, value, null, null)}
-										/>
-									</div>
-									<div className={'col-2 pr-2 align-items-center'}>
-										<Dropdown
-											options={[ Status.ACTIVE, Status.NEVER, Status.PAST, Status.REMISSION, Status.CURED ]}
-											displayOptions={[ 'ACTIVE', 'NEVER', 'PAST', 'REMISSION', 'CURED' ]}
-											label={'Status'}
-											className={styles.input_short}
-											selectedIdx={[ Status.ACTIVE, Status.NEVER, Status.PAST, Status.REMISSION, Status.CURED ].indexOf(hE.status)}
-											onChange={option => updateHealthEvents(idx, null, null, option)}
-											required
-										/>
-									</div>
-									<div className={'col-6 m-0 p-0 pr-2 align-items-center'}>
-										<TextInput
-											value={hE.remarks}
-											label={'Remarks'}
-											validator={Validator.text}
-											onChange={value => updateHealthEvents(idx, null, value, null)}
-										/>
-									</div>
-									<div className={'col-1 m-0 p-0 align-items-center'}>
-										<Button
-											text={'Delete'}
-											onClick={() => removeHealthEvent(idx)}
-											className={'mb-2 mt-4 color-quaternary p-2 pl-4 pr-4 align-self-end'}
-										/>
-									</div>
+						{healthEvents.map((hE, idx) => (
+							<div key={`edit-he-${hE.date}`} className={'row p-0 m-0 mb-2 align-items-start'}>
+								<div className={'col-3 m-0 p-0 pr-2 align-items-center'}>
+									<TextInput
+										value={hE.event}
+										label={'Subject'}
+										validator={Validator.text}
+										onChange={(value) => updateHealthEvents(idx, value, null, null)}
+									/>
 								</div>
-							))
-						}
+								<div className={'col-2 pr-2 align-items-center'}>
+									<Dropdown
+										options={[
+											Status.ACTIVE,
+											Status.NEVER,
+											Status.PAST,
+											Status.REMISSION,
+											Status.CURED,
+										]}
+										displayOptions={['ACTIVE', 'NEVER', 'PAST', 'REMISSION', 'CURED']}
+										label={'Status'}
+										className={styles.input_short}
+										selectedIdx={[
+											Status.ACTIVE,
+											Status.NEVER,
+											Status.PAST,
+											Status.REMISSION,
+											Status.CURED,
+										].indexOf(hE.status)}
+										onChange={(option) => updateHealthEvents(idx, null, null, option)}
+										required
+									/>
+								</div>
+								<div className={'col-6 m-0 p-0 pr-2 align-items-center'}>
+									<TextInput
+										value={hE.remarks}
+										label={'Remarks'}
+										validator={Validator.text}
+										onChange={(value) => updateHealthEvents(idx, null, value, null)}
+									/>
+								</div>
+								<div className={'col-1 m-0 p-0 align-items-center'}>
+									<Button
+										text={'Delete'}
+										onClick={() => removeHealthEvent(idx)}
+										className={'mb-2 mt-4 color-quaternary p-2 pl-4 pr-4 align-self-end'}
+									/>
+								</div>
+							</div>
+						))}
 					</div>
 				</div>
 			</div>
 		</main>
-		:
+	) : (
 		<main id="medicalInfo">
 			<section className={styles.medical_info}>
 				<div className={styles.apts}>
 					<h2 className="font-title mb-4">Recent Appointments</h2>
-					{
-						props.appointments.length === 0 ?
+					{props.appointments.length === 0 ? (
 						<div className={styles.empty}>You have no appointments to display.</div>
-						:
+					) : (
 						<div className={styles.apts_inner}>
-							{
-								props.appointments.sort((a, b) => Number(a.date < b.date)).map((apt, idx) => {
+							{props.appointments
+								.sort((a, b) => Number(a.date < b.date))
+								.map((apt, idx) => {
 									const doctor = getDoctorById(apt.doctor)
 									const patient = getPatientById(apt.patient)
 									return (
 										<div key={`apt-${idx}`} className={styles.appt_row}>
 											<div>{Formatter.stringDate(new Date(apt.date))}</div>
-											{ /* eslint-disable-next-line jsx-a11y/anchor-is-valid */ }
-											<a className={`${styles.subject} unselectable`} onClick={() => openAppointment(apt, patient, doctor)}>{apt.subject}</a>
-											{ props.isPatient && doctor && <div>{doctor.firstName} {doctor.lastName}</div> }
-											{ !props.isPatient && patient && <div>{patient.firstName} {patient.lastName}</div> }
+											{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+											<a
+												className={`${styles.subject} unselectable`}
+												onClick={() => openAppointment(apt, patient, doctor)}
+											>
+												{apt.subject}
+											</a>
+											{props.isPatient && doctor && (
+												<div>
+													{doctor.firstName} {doctor.lastName}
+												</div>
+											)}
+											{!props.isPatient && patient && (
+												<div>
+													{patient.firstName} {patient.lastName}
+												</div>
+											)}
 										</div>
 									)
-								})
-							}
+								})}
 						</div>
-					}
+					)}
 				</div>
-				{
-					props.isPatient && <>
+				{props.isPatient && (
+					<>
 						<div className={styles.health_events}>
 							<h2 className="font-title mb-4">Health Records</h2>
-							{
-								props.patients.length === 0 ?
+							{props.patients.length === 0 ? (
 								<div className={styles.empty}>You have no health records yet.</div>
-								:
+							) : (
 								<div className={styles.health_events_inner}>
-									{
-										props.healthEvents.sort((a, b) => Number(a.date < b.date)).map((healthEvent, idx) => {
+									{props.healthEvents
+										.sort((a, b) => Number(a.date < b.date))
+										.map((healthEvent, idx) => {
 											return (
-												<div key={`${healthEvent.event}-${idx}`} className={styles.health_event_row}>
+												<div
+													key={`${healthEvent.event}-${idx}`}
+													className={styles.health_event_row}
+												>
 													<div>{Formatter.stringDate(new Date(healthEvent.date))}</div>
-													{ /* eslint-disable-next-line jsx-a11y/anchor-is-valid */ }
-													<a className={`${styles.subject} unselectable`} onClick={() => openHealthEvent(healthEvent)}>{healthEvent.event}</a>
-													<div className={`${healthEvent.status === Status.ACTIVE ? 'color-quaternary font-weight-bold' : (healthEvent.status === Status.CURED ? 'color-good font-weight-bold' : 'color-medium')}`}>{STATUS[healthEvent.status]}</div>
+													{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+													<a
+														className={`${styles.subject} unselectable`}
+														onClick={() => openHealthEvent(healthEvent)}
+													>
+														{healthEvent.event}
+													</a>
+													<div
+														className={`${
+															healthEvent.status === Status.ACTIVE
+																? 'color-quaternary font-weight-bold'
+																: healthEvent.status === Status.CURED
+																? 'color-good font-weight-bold'
+																: 'color-medium'
+														}`}
+													>
+														{STATUS[healthEvent.status]}
+													</div>
 												</div>
 											)
-										})
-									}
+										})}
 								</div>
-							}
+							)}
 						</div>
 						<div className={styles.info_col}>
 							<h2 className="font-title mb-4">My Doctors</h2>
-							{
-								props.doctors.length === 0 ?
+							{props.doctors.length === 0 ? (
 								<div className={styles.empty}>You have no doctors yet.</div>
-								:
+							) : (
 								<div className={`${styles.doctors} d-flex flex-direction-row justify-content-start`}>
-									{
-										props.doctors.map((d, idx) => (
-											<div key={idx} className={styles.container} onClick={() => openDoctor(d)}>
-												<Avatar
-													user={d}
-													size={'80px'}
-												/>
-												<div className={'h5 mt-3 font-weight-bolder'}>{d.firstName} {d.lastName}</div>
-												<div className={'h7'}>{d.phone}</div>
-												<a className={'h7'} href={`mailto:${d.email}`}>{d.email}</a>
+									{props.doctors.map((d, idx) => (
+										<div key={idx} className={styles.container} onClick={() => openDoctor(d)}>
+											<Avatar user={d} size={'80px'} />
+											<div className={'h5 mt-3 font-weight-bolder'}>
+												{d.firstName} {d.lastName}
 											</div>
-										))
-									}
+											<div className={'h7'}>{d.phone}</div>
+											<a className={'h7'} href={`mailto:${d.email}`}>
+												{d.email}
+											</a>
+										</div>
+									))}
 								</div>
-							}
+							)}
 						</div>
 					</>
-				}
-				{
-					!props.isPatient && (
-						<div className={styles.info_col}>
-							<h2 className="font-title mb-4">My Patients</h2>
-							{
-								props.patients.length === 0 ?
-								<div className={styles.empty}>You have no patients yet.</div>
-								:
-								<div className={`${styles.doctors} d-flex flex-direction-row justify-content-start`}>
-									{
-										props.patients.map((p, idx) => (
-											<div key={idx} className={styles.container} onClick={() => editPatientHealthEvents(p)}>
-												<Avatar
-													user={p}
-													size={'80px'}
-												/>
-												<div className={'h5 mt-3 font-weight-bolder'}>{p.firstName} {p.lastName}</div>
-												<div className={'h7'}>{p.phone}</div>
-												<a className={'h7'} href={`mailto:${p.email}`}>{p.email}</a>
-											</div>
-										))
-									}
-								</div>
-							}
-						</div>
-					)
-				}
-				<Popup open={false} toggleRef={t => toggleAppointmentPopup = t}>
-					{
-						currentAppointment &&
+				)}
+				{!props.isPatient && (
+					<div className={styles.info_col}>
+						<h2 className="font-title mb-4">My Patients</h2>
+						{props.patients.length === 0 ? (
+							<div className={styles.empty}>You have no patients yet.</div>
+						) : (
+							<div className={`${styles.doctors} d-flex flex-direction-row justify-content-start`}>
+								{props.patients.map((p, idx) => (
+									<div
+										key={idx}
+										className={styles.container}
+										onClick={() => editPatientHealthEvents(p)}
+									>
+										<Avatar user={p} size={'80px'} />
+										<div className={'h5 mt-3 font-weight-bolder'}>
+											{p.firstName} {p.lastName}
+										</div>
+										<div className={'h7'}>{p.phone}</div>
+										<a className={'h7'} href={`mailto:${p.email}`}>
+											{p.email}
+										</a>
+									</div>
+								))}
+							</div>
+						)}
+					</div>
+				)}
+				<Popup open={false} toggleRef={(t) => (toggleAppointmentPopup = t)}>
+					{currentAppointment && (
 						<div className={styles.popup_container}>
 							<h2 className={`font-title mb-1`}>Appointment Details</h2>
-							<div className={'color-medium mb-4'}>{DateTime.prettyDate(new Date(currentAppointment.date))}</div>
-							<div><b>Subject: </b>{currentAppointment.subject}</div>
-							{ props.isPatient && currentDoctor && <div><b>Doctor: </b>{currentDoctor.firstName} {currentDoctor.lastName}</div> }
-							{ !props.isPatient && currentPatient && <div><b>Patient: </b>{currentPatient.firstName} {currentPatient.lastName}</div> }
-							{ currentAppointment.notes && <div className={'mt-3'}><b>Notes:</b><br />{currentAppointment.notes}</div> }
+							<div className={'color-medium mb-4'}>
+								{DateTime.prettyDate(new Date(currentAppointment.date))}
+							</div>
+							<div>
+								<b>Subject: </b>
+								{currentAppointment.subject}
+							</div>
+							{props.isPatient && currentDoctor && (
+								<div>
+									<b>Doctor: </b>
+									{currentDoctor.firstName} {currentDoctor.lastName}
+								</div>
+							)}
+							{!props.isPatient && currentPatient && (
+								<div>
+									<b>Patient: </b>
+									{currentPatient.firstName} {currentPatient.lastName}
+								</div>
+							)}
+							{currentAppointment.notes && (
+								<div className={'mt-3'}>
+									<b>Notes:</b>
+									<br />
+									{currentAppointment.notes}
+								</div>
+							)}
 						</div>
-					}
+					)}
 				</Popup>
-				<Popup open={false} toggleRef={t => toggleInfoPopup = t}>
-					{
-						currentDoctor &&
+				<Popup open={false} toggleRef={(t) => (toggleInfoPopup = t)}>
+					{currentDoctor && (
 						<div className={styles.popup_container}>
 							<div className={styles.doctor_details}>
-								<Avatar
-									user={currentDoctor}
-									size={'80px'}
-								/>
+								<Avatar user={currentDoctor} size={'80px'} />
 								<div className={'d-flex flex-column ml-3 flex-1'}>
-									<div className={'h5 font-weight-bolder'}>{currentDoctor.firstName} {currentDoctor.lastName}</div>
+									<div className={'h5 font-weight-bolder'}>
+										{currentDoctor.firstName} {currentDoctor.lastName}
+									</div>
 									<div className={'h6'}>{currentDoctor.phone}</div>
-									<a className={'h6'} href={`mailto:${currentDoctor.email}`}>{currentDoctor.email}</a>
+									<a className={'h6'} href={`mailto:${currentDoctor.email}`}>
+										{currentDoctor.email}
+									</a>
 									<div className={styles.doctor_hours}>
-										{
-											DAYS_LOWER.map(day => (currentDoctor.hours as any)[day] as Day).map((day, idx) => (
+										{DAYS_LOWER.map((day) => (currentDoctor.hours as any)[day] as Day).map(
+											(day, idx) => (
 												<div key={`day-${idx}`} className={styles.hours}>
 													<div>{DAYS[idx]}</div>
-													{ day.startTime !== -1 ? <div>{DateTime.minutesToHHMMAA(day.startTime)} to {DateTime.minutesToHHMMAA(day.endTime)}</div> : <div>Closed</div> }
+													{day.startTime !== -1 ? (
+														<div>
+															{DateTime.minutesToHHMMAA(day.startTime)} to{' '}
+															{DateTime.minutesToHHMMAA(day.endTime)}
+														</div>
+													) : (
+														<div>Closed</div>
+													)}
 												</div>
-											))
-										}
+											),
+										)}
 									</div>
 								</div>
 							</div>
 						</div>
-					}
+					)}
 				</Popup>
-				<Popup open={false} toggleRef={t => toggleHealthEventPopup = t}>
-					{
-						currentHealthEvent &&
+				<Popup open={false} toggleRef={(t) => (toggleHealthEventPopup = t)}>
+					{currentHealthEvent && (
 						<div className={styles.popup_container}>
 							<h2 className={`font-title mb-1`}>Health Record</h2>
-							<div className={'color-medium mb-4'}>{DateTime.prettyDate(new Date(currentHealthEvent.date))}</div>
-							<div><b>Event: </b>{currentHealthEvent.event}</div>
-							<div><b>Status: </b><span className={`${currentHealthEvent.status === Status.ACTIVE ? 'color-quaternary font-weight-bold' : (currentHealthEvent.status === Status.CURED ? 'color-good font-weight-bold' : 'color-medium')}`}>{STATUS[currentHealthEvent.status]}</span></div>
-							{ currentHealthEvent.remarks && <div className={'mt-3'}><b>Remarks:</b><br />{currentHealthEvent.remarks}</div> }
+							<div className={'color-medium mb-4'}>
+								{DateTime.prettyDate(new Date(currentHealthEvent.date))}
+							</div>
+							<div>
+								<b>Event: </b>
+								{currentHealthEvent.event}
+							</div>
+							<div>
+								<b>Status: </b>
+								<span
+									className={`${
+										currentHealthEvent.status === Status.ACTIVE
+											? 'color-quaternary font-weight-bold'
+											: currentHealthEvent.status === Status.CURED
+											? 'color-good font-weight-bold'
+											: 'color-medium'
+									}`}
+								>
+									{STATUS[currentHealthEvent.status]}
+								</span>
+							</div>
+							{currentHealthEvent.remarks && (
+								<div className={'mt-3'}>
+									<b>Remarks:</b>
+									<br />
+									{currentHealthEvent.remarks}
+								</div>
+							)}
 						</div>
-					}
+					)}
 				</Popup>
 			</section>
 		</main>

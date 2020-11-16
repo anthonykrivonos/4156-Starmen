@@ -5,9 +5,9 @@ export class Formatter {
 	}
 
 	public static stringDate(date: Date): string {
-        let month = '' + (date.getMonth() + 1)
-        let day = '' + date.getDate()
-        const year = date.getFullYear()
+		let month = '' + (date.getMonth() + 1)
+		let day = '' + date.getDate()
+		const year = date.getFullYear()
 
 		if (month.length < 2) {
 			month = '0' + month
@@ -16,6 +16,6 @@ export class Formatter {
 			day = '0' + day
 		}
 
-		return [ year, month, day ].join('-')
+		return [year, month, day].join('-')
 	}
 }

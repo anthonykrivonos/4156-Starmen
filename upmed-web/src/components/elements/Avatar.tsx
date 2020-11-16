@@ -20,7 +20,7 @@ export const Avatar = (props: AvatarProps) => {
 			size={props.size}
 			round={true}
 			src={profilePicture}
-			className={'unselectable'} 
+			className={'unselectable'}
 			onClick={props.onClick ? () => props.onClick!(props.user) : undefined}
 		/>
 	)

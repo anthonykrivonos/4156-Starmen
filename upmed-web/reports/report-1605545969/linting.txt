@@ -1,0 +1,2 @@
+============ upmed-web Linting Report Generated on 1605545969 ============
+$ tslint -p tsconfig.json

@@ -24,7 +24,7 @@ export class Validator {
 
 	// Returns true if the YYYY-MM-DD date is valid.
 	public static stringDate(value: string): boolean {
-		return value === '' || /^(\d{4})([/-])(\d{1,2})\2(\d{1,2})$/i.test(value)
+		return value === '' || /^(\d{4}-\d{2}-\d{2})$/i.test(value)
 	}
 
 	// Returns true if the email is valid, false otherwise.

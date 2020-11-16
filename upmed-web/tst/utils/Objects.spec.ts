@@ -78,7 +78,13 @@ describe('Objects', () => {
             1: 1,
             2: {
                 '2.a': 2,
-                '2.b': 2,
+                '2.b': {
+                    '2.a': 2,
+                    '2.b': {
+                        '2.a': 2,
+                        '2.b': 2,
+                    },
+                },
             }
         }
         expect(JSON.stringify(Objects.copy(obj, [], true))).equal(JSON.stringify(obj))
@@ -89,10 +95,27 @@ describe('Objects', () => {
             1: 1,
             2: {
                 '2.a': 2,
-                '2.b': 2,
+                '2.b': {
+                    '2.a': 2,
+                    '2.b': {
+                        '2.a': 2,
+                        '2.b': 2,
+                    },
+                },
             }
         }
         expect(JSON.stringify(Objects.copy(obj, [], false))).equal(JSON.stringify(obj))
+    })
+
+    it('copy.withoutProperty', () => {
+        const obj = {
+            1: 1,
+            2: {
+                '2.a': 2,
+                '2.b': 2,
+            }
+        }
+        expect(JSON.stringify(Objects.copy(obj, ["2"], false))).not.equal(JSON.stringify(obj))
     })
 
 })

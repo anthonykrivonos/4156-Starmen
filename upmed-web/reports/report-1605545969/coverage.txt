@@ -1,0 +1,88 @@
+============ upmed-web Coverage and Unit Report Generated on 1605545969 ============
+$ nyc env TS_NODE_PROJECT="tsconfig.tst.json" mocha --require ts-node/register ./tst/**/*.spec.ts
+
+
+  DateTime
+    ✓ safeParseHours.success
+    ✓ hoursOffset.success
+    ✓ getMinutes.success
+    ✓ minutesToHHMMAA.success
+    ✓ hhmmAAToMinutes.success
+    ✓ minutesToHHMM.success
+    ✓ hhmmToMinutes.success
+    ✓ dateFromStringDate.success
+    ✓ getModifiedDate.success
+    ✓ prettyDate.success
+
+  Formatter
+    ✓ phone.success
+    ✓ stringDate.success
+
+  Hasher
+    ✓ encode.success
+    ✓ decode.success
+    ✓ decode.failure
+
+  Objects
+    ✓ isNullish.postive
+    ✓ isNullish.negative
+    ✓ isArray.postive
+    ✓ isArray.negative
+    ✓ isString.postive
+    ✓ isString.negative
+    ✓ isNumber.postive
+    ✓ isNumber.negative
+    ✓ objToArray.success
+    ✓ copy.nullish
+    ✓ copy.nonObject
+    ✓ copy.shallow
+    ✓ copy.nonShallow
+    ✓ copy.withoutProperty
+
+  URL
+    ✓ getFromQuery.present
+    ✓ getFromQuery.absent
+
+  Validator
+    ✓ badWords.valid (41ms)
+    ✓ badWords.invalid
+    ✓ realName.valid
+    ✓ realName.invalid
+    ✓ text.valid
+    ✓ text.invalid
+    ✓ phone.valid
+    ✓ phone.invalid
+    ✓ stringDate.valid
+    ✓ stringDate.invalid
+    ✓ email.valid
+    ✓ email.invalid
+
+
+  43 passing (79ms)
+
+--------------------|---------|----------|---------|---------|-------------------
+File                | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+--------------------|---------|----------|---------|---------|-------------------
+All files           |     100 |    84.21 |     100 |     100 |                   
+ src/constants      |     100 |      100 |     100 |     100 |                   
+  calendar.ts       |     100 |      100 |     100 |     100 |                   
+  colors.ts         |     100 |      100 |     100 |     100 |                   
+  index.ts          |     100 |      100 |     100 |     100 |                   
+  models.ts         |     100 |      100 |     100 |     100 |                   
+  storage.ts        |     100 |      100 |     100 |     100 |                   
+ src/utils          |     100 |    84.21 |     100 |     100 |                   
+  DateTime.ts       |     100 |    66.67 |     100 |     100 | 51-64,117-122     
+  Formatter.ts      |     100 |      100 |     100 |     100 |                   
+  Hasher.ts         |     100 |      100 |     100 |     100 |                   
+  Objects.ts        |     100 |      100 |     100 |     100 |                   
+  URL.ts            |     100 |      100 |     100 |     100 |                   
+  Validator.ts      |     100 |      100 |     100 |     100 |                   
+  index.ts          |     100 |      100 |     100 |     100 |                   
+ tst/utils          |     100 |      100 |     100 |     100 |                   
+  DateTime.spec.ts  |     100 |      100 |     100 |     100 |                   
+  Formatter.spec.ts |     100 |      100 |     100 |     100 |                   
+  Hasher.spec.ts    |     100 |      100 |     100 |     100 |                   
+  Objects.spec.ts   |     100 |      100 |     100 |     100 |                   
+  URL.spec.ts       |     100 |      100 |     100 |     100 |                   
+  Validator.spec.ts |     100 |      100 |     100 |     100 |                   
+--------------------|---------|----------|---------|---------|-------------------

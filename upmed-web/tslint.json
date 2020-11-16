@@ -17,8 +17,8 @@
         "no-submodule-imports": false,
         "prefer-for-of": false,
         "no-useless-escape": false,
-        "no-unused-variable": true,
-        "max-classes-per-file": false
+        "max-classes-per-file": false,
+        "forin": false
     },
     "linterOptions": {
         "exclude": [

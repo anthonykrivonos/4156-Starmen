@@ -64,7 +64,7 @@ export const NavigationBar = (props: NavigationBarProps) => {
 	const navigationItems = props.items || []
 
 	return (
-		<nav ref={r => onNavbarResize(r)} className={'navbar-wrapper'}>
+		<nav ref={(r) => onNavbarResize(r)} className={'navbar-wrapper'}>
 			<div className="navbar navbar-expand-lg">
 				<a className={`${isNavBarSmall ? 'text-center' : 'text-left'} pt-2 pb-2`} href={props.homeRef || '/'}>
 					<h3 className={'logo'}>upmed</h3>

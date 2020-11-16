@@ -1,0 +1,14 @@
+============ upmed-web Linting Report Generated on 1605544127 ============
+$ tslint -p tsconfig.json
+/Users/Anthony/dev/4156-Starmen/upmed-web/src/components/elements/Avatar.tsx:4:24
+ERROR: 4:24  no-unused-declaration  Unused declarations are forbidden
+
+/Users/Anthony/dev/4156-Starmen/upmed-web/src/components/form/DateInput.tsx:5:1
+ERROR: 5:1   no-duplicate-imports   Multiple imports from '../../utils' can be combined into one.
+ERROR: 5:10  no-unused-declaration  Unused declarations are forbidden
+
+/Users/Anthony/dev/4156-Starmen/upmed-web/src/pages/home/Home.tsx:5:10
+ERROR: 5:10  no-unused-declaration  Unused declarations are forbidden
+ERROR: 8:7   no-unused-declaration  Unused declarations are forbidden
+
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

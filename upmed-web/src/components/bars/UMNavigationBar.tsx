@@ -22,14 +22,14 @@ export const UMNavigationBar = () => {
 	const [user, setUser] = useState(null as (Patient | HCP) | null)
 
 	useEffect(() => {
-		Users.getCurrentUser().then(u => setUser(u))
+		Users.getCurrentUser().then((u) => setUser(u))
 	})
 
 	useEffect(() => {
 		const newToken = Storage.get(STORAGE_KEYS.USER_TOKEN)
 		setUserToken(newToken)
 		// Update user
-		Users.getCurrentUser().then(u => setUser(u))
+		Users.getCurrentUser().then((u) => setUser(u))
 	}, [location.pathname])
 
 	const authNavItems = [
@@ -46,7 +46,5 @@ export const UMNavigationBar = () => {
 		),
 	]
 
-	return (
-		<NavigationBar items={userToken ? authNavItems : PUBLIC_NAV_ITEMS} homeRef={userToken ? '/profile' : '/'} />
-	)
+	return <NavigationBar items={userToken ? authNavItems : PUBLIC_NAV_ITEMS} homeRef={userToken ? '/profile' : '/'} />
 }

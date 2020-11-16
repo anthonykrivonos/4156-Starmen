@@ -50,7 +50,7 @@ export const DateInput = (props: DateInputProps) => {
 				minDate={props.minDate}
 				showTimeSelect={props.timeSelect === true}
 				dateFormat={`yyyy/MM/dd${props.timeSelect === true ? ' hh:mm aa' : ''}`}
-				onChange={d => onDateChange(d as Date)}
+				onChange={(d) => onDateChange(d as Date)}
 			/>
 		</div>
 	)

@@ -5,216 +5,210 @@ import { DateTime } from './DateTime'
 import { Objects } from './Objects'
 
 class PatientClient {
+	public static logIn = (id: string, email: string): Promise<{ id: string; token: string }> => {
+		return client('/patient/logIn', { id, email })
+	}
 
-    public static logIn = (id: string, email: string): Promise<{ id: string, token: string}> => {
-        return client('/patient/logIn', { id, email })
-    }
+	public static signUp = (
+		id: string,
+		firstName: string,
+		lastName: string,
+		phone: string,
+		email: string,
+		dateOfBirth: string,
+		sex: string,
+		height: number,
+		weight: number,
+		drinker: Status,
+		smoker: Status,
+		profilePicture?: string,
+	): Promise<{ id: string; token: string }> => {
+		return client('/patient/signUp', {
+			id,
+			firstName,
+			lastName,
+			phone,
+			email,
+			dateOfBirth,
+			sex,
+			profilePicture,
+			height,
+			weight,
+			drinker,
+			smoker,
+		})
+	}
 
-    public static signUp = (
-        id: string,
-        firstName: string,
-        lastName: string,
-        phone: string,
-        email: string,
-        dateOfBirth: string,
-        sex: string,
-        height: number,
-        weight: number,
-        drinker: Status,
-        smoker: Status,
-        profilePicture?: string,
-    ): Promise<{ id: string, token: string}> => {
-        return client('/patient/signUp', {
-            id,
-            firstName,
-            lastName,
-            phone,
-            email,
-            dateOfBirth,
-            sex,
-            profilePicture,
-            height,
-            weight,
-            drinker,
-            smoker,
-        })
-    }
-    
-    public static delete = (id: string): Promise<{ success: boolean }> => {
-        return client('/patient/delete', { id })
-    }
+	public static delete = (id: string): Promise<{ success: boolean }> => {
+		return client('/patient/delete', { id })
+	}
 
-    public static getByToken = (token: string): Promise<Patient> => {
-        return client('/patient/getByToken', { token })
-    }
+	public static getByToken = (token: string): Promise<Patient> => {
+		return client('/patient/getByToken', { token })
+	}
 
-    public static getHCPs = async (token: string): Promise<HCP[]> => {
-        const hcpMap = await client('/patient/getHCPs', { token }) as any
-        const hcps = Objects.objToArray(hcpMap) as HCP[]
-        for (const hcp of hcps) {
-            hcp.hours = DateTime.safeParseHours(hcp.hours)
-        }
-        return Objects.objToArray(hcpMap) as HCP[]
-    }
+	public static getHCPs = async (token: string): Promise<HCP[]> => {
+		const hcpMap = (await client('/patient/getHCPs', { token })) as any
+		const hcps = Objects.objToArray(hcpMap) as HCP[]
+		for (const hcp of hcps) {
+			hcp.hours = DateTime.safeParseHours(hcp.hours)
+		}
+		return Objects.objToArray(hcpMap) as HCP[]
+	}
 
-    public static editProfile = (
-        id: PatientId,
-        token: string,
-        firstName: string,
-	    lastName: string,
-        phone: string,
-        email: string,
-        height: number,
-        weight: number,
-        drinker: Status,
-        smoker: Status,
-        profilePicture?: string,
-    ): Promise<{ success: boolean }> => {
-        return client('/patient/editProfile', {
-            id,
-            token,
-            firstName,
-            lastName,
-            phone,
-            email,
-            profilePicture,
-            height,
-            weight,
-            drinker,
-            smoker,
-        })
-    }
+	public static editProfile = (
+		id: PatientId,
+		token: string,
+		firstName: string,
+		lastName: string,
+		phone: string,
+		email: string,
+		height: number,
+		weight: number,
+		drinker: Status,
+		smoker: Status,
+		profilePicture?: string,
+	): Promise<{ success: boolean }> => {
+		return client('/patient/editProfile', {
+			id,
+			token,
+			firstName,
+			lastName,
+			phone,
+			email,
+			profilePicture,
+			height,
+			weight,
+			drinker,
+			smoker,
+		})
+	}
 
-    public static getRecords = async (token: string): Promise<HealthEvent[]> => {
-        const healthMap = await client('/patient/getRecords', { token }) as any
-        return Objects.objToArray(healthMap) as HealthEvent[]
-    }
+	public static getRecords = async (token: string): Promise<HealthEvent[]> => {
+		const healthMap = (await client('/patient/getRecords', { token })) as any
+		return Objects.objToArray(healthMap) as HealthEvent[]
+	}
 
-    public static getAll = (token: string): Promise<Patient[]> => {
-        return client('/patient/getAll', { token })
-    }
-
+	public static getAll = (token: string): Promise<Patient[]> => {
+		return client('/patient/getAll', { token })
+	}
 }
 
 class HCPClient {
+	public static logIn = (id: string, email: string): Promise<{ id: string; token: string }> => {
+		return client('/hcp/logIn', { id, email })
+	}
 
-    public static logIn = (id: string, email: string): Promise<{ id: string, token: string}> => {
-        return client('/hcp/logIn', { id, email })
-    }
+	public static signUp = (
+		id: string,
+		hours: Hours,
+		firstName: string,
+		lastName: string,
+		phone: string,
+		email: string,
+		specialty?: string,
+		title?: string,
+		profilePicture?: string,
+	): Promise<{ id: string; token: string }> => {
+		return client('/hcp/signUp', {
+			id,
+			hours,
+			firstName,
+			lastName,
+			phone,
+			email,
+			specialty,
+			title,
+			profilePicture,
+		})
+	}
 
-    public static signUp = (
-        id: string,
-        hours: Hours,
-        firstName: string,
-        lastName: string,
-        phone: string,
-        email: string,
-        specialty?: string,
-        title?: string,
-        profilePicture?: string,
-    ): Promise<{ id: string, token: string}> => {
-        return client('/hcp/signUp', {
-            id,
-            hours,
-            firstName,
-            lastName,
-            phone,
-            email,
-            specialty,
-            title,
-            profilePicture,
-        })
-    }
+	public static getByToken = async (token: string): Promise<HCP> => {
+		const hcp = await client('/hcp/getByToken', { token })
+		hcp.hours = DateTime.safeParseHours(hcp.hours)
+		return hcp
+	}
 
-    public static getByToken = async (token: string): Promise<HCP> => {
-        const hcp = await client('/hcp/getByToken', { token })
-        hcp.hours = DateTime.safeParseHours(hcp.hours)
-        return hcp
-    }
+	public static editProfile = (
+		id: DoctorId,
+		token: string,
+		hours: Hours,
+		firstName: string,
+		lastName: string,
+		phone: string,
+		email: string,
+		specialty?: string,
+		title?: string,
+		profilePicture?: string,
+	): Promise<{ id: string; token: string }> => {
+		return client('/hcp/editProfile', {
+			id,
+			token,
+			hours,
+			firstName,
+			lastName,
+			phone,
+			email,
+			specialty,
+			title,
+			profilePicture,
+		})
+	}
 
-    public static editProfile = (
-        id: DoctorId,
-        token: string,
-        hours: Hours,
-        firstName: string,
-        lastName: string,
-        phone: string,
-        email: string,
-        specialty?: string,
-        title?: string,
-        profilePicture?: string,
-    ): Promise<{ id: string, token: string}> => {
-        return client('/hcp/editProfile', {
-            id,
-            token,
-            hours,
-            firstName,
-            lastName,
-            phone,
-            email,
-            specialty,
-            title,
-            profilePicture,
-        })
-    }
+	public static getPatients = async (token: string): Promise<Patient[]> => {
+		const patientMap = (await client('/hcp/getPatients', { token })) as any
+		return Objects.objToArray(patientMap) as Patient[]
+	}
 
-    public static getPatients = async (token: string): Promise<Patient[]> => {
-        const patientMap = await client('/hcp/getPatients', { token }) as any
-        return Objects.objToArray(patientMap) as Patient[]
-    }
+	public static setRecords = (token: string, id: PatientId, health: HealthEvent[]): Promise<HealthEvent[]> => {
+		return client('/hcp/setRecords', { token, id, health }) as any
+	}
 
-    public static setRecords = (token: string, id: PatientId, health: HealthEvent[]): Promise<HealthEvent[]> => {
-        return client('/hcp/setRecords', { token, id, health }) as any
-    }
+	public static notify = (token: string, id: AppointmentId): Promise<{ success: boolean }> => {
+		return client('/hcp/notify', { token, id }) as any
+	}
 
-    public static notify = (token: string, id: AppointmentId): Promise<{ success: boolean }> => {
-        return client('/hcp/notify', { token, id }) as any
-    }
-
-    public static getAll = (token: string): Promise<HCP[]> => {
-        return client('/hcp/getAll', { token })
-    }
-
+	public static getAll = (token: string): Promise<HCP[]> => {
+		return client('/hcp/getAll', { token })
+	}
 }
 
 class AppointmentClient {
+	public static createAppointment = async (
+		token: string,
+		date: number,
+		duration: number,
+		subject: string,
+		patient?: PatientId,
+		hcpid?: DoctorId,
+		notes?: string,
+		videoUrl?: string,
+	): Promise<{ id: AppointmentId }> => {
+		return client('/appointment/createAppointment', {
+			token,
+			date,
+			duration,
+			patient,
+			hcpid,
+			subject,
+			notes,
+			videoUrl,
+		})
+	}
 
-    public static createAppointment = async (
-        token: string,
-        date: number,
-        duration: number,
-        subject: string,
-        patient?: PatientId,
-        hcpid?: DoctorId,
-        notes?: string,
-        videoUrl?: string,
-    ): Promise<{ id: AppointmentId }> => {
-        return client('/appointment/createAppointment', {
-            token,
-            date,
-            duration,
-            patient,
-            hcpid,
-            subject,
-            notes,
-            videoUrl,
-        })
-    }
+	public static deleteAppointment = (id: AppointmentId): Promise<{ success: boolean }> => {
+		return client('/appointment/deleteAppointment', { id })
+	}
 
-    public static deleteAppointment = (id: AppointmentId): Promise<{ success: boolean }> => {
-        return client('/appointment/deleteAppointment', { id })
-    }
-
-    public static getCalendar = async (token: string): Promise<Appointment[]> => {
-        return client('/appointment/getCalendar', { token })
-    }
-
+	public static getCalendar = async (token: string): Promise<Appointment[]> => {
+		return client('/appointment/getCalendar', { token })
+	}
 }
 
 export class Client {
-    public static Patient = PatientClient
-    public static HCP = HCPClient
-    public static Appointment = AppointmentClient
+	public static Patient = PatientClient
+	public static HCP = HCPClient
+	public static Appointment = AppointmentClient
 }
 
 const API_URL = 'https://upmed-api.herokuapp.com'
@@ -265,8 +259,8 @@ export const client = async (endpoint: string, body: any): Promise<any> => {
 	if (endpoint.indexOf('/') !== 0) {
 		throw new Error('client Error: endpoint must start with a forward slash')
 	}
-    const uri = getUri(endpoint)
-    console.log(body)
+	const uri = getUri(endpoint)
+	console.log(body)
 	try {
 		const res = await fetch(uri, {
 			method: 'POST',
@@ -277,7 +271,7 @@ export const client = async (endpoint: string, body: any): Promise<any> => {
 		})
 		return parseResponse(res)
 	} catch (e) {
-        console.log(e)
+		console.log(e)
 		throw new Error(`upmed-api Error: ${e.toString()}`)
 	}
 }

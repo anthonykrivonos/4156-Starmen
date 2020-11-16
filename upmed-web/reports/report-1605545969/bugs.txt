@@ -1,0 +1,2 @@
+============ upmed-web Bug Report Generated on 1605545969 ============
+$ eslint . --ext .ts

@@ -57,7 +57,9 @@ export class Button extends Component {
 					onMouseUp={disabled ? undefined : this.onMouseUp}
 					onMouseEnter={disabled ? undefined : this.onHover}
 					onMouseLeave={disabled ? undefined : this.onHoverOut}
-					className={`${styles.button_wrapper} d-flex align-items-center justify-content-start animated ${disabled ? 'disabled' : ''} ${className}`}
+					className={`${styles.button_wrapper} d-flex align-items-center justify-content-start animated ${
+						disabled ? 'disabled' : ''
+					} ${className}`}
 					style={{
 						opacity,
 						transform: `scale(${magnify})`,

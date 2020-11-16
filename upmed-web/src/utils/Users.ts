@@ -14,7 +14,7 @@ export class Users {
 		let user = null as (Patient | HCP) | null
 		try {
 			const decoded = decode(userToken) as any
-			const isPatient = decoded.userType !== "HCP"
+			const isPatient = decoded.userType !== 'HCP'
 			if (isPatient) {
 				user = await Client.Patient.getByToken(userToken)
 			} else {
@@ -30,7 +30,7 @@ export class Users {
 			return true
 		}
 		const decoded = decode(userToken) as any
-		return decoded.userType !== "HCP"
+		return decoded.userType !== 'HCP'
 	}
 
 	public static logOut = () => Users.clearUserToken()

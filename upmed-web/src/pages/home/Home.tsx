@@ -10,9 +10,7 @@ export const Home = () => {
 			<section id="header" className={styles.header}>
 				<div className={styles.intro}>
 					<h2>Healthcare in 2020 that doesn't compromise.</h2>
-					<p className={styles.subtitle}>
-						Visit world-class clinicians virtually in just a few clicks.
-					</p>
+					<p className={styles.subtitle}>Visit world-class clinicians virtually in just a few clicks.</p>
 					<Link to="/signin">
 						<Button className={styles.upmed_btn} text="Get Started" />
 					</Link>
