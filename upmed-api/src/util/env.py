@@ -1,12 +1,14 @@
 import os
 import sys
-from os import path
+from os.path import join, realpath, dirname
+
+sys.path.append(join(os.getcwd(), '..'))
 
 from typing import List
 
 from dotenv import load_dotenv
 
-env_path = path.join(os.path.dirname(os.path.realpath(__file__)), '../../.env')
+env_path = join(dirname(realpath(__file__)), '../../.env')
 load_dotenv(dotenv_path=env_path)
 
 class Env:
@@ -35,7 +37,7 @@ class Env:
         return os.getenv("TWILIO_API_KEY_SECRET")
 
     @staticmethod
-    def TWILIO_AUTH_TOKEN_SECRET() -> str:
+    def TWILIO_AUTH_TOKEN() -> str:
         return os.getenv("TWILIO_AUTH_TOKEN")
 
 # Ensure .env file is up to date, or exit promptly
@@ -50,4 +52,4 @@ for key in Env.__dict__.keys():
         pass
 
 if missing_envs:
-    sys.exit("upmed-api/.env file not up to date. Missing %s!" % ", ".join(missing_envs))
+    sys.exit("upmed-appointment/.env file not up to date. Missing %s!" % ", ".join(missing_envs))

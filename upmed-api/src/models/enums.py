@@ -1,3 +1,7 @@
+import sys, os
+from os.path import join
+sys.path.append(join(os.getcwd(), '..'))
+
 from enum import Enum
 
 class Status(Enum):

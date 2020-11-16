@@ -1,6 +1,7 @@
 # Web server
 flask
 gunicorn
+flask_cors
 
 # Code coverage
 coverage
@@ -11,7 +12,7 @@ pylint
 # External database
 firebase-admin
 
-# Reading from .env (.env MUST BE INSIDE upmed-api/)
+# Reading from .env (.env MUST BE INSIDE upmed-appointment/)
 python-dotenv
 
 # For basic encryption/decryption

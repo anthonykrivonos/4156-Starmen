@@ -1,3 +1,7 @@
+import sys, os
+from os.path import join
+sys.path.append(join(os.getcwd(), '..'))
+
 class Day:
     startTime: int
     endTime: int

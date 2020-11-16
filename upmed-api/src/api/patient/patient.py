@@ -1,19 +1,18 @@
-# import sys
-# sys.path.append('/UpMed/upmed-api/src')
-# from src.util.firebase.db import Database
-
+import sys, os
+from os.path import join
+sys.path.append(join(os.getcwd(), '../..'))
 
 from flask import Blueprint, request, jsonify, make_response
-from ....src.util.firebase.db import Database
-from ....src.util.util import Auth
-from ....src.models.patient import Patient
-from ....src.models.health_event import HealthEvent
+from util.firebase.db import Database
+from util.util import Auth
+from models import Patient, HCP, Hours, Day
 
 
 patient_endpoints = Blueprint('patient', __name__)
 pdb = Database()
 pat = pdb.getPatients()
 auth = Auth()
+hcpdb = pdb.getHCP()
 
 
 @patient_endpoints.route('/', methods=['POST'])
@@ -70,8 +69,8 @@ def signup():
             patient.profilePicture = 'https://www.flaticon.com/svg/static/icons/svg/147/147144.svg'
 
         # Parse phone number
-        phone = str(post_data.get('phone')).replace('-', '')
-        patient.phone = phone
+        # phone = str(post_data.get('phone')).replace('-', '')
+        patient.phone = str(post_data.get('phone'))
         utype = "PATIENT"
         pat.document(patient.id).set({
             "id": patient.id,
@@ -130,7 +129,7 @@ def getbytoken():
         patient = pat.document(str(pid)).get().to_dict()
         # print(patient)
         resp = Patient(
-            id=patient['id'],
+            id= pid,
             firstName=patient['firstName'],
             lastName=patient['lastName'],
             phone=patient['phone'],
@@ -159,7 +158,8 @@ def getbytoken():
             "height": resp.height,
             "weight": resp.weight,
             "drinker": resp.drinker,
-            "smoker": resp.smoker
+            "smoker": resp.smoker,
+            "health": resp.health
             }
         return make_response(jsonify(responseObject)), 200
     else:
@@ -215,7 +215,6 @@ def getRecords():
 
 @patient_endpoints.route('/editProfile', methods=['POST'])
 def editProfile():
-
     auth_token = request.get_json().get('token')
     if auth_token:
         pid, utype = Auth.decode_auth_token(auth_token)
@@ -262,6 +261,161 @@ def editProfile():
             "Success": True
         }
         return make_response(jsonify(res)), 200
+    else:
+        responseObject = {
+            'status': 'fail',
+            'message': 'Provide a valid auth token.'
+        }
+        return make_response(jsonify(responseObject)), 401
+
+@patient_endpoints.route('/getHCPs', methods=['POST'])
+def gethcps():
+    auth_token = request.get_json().get('token')
+    if auth_token:
+        pid, utype = Auth.decode_auth_token(auth_token)
+        # Get the ids of the HCPs of patient
+        patient_resp = pat.document(str(pid)).get().to_dict()
+        print(patient_resp['doctors'])
+        results = {}
+        for i in patient_resp['doctors']:
+            week = []
+            for _ in range(0, 7):
+                week.append(Day(
+                    startTime=-1,
+                    endTime=-1,
+                )
+                )
+
+            schedule = Hours(
+                sunday=week[0],
+                monday=week[1],
+                tuesday=week[2],
+                wednesday=week[3],
+                thursday=week[4],
+                friday=week[5],
+                saturday=week[6]
+            )
+            hcp = hcpdb.document(i).get().to_dict()
+            resp = HCP(
+                id=hcp['id'],
+                firstName=hcp['firstName'],
+                lastName=hcp['lastName'],
+                phone=hcp['phone'],
+                email=hcp['email'],
+                specialty=hcp['title'],
+                profilePicture=hcp['profilePicture'],
+                calendar=[],
+                title='',
+                patients=[],
+                hours=schedule
+            )
+            newsched = hcp['hours']
+            res = newsched[0].strip('][').split(', ')
+            resp.hours.sunday.startTime = res[0]
+            resp.hours.sunday.endTime = res[1]
+            res = newsched[1].strip('][').split(', ')
+            resp.hours.monday.startTime = res[0]
+            resp.hours.monday.endTime = res[1]
+            res = newsched[2].strip('][').split(', ')
+            resp.hours.tuesday.startTime = res[0]
+            resp.hours.tuesday.endTime = res[1]
+            res = newsched[3].strip('][').split(', ')
+            resp.hours.wednesday.startTime = res[0]
+            resp.hours.wednesday.endTime = res[1]
+            res = newsched[4].strip('][').split(', ')
+            resp.hours.thursday.startTime = res[0]
+            resp.hours.thursday.endTime = res[1]
+            res = newsched[5].strip('][').split(', ')
+            resp.hours.friday.startTime = res[0]
+            resp.hours.friday.endTime = res[1]
+            res = newsched[6].strip('][').split(', ')
+            resp.hours.saturday.startTime = res[0]
+            resp.hours.saturday.endTime = res[1]
+
+            hours = {
+                "sunday": {
+                    "startTime": resp.hours.sunday.startTime,
+                    "endTime": resp.hours.sunday.endTime
+                },
+                "monday": {
+                    "startTime": resp.hours.monday.startTime,
+                    "endTime": resp.hours.monday.endTime
+                },
+                "tuesday": {
+                    "startTime": resp.hours.tuesday.startTime,
+                    "endTime": resp.hours.tuesday.endTime
+                },
+                "wednesday": {
+                    "startTime": resp.hours.wednesday.startTime,
+                    "endTime": resp.hours.wednesday.endTime
+                },
+                "thursday": {
+                    "startTime": resp.hours.thursday.startTime,
+                    "endTime": resp.hours.thursday.endTime
+                },
+                "friday": {
+                    "startTime": resp.hours.friday.startTime,
+                    "endTime": resp.hours.friday.endTime
+                },
+                "saturday": {
+                    "startTime": resp.hours.saturday.startTime,
+                    "endTime": resp.hours.saturday.endTime
+                }
+            }
+
+            responseObject = {
+                "id": resp.id,
+                "firstName": resp.firstName,
+                "lastName": resp.lastName,
+                "phone": resp.phone,
+                "email": resp.email,
+                "profilePicture": resp.profilePicture,
+                "calendar": resp.calendar,
+                "specialty": resp.specialty,
+                "title": resp.title,
+                "hours": hours,
+                "patients": resp.patients
+                }
+
+            entry = {
+                i: responseObject
+            }
+            # print(i)
+            results.update(entry)
+            # print(res)
+
+
+        return make_response(jsonify(results)), 200
+    else:
+        responseObject = {
+            'status': 'fail',
+            'message': 'Provide a valid auth token.'
+        }
+        return make_response(jsonify(responseObject)), 401
+
+@patient_endpoints.route('/getAll', methods=['POST'])
+def getAll():
+    auth_token = request.get_json().get('token')
+    if auth_token:
+        hid, utype = Auth.decode_auth_token(auth_token)
+        pats = pat.stream()
+        # print(hcps)
+        pats_return = []
+        for patient in pats:
+
+            h = patient.to_dict()
+            print(f'{patient.id}=> {patient}')
+            pat_obj = {
+                "id": h['id'],
+                "firstName": h['firstName'],
+                "lastName": h['lastName'],
+                "email": h['email'],
+                "phone": h['phone'],
+                "profilePicture": h['profilePicture']
+            }
+
+            pats_return.append(pat_obj)
+        return jsonify(pats_return), 200
     else:
         responseObject = {
             'status': 'fail',

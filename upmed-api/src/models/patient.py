@@ -1,3 +1,7 @@
+import sys, os
+from os.path import join
+sys.path.append(join(os.getcwd(), '..'))
+
 from typing import List, Optional
 
 from .enums import Status
@@ -11,7 +15,7 @@ class Patient:
     calendar: List[AppointmentId]
     phone: str
     email: str
-    dateOfBirth: int
+    dateOfBirth: str
     sex: str
     profilePicture: Optional[str]
     height: int
@@ -29,7 +33,7 @@ class Patient:
         calendar: List[AppointmentId],
         phone: str,
         email: str,
-        dateOfBirth: int,
+        dateOfBirth: str,
         sex: str,
         profilePicture: Optional[str],
         height: int,

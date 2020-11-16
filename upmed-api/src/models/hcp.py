@@ -1,3 +1,7 @@
+import sys, os
+from os.path import join
+sys.path.append(join(os.getcwd(), '..'))
+
 from typing import List, Optional
 
 from .hours import Hours

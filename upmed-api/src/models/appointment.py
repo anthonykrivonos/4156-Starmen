@@ -1,11 +1,15 @@
+import sys, os
+from os.path import join
+sys.path.append(join(os.getcwd(), '..'))
+
 from typing import Optional
 
 from .strings import AppointmentId, DoctorId, PatientId
 
 class Appointment:
     id: AppointmentId
-    startDate: int
-    endDate: int
+    date: int
+    duration: int
     doctor: DoctorId
     patient: PatientId
     subject: str
@@ -15,8 +19,8 @@ class Appointment:
     def __init__(
         self,
         id: AppointmentId,
-        startDate: int,
-        endDate: int,
+        date: int,
+        duration: int,
         doctor: DoctorId,
         patient: PatientId,
         subject: str,
@@ -24,8 +28,8 @@ class Appointment:
         videoUrl: Optional[str],
     ):
         self.id = id
-        self.startDate = startDate
-        self.endDate = endDate
+        self.date = date
+        self.duration = duration
         self.doctor = doctor
         self.patient = patient
         self.subject = subject
