@@ -1,0 +1,103 @@
+@import '../../../index'
+
+
+.editing_health_event
+    background-color: $light
+    padding: 2vw
+    padding-top: 6vh
+    padding-bottom: 6vh
+    min-height: 100vh
+
+.medical_info
+    background-color: $light
+    padding: 2vw
+    padding-top: 6vh
+    padding-bottom: 6vh
+    min-height: 100vh
+
+    .empty
+        color: $dark
+
+    .doctors
+        flex-wrap: wrap
+        .container
+            transition: 0.3s ease
+            box-shadow: 0 3px 6px rgba(0,0,0, 0.08), 0 3px 6px rgba(0,0,0,0.16)
+            &:hover
+                box-shadow: 0 3px 6px rgba(0,0,0, 0.04), 0 3px 6px rgba(0,0,0,0.08)
+            cursor: pointer
+            border-radius: 24px
+            padding: 24px !important
+            flex: 0.25
+            text-align: center
+            margin: 0
+            margin-left: 16px
+            margin-bottom: 16px
+            flex-shrink: 0
+            min-width: 180px !important
+            max-width: 180px !important
+
+    .apts
+        margin-bottom: 32px
+        .apts_inner
+            box-shadow: 0 3px 6px rgba(0,0,0, 0.08), 0 3px 6px rgba(0,0,0,0.16)
+            padding: 16px
+            border-radius: 16px
+            .appt_row
+                display: flex
+                padding: 16px
+                border-top: solid 1px $medium
+                &:nth-child(1)
+                    border-top: none
+                div
+                    margin: 0
+                    &:nth-child(1)
+                        margin-right: 16px
+                    &:nth-child(3)
+                        margin-left: 16px
+                        color: $medium
+                a
+                    cursor: pointer
+                .subject
+                    flex: 1
+    .health_events
+        margin-bottom: 32px
+
+        .health_events_inner
+            box-shadow: 0 3px 6px rgba(0,0,0, 0.08), 0 3px 6px rgba(0,0,0,0.16)
+            padding: 16px
+            border-radius: 16px
+
+            .health_event_row
+                display: flex
+                padding: 16px
+                border-top: solid 1px $medium
+                &:nth-child(1)
+                    border-top: none
+                div
+                    margin: 0
+                    &:nth-child(1)
+                        margin-right: 16px
+                    &:nth-child(3)
+                        margin-left: 16px
+                a
+                    cursor: pointer
+                .subject
+                    flex: 1
+
+
+.popup_container
+    padding: 16px
+    .doctor_details
+        display: flex
+    .doctor_hours
+        margin-top: 16px
+        .hours
+            display: flex
+            flex: 1
+            div
+                &:nth-child(1)
+                    width: 30%
+                    font-weight: bold
+                    
+

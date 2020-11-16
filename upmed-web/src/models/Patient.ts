@@ -9,7 +9,7 @@ export interface Patient {
     calendar: AppointmentId[]
     phone: string
     email: string
-    dateOfBirth: number
+    dateOfBirth: string
     sex: string
     profilePicture?: string
     height: number

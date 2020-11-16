@@ -1,0 +1,86 @@
+@import '../../index'
+
+.onsignin
+  background-color: $light
+  padding: 4vw
+  padding-top: 10vh
+  padding-bottom: 10vh
+
+  blockquote
+    margin-top: 16px
+    margin-bottom: 16px
+    padding-top: 8px
+    padding-bottom: 2px !important
+    padding-left: 16px
+    border-left: solid 8px $medium
+
+  .info_col
+    flex: 1
+    display: flex
+    flex-direction: column
+
+  button
+    margin-top: 16px
+    background: $secondary
+    color: $white
+    border: none
+    font-weight: 900
+
+    &.create_account
+      background: $primary
+
+      &.disabled
+        background: $medium !important
+        cursor: default
+
+    &.create_account:hover
+      background: $primary
+
+  .rec
+    margin-bottom: 10vh
+
+  .pfp
+    object-fit: cover
+    object-position: center
+    overflow: hidden
+    height: 24vw
+    width: 24vw
+    border-radius: 12vw !important
+  
+  .section_title
+    margin-top: 4vh
+    margin-bottom: 2vh
+
+  .input_tiny
+    width: 25%
+  .input_tiny_2
+    width: 23%
+    margin-left: 2%
+
+  .input_short
+    width: 50%
+
+  .input_mid
+    width: 65%
+
+  .input_long
+    width: 90%
+
+  .checkbox
+    height: 14px
+    width: 14px
+  
+.loading
+  height: 80vh
+
+
+@media only screen and ( max-width: $phone )
+  .onsignin
+    .input_short
+      width: 60%
+
+    .input_mid
+      width: 70%
+
+    .input_long
+      width: 90%

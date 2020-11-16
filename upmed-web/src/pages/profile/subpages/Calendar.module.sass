@@ -1,0 +1,74 @@
+@import '../../../index'
+
+.loading
+    height: 100vh
+    align-items: center
+
+.calendar_outter
+    flex: 1
+    flex-direction: column
+    justify-content: stretch
+    align-items: center
+    background-color: $light
+    min-height: 100vh
+
+    .calendar_top
+        padding: 3rem
+        padding-bottom: 0
+        margin-bottom: 32px
+        background-color: $white
+
+        .calendar_bar
+            display: flex
+            align-items: center
+            border-radius: 12px
+            overflow: hidden
+            justify-content: space-between
+            box-shadow: 0 3px 6px rgba(0,0,0, 0.08), 0 3px 6px rgba(0,0,0,0.16)
+            height: 60px
+            padding-left: 16px
+            padding-right: 16px
+            margin-bottom: 32px
+
+            .appointment_btn
+                background: $secondary
+                border: none
+                padding: 12px
+                padding-left: 12px
+                padding-right: 12px
+                font-size: 10pt
+                border-radius: 8px
+                color: $white
+
+    .calendar_inner
+        padding-left: 3rem
+        padding-right: 3rem
+        background-color: $white
+
+        .calendar
+            box-shadow: 0 3px 6px rgba(0,0,0, 0.16), 0 3px 6px rgba(0,0,0,0.23)
+            border-radius: 16px
+            padding: 16px
+
+            .fc-button-primary
+                background: $primary !important
+
+.popup_container
+    padding: 16px
+
+    .input_short
+        width: 60% !important
+
+    .input_mid
+        width: 80% !important
+    
+    .popup_mid_inputs
+        justify-content: stretch
+    
+        .duration
+            flex: 1.5 !important
+    
+    .schedule_btn
+        background: $secondary
+        color: $white
+        font-size: 12pt

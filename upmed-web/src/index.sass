@@ -1,0 +1,269 @@
+/**
+ *  Fonts
+ */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Noto+Sans:wght@400;700&family=Comfortaa:wght@700&display=swap');
+
+/**
+ *  CSS
+ */
+@import "node_modules/bootstrap/scss/bootstrap";
+
+/**
+ *  Colors
+ */
+
+$black: #000000
+$dark: #333333
+$medium: #B5B5B5
+$light: #FAFAFA
+$white: #FFFFFF
+$primary: #2B3236
+$secondary: #035A82
+$tertiary: #55C0F2
+$quaternary: #F05A4D
+$good: #1B7A00
+$clear: transparent
+
+/**
+ * Breakpoints
+ */
+$phone: 576px
+$tablet: 768px
+
+/**
+ *  General
+ */
+
+.App
+	text-align: center
+
+.fullpage-wrapper
+	width: 100vw
+
+body
+	font-family: 'Lato', sans-serif
+	outline: none
+
+main
+	overflow: hidden
+
+textarea:focus, input:focus, *:focus
+	outline: none !important
+
+.unselectable
+	user-select: none
+	-moz-user-select: none
+	-khtml-user-select: none
+	-webkit-user-select: none
+	-o-user-select: none
+
+.clickable
+	cursor: pointer
+
+.wrapper
+	width: 100%
+	position: relative
+
+.container
+	padding: 0 !important
+
+.fullpage
+	overflow: hidden
+	border: solid 1px red
+
+.flex-1
+	flex: 1
+
+.animated
+	-webkit-transition: all 0.05s ease
+	-moz-transition: all 0.05s ease
+	-o-transition: all 0.05s ease
+	transition: all 0.05s ease
+
+.animated-slow
+	-webkit-transition: all 0.5s ease
+	-moz-transition: all 0.5s ease
+	-o-transition: all 0.5s ease
+	transition: all 0.5s ease
+
+.logo
+	font-family: 'Comfortaa', sans-serif !important
+	font-weight: 700
+
+.h7
+	font-size: 0.8rem
+
+.h8
+	font-size: 0.6rem
+
+.h9
+	font-size: 0.4rem
+
+.justify-content-stretch
+	justify-content: stretch
+
+/**
+ *  Shadows
+ */
+.shadow-font
+	text-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)
+
+
+/**
+ *  Dimensions
+ */
+
+.w-20
+	width: 20%
+
+.w-65
+	width: 65%
+
+.w-80
+	width: 80%
+
+$w-desktop: 0 4rem;
+$w-mobile: 2rem 1rem;
+
+/**
+ *  Font Transforms
+ */
+
+.upper
+	text-transform: uppercase
+
+/**
+ *  Fonts
+ */
+
+.font-title
+	font-family: 'Lato', sans-serif
+	font-weight: 700
+	line-height: 1.4
+
+.font-light
+	font-family: 'Lato', sans-serif
+	font-weight: 400
+
+.font-regular
+	font-family: 'Lato', sans-serif
+
+.font-secondary
+	font-family: 'Noto Sans', sans-serif
+
+.font-tertiary
+	font-family: 'Noto Sans', sans
+
+/**
+ *  Line Height
+ */
+
+.lh-1
+	line-height: 1
+
+.lh-1.05
+	line-height: 1.05
+
+.lh-1.25
+	line-height: 1.25
+
+.lh-1.5
+	line-height: 1.5
+
+.lh-1.75
+	line-height: 1.75
+
+.lh-1.2
+	line-height: 1.75
+
+/**
+ *  Colors
+ */
+
+.color-black
+	color: $black
+
+.color-dark
+	color: $dark
+
+.color-medium
+	color: $medium
+
+.color-light
+	color: $light
+
+.color-white
+	color: $white
+
+.color-primary
+	color: $primary
+
+.color-secondary
+	color: $secondary
+
+.color-tertiary
+	color: $tertiary
+
+.color-quaternary
+	color: $quaternary
+
+.color-good
+	color: $good
+
+/**
+ *  Backgrounds
+ */
+
+.bg-black
+	background-color: $black !important
+
+.bg-dark
+	background-color: $dark !important
+
+.bg-medium
+	background-color: $medium !important
+
+.bg-light
+	background-color: $light !important
+
+.bg-white
+	background-color: $white !important
+
+.bg-primary
+	background-color: $primary !important
+
+.bg-secondary
+	background-color: $secondary !important
+
+.bg-tertiary
+	background-color: $tertiary !important
+
+.bg-quaternary
+	background-color: $quaternary !important
+
+/**
+ *  Line Heights
+ */
+.line-regular
+	line-height: 1.2
+
+.line-small
+	line-height: 1.1
+
+.line-none
+	line-height: 1
+
+.line-large
+	line-height: 1.4
+
+.line-larger
+	line-height: 1.6
+
+.line-double
+	line-height: 2
+
+/**
+ *	Overwrites
+ */
+.sb-avatar__image
+	object-fit: cover !important

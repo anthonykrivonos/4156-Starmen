@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './pages/App'
 import reportWebVitals from './reportWebVitals'
-import './index.module.sass'
+import './index.sass'
 
 ReactDOM.render(
 	<React.StrictMode>

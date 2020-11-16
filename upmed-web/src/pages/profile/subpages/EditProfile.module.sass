@@ -1,0 +1,93 @@
+@import '../../../index'
+
+.edit_profile_outter
+    background-color: $light
+    padding: 2vw
+    padding-top: 6vh
+    padding-bottom: 6vh
+    min-height: 100vh
+
+    .container
+        box-shadow: 0 3px 6px rgba(0,0,0, 0.08), 0 3px 6px rgba(0,0,0,0.16)
+        border-radius: 16px
+        padding: 32px !important
+        margin-top: 32px
+
+    blockquote
+        margin-top: 16px
+        margin-bottom: 16px
+        padding-top: 8px
+        padding-bottom: 2px !important
+        padding-left: 16px
+        border-left: solid 8px $medium
+
+    .info_col
+        flex: 1
+        display: flex
+        flex-direction: column
+
+    button
+        background: $secondary
+        color: $white
+        border: none
+        font-weight: 900
+
+        &.update_account
+            background: $primary
+            margin-left: 32px
+
+        &.disabled
+            background: $medium !important
+            cursor: default
+
+        &.update_account:hover
+            background: $primary
+
+    .rec
+        margin-bottom: 10vh
+
+    .pfp
+        object-fit: cover
+        object-position: center
+        overflow: hidden
+        height: 24vw
+        width: 24vw
+        border-radius: 12vw !important
+
+    .section_title
+        margin-bottom: 2vh
+
+    .input_tiny
+        width: 25%
+    .input_tiny_2
+        width: 23%
+        margin-left: 2%
+
+    .input_short
+        width: 60%
+
+    .input_mid
+        width: 75%
+
+    .input_long
+        width: 90%
+
+    .checkbox
+        height: 14px
+        width: 14px
+
+.loading
+    height: 100vh
+    align-items: center
+
+
+@media only screen and ( max-width: $phone )
+    .edit_profile_outter
+        .input_short
+            width: 60%
+
+        .input_mid
+            width: 70%
+
+        .input_long
+            width: 90%

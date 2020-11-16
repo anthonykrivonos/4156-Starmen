@@ -1,0 +1,60 @@
+@import '../../index'
+
+.sidebar_container
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    height: 100vh
+    background: $secondary
+    color: $white
+    flex: 1
+    padding-top: 32px
+    padding-bottom: 32px
+    padding-right: 32px
+
+    .divider
+        background: $medium
+        height: 1px
+        width: 100%
+        margin-top: 16px
+
+    .sidebar_inner
+        flex-direction: column
+
+        .user_container
+            padding-left: 16px
+            padding-right: 16px
+            padding-bottom: 16px
+
+            .user_creds
+                color: $light
+                font-size: 11pt
+                margin-top: 8px
+                .email
+                    font-size: 9pt
+
+
+        .sidebar_button
+            padding: 12px
+            padding-left: 16px
+            padding-right: 16px
+            transition: 0.1s ease
+            &:hover
+                color: $medium
+                transform: scale(1.02)
+    
+    .sidebar_bottom
+        .button_bottom
+            font-size: 10pt
+            font-weight: bold
+
+        .bottom_container
+            margin-top: 32px
+            padding-left: 16px
+            padding-right: 16px
+            padding-bottom: 16px
+
+            .divider
+                margin-bottom: 8px
+
+

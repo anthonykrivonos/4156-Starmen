@@ -1,0 +1,28 @@
+@import '../../index'
+
+.hours_outter
+    display: flex
+    flex-direction: column
+
+    .hours_row
+        display: flex
+        flex-direction: row
+        align-items: center
+        border: solid 1px $medium
+        border-radius: 12px
+        padding: 16px
+        margin-top: 4px
+        margin-bottom: 4px
+        height: 50px
+        transition: 0.1s ease
+
+        &:hover
+            transform: scale(1.02)
+        &.hours_row_invalid
+            border: solid 2px $quaternary
+        label
+            margin: 0 !important
+            padding: 0 !important
+        .closed
+            color: $medium
+            font-style: italic

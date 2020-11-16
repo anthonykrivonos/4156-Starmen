@@ -1,0 +1,57 @@
+@import '../../index'
+
+.navbar
+	background-color: $secondary
+
+	a
+		color: $light !important
+		margin: 0 1rem;
+
+		h2
+			font-size: 2rem
+	a:hover
+		text-decoration: none
+
+.nav-item
+	display: flex
+	flex-grow: 1
+	flex-shrink: 0
+	padding: 0 !important
+	margin-left: 12px
+	margin-right: 12px
+
+.nav-inner
+	position: relative !important
+
+.nav-link
+	padding-left: 0 !important
+	padding-right: 0 !important
+	margin: 0 !important
+	z-index: -1
+
+.ref-underline
+	width: 100%
+	height: 4px
+	background: $primary
+	margin-top: -12px
+	position: absolute
+	z-index: 0
+
+.upmed_btn
+	background-color: $primary
+	color: $secondary
+	font-family: 'Lato', sans-serif
+	font-weight: 700
+	border: none
+
+
+.navbar-wrapper
+	max-width: 100vw
+
+.navbar-toggler-icon, .hamburger-inner, .hamburger-inner:before, .hamburger-inner:after
+	fill: $black !important
+
+@media only screen and ( max-width: 991px )
+	.nav-item
+		margin-top: 4px !important
+		margin-bottom: 4px !important

@@ -4,8 +4,8 @@
 
 1. Import the `.env` file shared privately within the Starmen team and place it
 in the `upmed-api/` directory.
-2. Install dependencies with `yarn install`.
-3. Start the server by running `../upmed-api/src/app.py`.
+2. Start the server by following the instructions in `upmed-api/README.md`.
+3. `cd` to `upmed-web/` and install dependencies with `yarn install`.
 4. Start the app by running `yarn start`.
 
 ## Submitting Code & Deploying
@@ -18,19 +18,3 @@ in the `upmed-api/` directory.
 3. Have your PR approved by **at least one** other person.
 4. Merge your PR into `main`.
 5. Your code will be automatically deployed to Firebase Hosting.
-
-## Folder Structure
-
-```
-src/
-    api/
-        hcp/
-            hcp.py
-                - contains all endpoints related to HCPs
-        patient/
-            patient.py
-                - contains all endpoints related to patients
-    app.py
-        - Web server root
-tst/
-```

@@ -1,10 +1,11 @@
-import { AppointmentId, DoctorId } from './strings'
+import { AppointmentId, DoctorId, PatientId } from './strings'
 
 export interface Appointment {
     id: AppointmentId
-    startDate: number
-    endDate: number
+    date: number
+    duration: number
     doctor: DoctorId
+    patient: PatientId
     subject: string
     notes?: string
     videoUrl?: string

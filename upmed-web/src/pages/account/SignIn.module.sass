@@ -1,0 +1,86 @@
+@import '../../index'
+
+.signup
+  height: 90vh
+  background-color: $light
+
+  h2
+    padding: 2rem 0
+    font-size: 3rem
+    text-align: center
+    color: $primary
+    padding-top: 10vh
+
+  .tile
+    max-width: 850px
+    height: 355px
+    margin: 0 auto
+    border-radius: 15px
+    border: none
+    display: flex
+    align-items: center
+    overflow: hidden
+    background-color: white
+    box-shadow: 0px 4px 5px rgba(0,0,0,0.25)
+
+  .card_text
+    margin: 0 2rem
+    width: 50%
+
+    .bottom_text
+      margin-top: 1rem
+      font-size: 14px
+      color: $medium
+
+    img
+      width: 80%
+
+    img:hover
+      cursor: pointer
+
+    span
+      color: #0094FF
+
+  img
+    height: 100%
+    width: 50%
+
+  .login_error
+    color: $quaternary
+
+  button
+    width: 90% !important
+    max-width: 300px
+    margin-top: 8px
+    margin-bottom: 8px
+
+  .login_patient
+
+  .login_hcp
+    background: $primary !important
+    span
+      color: $white !important
+    div
+      background: $primary !important
+
+@media only screen and ( max-width: $phone )
+  .signup
+    height: 80vh
+    .tile
+      display: block
+      width: 90vw
+      padding: 2rem 0
+
+    .card_text
+      display: flex
+      flex-direction: column
+      justify-content: space-between
+      width: 100%
+      margin: 0 auto
+      padding: 0 1.875rem
+
+      p:nth-child(3)
+        margin: 0
+
+    .tile_img
+      display: none

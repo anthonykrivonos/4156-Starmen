@@ -1,0 +1,116 @@
+@import '../../index'
+
+.landing_img
+  width: 40%
+  height: 40%
+  object-fit: cover
+
+.header
+  margin: 4rem
+  display: flex
+  align-items: center
+  justify-content: space-between
+  margin-top: 10vh
+
+  .intro
+    max-width: 50%
+    z-index: 1
+
+  h2
+    font-size: 72px
+    max-width: 750px
+    margin-bottom: 2rem
+    font-weight: 700
+
+  .subtitle
+    font-size: 28px
+    font-weight: 300
+    margin-bottom: 4rem
+
+  .upmed_btn
+    background-color: $primary
+    color: $white
+    border: none
+
+  .unselectable
+    margin: 0 auto
+
+.how_it_works
+  margin: 6rem 4rem
+  display: flex
+  justify-content: space-evenly
+  align-items: center
+  margin-top: 20vh
+
+  h2
+    font-size: 32pt
+    text-align: center
+    margin-bottom: 3rem
+    font-weight: bold
+
+  img
+    margin: 0
+
+  .step
+    display: flex
+    align-items: center
+    justify-content: start
+    margin: 1rem 0
+
+    img
+      width: 5rem
+
+    p
+      margin-top: 1.5rem
+      margin-left: 1.5rem
+      font-size: 22px
+      max-width: 500px
+
+.contact
+  display: flex
+  align-items: center
+  justify-content: space-around
+  background-color: $primary
+  height: 445px
+  text-align: center
+  margin-top: 20vh
+
+  .question
+    color: $secondary
+    h3
+      font-size: 64px
+      letter-spacing: 0.1rem
+    p
+      font-size: 24px
+      margin-top: 16px
+
+  .vertical
+    height: 270px
+    width: 2px
+    background-color: $secondary
+
+  a, a:active
+    text-decoration: none
+    color: $secondary
+    font-size: 48px
+
+
+
+@media only screen and ( max-width: $tablet )
+  .header
+    h2
+      font-size: 60px
+
+    .subtitle
+      margin-bottom: 1rem
+
+    .landing_img
+      height: 50%
+      width: 50%
+
+  .tagline
+    display: none
+
+  .how_it_works
+    .landing_img
+      display: none
