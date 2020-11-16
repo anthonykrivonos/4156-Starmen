@@ -2,12 +2,13 @@ import sys, os
 from os.path import join
 sys.path.append(join(os.getcwd(), '..'))
 
-from util import SuperBlueprint
-# from ..util import SuperBlueprint
 
 from .hcp import hcp_endpoints
 from .patient import patient_endpoints
 from .appointment import appointment_endpoints
+
+from util import SuperBlueprint
+# from ..util import SuperBlueprint
 
 """
 Register appointment blueprints

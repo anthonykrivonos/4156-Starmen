@@ -1,5 +1,3 @@
-import os
-
 from util.env import Env
 from flask import Flask
 from flask_cors import CORS
