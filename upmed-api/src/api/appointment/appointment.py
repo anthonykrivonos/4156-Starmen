@@ -123,7 +123,7 @@ def getCalendar():
         for event in output:
             appointments_output = appointmentsdb.document(str(event)).get().to_dict()
             calendar.append(appointments_output)
-        return make_response(jsonify(output)), 200
+        return make_response(jsonify(calendar)), 200
     responseObject = {
         'status': 'fail',
         'message': 'Error in token authentication'
