@@ -7,15 +7,14 @@
 # from util import Database, Auth, Twilio
 # from models import HCP, Hours, Day, HealthEvent, Patient, Status, Appointment
 from flask import Blueprint, request, jsonify, make_response
-from ....src.util.firebase.db import Database
-from ....src.util.util import Auth, Twilio
-from ....src.models.hcp import HCP
-from ....src.models.hours import Hours
-from ....src.models.day import Day
-from ....src.models.health_event import HealthEvent
-from ....src.models.patient import Patient
-from ....src.models.enums import Status
-from ....src.models.appointment import Appointment
+from util.firebase.db import Database
+from util.util import Auth, Twilio
+from models.hcp import HCP
+from models.hours import Hours
+from models.day import Day
+from models.health_event import HealthEvent
+from models.patient import Patient
+from models.appointment import Appointment
 
 
 
