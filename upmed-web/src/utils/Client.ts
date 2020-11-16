@@ -217,8 +217,8 @@ export class Client {
     public static Appointment = AppointmentClient
 }
 
-// const API_URL = 'https://upmed-api.herokuapp.com'
-const API_URL = 'http://localhost:8080'
+const API_URL = 'https://upmed-api.herokuapp.com'
+// const API_URL = 'http://localhost:8080'
 
 /**
  * Creates a URI from the endpoint and API URL.
