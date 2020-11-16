@@ -3,6 +3,16 @@ from util.firebase.db import Database
 from util.util import Auth
 from models.appointment import Appointment
 
+# from flask import Blueprint, request, jsonify, make_response, json
+# from ....src.util.firebase.db import Database
+# from ....src.util.util import Auth
+# from ....src.models.patient import Patient
+# from ....src.models.hcp import HCP
+# from ....src.models.health_event import HealthEvent
+# from ....src.models.hours import Hours
+# from ....src.models.day import Day
+# from ....src.util.util import Twilio
+# from ....src.models.appointment import Appointment
 
 pdb = Database()
 hcp_db = pdb.getHCP()
@@ -94,32 +104,26 @@ def getCalendar():
 
     if auth_token:
         pid, utype = Auth.decode_auth_token(auth_token)
-        output = None
+        output = []
+        print(f'{utype} and {pid}')
         if utype == "PATIENT":
-            docs = appointmentsdb.where(u'patient', u'==', str(pid)).stream()
-            output = [doc.id for doc in docs]
+            docs = patient_db.document(str(pid)).get().to_dict()
+            print(docs)
+            output = docs['calendar']
         elif utype == "HCP":
-            docs = appointmentsdb.where(u'doctor', u'==', str(pid)).stream()
-            output = [doc.id for doc in docs]
+            docs = hcp_db.document(str(pid)).get().to_dict()
+            output = docs['calendar']
         else:
             responseobject = {
                 'Success': False,
                 'message': 'Failed to verify role'
             }
             return make_response(jsonify(responseobject)), 401
-        if output:
-            print(output)
-            calendar = []
-            for event in output:
-                appointments_output = appointmentsdb.document(str(event)).get().to_dict()
-                calendar.append(appointments_output)
-            return make_response(jsonify(calendar)), 200
-        else:
-            responseObject = {
-                'status': 'fail',
-                'message': 'No appointment found.'
-            }
-            return make_response(jsonify(responseObject)), 401
+        calendar = []
+        for event in output:
+            appointments_output = appointmentsdb.document(str(event)).get().to_dict()
+            calendar.append(appointments_output)
+        return make_response(jsonify(calendar)), 200
     responseObject = {
         'status': 'fail',
         'message': 'Error in token authentication'
