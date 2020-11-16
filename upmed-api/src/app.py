@@ -10,13 +10,14 @@ import os
 #
 # from .api import api_endpoints
 
-
+from util import Env
 
 """
 Create app and register blueprints
 """
 app = Flask(__name__)
-# CORS(app)
+if Env.USE_CORS():
+    CORS(app)
 api_endpoints.bind_to_app(app)
 
 @app.route('/')

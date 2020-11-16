@@ -40,6 +40,10 @@ class Env:
     def TWILIO_AUTH_TOKEN() -> str:
         return os.getenv("TWILIO_AUTH_TOKEN")
 
+    @staticmethod
+    def USE_CORS() -> bool:
+        return os.getenv("USE_CORS") == '1'
+
 # Ensure .env file is up to date, or exit promptly
 missing_envs: List[str] = []
 for key in Env.__dict__.keys():
