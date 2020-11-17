@@ -1,0 +1,49 @@
+============ upmed-web Coverage and Unit Report Generated on 1605576619 ============ \n\n
+************* Module upmed-api.src.app
+src/app.py:2:0: E0401: Unable to import 'flask' (import-error)
+src/app.py:5:0: E0401: Unable to import 'flask_cors' (import-error)
+src/app.py:36:13: E0602: Undefined variable 'os' (undefined-variable)
+************* Module upmed-api.src.util.env
+src/util/env.py:1:0: E0401: Unable to import 'dotenv' (import-error)
+************* Module upmed-api.src.util.super_blueprint
+src/util/super_blueprint.py:1:0: E0401: Unable to import 'flask' (import-error)
+************* Module upmed-api.src.util.util
+src/util/util.py:1:0: E0401: Unable to import 'twilio.rest' (import-error)
+src/util/util.py:55:21: E1101: Class 'Env' has no 'TWILIO_AUTH_TOKEN_SECRET' member (no-member)
+************* Module upmed-api.src.util.firebase.setup
+src/util/firebase/setup.py:5:0: E0401: Unable to import 'firebase_admin' (import-error)
+src/util/firebase/setup.py:6:0: E0401: Unable to import 'firebase_admin' (import-error)
+src/util/firebase/setup.py:7:0: E0401: Unable to import 'firebase_admin' (import-error)
+src/util/firebase/setup.py:9:0: E0401: Unable to import 'simplecrypt' (import-error)
+************* Module upmed-api.tst.api.hcp_test.hcp_test
+tst/api/hcp_test/hcp_test.py:5:0: E0611: No name 'firebase' in module 'util' (no-name-in-module)
+tst/api/hcp_test/hcp_test.py:5:0: E0401: Unable to import 'util.firebase.db' (import-error)
+tst/api/hcp_test/hcp_test.py:6:0: E0401: Unable to import 'models.patient' (import-error)
+tst/api/hcp_test/hcp_test.py:7:0: E0401: Unable to import 'models.hcp' (import-error)
+tst/api/hcp_test/hcp_test.py:8:0: E0401: Unable to import 'models.appointment' (import-error)
+tst/api/hcp_test/hcp_test.py:9:0: E0401: Unable to import 'models.day' (import-error)
+tst/api/hcp_test/hcp_test.py:10:0: E0401: Unable to import 'models.hours' (import-error)
+tst/api/hcp_test/hcp_test.py:11:0: E0401: Unable to import 'models.enums' (import-error)
+tst/api/hcp_test/hcp_test.py:12:0: E0611: No name 'util' in module 'util' (no-name-in-module)
+tst/api/hcp_test/hcp_test.py:12:0: E0401: Unable to import 'util.util' (import-error)
+************* Module upmed-api.src.api.patient.patient
+src/api/patient/patient.py:1:0: E0401: Unable to import 'flask' (import-error)
+************* Module upmed-api.tst.api.patient_test.patient_test
+tst/api/patient_test/patient_test.py:4:0: E0611: No name 'firebase' in module 'util' (no-name-in-module)
+tst/api/patient_test/patient_test.py:4:0: E0401: Unable to import 'util.firebase.db' (import-error)
+tst/api/patient_test/patient_test.py:5:0: E0401: Unable to import 'models.patient' (import-error)
+tst/api/patient_test/patient_test.py:6:0: E0401: Unable to import 'models.hcp' (import-error)
+tst/api/patient_test/patient_test.py:7:0: E0401: Unable to import 'models.appointment' (import-error)
+tst/api/patient_test/patient_test.py:8:0: E0401: Unable to import 'models.day' (import-error)
+tst/api/patient_test/patient_test.py:9:0: E0401: Unable to import 'models.hours' (import-error)
+tst/api/patient_test/patient_test.py:10:0: E0401: Unable to import 'models.enums' (import-error)
+tst/api/patient_test/patient_test.py:11:0: E0611: No name 'util' in module 'util' (no-name-in-module)
+tst/api/patient_test/patient_test.py:11:0: E0401: Unable to import 'util.util' (import-error)
+************* Module upmed-api.src.api.appointment.appointment
+src/api/appointment/appointment.py:1:0: E0401: Unable to import 'flask' (import-error)
+************* Module upmed-api.src.api.hcp.hcp
+src/api/hcp/hcp.py:1:0: E0401: Unable to import 'flask' (import-error)
+src/api/hcp/hcp.py:474:30: E1120: No value for argument 'duration' in constructor call (no-value-for-parameter)
+src/api/hcp/hcp.py:505:26: E1101: Instance of 'Appointment' has no 'startDate' member (no-member)
+************* Module upmed-api.tst.api.appointment_test.appointment_test
+tst/api/appointment_test/appointment_test.py:121:4: E0102: method already defined line 116 (function-redefined)

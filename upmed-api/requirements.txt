@@ -8,18 +8,23 @@ coverage
 
 # Linting/style checking
 pylint
+pycodestyle
 
 # External database
 firebase-admin
+requests
 
 # Reading from .env (.env MUST BE INSIDE upmed-appointment/)
 python-dotenv
+setuptools
 
 # For basic encryption/decryption
 simple-crypt
 
 # JWT
-PyJWT==1.4.2
+PyJWT
+
 
 # Twilio API
 twilio
+

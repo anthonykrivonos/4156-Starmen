@@ -1,11 +1,3 @@
-# import sys, os
-# from os.path import join
-# sys.path.append(join(os.getcwd(), '../..'))
-#
-# from flask import Blueprint, request, jsonify, make_response
-#
-# from util import Database, Auth, Twilio
-# from models import HCP, Hours, Day, HealthEvent, Patient, Status, Appointment
 from flask import Blueprint, request, jsonify, make_response
 from util.firebase.db import Database
 from util.util import Auth, Twilio
@@ -15,8 +7,41 @@ from models.day import Day
 from models.health_event import HealthEvent
 from models.patient import Patient
 from models.appointment import Appointment
+import datetime
+
+import sys
+import os
+from os.path import join
+sys.path.append(join(os.getcwd(), '../..'))
+
+"""HCP API Endpoints
+
+----Heroku Imports----
+from models import HCP, Hours, Day, HealthEvent, Patient, Status, Appointment
+from util import Database, Auth, Twilio
+from flask import Blueprint, request, jsonify, make_response
+import sys
+import os
+from os.path import join
+sys.path.append(join(os.getcwd(), '../..'))
 
 
+
+---- Relative Imports-----
+from flask import Blueprint, request, jsonify, make_response
+from ....src.util.firebase.db import Database
+from ....src.util.util import Auth, Twilio
+from ....src.models.hcp import HCP
+from ....src.models.hours import Hours
+from ....src.models.day import Day
+from ....src.models.health_event import HealthEvent
+from ....src.models.patient import Patient
+from ....src.models.enums import Status
+from ....src.models.appointment import Appointment
+
+Returns:
+HTTP Response: JSON
+"""
 
 # Setup HCP and Patient Document Collections
 db = Database()
@@ -28,13 +53,23 @@ twilio = Twilio()
 
 
 hcp_endpoints = Blueprint('hcp', __name__)
+default_pic = 'https://www.flaticon.com/svg/static/icons/svg/387/387561.svg'
+invalid_token = 'Provide a valid auth token'
+nonHCP = 'Not an HCP.'
+
 
 @hcp_endpoints.route('/')
 def root():
     return "hcp"
 
+
 @hcp_endpoints.route('/logIn', methods=['POST'])
 def login():
+    """HCP Logins
+
+    Returns:
+            Response: JSON
+    """
     try:
         pid = request.json['id']
         email = request.json['email']
@@ -44,7 +79,7 @@ def login():
             utype = "HCP"
             auth_token = auth.encode_auth_token(pid, utype)
             resp = {
-                "googleId": pid,
+                "id": pid,
                 "token": auth_token.decode()
             }
             return jsonify(resp), 200
@@ -53,27 +88,16 @@ def login():
     except Exception as e:
         return f"An Error Occured: {e}"
 
+
 @hcp_endpoints.route('/signUp', methods=['POST'])
 def signup():
+    """New HCP creates profile
+
+    Returns:
+            Response: JSON
+    """
     post_data = request.get_json()
-
-    week = []
-    for i in range(0, 7):
-        week.append(Day(
-            startTime=-1,
-            endTime=-1,
-        )
-        )
-
-    schedule = Hours(
-        sunday=week[0],
-        monday=week[1],
-        tuesday=week[2],
-        wednesday=week[3],
-        thursday=week[4],
-        friday=week[5],
-        saturday=week[6]
-    )
+    schedule = make_week()
     try:
         hcp = HCP(
             id=post_data.get('id'),
@@ -90,69 +114,84 @@ def signup():
         )
         try:
             hcp.specialty = post_data.get('specialty')
-        except:
+        except Exception as e:
             hcp.specialty = ''
 
         try:
             hcp.title = post_data.get('title')
-        except:
+        except Exception as e:
             hcp.title = ''
 
         try:
             hcp.profilePicture = post_data.get('profilePicture')
-        except:
-            hcp.profilePicture = 'https://www.flaticon.com/svg/static/icons/svg/387/387561.svg'
+        except Exception as e:
+            hcp.profilePicture = default_pic
+
         if hcp.profilePicture is None:
-            hcp.profilePicture = 'https://www.flaticon.com/svg/static/icons/svg/387/387561.svg'
+            hcp.profilePicture = default_pic
 
         newsched = post_data.get('hours')
 
-        if newsched['sunday']['startTime'] == -1 and newsched['sunday']['endTime'] == -1:
+        if newsched['sunday']['startTime'] == \
+                -1 and newsched['sunday']['endTime'] == -1:
             hcp.hours.sunday.startTime = -1
             hcp.hours.sunday.endTime = -1
-        elif 0 <= newsched['sunday']['startTime'] <= newsched['sunday']['endTime']:
+        elif 0 <= newsched['sunday']['startTime'] \
+                <= newsched['sunday']['endTime']:
             hcp.hours.sunday.startTime = newsched['sunday']['startTime']
             hcp.hours.sunday.endTime = newsched['sunday']['endTime']
 
-        if newsched['monday']['startTime'] == -1 and newsched['monday']['endTime'] == -1:
+        if newsched['monday']['startTime'] == \
+                -1 and newsched['monday']['endTime'] == -1:
             hcp.hours.monday.startTime = -1
             hcp.hours.monday.endTime = -1
-        elif 0 <= newsched['monday']['startTime'] <= newsched['monday']['endTime'] :
+        elif 0 <= newsched['monday']['startTime'] \
+                <= newsched['monday']['endTime']:
             hcp.hours.monday.startTime = newsched['monday']['startTime']
             hcp.hours.monday.endTime = newsched['monday']['endTime']
 
-        if newsched['tuesday']['startTime'] == -1 and newsched['tuesday']['endTime'] == -1:
+        if newsched['tuesday']['startTime'] == \
+                -1 and newsched['tuesday']['endTime'] == -1:
             hcp.hours.tuesday.startTime = -1
             hcp.hours.tuesday.endTime = -1
-        elif 0 <= newsched['tuesday']['startTime'] <= newsched['tuesday']['endTime'] :
+        elif 0 <= newsched['tuesday']['startTime'] \
+                <= newsched['tuesday']['endTime']:
             hcp.hours.tuesday.startTime = newsched['tuesday']['startTime']
             hcp.hours.tuesday.endTime = newsched['tuesday']['endTime']
 
-        if newsched['wednesday']['startTime'] == -1 and newsched['wednesday']['endTime'] == -1:
+        if newsched['wednesday']['startTime'] == \
+                -1 and newsched['wednesday']['endTime'] == -1:
             hcp.hours.wednesday.startTime = -1
             hcp.hours.wednesday.endTime = -1
-        elif 0 <= newsched['wednesday']['startTime'] <= newsched['wednesday']['endTime'] :
+        elif 0 <= newsched['wednesday']['startTime'] \
+                <= newsched['wednesday']['endTime']:
             hcp.hours.wednesday.startTime = newsched['wednesday']['startTime']
             hcp.hours.wednesday.endTime = newsched['wednesday']['endTime']
 
-        if newsched['thursday']['startTime'] == -1 and newsched['thursday']['endTime'] == -1:
+        if newsched['thursday']['startTime'] == \
+                -1 and newsched['thursday']['endTime'] == -1:
             hcp.hours.thursday.startTime = -1
             hcp.hours.thursday.endTime = -1
-        elif 0 <= newsched['thursday']['startTime'] <= newsched['thursday']['endTime'] :
+        elif 0 <= newsched['thursday']['startTime'] \
+                <= newsched['thursday']['endTime']:
             hcp.hours.thursday.startTime = newsched['thursday']['startTime']
             hcp.hours.thursday.endTime = newsched['thursday']['endTime']
 
-        if newsched['friday']['startTime'] == -1 and newsched['friday']['endTime'] == -1:
+        if newsched['friday']['startTime'] == \
+                -1 and newsched['friday']['endTime'] == -1:
             hcp.hours.friday.startTime = -1
             hcp.hours.friday.endTime = -1
-        elif 0 <= newsched['friday']['startTime'] <= newsched['friday']['endTime'] :
+        elif 0 <= newsched['friday']['startTime'] \
+                <= newsched['friday']['endTime']:
             hcp.hours.friday.startTime = newsched['friday']['startTime']
             hcp.hours.friday.endTime = newsched['friday']['endTime']
 
-        if newsched['saturday']['startTime'] == -1 and newsched['saturday']['endTime'] == -1:
+        if newsched['saturday']['startTime'] == \
+                -1 and newsched['saturday']['endTime'] == -1:
             hcp.hours.sunday.saturday = -1
             hcp.hours.sunday.saturday = -1
-        elif 0 <= newsched['saturday']['startTime'] <= newsched['saturday']['endTime'] :
+        elif 0 <= newsched['saturday']['startTime'] \
+                <= newsched['saturday']['endTime']:
             hcp.hours.saturday.startTime = newsched['saturday']['startTime']
             hcp.hours.saturday.endTime = newsched['saturday']['endTime']
 
@@ -180,7 +219,6 @@ def signup():
         time[1] = hcp.hours.saturday.endTime
         hours.append(str(time))
 
-
         utype = "HCP"
         hcpdb.document(hcp.id).set({
             "id": hcp.id,
@@ -196,23 +234,23 @@ def signup():
             "patients": hcp.patients
         })
         auth_token = auth.encode_auth_token(hcp.id, utype)
-        responseObject = {
+        response_object = {
             'id': hcp.id,
             'token': auth_token.decode()
         }
-        return make_response(jsonify(responseObject)), 201
+        return make_response(jsonify(response_object)), 201
     except Exception as e:
-        responseObject = {
+        response_object = {
             'status': 'fail',
             'message': f'Some error, {e} occurred. Please try again.'
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
 
 
 @hcp_endpoints.route('/delete', methods=['POST'])
 def remove():
     """
-        delete() : Delete a document from Firestore collection.
+            delete() : Delete a document from Firestore collection.
     """
     post_data = request.get_json()
     try:
@@ -226,28 +264,16 @@ def remove():
 
 @hcp_endpoints.route('/getByToken', methods=['POST'])
 def getbytoken():
-    # get the auth token
+    """Get HCP by token
+
+    Returns: Response: JSON
+    """
+    # Get Auth Token
     auth_token = request.get_json().get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
         if utype == "HCP":
-            week = []
-            for i in range(0, 7):
-                week.append(Day(
-                    startTime=-1,
-                    endTime=-1,
-                )
-                )
-
-            schedule = Hours(
-                sunday=week[0],
-                monday=week[1],
-                tuesday=week[2],
-                wednesday=week[3],
-                thursday=week[4],
-                friday=week[5],
-                saturday=week[6]
-            )
+            schedule = make_week()
             hcp = hcpdb.document(hid).get().to_dict()
             resp = HCP(
                 id=hcp['id'],
@@ -318,7 +344,7 @@ def getbytoken():
                 }
             }
 
-            responseObject = {
+            response_object = {
                 "id": resp.id,
                 "firstName": resp.firstName,
                 "lastName": resp.lastName,
@@ -327,24 +353,23 @@ def getbytoken():
                 "profilePicture": resp.profilePicture,
                 "calendar": resp.calendar,
                 "specialty": resp.specialty,
-                "title": resp.title,
                 "hours": hours,
                 "patients": resp.patients,
                 "title": resp.title,
-                }
-            return make_response(jsonify(responseObject)), 200
-        else:
-            responseobject = {
-                'Success': False,
-                'message': 'Not an HCP'
             }
-            return make_response(responseobject), 401
+            return make_response(jsonify(response_object)), 200
+        else:
+            response_object = {
+                'Success': False,
+                'message': nonHCP
+            }
+            return make_response(response_object), 401
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
-            'message': 'Provide a valid auth token.'
+            'message': invalid_token
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
 
 
 @hcp_endpoints.route('/setRecord', methods=['POST'])
@@ -418,40 +443,52 @@ def set_health_event():
 
             return make_response(jsonify(jsonevent)), 201
         else:
-            responseobject = {
+            response_object = {
                 'Success': False,
-                'message': 'Not an HCP'
+                'message': nonHCP
             }
-            return make_response(jsonify(responseobject)), 401
+            return make_response(jsonify(response_object)), 401
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
-            'message': 'Provide a valid auth token.'
+            'message': invalid_token
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
 
 
 @hcp_endpoints.route('/notify', methods=['POST'])
 def notify():
+    """
+    Notify patient of appoint
+        Request{
+                token: string
+                appointment_d: string
+        }
+    :return: Response
+    """
+
     auth_token = request.get_json().get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
         post_data = request.get_json()
+        # print(f'{hid} and {utype}')
         if utype == "HCP":
             try:
                 appointment_id = post_data.get('id')
-                appointment_resp = appointmentsdb.document(str(appointment_id)).get().to_dict()
+                appointment_resp = appointmentsdb.document(
+                    str(appointment_id)).get().to_dict()
                 appointment = Appointment(
                     id=appointment_resp['id'],
-                    startDate=appointment_resp['startDate'],
-                    endDate=appointment_resp['endDate'],
+                    date=appointment_resp['date'],
+                    duration=appointment_resp['duration'],
                     doctor=appointment_resp['doctor'],
                     patient=appointment_resp['patient'],
                     subject=appointment_resp['subject'],
                     notes=appointment_resp['notes'],
                     videoUrl=appointment_resp['videoUrl']
                 )
-                patient = pat.document(str(appointment.patient)).get().to_dict()
+                patient = pat.document(
+                    str(appointment.patient)).get().to_dict()
                 resp = Patient(
                     id=patient['id'],
                     firstName=patient['firstName'],
@@ -471,36 +508,130 @@ def notify():
                 )
 
                 client = twilio.connect()
-                message = client.messages \
-                    .create(
-                        body=f"Hi {resp.firstName} you have an appointment at {appointment.startDate} join at "
-                             f"{appointment.videoUrl}",
-                        from_='+19036182297',
-                        to=f'+1{str(resp.phone).replace("", "")}'
-                )
+                message = client.messages.create(
+                    body=f"Hi {resp.firstName} you have an appointment at "
+                         f"{datetime.datetime.fromtimestamp(appointment.date / 1e3)} join at "
+                    f"{appointment.videoUrl}",
+                    from_='+19036182297',
+                    to=f'+1{str(resp.phone).replace("", "")}')
+                print(message)
+                print(datetime.datetime.fromtimestamp(appointment.date / 1e3))
                 res = {
                     "Success": True
                 }
 
             except Exception as e:
-                return f"Unable to find {post_data.get('id')} because {e}", 404
+                return f"Unable to find {post_data.get('id')} because {e}", 400
 
             return make_response(jsonify(res)), 200
         else:
-            responseobject = {
+            response_object = {
                 'Success': False,
-                'message': 'Not an HCP'
+                'message': nonHCP
             }
-            return make_response(jsonify(responseobject)), 401
+            return make_response(jsonify(response_object)), 401
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
-            'message': 'Provide a valid auth token.'
+            'message': invalid_token
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
+
+
+@hcp_endpoints.route('/testNumber', methods=['POST'])
+def test_number():
+    """
+    Notify patient of appoint
+        Request{
+                token: string
+                appointment_id: string
+        }
+    :return: Response
+    """
+
+    auth_token = request.get_json().get('token')
+    if auth_token:
+        hid, utype = Auth.decode_auth_token(auth_token)
+        post_data = request.get_json()
+        # print(f'{hid} and {utype}')
+        if utype == "HCP":
+            try:
+                appointment_id = post_data.get('id')
+                appointment_resp = appointmentsdb.document(
+                    str(appointment_id)).get().to_dict()
+                appointment = Appointment(
+                    id=appointment_resp['id'],
+                    date=appointment_resp['date'],
+                    duration=appointment_resp['duration'],
+                    doctor=appointment_resp['doctor'],
+                    patient=appointment_resp['patient'],
+                    subject=appointment_resp['subject'],
+                    notes=appointment_resp['notes'],
+                    videoUrl=appointment_resp['videoUrl']
+                )
+                patient = pat.document(
+                    str(appointment.patient)).get().to_dict()
+                resp = Patient(
+                    id=patient['id'],
+                    firstName=patient['firstName'],
+                    lastName=patient['lastName'],
+                    phone=patient['phone'],
+                    email=patient['email'],
+                    dateOfBirth=patient['dateOfBirth'],
+                    sex=patient['sex'],
+                    profilePicture=patient['profilePicture'],
+                    height=patient['height'],
+                    weight=patient['weight'],
+                    drinker=patient['drinker'],
+                    smoker=patient['smoker'],
+                    calendar=patient['calendar'],
+                    doctors=patient['doctors'],
+                    health=patient['health']
+                )
+
+                client = twilio.connect()
+                message = client.messages.create(
+                    body=f"Hi {resp.firstName} you have an appointment at "
+                         f"{datetime.datetime.fromtimestamp(appointment.date / 1e3)} join at "
+                    f"{appointment.videoUrl}",
+                    from_='+19036182297',
+                    to=f'+1{str(resp.phone).replace("", "")}')
+                print(message)
+                print(datetime.datetime.fromtimestamp(appointment.date / 1e3))
+                res = {
+                    "Success": True
+                }
+
+            except Exception as e:
+                print(f"Unable to find {post_data.get('id')} because {e}")
+                res = {
+                    "Success": False
+                }
+                return make_response(jsonify(res)), 200
+
+            return make_response(jsonify(res)), 200
+        else:
+            response_object = {
+                'Success': False,
+                'message': nonHCP
+            }
+            return make_response(jsonify(response_object)), 401
+    else:
+        response_object = {
+            'status': 'fail',
+            'message': invalid_token
+        }
+        return make_response(jsonify(response_object)), 401
+
 
 @hcp_endpoints.route('/editProfile', methods=['POST'])
-def edithcpprofile():
+def edit_hcp_profile():
+    """
+    Edit existing HCP profile
+
+        Returns:
+                Response: JSON
+        """
     auth_token = request.get_json().get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
@@ -508,23 +639,7 @@ def edithcpprofile():
         if utype == "HCP":
             hcp_resp = hcpdb.document(str(hid)).get().to_dict()
             post_data = request.get_json()
-            week = []
-            for i in range(0, 7):
-                week.append(Day(
-                    startTime=-1,
-                    endTime=-1,
-                )
-                )
-
-            schedule = Hours(
-                sunday=week[0],
-                monday=week[1],
-                tuesday=week[2],
-                wednesday=week[3],
-                thursday=week[4],
-                friday=week[5],
-                saturday=week[6]
-            )
+            schedule = make_week()
             try:
                 hcp = HCP(
                     id=post_data.get('id'),
@@ -541,71 +656,99 @@ def edithcpprofile():
                 )
                 try:
                     hcp.specialty = post_data.get('specialty')
-                except:
+                except Exception as e:
                     hcp.specialty = ''
 
                 try:
                     hcp.title = post_data.get('title')
-                except:
+                except Exception as e:
                     hcp.title = ''
 
                 try:
                     hcp.profilePicture = post_data.get('profilePicture')
-                except:
-                    hcp.profilePicture = 'https://www.flaticon.com/svg/static/icons/svg/387/387561.svg'
+                except Exception as e:
+                    hcp.profilePicture = default_pic
                 if hcp.profilePicture is None:
-                    hcp.profilePicture = 'https://www.flaticon.com/svg/static/icons/svg/387/387561.svg'
+                    hcp.profilePicture = default_pic
 
                 newsched = post_data.get('hours')
 
-                if int(newsched['sunday']['startTime']) == -1 and int(newsched['sunday']['endTime']) == -1:
+                if int(newsched['sunday']['startTime']) == \
+                        -1 and int(newsched['sunday']['endTime']) == -1:
                     hcp.hours.sunday.startTime = -1
                     hcp.hours.sunday.endTime = -1
-                elif 0 <= int(newsched['sunday']['startTime']) <= int(newsched['sunday']['endTime']):
-                    hcp.hours.sunday.startTime = int(newsched['sunday']['startTime'])
-                    hcp.hours.sunday.endTime = int(newsched['sunday']['endTime'])
+                elif 0 <= int(newsched['sunday']['startTime']) \
+                        <= int(newsched['sunday']['endTime']):
+                    hcp.hours.sunday.startTime = int(
+                        newsched['sunday']['startTime'])
+                    hcp.hours.sunday.endTime = int(
+                        newsched['sunday']['endTime'])
 
-                if int(newsched['monday']['startTime']) == -1 and int(newsched['monday']['endTime']) == -1:
+                if int(newsched['monday']['startTime']) == \
+                        -1 and int(newsched['monday']['endTime']) == -1:
                     hcp.hours.monday.startTime = -1
                     hcp.hours.monday.endTime = -1
-                elif 0 <= int(newsched['monday']['startTime']) <= int(newsched['monday']['endTime']):
-                    hcp.hours.monday.startTime = int(newsched['monday']['startTime'])
-                    hcp.hours.monday.endTime = int(newsched['monday']['endTime'])
+                elif 0 <= int(newsched['monday']['startTime']) \
+                        <= int(newsched['monday']['endTime']):
+                    hcp.hours.monday.startTime = int(
+                        newsched['monday']['startTime'])
+                    hcp.hours.monday.endTime = int(
+                        newsched['monday']['endTime'])
 
-                if int(newsched['tuesday']['startTime']) == -1 and int(newsched['tuesday']['endTime']) == -1:
+                if int(newsched['tuesday']['startTime']) == \
+                        -1 and int(newsched['tuesday']['endTime']) == -1:
                     hcp.hours.tuesday.startTime = -1
                     hcp.hours.tuesday.endTime = -1
-                elif 0 <= int(newsched['tuesday']['startTime']) <= int(newsched['tuesday']['endTime']):
-                    hcp.hours.tuesday.startTime = int(newsched['tuesday']['startTime'])
-                    hcp.hours.tuesday.endTime = int(newsched['tuesday']['endTime'])
+                elif 0 <= int(newsched['tuesday']['startTime']) \
+                        <= int(newsched['tuesday']['endTime']):
+                    hcp.hours.tuesday.startTime = int(
+                        newsched['tuesday']['startTime'])
+                    hcp.hours.tuesday.endTime = int(
+                        newsched['tuesday']['endTime'])
 
-                if int(newsched['wednesday']['startTime']) == -1 and int(newsched['wednesday']['endTime']) == -1:
+                if int(newsched['wednesday']['startTime']) == \
+                        -1 and int(newsched['wednesday']['endTime']) == -1:
                     hcp.hours.wednesday.startTime = -1
                     hcp.hours.wednesday.endTime = -1
-                elif 0 <= int(newsched['wednesday']['startTime']) <= int(newsched['wednesday']['endTime']):
-                    hcp.hours.wednesday.startTime = int(newsched['wednesday']['startTime'])
-                    hcp.hours.wednesday.endTime = int(newsched['wednesday']['endTime'])
+                elif 0 <= int(newsched['wednesday']['startTime']) \
+                        <= int(newsched['wednesday']['endTime']):
+                    hcp.hours.wednesday.startTime = int(
+                        newsched['wednesday']['startTime'])
+                    hcp.hours.wednesday.endTime = int(
+                        newsched['wednesday']['endTime'])
 
-                if int(newsched['thursday']['startTime']) == -1 and int(newsched['thursday']['endTime']) == -1:
+                if int(newsched['thursday']['startTime']) == \
+                        -1 and int(newsched['thursday']['endTime']) == -1:
                     hcp.hours.thursday.startTime = -1
                     hcp.hours.thursday.endTime = -1
-                elif 0 <= int(newsched['thursday']['startTime']) <= int(newsched['thursday']['endTime']):
-                    hcp.hours.thursday.startTime = int(newsched['thursday']['startTime'])
-                    hcp.hours.thursday.endTime = int(newsched['thursday']['endTime'])
+                elif 0 <= int(newsched['thursday']['startTime']) \
+                        <= int(newsched['thursday']['endTime']):
+                    hcp.hours.thursday.startTime = int(
+                        newsched['thursday']['startTime'])
+                    hcp.hours.thursday.endTime = int(
+                        newsched['thursday']['endTime'])
 
-                if int(newsched['friday']['startTime']) == -1 and int(newsched['friday']['endTime']) == -1:
+                if int(newsched['friday']['startTime']) == \
+                        -1 and int(newsched['friday']['endTime']) == -1:
                     hcp.hours.friday.startTime = -1
                     hcp.hours.friday.endTime = -1
-                elif 0 <= int(newsched['friday']['startTime']) <= int(newsched['friday']['endTime']):
-                    hcp.hours.friday.startTime = int(newsched['friday']['startTime'])
-                    hcp.hours.friday.endTime = int(newsched['friday']['endTime'])
+                elif 0 <= int(newsched['friday']['startTime']) \
+                        <= int(newsched['friday']['endTime']):
+                    hcp.hours.friday.startTime = int(
+                        newsched['friday']['startTime'])
+                    hcp.hours.friday.endTime = int(
+                        newsched['friday']['endTime'])
 
-                if int(newsched['saturday']['startTime']) == -1 and int(newsched['saturday']['endTime']) == -1:
+                if int(newsched['saturday']['startTime']) == \
+                        -1 and int(newsched['saturday']['endTime']) == -1:
                     hcp.hours.sunday.saturday = -1
                     hcp.hours.sunday.saturday = -1
-                elif 0 <= int(newsched['saturday']['startTime']) <= int(newsched['saturday']['endTime']):
-                    hcp.hours.saturday.startTime = int(newsched['saturday']['startTime'])
-                    hcp.hours.saturday.endTime = int(newsched['saturday']['endTime'])
+                elif 0 <= int(newsched['saturday']['startTime']) \
+                        <= int(newsched['saturday']['endTime']):
+                    hcp.hours.saturday.startTime = int(
+                        newsched['saturday']['startTime'])
+                    hcp.hours.saturday.endTime = int(
+                        newsched['saturday']['endTime'])
 
                 hours = []
                 time = []
@@ -646,25 +789,29 @@ def edithcpprofile():
                         "patients": hcp.patients,
                     })
                 else:
-                    responseObject = {
+                    response_object = {
                         'status': 'fail',
-                        'message': 'Provide a valid auth token.'
+                        'message': invalid_token
                     }
-                    return make_response(jsonify(responseObject)), 401
-                responseObject = {
+                    return make_response(jsonify(response_object)), 401
+                response_object = {
                     "Success": True
                 }
-                return make_response(jsonify(responseObject)), 200
+                return make_response(jsonify(response_object)), 200
             except Exception as e:
-                responseObject = {
+                response_object = {
                     'status': 'fail',
                     'message': f'Some error, {e} occurred. Please try again.'
                 }
-                return make_response(jsonify(responseObject)), 401
+                return make_response(jsonify(response_object)), 401
 
 
 @hcp_endpoints.route('/getPatients', methods=['POST'])
 def getpatients():
+    """
+    Get Patient from token
+    :return: Patient
+    """
     auth_token = request.get_json().get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
@@ -680,17 +827,18 @@ def getpatients():
                 res.update(entry)
             return make_response(jsonify(res)), 200
         else:
-            responseobject = {
+            response_object = {
                 'Success': False,
-                'message': 'Not an HCP'
+                'message': nonHCP
             }
-            return make_response(responseobject), 401
+            return make_response(response_object), 401
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
-            'message': 'Provide a valid auth token.'
+            'message': invalid_token
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
+
 
 @hcp_endpoints.route('/setRecords', methods=['POST'])
 def set_health_events():
@@ -743,7 +891,6 @@ def set_health_events():
                 listevents = []
                 for i in resp.health:
                     listevents.append(i)
-                # healths = ''.join([str(e) for e in listevents])
                 pat.document(resp.id).set({
                     "id": resp.id,
                     "firstName": resp.firstName,
@@ -766,20 +913,29 @@ def set_health_events():
 
             return make_response(jsonify(resp.health)), 200
         else:
-            responseobject = {
+            response_object = {
                 'Success': False,
-                'message': 'Not an HCP'
+                'message': nonHCP
             }
-            return make_response(jsonify(responseobject)), 401
+            return make_response(jsonify(response_object)), 401
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
-            'message': 'Provide a valid auth token.'
+            'message': invalid_token
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
+
 
 @hcp_endpoints.route('/getAll', methods=['POST'])
-def getAll():
+def get_all():
+    """
+        Get all HCPs
+
+        Returns:
+                List[HCP]
+        :return:
+        """
+
     auth_token = request.get_json().get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
@@ -800,8 +956,62 @@ def getAll():
             hcps_return.append(hcp_obj)
         return jsonify(hcps_return), 200
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
-            'message': 'Provide a valid auth token.'
+            'message': invalid_token
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
+
+
+def make_week():
+    """
+    Makes a blank schedule
+    :return: Hours object
+    """
+
+    week = []
+    for _ in range(0, 7):
+        week.append(Day(
+            startTime=-1,
+            endTime=-1,
+        )
+        )
+
+    schedule = Hours(
+        sunday=week[0],
+        monday=week[1],
+        tuesday=week[2],
+        wednesday=week[3],
+        thursday=week[4],
+        friday=week[5],
+        saturday=week[6]
+    )
+    return schedule
+
+
+@hcp_endpoints.route('/setProfilePicture', methods=['POST'])
+def set_profile_picture():
+    """
+    Set HCP Profile Picture
+
+    Returns: Response: JSON
+    """
+    # Get Auth Token
+    auth_token = request.get_json().get('token')
+    if auth_token:
+        hid, utype = Auth.decode_auth_token(auth_token)
+        pic = request.get_json().get('profilePicture')
+        hcpdb.document(str(hid)).update({
+            "profilePicture": pic
+        })
+        response_object = {
+            "Success": True,
+            "profilePicture": pic
+        }
+        return make_response(jsonify(response_object)), 200
+    else:
+        response_object = {
+            'status': 'fail',
+            'message': "invalid_token"
+        }
+        return make_response(jsonify(response_object)), 401

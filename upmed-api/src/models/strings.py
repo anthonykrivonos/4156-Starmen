@@ -1,8 +1,12 @@
-import sys, os
+from typing import Text
+import sys
+import os
 from os.path import join
 sys.path.append(join(os.getcwd(), '..'))
 
-from typing import Text
+"""Strings Model
+    """
+
 
 DoctorId = Text
 PatientId = Text

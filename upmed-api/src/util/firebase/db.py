@@ -1,10 +1,12 @@
 from .setup import db
 
+
 class Database:
     """
-    Wrapper around Cloud Firestore to send and receive upmed-specific data.
-    TODO: Add all getters and setters.
+    Wrapper around Cloud Firestore to send and receive
+    upmed-specific data.
     """
+
     def getPatients(self):
         return db.collection('patients')
 
@@ -16,4 +18,3 @@ class Database:
 
     def __init__(self):
         self.db = db
-

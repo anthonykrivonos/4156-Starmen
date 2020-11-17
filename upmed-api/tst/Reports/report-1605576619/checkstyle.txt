@@ -1,0 +1,54 @@
+============ upmed-web Coverage and Unit Report Generated on 1605576619 ============ \n\n
+./src/util/util.py:21:80: E501 line too long (90 > 79 characters)
+./tst/api/__init__.py:3:28: W292 no newline at end of file
+./tst/api/appointment_test/appointment_test.py:19:80: E501 line too long (88 > 79 characters)
+./tst/api/appointment_test/appointment_test.py:100:80: E501 line too long (92 > 79 characters)
+./tst/api/appointment_test/appointment_test.py:101:80: E501 line too long (108 > 79 characters)
+./tst/api/appointment_test/appointment_test.py:103:80: E501 line too long (102 > 79 characters)
+./tst/api/appointment_test/appointment_test.py:108:80: E501 line too long (96 > 79 characters)
+./tst/api/appointment_test/appointment_test.py:113:80: E501 line too long (95 > 79 characters)
+./tst/api/appointment_test/appointment_test.py:118:80: E501 line too long (103 > 79 characters)
+./tst/api/appointment_test/appointment_test.py:123:80: E501 line too long (103 > 79 characters)
+./tst/api/appointment_test/appointment_test.py:126:1: E305 expected 2 blank lines after class or function definition, found 1
+./tst/api/hcp_test/hcp_test.py:2:10: E401 multiple imports on one line
+./tst/api/hcp_test/hcp_test.py:4:1: E402 module level import not at top of file
+./tst/api/hcp_test/hcp_test.py:5:1: E402 module level import not at top of file
+./tst/api/hcp_test/hcp_test.py:6:1: E402 module level import not at top of file
+./tst/api/hcp_test/hcp_test.py:7:1: E402 module level import not at top of file
+./tst/api/hcp_test/hcp_test.py:8:1: E402 module level import not at top of file
+./tst/api/hcp_test/hcp_test.py:9:1: E402 module level import not at top of file
+./tst/api/hcp_test/hcp_test.py:10:1: E402 module level import not at top of file
+./tst/api/hcp_test/hcp_test.py:11:1: E402 module level import not at top of file
+./tst/api/hcp_test/hcp_test.py:12:1: E402 module level import not at top of file
+./tst/api/hcp_test/hcp_test.py:13:1: E402 module level import not at top of file
+./tst/api/hcp_test/hcp_test.py:43:80: E501 line too long (88 > 79 characters)
+./tst/api/hcp_test/hcp_test.py:147:80: E501 line too long (92 > 79 characters)
+./tst/api/hcp_test/hcp_test.py:158:80: E501 line too long (83 > 79 characters)
+./tst/api/hcp_test/hcp_test.py:165:80: E501 line too long (82 > 79 characters)
+./tst/api/hcp_test/hcp_test.py:176:80: E501 line too long (87 > 79 characters)
+./tst/api/hcp_test/hcp_test.py:182:80: E501 line too long (83 > 79 characters)
+./tst/api/hcp_test/hcp_test.py:187:80: E501 line too long (83 > 79 characters)
+./tst/api/patient_test/patient_test.py:20:80: E501 line too long (88 > 79 characters)
+./tst/api/patient_test/patient_test.py:133:80: E501 line too long (87 > 79 characters)
+./tst/api/patient_test/patient_test.py:140:80: E501 line too long (86 > 79 characters)
+./tst/api/patient_test/patient_test.py:146:80: E501 line too long (91 > 79 characters)
+./tst/api/patient_test/patient_test.py:151:80: E501 line too long (87 > 79 characters)
+./tst/api/patient_test/patient_test.py:156:80: E501 line too long (87 > 79 characters)
+./tst/api/patient_test/patient_test.py:176:80: E501 line too long (92 > 79 characters)
+./tst/api/patient_test/patient_test.py:181:80: E501 line too long (88 > 79 characters)
+./tst/api/patient_test/patient_test.py:186:80: E501 line too long (87 > 79 characters)
+./tst/api/patient_test/patient_test.py:189:1: E305 expected 2 blank lines after class or function definition, found 1
+tst/models/appointment_model_test.py:20:80: E501 line too long (87 > 79 characters)
+tst/models/day_model_test.py:5:1: E302 expected 2 blank lines, found 1
+tst/models/day_model_test.py:7:63: E261 at least two spaces before inline comment
+tst/models/day_model_test.py:7:64: E262 inline comment should start with '# '
+tst/models/day_model_test.py:17:14: E211 whitespace before '('
+1       E211 whitespace before '('
+1       E261 at least two spaces before inline comment
+1       E262 inline comment should start with '# '
+1       E302 expected 2 blank lines, found 1
+2       E305 expected 2 blank lines after class or function definition, found 1
+1       E401 multiple imports on one line
+10      E402 module level import not at top of file
+26      E501 line too long (90 > 79 characters)
+1       W292 no newline at end of file

@@ -1,0 +1,634 @@
+************* Module upmed-api
+upmed-api/__init__.py:1:0: C0103: Module name "upmed-api" doesn't conform to snake_case naming style (invalid-name)
+************* Module upmed-api.src.api.patient
+upmed-api/src/api/patient/__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+************* Module upmed-api.src.api.appointment
+upmed-api/src/api/appointment/__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+************* Module upmed-api.src.api
+upmed-api/src/api/__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+************* Module upmed-api.src.app
+upmed-api/src/app.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/app.py:3:0: E0611: No name 'env' in module 'util' (no-name-in-module)
+upmed-api/src/app.py:3:0: E0401: Unable to import 'util.env' (import-error)
+upmed-api/src/app.py:4:0: E0401: Unable to import 'flask' (import-error)
+upmed-api/src/app.py:5:0: E0401: Unable to import 'flask_cors' (import-error)
+upmed-api/src/app.py:7:0: E0401: Unable to import 'api' (import-error)
+upmed-api/src/app.py:8:0: W0404: Reimport 'os' (imported line 1) (reimported)
+upmed-api/src/app.py:19:-1: W0105: String statement has no effect (pointless-string-statement)
+upmed-api/src/app.py:20:0: C0103: Constant name "app" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/app.py:25:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/app.py:5:0: W0611: Unused CORS imported from flask_cors (unused-import)
+upmed-api/src/app.py:8:0: C0411: standard import "import os" should be placed before "from util.env import Env" (wrong-import-order)
+************* Module upmed-api.src.models.day
+upmed-api/src/models/day.py:10:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        self,
+        ^   | (bad-continuation)
+upmed-api/src/models/day.py:11:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        startTime: int,
+        ^   | (bad-continuation)
+upmed-api/src/models/day.py:12:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        endTime: int,
+        ^   | (bad-continuation)
+upmed-api/src/models/day.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/models/day.py:1:0: C0410: Multiple imports on one line (sys, os) (multiple-imports)
+upmed-api/src/models/day.py:14:8: C0103: Attribute name "startTime" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/day.py:15:8: C0103: Attribute name "endTime" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/day.py:5:0: C0115: Missing class docstring (missing-class-docstring)
+upmed-api/src/models/day.py:17:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/models/day.py:5:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+************* Module upmed-api.src.api.hcp
+upmed-api/src/api/hcp/__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+************* Module upmed-api.src
+upmed-api/src/__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+************* Module upmed-api.src.api.appointment.appointment
+upmed-api/src/api/appointment/appointment.py:34:0: C0301: Line too long (124/100) (line-too-long)
+upmed-api/src/api/appointment/appointment.py:78:0: C0301: Line too long (113/100) (line-too-long)
+upmed-api/src/api/appointment/appointment.py:238:0: C0301: Line too long (145/100) (line-too-long)
+upmed-api/src/api/appointment/appointment.py:285:0: C0301: Line too long (113/100) (line-too-long)
+upmed-api/src/api/appointment/appointment.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/api/appointment/appointment.py:1:0: E0401: Unable to import 'flask' (import-error)
+upmed-api/src/api/appointment/appointment.py:2:0: E0611: No name 'firebase' in module 'util' (no-name-in-module)
+upmed-api/src/api/appointment/appointment.py:2:0: E0401: Unable to import 'util.firebase.db' (import-error)
+upmed-api/src/api/appointment/appointment.py:3:0: E0611: No name 'util' in module 'util' (no-name-in-module)
+upmed-api/src/api/appointment/appointment.py:3:0: E0401: Unable to import 'util.util' (import-error)
+upmed-api/src/api/appointment/appointment.py:4:0: E0401: Unable to import 'models.appointment' (import-error)
+upmed-api/src/api/appointment/appointment.py:17:0: C0103: Constant name "pdb" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:18:0: C0103: Constant name "hcp_db" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:19:0: C0103: Constant name "patient_db" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:20:0: C0103: Constant name "appointmentsdb" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:21:0: C0103: Constant name "auth" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:23:0: C0103: Constant name "appointment_endpoints" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:27:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/appointment/appointment.py:32:0: C0103: Function name "getByToken" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:81:15: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/appointment/appointment.py:49:12: C0103: Variable name "appointmentId" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:58:12: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/appointment/appointment.py:59:16: C0103: Variable name "appointmentId" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:62:16: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:76:16: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:81:8: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:84:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:92:0: C0103: Function name "getCalendar" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:127:4: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:135:0: R0914: Too many local variables (17/15) (too-many-locals)
+upmed-api/src/api/appointment/appointment.py:225:15: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/appointment/appointment.py:225:8: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:228:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:288:15: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/appointment/appointment.py:265:12: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/appointment/appointment.py:283:16: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:288:8: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/appointment/appointment.py:291:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+************* Module upmed-api.src.models.enums
+upmed-api/src/models/enums.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/models/enums.py:1:0: C0410: Multiple imports on one line (sys, os) (multiple-imports)
+upmed-api/src/models/enums.py:5:0: C0413: Import "from enum import Enum" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/enums.py:7:0: C0115: Missing class docstring (missing-class-docstring)
+************* Module upmed-api.src.models.hours
+upmed-api/src/models/hours.py:17:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        self,
+        ^   | (bad-continuation)
+upmed-api/src/models/hours.py:18:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        sunday: Day,
+        ^   | (bad-continuation)
+upmed-api/src/models/hours.py:19:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        monday: Day,
+        ^   | (bad-continuation)
+upmed-api/src/models/hours.py:20:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        tuesday: Day,
+        ^   | (bad-continuation)
+upmed-api/src/models/hours.py:21:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        wednesday: Day,
+        ^   | (bad-continuation)
+upmed-api/src/models/hours.py:22:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        thursday: Day,
+        ^   | (bad-continuation)
+upmed-api/src/models/hours.py:23:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        friday: Day,
+        ^   | (bad-continuation)
+upmed-api/src/models/hours.py:24:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        saturday: Day,
+        ^   | (bad-continuation)
+upmed-api/src/models/hours.py:35:11: C0326: Exactly one space required around assignment
+        res=[]
+           ^ (bad-whitespace)
+upmed-api/src/models/hours.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/models/hours.py:1:0: C0410: Multiple imports on one line (sys, os) (multiple-imports)
+upmed-api/src/models/hours.py:5:0: C0413: Import "from .day import Day" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/hours.py:7:0: C0115: Missing class docstring (missing-class-docstring)
+upmed-api/src/models/hours.py:16:4: R0913: Too many arguments (8/5) (too-many-arguments)
+upmed-api/src/models/hours.py:34:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/models/hours.py:7:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+************* Module upmed-api.src.api.patient.patient
+upmed-api/src/api/patient/patient.py:57:14: C0326: No space allowed after keyword argument assignment
+            id= post_data.get('id'),
+              ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:58:22: C0326: No space allowed around keyword argument assignment
+            firstName = post_data.get('firstName'),
+                      ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:59:21: C0326: No space allowed around keyword argument assignment
+            lastName = post_data.get('lastName'),
+                     ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:60:18: C0326: No space allowed around keyword argument assignment
+            phone = "0000000000",
+                  ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:61:18: C0326: No space allowed around keyword argument assignment
+            email = post_data.get('email'),
+                  ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:62:24: C0326: No space allowed around keyword argument assignment
+            dateOfBirth = post_data.get('dateOfBirth'),
+                        ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:63:16: C0326: No space allowed around keyword argument assignment
+            sex = post_data.get('sex'),
+                ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:64:27: C0326: No space allowed around keyword argument assignment
+            profilePicture = '',
+                           ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:65:19: C0326: No space allowed around keyword argument assignment
+            height = post_data.get('height'),
+                   ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:66:19: C0326: No space allowed around keyword argument assignment
+            weight = post_data.get('weight'),
+                   ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:67:20: C0326: No space allowed around keyword argument assignment
+            drinker = post_data.get('drinker'),
+                    ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:68:19: C0326: No space allowed around keyword argument assignment
+            smoker = post_data.get('smoker'),
+                   ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:139:14: C0326: No space allowed after keyword argument assignment
+            id= pid,
+              ^ (bad-whitespace)
+upmed-api/src/api/patient/patient.py:294:0: C0330: Wrong continued indentation.
+                )
+                ^          || (bad-continuation)
+upmed-api/src/api/patient/patient.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/api/patient/patient.py:1:0: C0410: Multiple imports on one line (sys, os) (multiple-imports)
+upmed-api/src/api/patient/patient.py:5:0: E0401: Unable to import 'flask' (import-error)
+upmed-api/src/api/patient/patient.py:5:0: C0413: Import "from flask import Blueprint, request, jsonify, make_response" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/api/patient/patient.py:6:0: E0611: No name 'firebase' in module 'util' (no-name-in-module)
+upmed-api/src/api/patient/patient.py:6:0: E0401: Unable to import 'util.firebase.db' (import-error)
+upmed-api/src/api/patient/patient.py:6:0: C0413: Import "from util.firebase.db import Database" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/api/patient/patient.py:7:0: E0611: No name 'util' in module 'util' (no-name-in-module)
+upmed-api/src/api/patient/patient.py:7:0: E0401: Unable to import 'util.util' (import-error)
+upmed-api/src/api/patient/patient.py:7:0: C0413: Import "from util.util import Auth" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/api/patient/patient.py:8:0: E0401: Unable to import 'models' (import-error)
+upmed-api/src/api/patient/patient.py:8:0: C0413: Import "from models import Patient, HCP, Hours, Day" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/api/patient/patient.py:18:0: C0103: Constant name "patient_endpoints" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:19:0: C0103: Constant name "pdb" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:20:0: C0103: Constant name "pat" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:21:0: C0103: Constant name "auth" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:22:0: C0103: Constant name "hcpdb" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:26:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/patient/patient.py:31:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/patient/patient.py:48:11: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/patient/patient.py:38:8: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/patient/patient.py:48:4: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:53:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/patient/patient.py:106:11: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/patient/patient.py:101:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:106:4: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:107:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:126:11: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/patient/patient.py:126:4: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:131:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/patient/patient.py:134:4: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/patient/patient.py:156:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:173:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:135:13: W0612: Unused variable 'utype' (unused-variable)
+upmed-api/src/api/patient/patient.py:181:0: C0103: Function name "getRecords" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:188:4: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/patient/patient.py:209:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:216:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:189:13: W0612: Unused variable 'utype' (unused-variable)
+upmed-api/src/api/patient/patient.py:224:0: C0103: Function name "editProfile" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:224:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/patient/patient.py:226:4: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/patient/patient.py:272:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:227:13: W0612: Unused variable 'utype' (unused-variable)
+upmed-api/src/api/patient/patient.py:279:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/patient/patient.py:279:0: R0914: Too many local variables (16/15) (too-many-locals)
+upmed-api/src/api/patient/patient.py:281:4: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/patient/patient.py:373:12: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:397:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:282:13: W0612: Unused variable 'utype' (unused-variable)
+upmed-api/src/api/patient/patient.py:404:0: C0103: Function name "getAll" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:404:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/patient/patient.py:406:4: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/patient/patient.py:413:12: C0103: Variable name "h" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:427:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/patient/patient.py:407:8: W0612: Unused variable 'hid' (unused-variable)
+upmed-api/src/api/patient/patient.py:407:13: W0612: Unused variable 'utype' (unused-variable)
+************* Module upmed-api.src.models.strings
+upmed-api/src/models/strings.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/models/strings.py:1:0: C0410: Multiple imports on one line (sys, os) (multiple-imports)
+upmed-api/src/models/strings.py:5:0: C0413: Import "from typing import Text" should be placed at the top of the module (wrong-import-position)
+************* Module upmed-api.src.models.appointment
+upmed-api/src/models/appointment.py:20:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        self,
+        ^   | (bad-continuation)
+upmed-api/src/models/appointment.py:21:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        id: AppointmentId,
+        ^   | (bad-continuation)
+upmed-api/src/models/appointment.py:22:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        date: int,
+        ^   | (bad-continuation)
+upmed-api/src/models/appointment.py:23:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        duration: int,
+        ^   | (bad-continuation)
+upmed-api/src/models/appointment.py:24:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        doctor: DoctorId,
+        ^   | (bad-continuation)
+upmed-api/src/models/appointment.py:25:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        patient: PatientId,
+        ^   | (bad-continuation)
+upmed-api/src/models/appointment.py:26:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        subject: str,
+        ^   | (bad-continuation)
+upmed-api/src/models/appointment.py:27:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        notes: Optional[str],
+        ^   | (bad-continuation)
+upmed-api/src/models/appointment.py:28:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        videoUrl: Optional[str],
+        ^   | (bad-continuation)
+upmed-api/src/models/appointment.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/models/appointment.py:1:0: C0410: Multiple imports on one line (sys, os) (multiple-imports)
+upmed-api/src/models/appointment.py:5:0: C0413: Import "from typing import Optional" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/appointment.py:7:0: C0413: Import "from .strings import AppointmentId, DoctorId, PatientId" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/appointment.py:30:8: C0103: Attribute name "id" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/appointment.py:37:8: C0103: Attribute name "videoUrl" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/appointment.py:9:0: C0115: Missing class docstring (missing-class-docstring)
+upmed-api/src/models/appointment.py:9:0: R0902: Too many instance attributes (8/7) (too-many-instance-attributes)
+upmed-api/src/models/appointment.py:21:8: W0622: Redefining built-in 'id' (redefined-builtin)
+upmed-api/src/models/appointment.py:19:4: R0913: Too many arguments (9/5) (too-many-arguments)
+upmed-api/src/models/appointment.py:9:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+************* Module upmed-api.src.models.health_event
+upmed-api/src/models/health_event.py:16:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        self,
+        ^   | (bad-continuation)
+upmed-api/src/models/health_event.py:17:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        date: int,
+        ^   | (bad-continuation)
+upmed-api/src/models/health_event.py:18:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        event: str,
+        ^   | (bad-continuation)
+upmed-api/src/models/health_event.py:19:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        remarks: Optional[str],
+        ^   | (bad-continuation)
+upmed-api/src/models/health_event.py:20:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        status: Status,
+        ^   | (bad-continuation)
+upmed-api/src/models/health_event.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/models/health_event.py:1:0: C0410: Multiple imports on one line (sys, os) (multiple-imports)
+upmed-api/src/models/health_event.py:5:0: C0413: Import "from typing import Optional" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/health_event.py:7:0: C0413: Import "from .enums import Status" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/health_event.py:9:0: C0115: Missing class docstring (missing-class-docstring)
+upmed-api/src/models/health_event.py:9:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+************* Module upmed-api.src.util.env
+upmed-api/src/util/env.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/util/env.py:7:0: C0413: Import "from typing import List" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/util/env.py:9:0: E0401: Unable to import 'dotenv' (import-error)
+upmed-api/src/util/env.py:9:0: C0413: Import "from dotenv import load_dotenv" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/util/env.py:11:0: C0103: Constant name "env_path" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/util/env.py:14:0: C0115: Missing class docstring (missing-class-docstring)
+upmed-api/src/util/env.py:16:4: C0103: Method name "PORT" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/util/env.py:16:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/env.py:20:4: C0103: Method name "UPMED_PRIVATE_KEY" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/util/env.py:20:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/env.py:24:4: C0103: Method name "FIREBASE_PRIVATE_KEY" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/util/env.py:24:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/env.py:28:4: C0103: Method name "TWILIO_ACCOUNT_SID" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/util/env.py:28:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/env.py:32:4: C0103: Method name "TWILIO_API_KEY_SID" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/util/env.py:32:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/env.py:36:4: C0103: Method name "TWILIO_API_KEY_SECRET" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/util/env.py:36:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/env.py:40:4: C0103: Method name "TWILIO_AUTH_TOKEN" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/util/env.py:40:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/env.py:45:11: C0201: Consider iterating the dictionary directly instead of calling .keys() (consider-iterating-dictionary)
+upmed-api/src/util/env.py:51:4: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+************* Module upmed-api.src.util.super_blueprint
+upmed-api/src/util/super_blueprint.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/util/super_blueprint.py:1:0: C0410: Multiple imports on one line (sys, os) (multiple-imports)
+upmed-api/src/util/super_blueprint.py:5:0: C0413: Import "from typing import List" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/util/super_blueprint.py:7:0: E0401: Unable to import 'flask' (import-error)
+upmed-api/src/util/super_blueprint.py:7:0: C0413: Import "from flask import Flask, Blueprint" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/util/super_blueprint.py:9:0: C0115: Missing class docstring (missing-class-docstring)
+upmed-api/src/util/super_blueprint.py:16:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/super_blueprint.py:22:4: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module upmed-api.src.api.api
+upmed-api/src/api/api.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/api/api.py:1:0: C0410: Multiple imports on one line (sys, os) (multiple-imports)
+upmed-api/src/api/api.py:5:0: E0611: No name 'SuperBlueprint' in module 'util' (no-name-in-module)
+upmed-api/src/api/api.py:5:0: C0413: Import "from util import SuperBlueprint" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/api/api.py:8:0: C0413: Import "from .hcp import hcp_endpoints" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/api/api.py:9:0: C0413: Import "from .patient import patient_endpoints" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/api/api.py:10:0: C0413: Import "from .appointment import appointment_endpoints" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/api/api.py:14:-1: W0105: String statement has no effect (pointless-string-statement)
+upmed-api/src/api/api.py:15:0: C0103: Constant name "api_endpoints" doesn't conform to UPPER_CASE naming style (invalid-name)
+************* Module upmed-api.src.models
+upmed-api/src/models/__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/models/__init__.py:8:0: W0404: Reimport '*' (imported line 1) (reimported)
+************* Module upmed-api.src.util.firebase.db
+upmed-api/src/util/firebase/db.py:19:0: C0305: Trailing newlines (trailing-newlines)
+upmed-api/src/util/firebase/db.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/util/firebase/db.py:18:8: C0103: Attribute name "db" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/util/firebase/db.py:8:4: C0103: Method name "getPatients" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/util/firebase/db.py:8:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/firebase/db.py:8:4: R0201: Method could be a function (no-self-use)
+upmed-api/src/util/firebase/db.py:11:4: C0103: Method name "getHCP" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/util/firebase/db.py:11:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/firebase/db.py:11:4: R0201: Method could be a function (no-self-use)
+upmed-api/src/util/firebase/db.py:14:4: C0103: Method name "getAppointments" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/util/firebase/db.py:14:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/firebase/db.py:14:4: R0201: Method could be a function (no-self-use)
+************* Module upmed-api.src.util
+upmed-api/src/util/__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+************* Module upmed-api.src.util.firebase
+upmed-api/src/util/firebase/__init__.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+************* Module upmed-api.src.util.firebase.setup
+upmed-api/src/util/firebase/setup.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/util/firebase/setup.py:5:0: E0401: Unable to import 'firebase_admin' (import-error)
+upmed-api/src/util/firebase/setup.py:6:0: E0401: Unable to import 'firebase_admin' (import-error)
+upmed-api/src/util/firebase/setup.py:7:0: E0401: Unable to import 'firebase_admin' (import-error)
+upmed-api/src/util/firebase/setup.py:9:0: E0401: Unable to import 'simplecrypt' (import-error)
+upmed-api/src/util/firebase/setup.py:14:0: C0103: Constant name "enc_cert_path" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/util/firebase/setup.py:15:0: C0103: Constant name "dec_cert_path" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/util/firebase/setup.py:21:4: C0103: Constant name "encrypted_cert" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/util/firebase/setup.py:25:-1: W0105: String statement has no effect (pointless-string-statement)
+upmed-api/src/util/firebase/setup.py:26:0: C0103: Constant name "decrypted_cert" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/util/firebase/setup.py:32:-1: W0105: String statement has no effect (pointless-string-statement)
+upmed-api/src/util/firebase/setup.py:33:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/firebase/setup.py:39:-1: W0105: String statement has no effect (pointless-string-statement)
+upmed-api/src/util/firebase/setup.py:40:0: C0103: Constant name "cred" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/util/firebase/setup.py:45:-1: W0105: String statement has no effect (pointless-string-statement)
+upmed-api/src/util/firebase/setup.py:46:0: C0103: Constant name "db" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/util/firebase/setup.py:9:0: W0611: Unused encrypt imported from simplecrypt (unused-import)
+************* Module upmed-api.src.util.util
+upmed-api/src/util/util.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/util/util.py:1:0: C0410: Multiple imports on one line (sys, os) (multiple-imports)
+upmed-api/src/util/util.py:5:0: C0413: Import "import jwt" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/util/util.py:6:0: C0413: Import "import datetime" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/util/util.py:7:0: C0413: Import "from .env import Env" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/util/util.py:8:0: E0401: Unable to import 'twilio.rest' (import-error)
+upmed-api/src/util/util.py:8:0: C0413: Import "from twilio.rest import Client" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/util/util.py:13:41: W0622: Redefining built-in 'type' (redefined-builtin)
+upmed-api/src/util/util.py:30:15: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/util/util.py:30:8: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/util/util.py:13:4: R0201: Method could be a function (no-self-use)
+upmed-api/src/util/util.py:50:0: C0115: Missing class docstring (missing-class-docstring)
+upmed-api/src/util/util.py:52:4: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/util/util.py:54:21: E1101: Class 'Env' has no 'TWILIO_AUTH_TOKEN_SECRET' member (no-member)
+upmed-api/src/util/util.py:52:4: R0201: Method could be a function (no-self-use)
+upmed-api/src/util/util.py:50:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+upmed-api/src/util/util.py:6:0: C0411: standard import "import datetime" should be placed before "import jwt" (wrong-import-order)
+upmed-api/src/util/util.py:8:0: C0411: first party import "from twilio.rest import Client" should be placed before "from .env import Env" (wrong-import-order)
+************* Module upmed-api.src.models.hcp
+upmed-api/src/models/hcp.py:24:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        self,
+        ^   | (bad-continuation)
+upmed-api/src/models/hcp.py:25:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        id: DoctorId,
+        ^   | (bad-continuation)
+upmed-api/src/models/hcp.py:26:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        firstName: str,
+        ^   | (bad-continuation)
+upmed-api/src/models/hcp.py:27:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        lastName: str,
+        ^   | (bad-continuation)
+upmed-api/src/models/hcp.py:28:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        title: Optional[str],
+        ^   | (bad-continuation)
+upmed-api/src/models/hcp.py:29:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        specialty: Optional[str],
+        ^   | (bad-continuation)
+upmed-api/src/models/hcp.py:30:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        phone: str,
+        ^   | (bad-continuation)
+upmed-api/src/models/hcp.py:31:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        email: str,
+        ^   | (bad-continuation)
+upmed-api/src/models/hcp.py:32:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        calendar: List[AppointmentId],
+        ^   | (bad-continuation)
+upmed-api/src/models/hcp.py:33:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        profilePicture: Optional[str],
+        ^   | (bad-continuation)
+upmed-api/src/models/hcp.py:34:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        patients: List[PatientId],
+        ^   | (bad-continuation)
+upmed-api/src/models/hcp.py:35:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        hours: Hours,
+        ^   | (bad-continuation)
+upmed-api/src/models/hcp.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/models/hcp.py:1:0: C0410: Multiple imports on one line (sys, os) (multiple-imports)
+upmed-api/src/models/hcp.py:5:0: C0413: Import "from typing import List, Optional" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/hcp.py:7:0: C0413: Import "from .hours import Hours" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/hcp.py:8:0: C0413: Import "from .strings import DoctorId, PatientId, AppointmentId" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/hcp.py:37:8: C0103: Attribute name "id" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/hcp.py:38:8: C0103: Attribute name "firstName" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/hcp.py:39:8: C0103: Attribute name "lastName" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/hcp.py:45:8: C0103: Attribute name "profilePicture" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/hcp.py:10:0: C0115: Missing class docstring (missing-class-docstring)
+upmed-api/src/models/hcp.py:10:0: R0902: Too many instance attributes (11/7) (too-many-instance-attributes)
+upmed-api/src/models/hcp.py:25:8: W0622: Redefining built-in 'id' (redefined-builtin)
+upmed-api/src/models/hcp.py:23:4: R0913: Too many arguments (12/5) (too-many-arguments)
+upmed-api/src/models/hcp.py:10:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+************* Module upmed-api.src.models.patient
+upmed-api/src/models/patient.py:29:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        self,
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:30:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        id: PatientId,
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:31:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        firstName: str,
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:32:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        lastName: str,
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:33:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        calendar: List[AppointmentId],
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:34:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        phone: str,
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:35:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        email: str,
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:36:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        dateOfBirth: str,
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:37:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        sex: str,
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:38:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        profilePicture: Optional[str],
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:39:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        height: int,
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:40:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        weight: int,
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:41:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        drinker: Status,
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:42:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        smoker: Status,
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:43:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        health: List[HealthEvent],
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:44:0: C0330: Wrong hanging indentation before block (add 4 spaces).
+        doctors: List[DoctorId],
+        ^   | (bad-continuation)
+upmed-api/src/models/patient.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/models/patient.py:1:0: C0410: Multiple imports on one line (sys, os) (multiple-imports)
+upmed-api/src/models/patient.py:5:0: C0413: Import "from typing import List, Optional" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/patient.py:7:0: C0413: Import "from .enums import Status" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/patient.py:8:0: C0413: Import "from .strings import DoctorId, PatientId, AppointmentId" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/patient.py:9:0: C0413: Import "from .health_event import HealthEvent" should be placed at the top of the module (wrong-import-position)
+upmed-api/src/models/patient.py:46:8: C0103: Attribute name "id" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/patient.py:47:8: C0103: Attribute name "firstName" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/patient.py:48:8: C0103: Attribute name "lastName" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/patient.py:52:8: C0103: Attribute name "dateOfBirth" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/patient.py:54:8: C0103: Attribute name "profilePicture" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/models/patient.py:11:0: C0115: Missing class docstring (missing-class-docstring)
+upmed-api/src/models/patient.py:11:0: R0902: Too many instance attributes (15/7) (too-many-instance-attributes)
+upmed-api/src/models/patient.py:30:8: W0622: Redefining built-in 'id' (redefined-builtin)
+upmed-api/src/models/patient.py:28:4: R0913: Too many arguments (16/5) (too-many-arguments)
+upmed-api/src/models/patient.py:28:4: R0914: Too many local variables (16/15) (too-many-locals)
+upmed-api/src/models/patient.py:11:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+************* Module upmed-api.src.api.hcp.hcp
+upmed-api/src/api/hcp/hcp.py:67:0: C0330: Wrong continued indentation.
+        )
+        ^          || (bad-continuation)
+upmed-api/src/api/hcp/hcp.py:121:83: C0326: No space allowed before :
+        elif 0 <= newsched['monday']['startTime'] <= newsched['monday']['endTime'] :
+                                                                                   ^ (bad-whitespace)
+upmed-api/src/api/hcp/hcp.py:128:85: C0326: No space allowed before :
+        elif 0 <= newsched['tuesday']['startTime'] <= newsched['tuesday']['endTime'] :
+                                                                                     ^ (bad-whitespace)
+upmed-api/src/api/hcp/hcp.py:135:89: C0326: No space allowed before :
+        elif 0 <= newsched['wednesday']['startTime'] <= newsched['wednesday']['endTime'] :
+                                                                                         ^ (bad-whitespace)
+upmed-api/src/api/hcp/hcp.py:142:87: C0326: No space allowed before :
+        elif 0 <= newsched['thursday']['startTime'] <= newsched['thursday']['endTime'] :
+                                                                                       ^ (bad-whitespace)
+upmed-api/src/api/hcp/hcp.py:149:83: C0326: No space allowed before :
+        elif 0 <= newsched['friday']['startTime'] <= newsched['friday']['endTime'] :
+                                                                                   ^ (bad-whitespace)
+upmed-api/src/api/hcp/hcp.py:156:87: C0326: No space allowed before :
+        elif 0 <= newsched['saturday']['startTime'] <= newsched['saturday']['endTime'] :
+                                                                                       ^ (bad-whitespace)
+upmed-api/src/api/hcp/hcp.py:241:0: C0330: Wrong continued indentation.
+                )
+                ^          || (bad-continuation)
+upmed-api/src/api/hcp/hcp.py:477:0: C0301: Line too long (111/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:481:0: C0330: Wrong hanging indentation.
+                )
+                ^   |   | (bad-continuation)
+upmed-api/src/api/hcp/hcp.py:518:0: C0330: Wrong continued indentation.
+                )
+                ^          || (bad-continuation)
+upmed-api/src/api/hcp/hcp.py:556:0: C0301: Line too long (103/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:558:0: C0301: Line too long (103/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:562:0: C0301: Line too long (107/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:565:0: C0301: Line too long (101/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:569:0: C0301: Line too long (107/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:572:0: C0301: Line too long (101/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:576:0: C0301: Line too long (109/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:579:0: C0301: Line too long (103/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:583:0: C0301: Line too long (113/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:586:0: C0301: Line too long (107/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:590:0: C0301: Line too long (111/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:593:0: C0301: Line too long (105/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:597:0: C0301: Line too long (107/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:600:0: C0301: Line too long (101/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:604:0: C0301: Line too long (111/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:607:0: C0301: Line too long (105/100) (line-too-long)
+upmed-api/src/api/hcp/hcp.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+upmed-api/src/api/hcp/hcp.py:9:0: E0401: Unable to import 'flask' (import-error)
+upmed-api/src/api/hcp/hcp.py:23:0: C0103: Constant name "db" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:24:0: C0103: Constant name "hcpdb" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:25:0: C0103: Constant name "pat" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:26:0: C0103: Constant name "appointmentsdb" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:27:0: C0103: Constant name "auth" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:28:0: C0103: Constant name "twilio" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:31:0: C0103: Constant name "hcp_endpoints" doesn't conform to UPPER_CASE naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:34:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/hcp/hcp.py:38:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/hcp/hcp.py:54:11: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/hcp/hcp.py:44:8: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/hcp/hcp.py:54:4: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:58:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/hcp/hcp.py:205:11: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/hcp/hcp.py:94:8: W0702: No exception type(s) specified (bare-except)
+upmed-api/src/api/hcp/hcp.py:99:8: W0702: No exception type(s) specified (bare-except)
+upmed-api/src/api/hcp/hcp.py:104:8: W0702: No exception type(s) specified (bare-except)
+upmed-api/src/api/hcp/hcp.py:200:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:205:4: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:206:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:62:8: W0612: Unused variable 'i' (unused-variable)
+upmed-api/src/api/hcp/hcp.py:58:0: R0912: Too many branches (20/12) (too-many-branches)
+upmed-api/src/api/hcp/hcp.py:58:0: R0915: Too many statements (93/50) (too-many-statements)
+upmed-api/src/api/hcp/hcp.py:224:11: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/hcp/hcp.py:224:4: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:229:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/hcp/hcp.py:234:8: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/hcp/hcp.py:322:12: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:322:29: W0109: Duplicate key 'title' in dictionary (duplicate-key)
+upmed-api/src/api/hcp/hcp.py:344:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:236:16: W0612: Unused variable 'i' (unused-variable)
+upmed-api/src/api/hcp/hcp.py:362:8: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/hcp/hcp.py:417:19: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/hcp/hcp.py:417:12: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:428:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:360:8: W0612: Unused variable 'hid' (unused-variable)
+upmed-api/src/api/hcp/hcp.py:436:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/hcp/hcp.py:441:8: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/hcp/hcp.py:486:19: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/hcp/hcp.py:445:30: E1123: Unexpected keyword argument 'startDate' in constructor call (unexpected-keyword-arg)
+upmed-api/src/api/hcp/hcp.py:445:30: E1123: Unexpected keyword argument 'endDate' in constructor call (unexpected-keyword-arg)
+upmed-api/src/api/hcp/hcp.py:445:30: E1120: No value for argument 'date' in constructor call (no-value-for-parameter)
+upmed-api/src/api/hcp/hcp.py:445:30: E1120: No value for argument 'duration' in constructor call (no-value-for-parameter)
+upmed-api/src/api/hcp/hcp.py:477:79: E1101: Instance of 'Appointment' has no 'startDate' member (no-member)
+upmed-api/src/api/hcp/hcp.py:486:12: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:497:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:439:8: W0612: Unused variable 'hid' (unused-variable)
+upmed-api/src/api/hcp/hcp.py:475:16: W0612: Unused variable 'message' (unused-variable)
+upmed-api/src/api/hcp/hcp.py:504:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/hcp/hcp.py:659:19: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/hcp/hcp.py:545:16: W0702: No exception type(s) specified (bare-except)
+upmed-api/src/api/hcp/hcp.py:550:16: W0702: No exception type(s) specified (bare-except)
+upmed-api/src/api/hcp/hcp.py:555:16: W0702: No exception type(s) specified (bare-except)
+upmed-api/src/api/hcp/hcp.py:650:20: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:655:16: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:659:12: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:660:16: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:504:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+upmed-api/src/api/hcp/hcp.py:513:16: W0612: Unused variable 'i' (unused-variable)
+upmed-api/src/api/hcp/hcp.py:504:0: R0912: Too many branches (24/12) (too-many-branches)
+upmed-api/src/api/hcp/hcp.py:504:0: R0915: Too many statements (99/50) (too-many-statements)
+upmed-api/src/api/hcp/hcp.py:668:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/hcp/hcp.py:673:8: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/hcp/hcp.py:690:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:707:8: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/hcp/hcp.py:765:19: W0703: Catching too general exception Exception (broad-except)
+upmed-api/src/api/hcp/hcp.py:730:20: C0103: Variable name "ev" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:765:12: C0103: Variable name "e" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:776:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:705:8: W0612: Unused variable 'hid' (unused-variable)
+upmed-api/src/api/hcp/hcp.py:783:0: C0103: Function name "getAll" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:783:0: C0116: Missing function or method docstring (missing-function-docstring)
+upmed-api/src/api/hcp/hcp.py:785:4: R1705: Unnecessary "else" after "return" (no-else-return)
+upmed-api/src/api/hcp/hcp.py:791:12: C0103: Variable name "h" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:804:8: C0103: Variable name "responseObject" doesn't conform to snake_case naming style (invalid-name)
+upmed-api/src/api/hcp/hcp.py:786:8: W0612: Unused variable 'hid' (unused-variable)
+upmed-api/src/api/hcp/hcp.py:786:13: W0612: Unused variable 'utype' (unused-variable)
+upmed-api/src/api/hcp/hcp.py:17:0: W0611: Unused Status imported from src.models.enums (unused-import)
+
+------------------------------------------------------------------
+Your code has been rated at 4.15/10 (previous run: 4.15/10, +0.00)
+

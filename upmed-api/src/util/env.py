@@ -56,4 +56,6 @@ for key in Env.__dict__.keys():
         pass
 
 if missing_envs:
-    sys.exit("upmed-appointment/.env file not up to date. Missing %s!" % ", ".join(missing_envs))
+    sys.exit(
+        "upmed-appointment/.env file not up to date. Missing %s!" %
+        ", ".join(missing_envs))

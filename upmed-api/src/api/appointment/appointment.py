@@ -3,16 +3,33 @@ from util.firebase.db import Database
 from util.util import Auth
 from models.appointment import Appointment
 
-# from flask import Blueprint, request, jsonify, make_response, json
-# from ....src.util.firebase.db import Database
-# from ....src.util.util import Auth
-# from ....src.models.patient import Patient
-# from ....src.models.hcp import HCP
-# from ....src.models.health_event import HealthEvent
-# from ....src.models.hours import Hours
-# from ....src.models.day import Day
-# from ....src.util.util import Twilio
-# from ....src.models.appointment import Appointment
+import sys
+import os
+from os.path import join
+sys.path.append(join(os.getcwd(), '../..'))
+
+"""
+Appointment API
+
+----Heroku Imports----
+from flask import Blueprint, request, jsonify, make_response
+from util.firebase.db import Database
+from util.util import Auth
+from models.appointment import Appointment
+
+---Relative Imports----
+from flask import Blueprint, request, jsonify, make_response, json
+from ....src.util.firebase.db import Database
+from ....src.util.util import Auth
+from ....src.models.patient import Patient
+from ....src.models.hcp import HCP
+from ....src.models.health_event import HealthEvent
+from ....src.models.hours import Hours
+from ....src.models.day import Day
+from ....src.util.util import Twilio
+from ....src.models.appointment import Appointment
+
+"""
 
 pdb = Database()
 hcp_db = pdb.getHCP()
@@ -25,13 +42,20 @@ appointment_endpoints = Blueprint('appointment', __name__)
 
 @appointment_endpoints.route('/')
 def root():
+    """
+    Deafault Route
+
+    Returns:
+        reponse: string
+    """
     return "appointment root"
 
 
 @appointment_endpoints.route('/getByToken', methods=['POST'])
-def getByToken():
+def get_by_token():
     """
-        Get the appointment details given appointment ID, request must be from concerned patient or healthcare professional.
+        Get the appointment details given appointment ID, request
+        must be from concerned patient or healthcare professional.
         Request:
         {
             token: string
@@ -49,17 +73,13 @@ def getByToken():
             appointmentId = post_data.get('appointmentId')
             elements = appointmentId.split(',')
 
-            user_id_verified = False
-            if (utype == "HCP") and (str(pid) == str(elements[1])):
-                user_id_verified = True
-            elif (utype == "PATIENT") and (str(pid) == str(elements[0])):
-                user_id_verified = True
-
-            if user_id_verified:
+            if (utype == "HCP") and (str(pid) == str(elements[1])) or (
+                    utype == "PATIENT") and (str(pid) == str(elements[0])):
                 appointmentId = post_data.get('appointmentId')
-                appointments_output = appointmentsdb.document(str(appointmentId)).get().to_dict()
+                appointments_output = appointmentsdb.document(
+                    str(appointmentId)).get().to_dict()
 
-                responseObject = {
+                response_object = {
                     "id": appointments_output['id'],
                     "date": appointments_output['date'],
                     "duration": appointments_output['duration'],
@@ -70,28 +90,31 @@ def getByToken():
                     "videoUrl": appointments_output['videoUrl']
                 }
 
-                return make_response(jsonify(responseObject)), 200
+                return make_response(jsonify(response_object)), 200
 
             else:
-                responseObject = {
+                response_object = {
                     'status': 'fail',
-                    'message': 'Delete request not originated from concerned patient or healthcare professional.'
+                    'message': 'Delete request not '
+                               'originated from concerned patient or '
+                               'healthcare professional.'
                 }
-                return make_response(jsonify(responseObject)), 401
+                return make_response(jsonify(response_object)), 401
         except Exception as e:
             return f"An Error Occurred: {e}"
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
             'message': 'Error in token authentication'
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
 
 
 @appointment_endpoints.route('/getCalendar', methods=['POST'])
-def getCalendar():
+def get_calendar():
     """
-        Get a list of Appointment IDs specific to the user from within the token.
+        Get a list of Appointment IDs specific to the
+        user from within the token.
         Request:
         {
             token: string
@@ -114,33 +137,37 @@ def getCalendar():
             docs = hcp_db.document(str(pid)).get().to_dict()
             output = docs['calendar']
         else:
-            responseobject = {
+            response_object = {
                 'Success': False,
                 'message': 'Failed to verify role'
             }
-            return make_response(jsonify(responseobject)), 401
+            return make_response(jsonify(response_object)), 401
         calendar = []
         for event in output:
-            appointments_output = appointmentsdb.document(str(event)).get().to_dict()
+            appointments_output = appointmentsdb.document(
+                str(event)).get().to_dict()
             calendar.append(appointments_output)
         return make_response(jsonify(calendar)), 200
-    responseObject = {
+    response_object = {
         'status': 'fail',
-        'message': 'Error in token authentication'
+        'message': 'Error, in token authentication'
     }
-    return make_response(jsonify(responseObject)), 401
+    return make_response(jsonify(response_object)), 401
 
 
 @appointment_endpoints.route('/createAppointment', methods=['POST'])
 def create_appointment():
     """
-    Create a new appointment given the appointment details, returns an unique appointment id
+    Create a new appointment given the appointment details,
+    returns an unique appointment id
     Request:
             token: string
             date: int (UNIX Time)
             duration: int (0-1440 minutes)
-            hcpid: str    (if patient initiate an appointment need to specify which hcp)
-            patient: str  (if HCP initiate an appointment need to specify which patient)
+            hcpid: str    (if patient initiate an appointment need
+                to specify which hcp)
+            patient: str  (if HCP initiate an appointment
+                need to specify which patient)
             subject: str
             notes: Optional[str]
             videoUrl: Optional[str]
@@ -164,13 +191,14 @@ def create_appointment():
         elif utype == "PATIENT":
             doctor_id = post_data.get('hcpid')
         else:
-            responseobject = {
+            response_object = {
                 'Success': False,
                 'message': 'Failed to verify role'
             }
-            return make_response(jsonify(responseobject)), 401
+            return make_response(jsonify(response_object)), 401
 
-        appointment_id = str(patient_id) + "," + str(doctor_id) + "," + str(post_data.get('date'))
+        appointment_id = str(patient_id) + "," + \
+            str(doctor_id) + "," + str(post_data.get('date'))
         try:
             new_appointment = Appointment(
                 id=appointment_id,
@@ -193,7 +221,8 @@ def create_appointment():
                 "videoUrl": new_appointment.videoUrl
             })
 
-            # Add the appointment id to both respective patient and HCP database
+            # Add the appointment id to both respective patient and HCP
+            # database
             patient_ref = patient_db.document(str(patient_id))
             hcp_ref = hcp_db.document(str(doctor_id))
 
@@ -218,24 +247,26 @@ def create_appointment():
             hcp_calendar.append(appointment_id)
             hcp_ref.update({u'calendar': hcp_calendar})
 
-            responseobject = {
+            response_object = {
                 "appointmentId": new_appointment.id
             }
-            return make_response(jsonify(responseobject)), 200
+            return make_response(jsonify(response_object)), 200
         except Exception as e:
             return f"Failure due to {e}", 404
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
-            'message': 'Error in token authentication'
+            'message': 'Error: Error in token authentication'
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
 
 
 @appointment_endpoints.route('/delete_appointment', methods=['POST'])
 def delete_appointment():
     """
-        Remove appointment with the given appointment id, the request must originate from either the concerned patient or healthcare professional
+        Remove appointment with the given appointment id,
+        the request must originate from either the concerned patient
+        or healthcare professional
         Request:
         {
             id: string
@@ -257,9 +288,8 @@ def delete_appointment():
             patient_id = str(elements[0])
 
             user_id_verified = False
-            if (utype == "HCP") and (str(pid) == doctor_id):
-                user_id_verified = True
-            elif (utype == "PATIENT") and (str(pid) == patient_id):
+            if (utype == "HCP") and (str(pid) == doctor_id) or (
+                    utype == "PATIENT") and (str(pid) == patient_id):
                 user_id_verified = True
 
             if user_id_verified:
@@ -280,16 +310,17 @@ def delete_appointment():
                 return jsonify({"success": True}), 200
 
             else:
-                responseObject = {
+                response_object = {
                     'status': 'fail',
-                    'message': 'Delete request not originated from concerned patient or healthcare professional.'
+                    'message': 'Delete request not originated from '
+                               'concerned patient or healthcare professional.'
                 }
-                return make_response(jsonify(responseObject)), 401
+                return make_response(jsonify(response_object)), 401
         except Exception as e:
             return f"An Error Occurred: {e}"
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
             'message': 'Error in token authentication'
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401

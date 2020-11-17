@@ -1,19 +1,41 @@
-import sys, os
+from flask import Blueprint, request, jsonify, make_response, json
+from util.firebase.db import Database
+from util.util import Auth
+from models.patient import Patient
+from models.hcp import HCP
+from models.hours import Hours
+from models.day import Day
+
+import sys
+import os
 from os.path import join
 sys.path.append(join(os.getcwd(), '../..'))
 
-from flask import Blueprint, request, jsonify, make_response
-from util.firebase.db import Database
-from util.util import Auth
+"""
+Patient API Endpoints
+------ Heroku Imports-----
 from models import Patient, HCP, Hours, Day
-# from flask import Blueprint, request, jsonify, make_response, json
-# from ....src.util.firebase.db import Database
-# from ....src.util.util import Auth
-# from ....src.models.patient import Patient
-# from ....src.models.hcp import HCP
-# from ....src.models.health_event import HealthEvent
-# from ....src.models.hours import Hours
-# from ....src.models.day import Day
+from util.util import Auth
+from util.firebase.db import Database
+from flask import Blueprint, request, jsonify, make_response, json
+import sys
+import os
+from os.path import join
+sys.path.append(join(os.getcwd(), '../..'))
+
+
+----Relative Imports-----
+from flask import Blueprint, request, jsonify, make_response, json
+from ....src.util.firebase.db import Database
+from ....src.util.util import Auth
+from ....src.models.patient import Patient
+from ....src.models.hcp import HCP
+from ....src.models.health_event import HealthEvent
+from ....src.models.hours import Hours
+from ....src.models.day import Day
+
+"""
+
 
 patient_endpoints = Blueprint('patient', __name__)
 pdb = Database()
@@ -24,15 +46,27 @@ hcpdb = pdb.getHCP()
 
 @patient_endpoints.route('/', methods=['POST'])
 def root():
-    return "GO TO AN ENDPOINT"
+    """Default api route
+
+    Returns:
+        Response: string
+    """
+    return "GO TO AN ENDPOINT", 404
 
 
 @patient_endpoints.route('/logIn', methods=['POST'])
 def login():
+    """Login existing patient
+
+    Returns:
+        Response: JSON
+    """
     try:
+
         pid = request.json['id']
         email = request.json['email']
         res = pat.document(str(pid)).get()
+
         res = res.to_dict()
 
         if res['email'] == email:
@@ -46,26 +80,31 @@ def login():
         else:
             return "False", 404
     except Exception as e:
-        return f"An Error Occured: {e}"
+        return f"An Error Occured: {e}", 500
 
 
 @patient_endpoints.route('/signUp', methods=['POST'])
 def signup():
+    """Create new Patient object and record
+
+    Returns:
+        Response: JSON
+    """
     post_data = request.get_json()
     try:
         patient = Patient(
-            id= post_data.get('id'),
-            firstName = post_data.get('firstName'),
-            lastName = post_data.get('lastName'),
-            phone = "0000000000",
-            email = post_data.get('email'),
-            dateOfBirth = post_data.get('dateOfBirth'),
-            sex = post_data.get('sex'),
-            profilePicture = '',
-            height = post_data.get('height'),
-            weight = post_data.get('weight'),
-            drinker = post_data.get('drinker'),
-            smoker = post_data.get('smoker'),
+            id=post_data.get('id'),
+            firstName=post_data.get('firstName'),
+            lastName=post_data.get('lastName'),
+            phone="0000000000",
+            email=post_data.get('email'),
+            dateOfBirth=post_data.get('dateOfBirth'),
+            sex=post_data.get('sex'),
+            profilePicture='',
+            height=post_data.get('height'),
+            weight=post_data.get('weight'),
+            drinker=post_data.get('drinker'),
+            smoker=post_data.get('smoker'),
             calendar=[],
             health=[],
             doctors=[]
@@ -73,7 +112,8 @@ def signup():
         try:
             patient.profilePicture = post_data.get('profilePicture')
         except KeyError:
-            patient.profilePicture = 'https://www.flaticon.com/svg/static/icons/svg/147/147144.svg'
+            patient.profilePicture = 'https://www.flaticon.com/svg/static/' \
+                                     'icons/svg/147/147144.svg'
 
         # Parse phone number
         # phone = str(post_data.get('phone')).replace('-', '')
@@ -98,17 +138,17 @@ def signup():
 
         })
         auth_token = auth.encode_auth_token(patient.id, utype)
-        responseObject = {
+        response_object = {
             'id': patient.id,
             'token': auth_token.decode()
         }
-        return make_response(jsonify(responseObject)), 201
+        return make_response(jsonify(response_object)), 201
     except Exception as e:
-        responseObject = {
+        response_object = {
             'status': 'fail',
             'message': f'Some error, {e} occurred. Please try again.'
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
 
 
 @patient_endpoints.route('/delete', methods=['POST'])
@@ -129,6 +169,11 @@ def remove():
 
 @patient_endpoints.route('/getByToken', methods=['POST'])
 def getbytoken():
+    """Get Patients by token
+
+    Returns:
+        Response: JSON
+    """
     # get the auth token
     auth_token = request.get_json().get('token')
     if auth_token:
@@ -136,7 +181,7 @@ def getbytoken():
         patient = pat.document(str(pid)).get().to_dict()
         # print(patient)
         resp = Patient(
-            id= pid,
+            id=pid,
             firstName=patient['firstName'],
             lastName=patient['lastName'],
             phone=patient['phone'],
@@ -153,7 +198,7 @@ def getbytoken():
             health=patient['health']
         )
 
-        responseObject = {
+        response_object = {
             "id": resp.id,
             "firstName": resp.firstName,
             "lastName": resp.lastName,
@@ -167,18 +212,18 @@ def getbytoken():
             "drinker": resp.drinker,
             "smoker": resp.smoker,
             "health": resp.health
-            }
-        return make_response(jsonify(responseObject)), 200
-    else:
-        responseObject = {
-            'status': 'fail',
-            'message': 'Provide a valid auth token.'
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 200
+    else:
+        response_object = {
+            'status': 'fail',
+            'message': 'Ivalid token. Provide a valid auth token.'
+        }
+        return make_response(jsonify(response_object)), 401
 
 
 @patient_endpoints.route('/getRecords', methods=['POST'])
-def getRecords():
+def get_records():
     """
         Based on the supplied patient JWT the health records
         for that patient will be accessed.
@@ -206,22 +251,26 @@ def getRecords():
             doctors=patient['doctors'],
             health=patient['health']
         )
-        responseObject = []
+        response_object = []
         for i in resp.health:
-            responseObject.append(i)
+            response_object.append(i)
 
-
-        return make_response(jsonify(responseObject)), 200
+        return make_response(jsonify(response_object)), 200
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
-            'message': 'Provide a valid auth token.'
+            'message': 'Invalid. Provide a valid auth token.'
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
 
 
 @patient_endpoints.route('/editProfile', methods=['POST'])
-def editProfile():
+def edit_profile():
+    """edit Patient Profile
+
+    Returns:
+        Response: JSON
+    """
     auth_token = request.get_json().get('token')
     if auth_token:
         pid, utype = Auth.decode_auth_token(auth_token)
@@ -235,7 +284,7 @@ def editProfile():
             email=post_data.get('email'),
             dateOfBirth=patient_resp['dateOfBirth'],
             sex=patient_resp['sex'],
-            profilePicture=post_data.get('profilePicture'),
+            profilePicture=patient_resp['profilePicture'],
             height=post_data.get('height'),
             weight=post_data.get('weight'),
             drinker=post_data.get('drinker'),
@@ -244,6 +293,11 @@ def editProfile():
             doctors=patient_resp['doctors'],
             health=patient_resp['health']
         )
+
+        try:
+            patient.profilePicture = post_data.get('profilePicture')
+        except KeyError:
+            patient.profilePicture = patient_resp['profilePicture']
 
         pat.document(patient.id).set({
             "id": patient.id,
@@ -269,14 +323,20 @@ def editProfile():
         }
         return make_response(jsonify(res)), 200
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
             'message': 'Provide a valid auth token.'
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
+
 
 @patient_endpoints.route('/getHCPs', methods=['POST'])
 def gethcps():
+    """Get Patients's HCPs
+
+    Returns:
+        Response: JSON
+    """
     auth_token = request.get_json().get('token')
     if auth_token:
         pid, utype = Auth.decode_auth_token(auth_token)
@@ -370,7 +430,7 @@ def gethcps():
                 }
             }
 
-            responseObject = {
+            response_object = {
                 "id": resp.id,
                 "firstName": resp.firstName,
                 "lastName": resp.lastName,
@@ -382,31 +442,35 @@ def gethcps():
                 "title": resp.title,
                 "hours": hours,
                 "patients": resp.patients
-                }
+            }
 
             entry = {
-                i: responseObject
+                i: response_object
             }
             # print(i)
             results.update(entry)
             # print(res)
 
-
         return make_response(jsonify(results)), 200
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
-            'message': 'Provide a valid auth token.'
+            'message': 'Token Invalid. Provide a valid auth token.'
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
+
 
 @patient_endpoints.route('/getAll', methods=['POST'])
-def getAll():
+def get_all():
+    """Get Patients
+
+    Returns:
+        Response: JSON
+    """
     auth_token = request.get_json().get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
         pats = pat.stream()
-        # print(hcps)
         pats_return = []
         for patient in pats:
 
@@ -424,8 +488,38 @@ def getAll():
             pats_return.append(pat_obj)
         return jsonify(pats_return), 200
     else:
-        responseObject = {
+        response_object = {
             'status': 'fail',
             'message': 'Provide a valid auth token.'
         }
-        return make_response(jsonify(responseObject)), 401
+        return make_response(jsonify(response_object)), 401
+
+
+@patient_endpoints.route('/setProfilePicture', methods=['POST'])
+def set_profile_picture():
+    """
+    Set Patient Profile Picture
+
+    Returns: Response: JSON
+    """
+    # Get Auth Token
+    auth_token = request.get_json().get('token')
+    if auth_token:
+        pid, utype = Auth.decode_auth_token(auth_token)
+        pic = request.get_json().get('profilePicture')
+        print(pid)
+        print(pic)
+        pat.document(str(pid)).update({
+            "profilePicture": pic
+        })
+        response_object = {
+            "Success": True,
+            "profilePicture": pic
+        }
+        return make_response(jsonify(response_object)), 200
+    else:
+        response_object = {
+            'status': 'fail',
+            'message': "invalid_token"
+        }
+        return make_response(jsonify(response_object)), 401

@@ -1,13 +1,17 @@
-import sys, os
+from twilio.rest import Client
+from .env import Env
+import datetime
+import jwt
+import sys
+import os
 from os.path import join
 sys.path.append(join(os.getcwd(), '..'))
+"""
+Util and helper functions
+"""
 
-import jwt
-import datetime
-from .env import Env
-from twilio.rest import Client
 
-class Auth():
+class Auth:
     """ TOKEN FUCNTIONS"""
 
     def encode_auth_token(self, user_id, type):
@@ -17,7 +21,8 @@ class Auth():
         """
         try:
             payload = {
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=7, seconds=0),
+                'exp': datetime.datetime.utcnow() +
+                datetime.timedelta(days=7, seconds=0),
                 'iat': datetime.datetime.utcnow(),
                 'googleId': user_id,
                 'userType': type
@@ -51,5 +56,5 @@ class Twilio():
 
     def connect(self):
         account_sid = Env.TWILIO_ACCOUNT_SID()
-        auth_token = Env.TWILIO_AUTH_TOKEN_SECRET()
+        auth_token = Env.TWILIO_AUTH_TOKEN()
         return Client(account_sid, auth_token)

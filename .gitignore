@@ -19,6 +19,9 @@
 .env.development.local
 .env.test.local
 .env.production.local
+venv
+env
+
 
 # cache
 **/__pycache__
@@ -31,3 +34,5 @@ yarn-error.log*
 # firebase
 *upmed-starmen-firebase-
 *decrypted_cert.json
+/upmed-api/tst/api/hcp_test/ENV_DIR/
+/enev/

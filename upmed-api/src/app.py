@@ -1,16 +1,32 @@
+import os
+
 from util.env import Env
 from flask import Flask
 from flask_cors import CORS
 
 from api import api_endpoints
+
+"""
+Create app and register blueprints
+
+---Heroku Imports---
 import os
 
-# from .util.env import Env
-# from flask import Flask
-#
-# from .api import api_endpoints
+from util.env import Env
+from flask import Flask
+from flask_cors import CORS
 
-from util import Env
+from api import api_endpoints
+
+CORS(app)
+----Relative Imports----
+import os
+from .util.env import Env
+from flask import Flask
+
+from .api import api_endpoints
+from flask_cors import CORS
+"""
 
 """
 Create app and register blueprints

@@ -1,8 +1,12 @@
-import sys, os
+from enum import Enum
+import sys
+import os
 from os.path import join
 sys.path.append(join(os.getcwd(), '..'))
 
-from enum import Enum
+"""Enums Data Model
+    """
+
 
 class Status(Enum):
     ACTIVE = 0
