@@ -4,7 +4,7 @@ import ReactPopup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 import styles from './Popup.module.sass'
 
-interface PopupProps {
+export interface PopupProps {
 	children?: any
 	open?: boolean
 	autoclose?: boolean

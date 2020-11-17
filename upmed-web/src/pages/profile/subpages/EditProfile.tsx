@@ -260,7 +260,6 @@ export const EditProfile = (props: ProfileSubpageProps) => {
 									onChange={(hrs, valid) => {
 										setHours(hrs)
 										setHoursValid(valid)
-										console.log(valid)
 									}}
 									className={styles.input_mid}
 									initialHours={hours}

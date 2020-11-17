@@ -5,7 +5,7 @@ import { Footer, UMNavigationBar } from '../components'
 import { Home } from './home'
 import { SignIn, OnSignIn } from './account'
 import { Profile } from './profile'
-import { Users, Objects } from '../utils'
+import { Users } from '../utils'
 
 import './../index.sass'
 
@@ -52,7 +52,7 @@ export class App extends Component {
 
 	constructor(props: any) {
 		super(props)
-		this.isLoggedIn = !Objects.isNullish(Users.getUserToken())
+		this.isLoggedIn = Users.hasUserToken()
 	}
 
 	public render = () => {
@@ -60,6 +60,7 @@ export class App extends Component {
 			<Router>
 				<Switch>
 					{this.isLoggedIn && <Redirect exact from={'/'} to={'/profile/'} />}
+					{!this.isLoggedIn && <Redirect exact from={'/profile/*'} to={'/'} />}
 					{ROUTES.filter((r) => this.isLoggedIn || !r.auth).map((route) => (
 						<ReactRoute exact key={route.name} path={route.path}>
 							{route.navbar !== false && <UMNavigationBar />}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { ProfileSubpageProps } from '../Profile'
 
-import FullCalendar from '@fullcalendar/react'
+import FullCalendar, { EventInput } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 
 import { Button, Popup, TextInput, DateInput, RadioButtons, Dropdown, Loading } from '../../../components'
@@ -11,8 +11,9 @@ import { Client, DateTime, Objects, Users, Validator } from '../../../utils'
 
 import styles from './Calendar.module.sass'
 import { useLocation } from 'react-router-dom'
+import { AppointmentPopup } from './components'
 
-const appointmentToFullCalendarEvent = (appointment: Appointment) => {
+const appointmentToFullCalendarEvent = (appointment: Appointment): EventInput => {
 	return {
 		id: appointment.id,
 		start: appointment.date,
@@ -28,7 +29,7 @@ export const Calendar = (props: ProfileSubpageProps) => {
 	let togglePopup = null as any
 
 	const [subject, setSubject] = useState('')
-	const [duration, setDuration] = useState(30 * 60 * 1000)
+	const [duration, setDuration] = useState(30)
 	const [date, setDate] = useState(new Date())
 	const [isValid, setIsValid] = useState(false)
 	const [patient, setPatient] = useState(
@@ -37,6 +38,10 @@ export const Calendar = (props: ProfileSubpageProps) => {
 	const [doctor, setDoctor] = useState(props.doctors.length > 0 ? props.doctors[0] : (undefined as HCP | undefined))
 	const [scheduleError, setScheduleError] = useState('')
 	const [scheduleLoading, setScheduleLoading] = useState(false)
+
+	const [currentAppointment, setCurrentAppointment] = useState(null as Appointment | null)
+	const [currentDoctor, setCurrentDoctor] = useState(null as HCP | null)
+	const [currentPatient, setCurrentPatient] = useState(null as Patient | null)
 
 	// Search for new doctors or patients
 	const [newDoctors, setNewDoctors] = useState([] as HCP[])
@@ -86,6 +91,7 @@ export const Calendar = (props: ProfileSubpageProps) => {
 				// Doctor validation
 				(!props.isPatient ? patient !== null : true),
 		)
+		console.log(subject, date, duration, doctor, patient, isValid)
 	}, [duration, date, patient, doctor, subject, props.isPatient, isValid])
 
 	const scheduleAppointment = async () => {
@@ -102,7 +108,10 @@ export const Calendar = (props: ProfileSubpageProps) => {
 				'',
 			)
 			if (!props.isPatient && patient) {
-				await Client.HCP.notify(Users.getUserToken(), patient.id)
+				// Feature: notification
+				try {
+					Client.HCP.notify(Users.getUserToken(), patient.id)
+				} catch {}
 			}
 			window.location.reload()
 		} catch {
@@ -111,6 +120,57 @@ export const Calendar = (props: ProfileSubpageProps) => {
 			)
 		}
 		setScheduleLoading(false)
+	}
+
+	let toggleAppointmentPopup = null as any
+	const openAppointment = (appointment: Appointment | null) => {
+		if (appointment && toggleAppointmentPopup) {
+			let doc
+			let pat
+			if (props.isPatient) {
+				for (const d of props.doctors) {
+					if (d.id === appointment.doctor) {
+						doc = d
+						break
+					}
+				}
+				pat = props.user as Patient
+			} else {
+				for (const p of props.patients) {
+					if (p.id === appointment.patient) {
+						pat = p
+						break
+					}
+				}
+				doc = props.user as HCP
+			}
+
+			if (doc && pat) {
+				setCurrentDoctor(doc)
+				setCurrentPatient(pat)
+				setCurrentAppointment(appointment)
+				toggleAppointmentPopup(true)
+			}
+		}
+	}
+
+	const appointmentAtId = (id: string): Appointment | null => {
+		for (const appointment of props.appointments) {
+			if (appointment.id === id) {
+				return appointment
+			}
+		}
+		return null
+	}
+
+	const clearAppointment = () => {
+		setSubject('')
+		setDate(new Date())
+		setIsValid(false)
+		setDuration(30)
+		setScheduleError('')
+		props.isPatient && setDoctor(undefined)
+		!props.isPatient && setPatient(undefined)
 	}
 
 	return (
@@ -137,10 +197,13 @@ export const Calendar = (props: ProfileSubpageProps) => {
 						height={'70vh'}
 						selectable={true}
 						initialEvents={props.appointments.map((apt) => appointmentToFullCalendarEvent(apt))}
+						eventClick={(arg) => {
+							openAppointment(appointmentAtId(arg.event.id))
+						}}
 					/>
 				</div>
 			</div>
-			<Popup open={false} toggleRef={(t) => (togglePopup = t)}>
+			<Popup open={false} toggleRef={(t) => (togglePopup = t)} onClose={clearAppointment}>
 				<div className={styles.popup_container}>
 					<h2 className={`font-title mb-4`}>Schedule an Appointment</h2>
 					<TextInput
@@ -179,7 +242,7 @@ export const Calendar = (props: ProfileSubpageProps) => {
 									onChange={(p) => setPatient(p)}
 									options={newPatients}
 									label={'Patient'}
-									containerClassName={'mt-3'}
+									containerClassName={'mt-3 w-75'}
 									required
 								/>
 							)}
@@ -205,6 +268,13 @@ export const Calendar = (props: ProfileSubpageProps) => {
 					</div>
 				</div>
 			</Popup>
+			<AppointmentPopup
+				open={false}
+				toggleRef={(t) => (toggleAppointmentPopup = t)}
+				patient={currentPatient || undefined}
+				doctor={currentDoctor || undefined}
+				appointment={currentAppointment || undefined}
+			/>
 		</div>
 	)
 }

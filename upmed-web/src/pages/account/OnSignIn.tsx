@@ -9,8 +9,9 @@ import {
 	Counter,
 	HoursInputs,
 	SuggestionInput,
+	Error,
 } from '../../components'
-import { INITIAL_HOURS, SPECIALTIES } from '../../constants'
+import { INITIAL_HOURS, SPECIALTIES, TIMEOUT_MS } from '../../constants'
 import { Hasher, URL, Validator, Formatter, Users, Objects, DateTime, Client } from '../../utils'
 import styles from './OnSignIn.module.sass'
 import { Status } from '../../models'
@@ -22,6 +23,7 @@ export const OnSignIn = () => {
 	const [status, setStatus] = useState(location.pathname)
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
+	const [showError, setShowError] = useState(false)
 
 	/**
 	 * Keeps track of the user's login webtoken.
@@ -56,13 +58,6 @@ export const OnSignIn = () => {
 	const [isValid, setIsValid] = useState(false)
 
 	useEffect(() => {
-		console.log({
-			smoker,
-			drinker,
-		})
-	}, [smoker, drinker])
-
-	useEffect(() => {
 		setLoading(true)
 		setStatus(location.pathname)
 
@@ -80,31 +75,29 @@ export const OnSignIn = () => {
 			}
 
 			// If expired, prompt a log in again
-			if (decodedDetails.expiryTime && decodedDetails.expiryTime < Date.now()) {
+			if (!decodedDetails || (decodedDetails.expiryTime && decodedDetails.expiryTime < Date.now())) {
 				history.push('/signin')
+			} else {
+				setId(decodedDetails.id)
+				setProfilePicture(decodedDetails.profilePicture ? decodedDetails.profilePicture : null)
+				setEmail(decodedDetails.email)
+				setFirstName(decodedDetails.firstName)
+				setLastName(decodedDetails.lastName)
+				setIsPatient(decodedDetails.isPatient || false)
+				// Attempt to log in
+				isPatient
+					? Client.Patient.logIn(id, email)
+							.then(({ token }) => {
+								setUserToken(token)
+							})
+							.catch(() => setLoading(false))
+					: Client.HCP.logIn(id, email)
+							.then(({ token }) => {
+								setUserToken(token)
+							})
+							.catch(() => setLoading(false))
 			}
-
-			setId(decodedDetails.id)
-			setProfilePicture(decodedDetails.profilePicture ? decodedDetails.profilePicture : null)
-			setEmail(decodedDetails.email)
-			setFirstName(decodedDetails.firstName)
-			setLastName(decodedDetails.lastName)
-			setIsPatient(decodedDetails.isPatient || false)
-
-			setLoading(false)
-
-			// Attempt to log in
-			isPatient
-				? Client.Patient.logIn(id, email).then(({ token }) => {
-						setUserToken(token)
-						setLoading(false)
-				  })
-				: Client.HCP.logIn(id, email).then(({ token }) => {
-						setUserToken(token)
-						setLoading(false)
-				  })
 		} catch (e) {
-			console.error(e)
 			// In case something goes wrong, go to sign-in
 			history.push('/signin')
 		}
@@ -112,6 +105,7 @@ export const OnSignIn = () => {
 
 	const createAccount = async () => {
 		setLoading(true)
+		const timeout = setTimeout(() => setShowError(true), TIMEOUT_MS)
 
 		try {
 			const { token } = isPatient
@@ -141,8 +135,11 @@ export const OnSignIn = () => {
 						profilePicture || undefined,
 				  )
 			Users.setUserToken(token)
-			history.push('/profile/')
+			clearTimeout(timeout)
+			window.open('/profile/', '_self')
 		} catch (e) {
+			clearTimeout(timeout)
+			setShowError(true)
 			setError(e)
 		}
 
@@ -164,7 +161,7 @@ export const OnSignIn = () => {
 	useEffect(() => {
 		if (!Objects.isNullish(userToken)) {
 			Users.setUserToken(userToken!)
-			history.push('/profile/')
+			window.open('/profile/', '_self')
 		}
 	}, [userToken, history])
 
@@ -210,7 +207,9 @@ export const OnSignIn = () => {
 		hoursValid,
 	])
 
-	return loading ? (
+	return showError ? (
+		<Error />
+	) : loading ? (
 		<Loading containerClassName={styles.loading} text={'Loading...'} />
 	) : email ? (
 		<main id="onSignIn">
@@ -360,7 +359,6 @@ export const OnSignIn = () => {
 									onChange={(hrs, valid) => {
 										setHours(hrs)
 										setHoursValid(valid)
-										console.log(valid)
 									}}
 									className={styles.input_mid}
 									required

@@ -1,0 +1,34 @@
+@import '../../index'
+
+.error_outter
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    height: 100vh
+    .error_inner
+        text-align: center
+        width: 40%
+        .error_image
+            height: 25vh
+        .error_short
+            @extend .font-title
+            margin-top: 16px
+            font-size: 4rem
+        .error_message
+            margin-bottom: 16px
+        .retry
+            margin-top: 32px
+            margin-bottom: 16px
+            color: $medium
+        .button_container
+            margin-bottom: 32px
+            .button
+                background: $primary !important
+                color: $white !important
+                padding-left: 16px
+                padding-right: 16px
+        .upmed_logo
+            @extend .logo
+            font-size: 14pt
+

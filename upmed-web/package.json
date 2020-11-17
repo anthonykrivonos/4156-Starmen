@@ -101,9 +101,10 @@
       "last 1 safari version"
     ]
   },
-  "pre-commit": [
+  "precommit": [
     "lint",
     "format",
+    "test",
     "build"
   ]
 }

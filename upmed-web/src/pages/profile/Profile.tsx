@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
-import { Loading, Sidebar } from '../../components'
+import { Error, Loading, Sidebar } from '../../components'
 import { Patient, HCP, Appointment, HealthEvent } from '../../models'
 import { Client, Users } from '../../utils'
 
 import { Calendar, MedicalInfo, EditProfile } from './subpages'
 
 import styles from './Profile.module.sass'
+import { TIMEOUT_MS } from '../../constants'
 
 const PROFILE_SUBPAGES = [
 	{
@@ -55,14 +56,7 @@ const getSubpageProps = async () => {
 	}
 
 	// Band-aid for empty calendar bug
-	try {
-		appointments = await Client.Appointment.getCalendar(token)
-		setTimeout(() => {
-			throw new Error('')
-		}, 2000)
-	} catch {
-		appointments = []
-	}
+	appointments = await Client.Appointment.getCalendar(token)
 
 	return {
 		user,
@@ -79,6 +73,7 @@ export const Profile = () => {
 	const location = useLocation()
 
 	const [loading, setLoading] = useState(true)
+	const [showError, setShowError] = useState(false)
 	const [subpage, setSubpage] = useState(null as any)
 	const [didSetSubpageProps, setDidSetSubpageProps] = useState(false)
 	const [subpageProps, setSubpageProps] = useState(null as ProfileSubpageProps | null)
@@ -99,19 +94,26 @@ export const Profile = () => {
 
 		if (!didSetSubpageProps) {
 			setDidSetSubpageProps(true)
+			const timeout = setTimeout(() => setShowError(true), TIMEOUT_MS)
 			getSubpageProps()
 				.then((p) => {
 					setSubpageProps(p)
-					console.log(p)
+					clearTimeout(timeout)
 					setLoading(false)
 				})
-				.catch(() => setLoading(false))
+				.catch(() => {
+					setShowError(true)
+					clearTimeout(timeout)
+					setLoading(false)
+				})
 		} else {
 			setLoading(false)
 		}
 	}, [didSetSubpageProps, history, location.pathname])
 
-	return loading || !subpage || !subpageProps ? (
+	return showError ? (
+		<Error />
+	) : loading || !subpage || !subpageProps ? (
 		<Loading containerClassName={styles.loading} text={'Loading...'} />
 	) : (
 		<main className={styles.profile_outter}>

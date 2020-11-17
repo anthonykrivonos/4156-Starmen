@@ -36,6 +36,7 @@ export class Users {
 	public static logOut = () => Users.clearUserToken()
 
 	public static getUserToken = () => Storage.get(STORAGE_KEYS.USER_TOKEN)
+	public static hasUserToken = () => Storage.has(STORAGE_KEYS.USER_TOKEN)
 	public static setUserToken = (userToken: string) => Storage.set(STORAGE_KEYS.USER_TOKEN, userToken)
 	public static clearUserToken = () => Storage.remove(STORAGE_KEYS.USER_TOKEN)
 }

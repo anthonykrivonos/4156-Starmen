@@ -8,10 +8,12 @@ import { Formatter, DateTime, Validator, Objects, Client, Users } from '../../..
 import { HCP, DoctorId, Appointment, Day, PatientId, Patient, HealthEvent, Status } from '../../../models'
 
 import styles from './MedicalInfo.module.sass'
+import { AppointmentPopup } from './components'
 
 export const MedicalInfo = (props: ProfileSubpageProps) => {
 	const [currentAppointment, setCurrentAppointment] = useState(null as Appointment | null)
 	const [currentDoctor, setCurrentDoctor] = useState(null as HCP | null)
+	const [allPatients, setAllPatients] = useState(props.patients || ([] as Patient[]))
 	const [currentPatient, setCurrentPatient] = useState(null as Patient | null)
 	const [currentHealthEvent, setCurrentHealthEvent] = useState(null as HealthEvent | null)
 	const [isCurrentlyEditingHealthEvents, setIsCurrentlyEditingHealthEvent] = useState(false)
@@ -40,6 +42,7 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 		if (toggleAppointmentPopup) {
 			setCurrentAppointment(apt)
 			setCurrentPatient(patient)
+			patient && setHealthEvents(patient.health)
 			setCurrentDoctor(doctor)
 			toggleAppointmentPopup(true)
 		}
@@ -63,6 +66,7 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 
 	const editPatientHealthEvents = (patient: Patient) => {
 		setCurrentPatient(patient)
+		patient && setHealthEvents(patient.health)
 		setIsCurrentlyEditingHealthEvent(true)
 	}
 
@@ -98,6 +102,14 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 			setAreHealthEventsValid(areValid)
 
 			if (areValid && currentPatient) {
+				const newPatients = Objects.copy(allPatients)
+				for (let i = 0; i < newPatients.length; i++) {
+					if (currentPatient && newPatients[i].id === currentPatient.id) {
+						newPatients[i].health = newHealthEvents
+						break
+					}
+				}
+				setAllPatients(newPatients)
 				try {
 					Client.HCP.setRecords(Users.getUserToken(), currentPatient.id, newHealthEvents)
 				} catch (e) {
@@ -116,21 +128,37 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 		const newHealthEvents = Objects.copy(healthEvents) as HealthEvent[]
 		newHealthEvents.unshift(hE)
 		setHealthEvents(newHealthEvents)
+		const newPatients = Objects.copy(allPatients)
+		for (let i = 0; i < newPatients.length; i++) {
+			if (currentPatient && newPatients[i].id === currentPatient.id) {
+				newPatients[i].health = newHealthEvents
+				break
+			}
+		}
+		setAllPatients(newPatients)
 		setAreHealthEventsValid(false)
 	}
 
 	const removeHealthEvent = (index: number) => {
 		const newHealthEvents = Objects.copy(healthEvents) as HealthEvent[]
 		newHealthEvents.splice(index, 1)
+		setAreHealthEventsValid(true)
 
 		for (let i = newHealthEvents.length - 1; i >= 0; i--) {
 			if (newHealthEvents[i].event === '') {
 				newHealthEvents.splice(i, 1)
 			}
 		}
-
 		setHealthEvents(newHealthEvents)
-		setAreHealthEventsValid(true)
+
+		const newPatients = Objects.copy(allPatients)
+		for (let i = 0; i < newPatients.length; i++) {
+			if (currentPatient && newPatients[i].id === currentPatient.id) {
+				newPatients[i].health = newHealthEvents
+				break
+			}
+		}
+		setAllPatients(newPatients)
 
 		if (currentPatient) {
 			try {
@@ -144,108 +172,110 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 	return isCurrentlyEditingHealthEvents && currentPatient ? (
 		<main id="editingHealthEvent">
 			<div className={styles.editing_health_event}>
-				<div className={'d-flex flex-row justify-content-between align-items-center'}>
-					<div>
-						<h2 className="font-title mb-1">Editing Health Records</h2>
-						<div className="h5">
-							{currentPatient.firstName} {currentPatient.lastName}
-						</div>
-					</div>
-					<Button text={'Close'} onClick={() => setIsCurrentlyEditingHealthEvent(false)} />
-				</div>
-				<div className={'mt-3'}>
-					<Avatar user={currentPatient} size={'6rem'} />
-					<h4 className={`font-title mt-2 mb-3`}>Patient Details</h4>
-					<div className={'row p-0 m-0'}>
-						<div className={'col-3 m-0 p-0 font-weight-bolder'}>DOB</div>
-						<div className={'col-9 m-0 p-0'}>{currentPatient.dateOfBirth}</div>
-					</div>
-					<div className={'row p-0 m-0'}>
-						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Sex</div>
-						<div className={'col-9 m-0 p-0'}>{currentPatient.sex}</div>
-					</div>
-					<div className={'row p-0 m-0'}>
-						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Height</div>
-						<div className={'col-9 m-0 p-0'}>{currentPatient.height} cm</div>
-					</div>
-					<div className={'row p-0 m-0'}>
-						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Weight</div>
-						<div className={'col-9 m-0 p-0'}>{currentPatient.weight} kg</div>
-					</div>
-					<div className={'row p-0 m-0'}>
-						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Drinker</div>
-						<div className={'col-9 m-0 p-0'}>{STATUS[currentPatient.drinker]}</div>
-					</div>
-					<div className={'row p-0 m-0'}>
-						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Smoker</div>
-						<div className={'col-9 m-0 p-0'}>{STATUS[currentPatient.smoker]}</div>
-					</div>
-					<div className={'row p-0 m-0 mt-3'}>
-						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Email</div>
-						<div className={'col-9 m-0 p-0'}>{currentPatient.email}</div>
-					</div>
-					<div className={'row p-0 m-0'}>
-						<div className={'col-3 m-0 p-0 font-weight-bolder'}>Phone</div>
-						<div className={'col-9 m-0 p-0'}>{currentPatient.phone}</div>
-					</div>
-					<h4 className={`font-title mt-4 mb-3`}>Health Records</h4>
-					<div className={styles.edit_health_events}>
-						<Button
-							text={'Add Health Record'}
-							onClick={addHealthEvent}
-							disabled={!areHealthEventsValid}
-							className={'mb-2'}
-						/>
-						{healthEvents.map((hE, idx) => (
-							<div key={`edit-he-${hE.date}`} className={'row p-0 m-0 mb-2 align-items-start'}>
-								<div className={'col-3 m-0 p-0 pr-2 align-items-center'}>
-									<TextInput
-										value={hE.event}
-										label={'Subject'}
-										validator={Validator.text}
-										onChange={(value) => updateHealthEvents(idx, value, null, null)}
-									/>
-								</div>
-								<div className={'col-2 pr-2 align-items-center'}>
-									<Dropdown
-										options={[
-											Status.ACTIVE,
-											Status.NEVER,
-											Status.PAST,
-											Status.REMISSION,
-											Status.CURED,
-										]}
-										displayOptions={['ACTIVE', 'NEVER', 'PAST', 'REMISSION', 'CURED']}
-										label={'Status'}
-										className={styles.input_short}
-										selectedIdx={[
-											Status.ACTIVE,
-											Status.NEVER,
-											Status.PAST,
-											Status.REMISSION,
-											Status.CURED,
-										].indexOf(hE.status)}
-										onChange={(option) => updateHealthEvents(idx, null, null, option)}
-										required
-									/>
-								</div>
-								<div className={'col-6 m-0 p-0 pr-2 align-items-center'}>
-									<TextInput
-										value={hE.remarks}
-										label={'Remarks'}
-										validator={Validator.text}
-										onChange={(value) => updateHealthEvents(idx, null, value, null)}
-									/>
-								</div>
-								<div className={'col-1 m-0 p-0 align-items-center'}>
-									<Button
-										text={'Delete'}
-										onClick={() => removeHealthEvent(idx)}
-										className={'mb-2 mt-4 color-quaternary p-2 pl-4 pr-4 align-self-end'}
-									/>
-								</div>
+				<div className={styles.editing_health_event_inner}>
+					<div className={'d-flex flex-row justify-content-between align-items-center'}>
+						<div>
+							<h2 className="font-title mb-1">Editing Health Records</h2>
+							<div className="h5">
+								{currentPatient.firstName} {currentPatient.lastName}
 							</div>
-						))}
+						</div>
+						<Button text={'Close'} onClick={() => setIsCurrentlyEditingHealthEvent(false)} />
+					</div>
+					<div className={'mt-3'}>
+						<Avatar user={currentPatient} size={'6rem'} />
+						<h4 className={`font-title mt-2 mb-3`}>Patient Details</h4>
+						<div className={'row p-0 m-0'}>
+							<div className={'col-3 m-0 p-0 font-weight-bolder'}>DOB</div>
+							<div className={'col-9 m-0 p-0'}>{currentPatient.dateOfBirth}</div>
+						</div>
+						<div className={'row p-0 m-0'}>
+							<div className={'col-3 m-0 p-0 font-weight-bolder'}>Sex</div>
+							<div className={'col-9 m-0 p-0'}>{currentPatient.sex}</div>
+						</div>
+						<div className={'row p-0 m-0'}>
+							<div className={'col-3 m-0 p-0 font-weight-bolder'}>Height</div>
+							<div className={'col-9 m-0 p-0'}>{currentPatient.height} cm</div>
+						</div>
+						<div className={'row p-0 m-0'}>
+							<div className={'col-3 m-0 p-0 font-weight-bolder'}>Weight</div>
+							<div className={'col-9 m-0 p-0'}>{currentPatient.weight} kg</div>
+						</div>
+						<div className={'row p-0 m-0'}>
+							<div className={'col-3 m-0 p-0 font-weight-bolder'}>Drinker</div>
+							<div className={'col-9 m-0 p-0'}>{STATUS[currentPatient.drinker]}</div>
+						</div>
+						<div className={'row p-0 m-0'}>
+							<div className={'col-3 m-0 p-0 font-weight-bolder'}>Smoker</div>
+							<div className={'col-9 m-0 p-0'}>{STATUS[currentPatient.smoker]}</div>
+						</div>
+						<div className={'row p-0 m-0 mt-3'}>
+							<div className={'col-3 m-0 p-0 font-weight-bolder'}>Email</div>
+							<div className={'col-9 m-0 p-0'}>{currentPatient.email}</div>
+						</div>
+						<div className={'row p-0 m-0'}>
+							<div className={'col-3 m-0 p-0 font-weight-bolder'}>Phone</div>
+							<div className={'col-9 m-0 p-0'}>{currentPatient.phone}</div>
+						</div>
+						<h4 className={`font-title mt-4 mb-3`}>Health Records</h4>
+						<div className={styles.edit_health_events}>
+							<Button
+								text={'Add Health Record'}
+								onClick={addHealthEvent}
+								disabled={!areHealthEventsValid}
+								className={styles.add_health_event}
+							/>
+							{healthEvents.map((hE, idx) => (
+								<div key={`edit-he-${hE.date}`} className={'row p-0 m-0 mb-2 pr-4 align-items-start'}>
+									<div className={'col-3 m-0 p-0 pr-2 align-items-center'}>
+										<TextInput
+											value={hE.event}
+											label={'Subject'}
+											validator={Validator.text}
+											onChange={(value) => updateHealthEvents(idx, value, null, null)}
+										/>
+									</div>
+									<div className={'col-2 pr-2 align-items-center'}>
+										<Dropdown
+											options={[
+												Status.ACTIVE,
+												Status.NEVER,
+												Status.PAST,
+												Status.REMISSION,
+												Status.CURED,
+											]}
+											displayOptions={['ACTIVE', 'NEVER', 'PAST', 'REMISSION', 'CURED']}
+											label={'Status'}
+											className={styles.input_short}
+											selectedIdx={[
+												Status.ACTIVE,
+												Status.NEVER,
+												Status.PAST,
+												Status.REMISSION,
+												Status.CURED,
+											].indexOf(hE.status)}
+											onChange={(option) => updateHealthEvents(idx, null, null, option)}
+											required
+										/>
+									</div>
+									<div className={'col-6 m-0 p-0 pr-2 align-items-center'}>
+										<TextInput
+											value={hE.remarks}
+											label={'Remarks'}
+											validator={Validator.text}
+											onChange={(value) => updateHealthEvents(idx, null, value, null)}
+										/>
+									</div>
+									<div className={'col-1 m-0 p-0 align-items-center'}>
+										<Button
+											text={'Delete'}
+											onClick={() => removeHealthEvent(idx)}
+											className={'mb-2 mt-4 color-quaternary p-2 pl-4 pr-4 align-self-end'}
+										/>
+									</div>
+								</div>
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -260,7 +290,7 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 					) : (
 						<div className={styles.apts_inner}>
 							{props.appointments
-								.sort((a, b) => Number(a.date < b.date))
+								.sort((a, b) => b.date - a.date)
 								.map((apt, idx) => {
 									const doctor = getDoctorById(apt.doctor)
 									const patient = getPatientById(apt.patient)
@@ -294,7 +324,7 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 					<>
 						<div className={styles.health_events}>
 							<h2 className="font-title mb-4">Health Records</h2>
-							{props.patients.length === 0 ? (
+							{allPatients.length === 0 ? (
 								<div className={styles.empty}>You have no health records yet.</div>
 							) : (
 								<div className={styles.health_events_inner}>
@@ -357,11 +387,11 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 				{!props.isPatient && (
 					<div className={styles.info_col}>
 						<h2 className="font-title mb-4">My Patients</h2>
-						{props.patients.length === 0 ? (
+						{allPatients.length === 0 ? (
 							<div className={styles.empty}>You have no patients yet.</div>
 						) : (
 							<div className={`${styles.doctors} d-flex flex-direction-row justify-content-start`}>
-								{props.patients.map((p, idx) => (
+								{allPatients.map((p, idx) => (
 									<div
 										key={idx}
 										className={styles.container}
@@ -372,7 +402,7 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 											{p.firstName} {p.lastName}
 										</div>
 										<div className={'h7'}>{p.phone}</div>
-										<a className={'h7'} href={`mailto:${p.email}`}>
+										<a className={'h7 word-wrap'} href={`mailto:${p.email}`}>
 											{p.email}
 										</a>
 									</div>
@@ -381,39 +411,13 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 						)}
 					</div>
 				)}
-				<Popup open={false} toggleRef={(t) => (toggleAppointmentPopup = t)}>
-					{currentAppointment && (
-						<div className={styles.popup_container}>
-							<h2 className={`font-title mb-1`}>Appointment Details</h2>
-							<div className={'color-medium mb-4'}>
-								{DateTime.prettyDate(new Date(currentAppointment.date))}
-							</div>
-							<div>
-								<b>Subject: </b>
-								{currentAppointment.subject}
-							</div>
-							{props.isPatient && currentDoctor && (
-								<div>
-									<b>Doctor: </b>
-									{currentDoctor.firstName} {currentDoctor.lastName}
-								</div>
-							)}
-							{!props.isPatient && currentPatient && (
-								<div>
-									<b>Patient: </b>
-									{currentPatient.firstName} {currentPatient.lastName}
-								</div>
-							)}
-							{currentAppointment.notes && (
-								<div className={'mt-3'}>
-									<b>Notes:</b>
-									<br />
-									{currentAppointment.notes}
-								</div>
-							)}
-						</div>
-					)}
-				</Popup>
+				<AppointmentPopup
+					open={false}
+					toggleRef={(t) => (toggleAppointmentPopup = t)}
+					patient={currentPatient || undefined}
+					doctor={currentDoctor || undefined}
+					appointment={currentAppointment || undefined}
+				/>
 				<Popup open={false} toggleRef={(t) => (toggleInfoPopup = t)}>
 					{currentDoctor && (
 						<div className={styles.popup_container}>

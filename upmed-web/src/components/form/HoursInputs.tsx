@@ -84,7 +84,9 @@ export const HoursInputs = (props: HoursInputsProps) => {
 			{DAYS.map((day, idx) => (
 				<div
 					key={`hours-day-${idx}`}
-					className={`${styles.hours_row} ${invalids.has(day) ? styles.hours_row_invalid : ''} clickable`}
+					className={`${styles.hours_row} ${getHours(day).startTime === TIME_ABSENT ? styles.closed : ''} ${
+						invalids.has(day) ? styles.hours_row_invalid : ''
+					} clickable`}
 					onClick={() => onDaySelect(day)}
 				>
 					<div className={'col-1 d-flex flex-direction-row justify-content-start p-0 unselectable clickable'}>
