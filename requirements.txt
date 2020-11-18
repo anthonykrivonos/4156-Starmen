@@ -1,5 +1,1 @@
-PyJWT
-dotenv
-flask
-twilio
 # Empty; needed only for Heroku
