@@ -6,6 +6,7 @@ import { Patient, HCP } from '../../models'
 interface AvatarProps {
 	user: Patient | HCP
 	size: string
+	className?: string
 	onClick?: (user: Patient | HCP) => void
 }
 
@@ -20,7 +21,7 @@ export const Avatar = (props: AvatarProps) => {
 			size={props.size}
 			round={true}
 			src={profilePicture}
-			className={'unselectable'}
+			className={`unselectable ${props.className || ''}`}
 			onClick={props.onClick ? () => props.onClick!(props.user) : undefined}
 		/>
 	)

@@ -59,14 +59,14 @@ class PatientClient {
 	public static editProfile = (
 		id: PatientId,
 		token: string,
-		firstName: string,
-		lastName: string,
-		phone: string,
-		email: string,
-		height: number,
-		weight: number,
-		drinker: Status,
-		smoker: Status,
+		firstName?: string,
+		lastName?: string,
+		phone?: string,
+		email?: string,
+		height?: number,
+		weight?: number,
+		drinker?: Status,
+		smoker?: Status,
 		profilePicture?: string,
 	): Promise<{ success: boolean }> => {
 		return client('/patient/editProfile', {
@@ -81,6 +81,18 @@ class PatientClient {
 			weight,
 			drinker,
 			smoker,
+		})
+	}
+
+	public static editProfilePicture = (
+		id: PatientId,
+		token: string,
+		profilePicture: string,
+	): Promise<{ id: string; token: string }> => {
+		return client('/patient/setProfilePicture', {
+			id,
+			token,
+			profilePicture,
 		})
 	}
 
@@ -132,11 +144,11 @@ class HCPClient {
 	public static editProfile = (
 		id: DoctorId,
 		token: string,
-		hours: Hours,
-		firstName: string,
-		lastName: string,
-		phone: string,
-		email: string,
+		hours?: Hours,
+		firstName?: string,
+		lastName?: string,
+		phone?: string,
+		email?: string,
 		specialty?: string,
 		title?: string,
 		profilePicture?: string,
@@ -155,6 +167,18 @@ class HCPClient {
 		})
 	}
 
+	public static editProfilePicture = (
+		id: DoctorId,
+		token: string,
+		profilePicture: string,
+	): Promise<{ id: string; token: string }> => {
+		return client('/hcp/setProfilePicture', {
+			id,
+			token,
+			profilePicture,
+		})
+	}
+
 	public static getPatients = async (token: string): Promise<Patient[]> => {
 		const patientMap = (await client('/hcp/getPatients', { token })) as any
 		return Objects.objToArray(patientMap) as Patient[]
@@ -166,6 +190,10 @@ class HCPClient {
 
 	public static notify = (token: string, id: AppointmentId): Promise<{ success: boolean }> => {
 		return client('/hcp/notify', { token, id }) as any
+	}
+
+	public static testNumber = (token: string, id: AppointmentId): Promise<{ success: boolean }> => {
+		return client('/hcp/testNumber', { token, id }) as any
 	}
 
 	public static getAll = (token: string): Promise<HCP[]> => {
@@ -260,6 +288,7 @@ export const client = async (endpoint: string, body: any): Promise<any> => {
 		throw new Error('client Error: endpoint must start with a forward slash')
 	}
 	const uri = getUri(endpoint)
+	console.log(uri, body)
 	try {
 		const res = await fetch(uri, {
 			method: 'POST',

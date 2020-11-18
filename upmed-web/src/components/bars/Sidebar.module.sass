@@ -26,6 +26,14 @@
             padding-right: 16px
             padding-bottom: 16px
 
+            .avatar
+                transition: 0.1s ease
+                cursor: pointer
+                &:hover
+                    color: $medium
+                    transform: scale(1.01)
+                    box-shadow: 0 3px 6px rgba(0,0,0, 0.04), 0 3px 6px rgba(0,0,0,0.04)
+
             .user_creds
                 color: $light
                 font-size: 11pt
@@ -34,19 +42,20 @@
                     font-size: 9pt
 
 
-        .sidebar_button
-            padding: 12px
-            padding-left: 16px
-            padding-right: 16px
-            transition: 0.1s ease
-            &:hover
-                color: $medium
-                transform: scale(1.02)
+    .sidebar_button
+        padding: 12px
+        padding-left: 16px
+        padding-right: 16px
+        transition: 0.1s ease
+        &:hover
+            color: $medium
+            transform: scale(1.02)
     
     .sidebar_bottom
         .button_bottom
             font-size: 10pt
             font-weight: bold
+            padding-left: 8px
 
         .bottom_container
             margin-top: 32px
@@ -56,5 +65,3 @@
 
             .divider
                 margin-bottom: 8px
-
-

@@ -9,7 +9,7 @@ import {
 	Counter,
 	HoursInputs,
 	SuggestionInput,
-	Error,
+	Error as ErrorPage,
 } from '../../components'
 import { INITIAL_HOURS, SPECIALTIES, TIMEOUT_MS } from '../../constants'
 import { Hasher, URL, Validator, Formatter, Users, Objects, DateTime, Client } from '../../utils'
@@ -61,6 +61,8 @@ export const OnSignIn = () => {
 		setLoading(true)
 		setStatus(location.pathname)
 
+		const timeout = setTimeout(() => setShowError(true), TIMEOUT_MS)
+
 		// Try to unhash the account details
 		try {
 			const decodedDetails = Hasher.decode(URL.getFromQuery(window.location.href, 'details') as string) as {
@@ -76,6 +78,7 @@ export const OnSignIn = () => {
 
 			// If expired, prompt a log in again
 			if (!decodedDetails || (decodedDetails.expiryTime && decodedDetails.expiryTime < Date.now())) {
+				clearTimeout(timeout)
 				history.push('/signin')
 			} else {
 				setId(decodedDetails.id)
@@ -88,17 +91,28 @@ export const OnSignIn = () => {
 				isPatient
 					? Client.Patient.logIn(id, email)
 							.then(({ token }) => {
+								if (!token) { throw new Error() }
 								setUserToken(token)
+								clearTimeout(timeout)
 							})
-							.catch(() => setLoading(false))
+							.catch((e) => {
+								console.error(e)
+								clearTimeout(timeout)
+							})
 					: Client.HCP.logIn(id, email)
 							.then(({ token }) => {
+								if (!token) { throw new Error() }
 								setUserToken(token)
+								clearTimeout(timeout)
 							})
-							.catch(() => setLoading(false))
+							.catch((e) => {
+								clearTimeout(timeout)
+							})
 			}
 		} catch (e) {
 			// In case something goes wrong, go to sign-in
+			clearTimeout(timeout)
+			setLoading(false)
 			history.push('/signin')
 		}
 	}, [location.pathname, history, status, id, email, isPatient])
@@ -133,17 +147,15 @@ export const OnSignIn = () => {
 						specialty,
 						title,
 						profilePicture || undefined,
-				  )
-			Users.setUserToken(token)
+				)
+			setUserToken(token)
 			clearTimeout(timeout)
-			window.open('/profile/', '_self')
 		} catch (e) {
+			setLoading(false)
 			clearTimeout(timeout)
 			setShowError(true)
 			setError(e)
 		}
-
-		setLoading(false)
 	}
 
 	// Search for specialties by substring
@@ -161,7 +173,15 @@ export const OnSignIn = () => {
 	useEffect(() => {
 		if (!Objects.isNullish(userToken)) {
 			Users.setUserToken(userToken!)
-			window.open('/profile/', '_self')
+			if (isPatient) {
+				Client.Patient.editProfilePicture(id, userToken!, profilePicture!)
+				.then(() => window.open('/profile/', '_self'))
+				.catch(() => window.open('/profile/', '_self'))
+			} else {
+				Client.HCP.editProfilePicture(id, userToken!, profilePicture!)
+				.then(() => window.open('/profile/', '_self'))
+				.catch(() => window.open('/profile/', '_self'))
+			}
 		}
 	}, [userToken, history])
 
@@ -208,7 +228,7 @@ export const OnSignIn = () => {
 	])
 
 	return showError ? (
-		<Error />
+		<ErrorPage />
 	) : loading ? (
 		<Loading containerClassName={styles.loading} text={'Loading...'} />
 	) : email ? (

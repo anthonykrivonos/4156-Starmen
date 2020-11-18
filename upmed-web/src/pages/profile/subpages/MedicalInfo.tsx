@@ -283,6 +283,97 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 	) : (
 		<main id="medicalInfo">
 			<section className={styles.medical_info}>
+				{!props.isPatient && (
+					<div className={styles.my_container}>
+						<h2 className="font-title mb-4">My Patients</h2>
+						{allPatients.length === 0 ? (
+							<div className={styles.empty}>You have no patients yet.</div>
+						) : (
+							<div className={`${styles.doctors} d-flex flex-direction-row justify-content-start`}>
+								{allPatients.map((p, idx) => (
+									<div
+										key={`allPatients-${idx}`}
+										className={styles.container}
+										onClick={() => editPatientHealthEvents(p)}
+									>
+										<Avatar user={p} size={'80px'} />
+										<div className={'h5 mt-3 font-weight-bolder'}>
+											{p.firstName} {p.lastName}
+										</div>
+										<div className={'h7'}>{p.phone}</div>
+										<a className={'h7 word-wrap'} href={`mailto:${p.email}`}>
+											{p.email}
+										</a>
+									</div>
+								))}
+							</div>
+						)}
+					</div>
+				)}
+				{props.isPatient && (
+					<>
+						<div className={styles.my_container}>
+							<h2 className="font-title mb-4">My Doctors</h2>
+							{props.doctors.length === 0 ? (
+								<div className={styles.empty}>You have no doctors yet.</div>
+							) : (
+								<div className={`${styles.doctors} d-flex flex-direction-row justify-content-start`}>
+									{props.doctors.map((d, idx) => (
+										<div key={`allDoctors-${idx}`} className={styles.container} onClick={() => openDoctor(d)}>
+											<Avatar user={d} size={'80px'} />
+											<div className={'h5 mt-3 font-weight-bolder'}>
+												{d.firstName} {d.lastName}
+											</div>
+											<div className={'h7'}>{d.phone}</div>
+											<a className={'h7'} href={`mailto:${d.email}`}>
+												{d.email}
+											</a>
+										</div>
+									))}
+								</div>
+							)}
+						</div>
+						<div className={styles.health_events}>
+							<h2 className="font-title mb-4">Health Records</h2>
+							{props.healthEvents.length === 0 ? (
+								<div className={styles.empty}>You have no health records yet.</div>
+							) : (
+								<div className={styles.health_events_inner}>
+									{props.healthEvents
+										.sort((a, b) => Number(a.date < b.date))
+										.map((healthEvent, idx) => {
+											return (
+												<div
+													key={`${healthEvent.event}-${idx}`}
+													className={styles.health_event_row}
+												>
+													<div>{Formatter.stringDate(new Date(healthEvent.date))}</div>
+													{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+													<a
+														className={`${styles.subject} unselectable`}
+														onClick={() => openHealthEvent(healthEvent)}
+													>
+														{healthEvent.event}
+													</a>
+													<div
+														className={`${
+															healthEvent.status === Status.ACTIVE
+																? 'color-quaternary font-weight-bold'
+																: healthEvent.status === Status.CURED
+																? 'color-good font-weight-bold'
+																: 'color-medium'
+														}`}
+													>
+														{STATUS[healthEvent.status]}
+													</div>
+												</div>
+											)
+										})}
+								</div>
+							)}
+						</div>
+					</>
+				)}
 				<div className={styles.apts}>
 					<h2 className="font-title mb-4">Recent Appointments</h2>
 					{props.appointments.length === 0 ? (
@@ -320,97 +411,6 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 						</div>
 					)}
 				</div>
-				{props.isPatient && (
-					<>
-						<div className={styles.health_events}>
-							<h2 className="font-title mb-4">Health Records</h2>
-							{allPatients.length === 0 ? (
-								<div className={styles.empty}>You have no health records yet.</div>
-							) : (
-								<div className={styles.health_events_inner}>
-									{props.healthEvents
-										.sort((a, b) => Number(a.date < b.date))
-										.map((healthEvent, idx) => {
-											return (
-												<div
-													key={`${healthEvent.event}-${idx}`}
-													className={styles.health_event_row}
-												>
-													<div>{Formatter.stringDate(new Date(healthEvent.date))}</div>
-													{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-													<a
-														className={`${styles.subject} unselectable`}
-														onClick={() => openHealthEvent(healthEvent)}
-													>
-														{healthEvent.event}
-													</a>
-													<div
-														className={`${
-															healthEvent.status === Status.ACTIVE
-																? 'color-quaternary font-weight-bold'
-																: healthEvent.status === Status.CURED
-																? 'color-good font-weight-bold'
-																: 'color-medium'
-														}`}
-													>
-														{STATUS[healthEvent.status]}
-													</div>
-												</div>
-											)
-										})}
-								</div>
-							)}
-						</div>
-						<div className={styles.info_col}>
-							<h2 className="font-title mb-4">My Doctors</h2>
-							{props.doctors.length === 0 ? (
-								<div className={styles.empty}>You have no doctors yet.</div>
-							) : (
-								<div className={`${styles.doctors} d-flex flex-direction-row justify-content-start`}>
-									{props.doctors.map((d, idx) => (
-										<div key={idx} className={styles.container} onClick={() => openDoctor(d)}>
-											<Avatar user={d} size={'80px'} />
-											<div className={'h5 mt-3 font-weight-bolder'}>
-												{d.firstName} {d.lastName}
-											</div>
-											<div className={'h7'}>{d.phone}</div>
-											<a className={'h7'} href={`mailto:${d.email}`}>
-												{d.email}
-											</a>
-										</div>
-									))}
-								</div>
-							)}
-						</div>
-					</>
-				)}
-				{!props.isPatient && (
-					<div className={styles.info_col}>
-						<h2 className="font-title mb-4">My Patients</h2>
-						{allPatients.length === 0 ? (
-							<div className={styles.empty}>You have no patients yet.</div>
-						) : (
-							<div className={`${styles.doctors} d-flex flex-direction-row justify-content-start`}>
-								{allPatients.map((p, idx) => (
-									<div
-										key={idx}
-										className={styles.container}
-										onClick={() => editPatientHealthEvents(p)}
-									>
-										<Avatar user={p} size={'80px'} />
-										<div className={'h5 mt-3 font-weight-bolder'}>
-											{p.firstName} {p.lastName}
-										</div>
-										<div className={'h7'}>{p.phone}</div>
-										<a className={'h7 word-wrap'} href={`mailto:${p.email}`}>
-											{p.email}
-										</a>
-									</div>
-								))}
-							</div>
-						)}
-					</div>
-				)}
 				<AppointmentPopup
 					open={false}
 					toggleRef={(t) => (toggleAppointmentPopup = t)}

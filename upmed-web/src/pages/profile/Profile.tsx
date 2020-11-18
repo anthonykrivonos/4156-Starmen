@@ -122,6 +122,7 @@ export const Profile = () => {
 					className={styles.sideBar_inner}
 					user={subpageProps.user}
 					isPatient={subpageProps.isPatient}
+					onAvatarClick={() => history.push('/profile/')}
 					buttons={PROFILE_SUBPAGES.map((sp) => ({
 						text: sp.name,
 						onClick: () => history.push(sp.path),

@@ -19,8 +19,13 @@ export const AppointmentPopup = (props: AppointmentPopupProps) => {
 	const notify = async () => {
 		setNotifyLoading(true)
 		try {
-			await Client.HCP.notify(Users.getUserToken(), props.appointment!.id)
-			setNotifyMessage('Sent!')
+			const test = await Client.HCP.testNumber(Users.getUserToken(), props.appointment!.id)
+			if (!test.success) {
+				setNotifyMessage(`Looks like ${props.patient ? props.patient.firstName : 'your patient'} does not have texting enabled.`)
+			} else {
+				await Client.HCP.notify(Users.getUserToken(), props.appointment!.id)
+				setNotifyMessage('Sent!')
+			}
 		} catch {
 			setNotifyMessage('An error occurred. Please try again later.')
 		}

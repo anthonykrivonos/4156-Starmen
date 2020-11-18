@@ -107,10 +107,13 @@ export const Calendar = (props: ProfileSubpageProps) => {
 				'',
 				'',
 			)
-			if (!props.isPatient && patient) {
+			if (!props.isPatient && patient && currentAppointment) {
 				// Feature: notification
 				try {
-					Client.HCP.notify(Users.getUserToken(), patient.id)
+					const test = await Client.HCP.testNumber(Users.getUserToken(), currentAppointment.id)
+					if (test.success) {
+						Client.HCP.notify(Users.getUserToken(), patient.id)
+					}
 				} catch {}
 			}
 			window.location.reload()
