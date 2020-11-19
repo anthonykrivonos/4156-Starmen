@@ -1,0 +1,277 @@
+============ upmed-web Coverage and Component Unit Report Generated on 1605545969 ============
+$ jest --coverage --verbose --noStackTrace --watchAll=false --config ./jest.config.js ./tst/**/*.spec.tsx 2>&1
+  Invalid testPattern .\\tst\\**\\*.spec.tsx supplied. Running all tests instead.
+  Invalid testPattern .\\tst\\**\\*.spec.tsx supplied. Running all tests instead.
+PASS tst/components/form/SuggestionInput.spec.tsx
+  SuggestionInput
+    √ render.inDocument (94 ms)
+
+PASS tst/components/form/TextInput.spec.tsx
+  TextInput
+    √ render.inDocument (45 ms)
+
+FAIL tst/pages/profile/subpages/components/AppointmentPopup.spec.tsx (5.694 s)
+  AppointmentPopup
+    × AppointmentPopup (20 ms)
+
+  ● AppointmentPopup › AppointmentPopup
+
+    Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+    1. You might have mismatching versions of React and the renderer (such as React DOM)
+    2. You might be breaking the Rules of Hooks
+    3. You might have more than one copy of React in the same app
+    See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+
+PASS tst/pages/App.spec.tsx (6.16 s)
+  App
+    √ render.inDocument (133 ms)
+
+PASS tst/components/elements/Avatar.spec.tsx
+  Avatar
+    √ render.inDocument (25 ms)
+
+PASS tst/components/form/HoursInputs.spec.tsx
+  HoursInputs
+    √ render.inDocument (564 ms)
+
+PASS tst/components/Sidebar.spec.tsx
+  Sidebar
+    √ render.inDocument (20 ms)
+
+PASS tst/utils/DateTime.spec.ts
+  DateTime
+    √ safeParseHours.success (1 ms)
+    √ hoursOffset.success
+    √ getMinutes.success
+    √ minutesToHHMMAA.success
+    √ hhmmAAToMinutes.success (1 ms)
+    √ minutesToHHMM.success
+    √ hhmmToMinutes.success
+    √ dateFromStringDate.success (1 ms)
+    √ getModifiedDate.success (1 ms)
+    √ prettyDate.success
+
+PASS tst/utils/Validator.spec.ts
+  Validator
+    √ badWords.valid (71 ms)
+    √ badWords.invalid (2 ms)
+    √ realName.valid (17 ms)
+    √ realName.invalid (15 ms)
+    √ text.valid (13 ms)
+    √ text.invalid (2 ms)
+    √ phone.valid
+    √ phone.invalid (1 ms)
+    √ stringDate.valid
+    √ stringDate.invalid (1 ms)
+    √ email.valid
+    √ email.invalid
+
+PASS tst/components/form/Counter.spec.tsx
+  Counter
+    √ render.inDocument (34 ms)
+
+PASS tst/components/elements/Error.spec.tsx
+  Error
+    √ render.inDocument (21 ms)
+
+PASS tst/components/form/DateInput.spec.tsx
+  DateInput
+    √ render.inDocument (64 ms)
+
+PASS tst/utils/Objects.spec.ts
+  Objects
+    √ isNullish.postive (1 ms)
+    √ isNullish.negative
+    √ isArray.postive (1 ms)
+    √ isArray.negative
+    √ isString.postive
+    √ isString.negative (1 ms)
+    √ isNumber.postive
+    √ isNumber.negative
+    √ objToArray.success
+    √ copy.nullish (1 ms)
+    √ copy.nonObject
+    √ copy.shallow
+    √ copy.nonShallow
+    √ copy.withoutProperty (1 ms)
+
+PASS tst/utils/Formatter.spec.ts
+  Formatter
+    √ phone.success (1 ms)
+    √ stringDate.success (1 ms)
+
+PASS tst/components/button/Button.spec.tsx
+  Button
+    √ render.inDocument (10 ms)
+
+PASS tst/components/form/RadioButtons.spec.tsx
+  RadioButtons
+    √ render.inDocument (16 ms)
+
+PASS tst/components/elements/Popup.spec.tsx
+  Popup
+    √ render.inDocument (41 ms)
+
+PASS tst/utils/URL.spec.ts
+  URL
+    √ getFromQuery.present (3 ms)
+    √ getFromQuery.absent (1 ms)
+
+PASS tst/components/form/Dropdown.spec.tsx
+  Dropdown
+    √ render.inDocument (15 ms)
+
+PASS tst/utils/Hasher.spec.ts
+  Hasher
+    √ encode.success (1 ms)
+    √ decode.success (1 ms)
+    √ decode.failure (1 ms)
+
+PASS tst/components/button/GoogleButton.spec.tsx
+  GoogleButton
+    √ render.inDocument (30 ms)
+
+FAIL tst/pages/profile/subpages/Calendar.spec.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+FAIL tst/pages/profile/Profile.spec.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+FAIL tst/pages/account/SignIn.spec.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+FAIL tst/pages/account/OnSignIn.spec.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+FAIL tst/pages/profile/subpages/EditProfile.spec.tsx
+  ● Test suite failed to run
+
+    [96mtst/pages/profile/subpages/EditProfile.spec.tsx[0m:[93m1[0m:[93m1[0m - [91merror[0m[90m TS1208: [0mAll files must be modules when the '--isolatedModules' flag is provided.
+
+    [7m1[0m 
+    [7m [0m [91m[0m
+
+FAIL tst/pages/profile/subpages/MedicalInfo.spec.tsx
+  ● Test suite failed to run
+
+    [96mtst/pages/profile/subpages/MedicalInfo.spec.tsx[0m:[93m1[0m:[93m1[0m - [91merror[0m[90m TS1208: [0mAll files must be modules when the '--isolatedModules' flag is provided.
+
+    [7m1[0m 
+    [7m [0m [91m[0m
+
+-----------------------------------|---------|----------|---------|---------|-------------------------------
+File                               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s             
+-----------------------------------|---------|----------|---------|---------|-------------------------------
+All files                          |   36.83 |    22.69 |   21.79 |    40.3 |                               
+ components                        |     100 |      100 |     100 |     100 |                               
+  index.ts                         |     100 |      100 |     100 |     100 |                               
+ components/animations             |   83.33 |        0 |       0 |   83.33 |                               
+  Loading.tsx                      |      80 |        0 |       0 |      80 | 14                            
+  index.ts                         |     100 |      100 |     100 |     100 |                               
+ components/bars                   |    91.4 |       45 |      80 |      92 |                               
+  NavigationBar.tsx                |   86.79 |    54.29 |      70 |    87.8 | 44-45,49,56,73                
+  Sidebar.tsx                      |   88.89 |    26.32 |      80 |   88.89 | 66                            
+  UMNavigationBar.tsx              |     100 |       50 |     100 |     100 | 37-49                         
+  index.ts                         |     100 |      100 |     100 |     100 |                               
+ components/button                 |   72.41 |    58.33 |   41.67 |   68.09 |                               
+  Button.tsx                       |   70.83 |       60 |   44.44 |   64.86 | 85-90,95-96,100-102,106-107   
+  GoogleButton.tsx                 |      75 |       50 |   33.33 |      75 | 21,32                         
+  index.ts                         |     100 |      100 |     100 |     100 |                               
+ components/elements               |   83.33 |       50 |   54.55 |   84.44 |                               
+  Avatar.tsx                       |      90 |       75 |      50 |   85.71 | 25                            
+  Error.tsx                        |   93.33 |      100 |   66.67 |     100 |                               
+  Footer.tsx                       |     100 |      100 |     100 |     100 |                               
+  Popup.tsx                        |      65 |    14.29 |      40 |   64.71 | 21-22,28-29,33-34             
+  index.ts                         |     100 |      100 |     100 |     100 |                               
+ components/form                   |   62.83 |    49.46 |   28.81 |   61.04 |                               
+  Counter.tsx                      |   57.89 |    34.62 |      25 |   56.25 | 36-48,52-53,58-59,82          
+  DateInput.tsx                    |   80.95 |    76.92 |      50 |   76.47 | 25-27,53                      
+  Dropdown.tsx                     |   78.57 |       80 |      50 |      75 | 24-25,39                      
+  HoursInputs.tsx                  |   49.12 |    54.29 |      25 |      46 | 41-54,58-61,66-73,90-130      
+  RadioButtons.tsx                 |   66.67 |       50 |      20 |   61.54 | 23-24,35-49                   
+  SuggestionInput.tsx              |   65.85 |    41.67 |      25 |    62.5 | 34-37,41-42,46-51,64,70,74,98 
+  TextInput.tsx                    |   61.84 |    38.71 |   28.57 |   63.24 | 74,79-82,112-123,137-159      
+  index.ts                         |     100 |      100 |     100 |     100 |                               
+ pages                             |   90.91 |    85.71 |   83.33 |   94.44 |                               
+  App.tsx                          |     100 |    85.71 |     100 |     100 | 62,71                         
+  index.ts                         |       0 |      100 |       0 |       0 | 1                             
+ pages/account                     |    9.19 |        0 |       0 |   13.18 |                               
+  OnSignIn.tsx                     |    4.94 |        0 |       0 |    7.34 | 20-381                        
+  SignIn.tsx                       |   33.33 |        0 |       0 |   38.89 | 9-49                          
+  index.ts                         |     100 |      100 |     100 |     100 |                               
+ pages/home                        |     100 |      100 |     100 |     100 |                               
+  Home.tsx                         |     100 |      100 |     100 |     100 |                               
+  index.tsx                        |     100 |      100 |     100 |     100 |                               
+ pages/profile                     |   14.67 |        0 |       0 |   18.97 |                               
+  Profile.tsx                      |   13.51 |        0 |       0 |   17.54 | 41-61,72-136                  
+  index.tsx                        |     100 |      100 |     100 |     100 |                               
+ pages/profile/subpages            |       7 |        0 |       0 |    9.46 |                               
+  Calendar.tsx                     |    6.99 |        0 |       0 |    9.71 | 17,27-276                     
+  EditProfile.tsx                  |    7.69 |        0 |       0 |   12.28 | 21-262                        
+  MedicalInfo.tsx                  |    4.91 |        0 |       0 |    6.02 | 14-456                        
+  index.tsx                        |     100 |      100 |     100 |     100 |                               
+ pages/profile/subpages/components |      28 |        0 |   33.33 |      35 |                               
+  AppointmentPopup.tsx             |      25 |        0 |   33.33 |   31.58 | 17-40                         
+  index.ts                         |     100 |      100 |     100 |     100 |                               
+-----------------------------------|---------|----------|---------|---------|-------------------------------
+Summary of all failing tests
+FAIL tst/pages/profile/subpages/components/AppointmentPopup.spec.tsx (5.694 s)
+  ● AppointmentPopup › AppointmentPopup
+
+    Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+    1. You might have mismatching versions of React and the renderer (such as React DOM)
+    2. You might be breaking the Rules of Hooks
+    3. You might have more than one copy of React in the same app
+    See https://reactjs.org/link/invalid-hook-call for tips about how to debug and fix this problem.
+
+FAIL tst/pages/profile/subpages/Calendar.spec.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+FAIL tst/pages/profile/Profile.spec.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+FAIL tst/pages/account/SignIn.spec.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+FAIL tst/pages/account/OnSignIn.spec.tsx
+  ● Test suite failed to run
+
+    Your test suite must contain at least one test.
+
+FAIL tst/pages/profile/subpages/EditProfile.spec.tsx
+  ● Test suite failed to run
+
+    [96mtst/pages/profile/subpages/EditProfile.spec.tsx[0m:[93m1[0m:[93m1[0m - [91merror[0m[90m TS1208: [0mAll files must be modules when the '--isolatedModules' flag is provided.
+
+    [7m1[0m 
+    [7m [0m [91m[0m
+
+FAIL tst/pages/profile/subpages/MedicalInfo.spec.tsx
+  ● Test suite failed to run
+
+    [96mtst/pages/profile/subpages/MedicalInfo.spec.tsx[0m:[93m1[0m:[93m1[0m - [91merror[0m[90m TS1208: [0mAll files must be modules when the '--isolatedModules' flag is provided.
+
+    [7m1[0m 
+    [7m [0m [91m[0m
+
+
+Test Suites: 7 failed, 20 passed, 27 total
+Tests:       1 failed, 57 passed, 58 total
+Snapshots:   0 total
+Time:        21.818 s
+Ran all test suites.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

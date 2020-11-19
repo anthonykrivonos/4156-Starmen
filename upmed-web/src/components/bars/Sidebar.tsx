@@ -19,7 +19,7 @@ interface SidebarProps {
 	user?: Patient | HCP
 	isPatient: boolean
 	className?: string
-	onAvatarClick?: ()=>void
+	onAvatarClick?: () => void
 }
 
 export const Sidebar = (props: SidebarProps) => {
@@ -28,7 +28,12 @@ export const Sidebar = (props: SidebarProps) => {
 			<div className={styles.sidebar_inner}>
 				{props.user && (
 					<div className={styles.user_container}>
-						<Avatar user={props.user} size={'100px'} className={styles.avatar} onClick={props.onAvatarClick} />
+						<Avatar
+							user={props.user}
+							size={'100px'}
+							className={styles.avatar}
+							onClick={props.onAvatarClick}
+						/>
 						<div className={styles.user_creds}>
 							<div className={'h5'}>
 								{props.user.firstName} {props.user.lastName}
@@ -53,7 +58,11 @@ export const Sidebar = (props: SidebarProps) => {
 							<div
 								className={`p-0 ${button.icon ? 'col-9' : 'col-12'} ${
 									button.centered ? 'text-center' : 'text-left'
-								} ${button.active ? 'font-weight-bolder color-white' : 'font-weight-light color-light o-75'}`}
+								} ${
+									button.active
+										? 'font-weight-bolder color-white'
+										: 'font-weight-light color-light o-75'
+								}`}
 							>
 								{button.text}
 							</div>

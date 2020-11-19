@@ -319,7 +319,11 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 							) : (
 								<div className={`${styles.doctors} d-flex flex-direction-row justify-content-start`}>
 									{props.doctors.map((d, idx) => (
-										<div key={`allDoctors-${idx}`} className={styles.container} onClick={() => openDoctor(d)}>
+										<div
+											key={`allDoctors-${idx}`}
+											className={styles.container}
+											onClick={() => openDoctor(d)}
+										>
 											<Avatar user={d} size={'80px'} />
 											<div className={'h5 mt-3 font-weight-bolder'}>
 												{d.firstName} {d.lastName}

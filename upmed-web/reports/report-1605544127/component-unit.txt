@@ -1,0 +1,68 @@
+============ upmed-web Coverage and Component Unit Report Generated on 1605544127 ============
+yarn run v1.12.3
+$ jest --coverage --verbose --noStackTrace --watchAll=false --config ./jest.config.js ./tst/**/*.spec.tsx 2>&1
+PASS tst/pages/App.spec.tsx
+  App
+    ✓ render.inDocument (51 ms)
+
+-----------------------------------|---------|----------|---------|---------|-----------------------------
+File                               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s           
+-----------------------------------|---------|----------|---------|---------|-----------------------------
+All files                          |   24.67 |     6.65 |   10.26 |   28.25 |                             
+ components                        |     100 |      100 |     100 |     100 |                             
+  index.ts                         |     100 |      100 |     100 |     100 |                             
+ components/animations             |   83.33 |        0 |       0 |   83.33 |                             
+  Loading.tsx                      |      80 |        0 |       0 |      80 | 14                          
+  index.ts                         |     100 |      100 |     100 |     100 |                             
+ components/bars                   |    87.1 |    36.67 |      60 |   86.67 |                             
+  NavigationBar.tsx                |   86.79 |    54.29 |      70 |    87.8 | 44-45,49,56,73              
+  Sidebar.tsx                      |   44.44 |        0 |       0 |   44.44 | 26-66                       
+  UMNavigationBar.tsx              |     100 |       50 |     100 |     100 | 37-49                       
+  index.ts                         |     100 |      100 |     100 |     100 |                             
+ components/button                 |   67.24 |       50 |   33.33 |    61.7 |                             
+  Button.tsx                       |   70.83 |       60 |   44.44 |   64.86 | 85-90,95-96,100-102,106-107 
+  GoogleButton.tsx                 |    37.5 |        0 |       0 |    37.5 | 20-35                       
+  index.ts                         |     100 |      100 |     100 |     100 |                             
+ components/elements               |   44.44 |        0 |    9.09 |   53.33 |                             
+  Avatar.tsx                       |      40 |        0 |       0 |   57.14 | 14-25                       
+  Error.tsx                        |      40 |        0 |       0 |      50 | 33-42                       
+  Footer.tsx                       |     100 |      100 |     100 |     100 |                             
+  Popup.tsx                        |      25 |        0 |       0 |   29.41 | 17-37                       
+  index.ts                         |     100 |      100 |     100 |     100 |                             
+ components/form                   |   19.33 |        0 |    1.69 |   21.65 |                             
+  Counter.tsx                      |   13.16 |        0 |       0 |   15.63 | 22-82                       
+  DateInput.tsx                    |   28.57 |        0 |       0 |   35.29 | 21-53                       
+  Dropdown.tsx                     |   35.71 |        0 |       0 |   41.67 | 21-46                       
+  HoursInputs.tsx                  |   14.04 |        0 |       0 |      16 | 24-130                      
+  RadioButtons.tsx                 |   26.67 |        0 |       0 |   30.77 | 17-49                       
+  SuggestionInput.tsx              |   14.63 |        0 |       0 |   18.75 | 30-98                       
+  TextInput.tsx                    |   14.47 |        0 |    7.14 |   13.24 | 34-41,44-53,58-82,87-159    
+  index.ts                         |     100 |      100 |     100 |     100 |                             
+ pages                             |   90.91 |    85.71 |   83.33 |   94.44 |                             
+  App.tsx                          |     100 |    85.71 |     100 |     100 | 62,71                       
+  index.ts                         |       0 |      100 |       0 |       0 | 1                           
+ pages/account                     |    9.19 |        0 |       0 |   13.18 |                             
+  OnSignIn.tsx                     |    4.94 |        0 |       0 |    7.34 | 20-381                      
+  SignIn.tsx                       |   33.33 |        0 |       0 |   38.89 | 9-49                        
+  index.ts                         |     100 |      100 |     100 |     100 |                             
+ pages/home                        |     100 |      100 |     100 |     100 |                             
+  Home.tsx                         |     100 |      100 |     100 |     100 |                             
+  index.tsx                        |     100 |      100 |     100 |     100 |                             
+ pages/profile                     |   14.67 |        0 |       0 |   18.97 |                             
+  Profile.tsx                      |   13.51 |        0 |       0 |   17.54 | 41-61,72-136                
+  index.tsx                        |     100 |      100 |     100 |     100 |                             
+ pages/profile/subpages            |       7 |        0 |       0 |    9.46 |                             
+  Calendar.tsx                     |    6.99 |        0 |       0 |    9.71 | 17,27-276                   
+  EditProfile.tsx                  |    7.69 |        0 |       0 |   12.28 | 21-262                      
+  MedicalInfo.tsx                  |    4.91 |        0 |       0 |    6.02 | 14-456                      
+  index.tsx                        |     100 |      100 |     100 |     100 |                             
+ pages/profile/subpages/components |      24 |        0 |       0 |      30 |                             
+  AppointmentPopup.tsx             |   20.83 |        0 |       0 |   26.32 | 16-40                       
+  index.ts                         |     100 |      100 |     100 |     100 |                             
+-----------------------------------|---------|----------|---------|---------|-----------------------------
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        2.987 s
+Ran all test suites matching /.\/tst\/pages\/App.spec.tsx/i.
+Done in 3.65s.

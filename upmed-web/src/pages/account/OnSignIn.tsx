@@ -91,7 +91,9 @@ export const OnSignIn = () => {
 				isPatient
 					? Client.Patient.logIn(id, email)
 							.then(({ token }) => {
-								if (!token) { throw new Error() }
+								if (!token) {
+									throw new Error()
+								}
 								setUserToken(token)
 								clearTimeout(timeout)
 							})
@@ -101,7 +103,9 @@ export const OnSignIn = () => {
 							})
 					: Client.HCP.logIn(id, email)
 							.then(({ token }) => {
-								if (!token) { throw new Error() }
+								if (!token) {
+									throw new Error()
+								}
 								setUserToken(token)
 								clearTimeout(timeout)
 							})
@@ -147,7 +151,7 @@ export const OnSignIn = () => {
 						specialty,
 						title,
 						profilePicture || undefined,
-				)
+				  )
 			setUserToken(token)
 			clearTimeout(timeout)
 		} catch (e) {
@@ -175,12 +179,12 @@ export const OnSignIn = () => {
 			Users.setUserToken(userToken!)
 			if (isPatient) {
 				Client.Patient.editProfilePicture(id, userToken!, profilePicture!)
-				.then(() => window.open('/profile/', '_self'))
-				.catch(() => window.open('/profile/', '_self'))
+					.then(() => window.open('/profile/', '_self'))
+					.catch(() => window.open('/profile/', '_self'))
 			} else {
 				Client.HCP.editProfilePicture(id, userToken!, profilePicture!)
-				.then(() => window.open('/profile/', '_self'))
-				.catch(() => window.open('/profile/', '_self'))
+					.then(() => window.open('/profile/', '_self'))
+					.catch(() => window.open('/profile/', '_self'))
 			}
 		}
 	}, [userToken, history])

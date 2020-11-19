@@ -15,9 +15,15 @@ mkdir "reports"
 mkdir "reports/${FLDR}"
 
 # Coverage and unit
-echo "Writing coverage and unit testing report to reports/${FLDR}/coverage.txt."
-echo $(header "Coverage and Unit") >> "reports/${FLDR}/coverage.txt"
-yarn test >> "reports/${FLDR}/coverage.txt"
+echo "Writing coverage and unit testing report to reports/${FLDR}/unit.txt."
+echo $(header "Coverage and Unit") >> "reports/${FLDR}/unit.txt"
+yarn test >> "reports/${FLDR}/unit.txt"
+echo "Done."
+
+# Coverage and component unit
+echo "Writing coverage and component unit testing report to reports/${FLDR}/component-unit.txt."
+echo $(header "Coverage and Component Unit") >> "reports/${FLDR}/component-unit.txt"
+yarn jest >> "reports/${FLDR}/component-unit.txt"
 echo "Done."
 
 # Styling
