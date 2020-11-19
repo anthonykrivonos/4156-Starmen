@@ -75,7 +75,6 @@ export const EditProfile = (props: ProfileSubpageProps) => {
 			}
 			window.location.reload()
 		} catch (e) {
-			console.error(e)
 			setError('An error occurred.')
 			setLoadingUpdate(false)
 		}

@@ -112,9 +112,7 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 				setAllPatients(newPatients)
 				try {
 					Client.HCP.setRecords(Users.getUserToken(), currentPatient.id, newHealthEvents)
-				} catch (e) {
-					console.error(e)
-				}
+				} catch {}
 			}
 		}
 	}
@@ -163,9 +161,7 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 		if (currentPatient) {
 			try {
 				Client.HCP.setRecords(Users.getUserToken(), currentPatient.id, newHealthEvents)
-			} catch (e) {
-				console.error(e)
-			}
+			} catch {}
 		}
 	}
 

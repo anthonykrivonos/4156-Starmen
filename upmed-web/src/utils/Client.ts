@@ -288,7 +288,6 @@ export const client = async (endpoint: string, body: any): Promise<any> => {
 		throw new Error('client Error: endpoint must start with a forward slash')
 	}
 	const uri = getUri(endpoint)
-	console.log(uri, body)
 	try {
 		const res = await fetch(uri, {
 			method: 'POST',
@@ -297,7 +296,7 @@ export const client = async (endpoint: string, body: any): Promise<any> => {
 				'Content-Type': Objects.isObject(body) ? 'application/json' : 'text/plain',
 			},
 		})
-		return parseResponse(res)
+		return await parseResponse(res)
 	} catch (e) {
 		throw new Error(`upmed-api Error: ${e.toString()}`)
 	}

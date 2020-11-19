@@ -20,7 +20,6 @@ export const OnSignIn = () => {
 	const location = useLocation()
 	const history = useHistory()
 
-	const [status, setStatus] = useState(location.pathname)
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState('')
 	const [showError, setShowError] = useState(false)
@@ -59,9 +58,16 @@ export const OnSignIn = () => {
 
 	useEffect(() => {
 		setLoading(true)
-		setStatus(location.pathname)
 
 		const timeout = setTimeout(() => setShowError(true), TIMEOUT_MS)
+		const mustCreateAccount = () => {
+			clearTimeout(timeout)
+			setLoading(false)
+		}
+		const logInFailure = () => {
+			mustCreateAccount()
+			history.push('/signin')
+		}
 
 		// Try to unhash the account details
 		try {
@@ -78,8 +84,7 @@ export const OnSignIn = () => {
 
 			// If expired, prompt a log in again
 			if (!decodedDetails || (decodedDetails.expiryTime && decodedDetails.expiryTime < Date.now())) {
-				clearTimeout(timeout)
-				history.push('/signin')
+				logInFailure()
 			} else {
 				setId(decodedDetails.id)
 				setProfilePicture(decodedDetails.profilePicture ? decodedDetails.profilePicture : null)
@@ -87,39 +92,34 @@ export const OnSignIn = () => {
 				setFirstName(decodedDetails.firstName)
 				setLastName(decodedDetails.lastName)
 				setIsPatient(decodedDetails.isPatient || false)
+
 				// Attempt to log in
-				isPatient
-					? Client.Patient.logIn(id, email)
+				decodedDetails.isPatient
+					? Client.Patient.logIn(decodedDetails.id, decodedDetails.email)
 							.then(({ token }) => {
 								if (!token) {
-									throw new Error()
+									mustCreateAccount()
+								} else {
+									setUserToken(token)
+									clearTimeout(timeout)
 								}
-								setUserToken(token)
-								clearTimeout(timeout)
 							})
 							.catch((e) => {
-								console.error(e)
-								clearTimeout(timeout)
+								mustCreateAccount()
 							})
-					: Client.HCP.logIn(id, email)
-							.then(({ token }) => {
-								if (!token) {
-									throw new Error()
-								}
+					: Client.HCP.logIn(decodedDetails.id, decodedDetails.email).then(({ token }) => {
+							if (!token) {
+								mustCreateAccount()
+							} else {
 								setUserToken(token)
 								clearTimeout(timeout)
-							})
-							.catch((e) => {
-								clearTimeout(timeout)
-							})
+							}
+					  })
 			}
 		} catch (e) {
-			// In case something goes wrong, go to sign-in
-			clearTimeout(timeout)
-			setLoading(false)
-			history.push('/signin')
+			logInFailure()
 		}
-	}, [location.pathname, history, status, id, email, isPatient])
+	}, [location.pathname])
 
 	const createAccount = async () => {
 		setLoading(true)
@@ -392,6 +392,11 @@ export const OnSignIn = () => {
 					</div>
 					<div className={'d-flex col-md-4 flex-column-reverse justify-content-between'}>
 						<div className={'d-flex flex-row justify-content-end'}>
+							<Button
+								className={styles.back_button}
+								onClick={() => history.push('/signin')}
+								text={'Back'}
+							/>
 							<div>
 								<Button
 									disabled={!isValid}

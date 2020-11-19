@@ -91,7 +91,6 @@ export const Calendar = (props: ProfileSubpageProps) => {
 				// Doctor validation
 				(!props.isPatient ? patient !== null : true),
 		)
-		console.log(subject, date, duration, doctor, patient, isValid)
 	}, [duration, date, patient, doctor, subject, props.isPatient, isValid])
 
 	const scheduleAppointment = async () => {

@@ -4,7 +4,7 @@ export class Validator {
 	// Returns true if there are no bad words.
 	public static badWords(value: string): boolean {
 		const filter = new Filter()
-		return filter.clean(value) === value
+		return value === '' || filter.clean(value) === value
 	}
 
 	// Returns true if the name is valid, false otherwise.
