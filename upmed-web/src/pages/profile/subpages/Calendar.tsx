@@ -276,6 +276,7 @@ export const Calendar = (props: ProfileSubpageProps) => {
 				patient={currentPatient || undefined}
 				doctor={currentDoctor || undefined}
 				appointment={currentAppointment || undefined}
+				isPatient={props.isPatient}
 			/>
 		</div>
 	)

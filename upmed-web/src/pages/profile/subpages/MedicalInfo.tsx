@@ -417,6 +417,7 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 					patient={currentPatient || undefined}
 					doctor={currentDoctor || undefined}
 					appointment={currentAppointment || undefined}
+					isPatient={props.isPatient}
 				/>
 				<Popup open={false} toggleRef={(t) => (toggleInfoPopup = t)}>
 					{currentDoctor && (
