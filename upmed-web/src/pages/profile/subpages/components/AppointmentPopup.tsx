@@ -56,13 +56,13 @@ export const AppointmentPopup = (props: AppointmentPopupProps) => {
 						<b>Subject: </b>
 						{props.appointment.subject}
 					</div>
-					{props.isPatient && props.doctor && (
+					{props.doctor && (
 						<div>
 							<b>Doctor: </b>
 							{props.doctor.firstName} {props.doctor.lastName}
 						</div>
 					)}
-					{!props.isPatient && props.patient && (
+					{props.patient && (
 						<div>
 							<b>Patient: </b>
 							{props.patient.firstName} {props.patient.lastName}
