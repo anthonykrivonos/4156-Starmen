@@ -1,40 +1,15 @@
-from flask import Blueprint, request, jsonify, make_response, json
-from util.firebase.db import Database
-from util.util import Auth
-from models.patient import Patient
-from models.hcp import HCP
-from models.hours import Hours
-from models.day import Day
+from flask import Blueprint, request, jsonify, make_response
 
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '../..'))
+from sys import path
+from os.path import join, dirname
+path.append(join(dirname(__file__), '../../..'))
 
-"""
-Patient API Endpoints
------- Heroku Imports-----
-from models import Patient, HCP, Hours, Day
-from util.util import Auth
-from util.firebase.db import Database
-from flask import Blueprint, request, jsonify, make_response, json
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '../..'))
-
-
-----Relative Imports-----
-from flask import Blueprint, request, jsonify, make_response, json
-from ....src.util.firebase.db import Database
-from ....src.util.util import Auth
-from ....src.models.patient import Patient
-from ....src.models.hcp import HCP
-from ....src.models.health_event import HealthEvent
-from ....src.models.hours import Hours
-from ....src.models.day import Day
-
-"""
+from src.util.firebase.db import Database  # noqa
+from src.util.util import Auth  # noqa
+from src.models.patient import Patient  # noqa
+from src.models.hcp import HCP  # noqa
+from src.models.hours import Hours  # noqa
+from src.models.day import Day  # noqa
 
 
 patient_endpoints = Blueprint('patient', __name__)

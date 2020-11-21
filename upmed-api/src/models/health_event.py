@@ -1,12 +1,9 @@
 from .enums import Status
 from typing import Optional
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '..'))
+
 """
-    HealthEvent Data Model
-    """
+HealthEvent Data Model
+"""
 
 
 class HealthEvent:

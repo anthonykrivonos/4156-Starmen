@@ -1,0 +1,11 @@
+============ upmed-web Coverage and Unit Report Generated on 1605806127 ============ \n\n
+./src/api/hcp/hcp.py:510:80: E501 line too long (94 > 79 characters)
+./tst/api/appointment_test/appointment_test.py:137:80: E501 line too long (82 > 79 characters)
+./tst/api/appointment_test/appointment_test.py:178:80: E501 line too long (86 > 79 characters)
+./tst/api/hcp_test/hcp_test.py:317:20: E131 continuation line unaligned for hanging indent
+./tst/api/hcp_test/hcp_test.py:348:80: E501 line too long (96 > 79 characters)
+./tst/api/hcp_test/hcp_test.py:349:80: E501 line too long (102 > 79 characters)
+./tst/api/patient_test/patient_test.py:264:80: E501 line too long (90 > 79 characters)
+./tst/api/patient_test/patient_test.py:265:80: E501 line too long (112 > 79 characters)
+1       E131 continuation line unaligned for hanging indent
+7       E501 line too long (94 > 79 characters)

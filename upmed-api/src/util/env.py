@@ -1,12 +1,10 @@
-import os
-import sys
-from os.path import join, realpath, dirname
-
-sys.path.append(join(os.getcwd(), '..'))
-
+from os import getenv
+from os.path import join, dirname, realpath
+from sys import exit
 from typing import List
 
 from dotenv import load_dotenv
+
 
 env_path = join(dirname(realpath(__file__)), '../../.env')
 load_dotenv(dotenv_path=env_path)
@@ -14,35 +12,35 @@ load_dotenv(dotenv_path=env_path)
 class Env:
     @staticmethod
     def PORT() -> str:
-        return os.getenv("PORT")
+        return getenv("PORT")
 
     @staticmethod
     def UPMED_PRIVATE_KEY() -> str:
-        return os.getenv("UPMED_PRIVATE_KEY")
+        return getenv("UPMED_PRIVATE_KEY")
 
     @staticmethod
     def FIREBASE_PRIVATE_KEY() -> str:
-        return os.getenv("FIREBASE_PRIVATE_KEY")
+        return getenv("FIREBASE_PRIVATE_KEY")
 
     @staticmethod
     def TWILIO_ACCOUNT_SID() -> str:
-        return os.getenv("TWILIO_ACCOUNT_SID")
+        return getenv("TWILIO_ACCOUNT_SID")
 
     @staticmethod
     def TWILIO_API_KEY_SID() -> str:
-        return os.getenv("TWILIO_API_KEY_SID")
+        return getenv("TWILIO_API_KEY_SID")
 
     @staticmethod
     def TWILIO_API_KEY_SECRET() -> str:
-        return os.getenv("TWILIO_API_KEY_SECRET")
+        return getenv("TWILIO_API_KEY_SECRET")
 
     @staticmethod
     def TWILIO_AUTH_TOKEN() -> str:
-        return os.getenv("TWILIO_AUTH_TOKEN")
+        return getenv("TWILIO_AUTH_TOKEN")
 
     @staticmethod
     def USE_CORS() -> bool:
-        return os.getenv("USE_CORS") == '1'
+        return getenv("USE_CORS") == '1'
 
 # Ensure .env file is up to date, or exit promptly
 missing_envs: List[str] = []
@@ -56,6 +54,6 @@ for key in Env.__dict__.keys():
         pass
 
 if missing_envs:
-    sys.exit(
+    exit(
         "upmed-appointment/.env file not up to date. Missing %s!" %
         ", ".join(missing_envs))

@@ -1,32 +1,14 @@
 import os
-
-from util.env import Env
 from flask import Flask
 from flask_cors import CORS
 
-from api import api_endpoints
+from sys import path
+from os.path import join, dirname
+path.append(join(dirname(__file__), '..'))
 
-"""
-Create app and register blueprints
+from src.util.env import Env  # noqa
+from src.api import api_endpoints  # noqa
 
----Heroku Imports---
-import os
-
-from util.env import Env
-from flask import Flask
-from flask_cors import CORS
-
-from api import api_endpoints
-
-CORS(app)
-----Relative Imports----
-import os
-from .util.env import Env
-from flask import Flask
-
-from .api import api_endpoints
-from flask_cors import CORS
-"""
 
 """
 Create app and register blueprints

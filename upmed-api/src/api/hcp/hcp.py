@@ -1,47 +1,19 @@
-from flask import Blueprint, request, jsonify, make_response
-from util.firebase.db import Database
-from util.util import Auth, Twilio
-from models.hcp import HCP
-from models.hours import Hours
-from models.day import Day
-from models.health_event import HealthEvent
-from models.patient import Patient
-from models.appointment import Appointment
 import datetime
-
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '../..'))
-
-"""HCP API Endpoints
-
-----Heroku Imports----
-from models import HCP, Hours, Day, HealthEvent, Patient, Status, Appointment
-from util import Database, Auth, Twilio
 from flask import Blueprint, request, jsonify, make_response
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '../..'))
 
+from sys import path
+from os.path import join, dirname
+path.append(join(dirname(__file__), '../../..'))
 
+from src.util.firebase.db import Database  # noqa
+from src.util.util import Auth, Twilio  # noqa
+from src.models.hcp import HCP  # noqa
+from src.models.hours import Hours  # noqa
+from src.models.day import Day  # noqa
+from src.models.health_event import HealthEvent  # noqa
+from src.models.patient import Patient  # noqa
+from src.models.appointment import Appointment  # noqa
 
----- Relative Imports-----
-from flask import Blueprint, request, jsonify, make_response
-from ....src.util.firebase.db import Database
-from ....src.util.util import Auth, Twilio
-from ....src.models.hcp import HCP
-from ....src.models.hours import Hours
-from ....src.models.day import Day
-from ....src.models.health_event import HealthEvent
-from ....src.models.patient import Patient
-from ....src.models.enums import Status
-from ....src.models.appointment import Appointment
-
-Returns:
-HTTP Response: JSON
-"""
 
 # Setup HCP and Patient Document Collections
 db = Database()

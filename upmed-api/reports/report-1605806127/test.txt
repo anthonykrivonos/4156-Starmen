@@ -1,0 +1,28 @@
+============ upmed-web Coverage and Unit Report Generated on 1605806127 ============ \n\n
+.........
+----------------------------------------------------------------------
+Ran 9 tests in 2.432s
+
+OK
+/usr/lib/python3.6/runpy.py:125: RuntimeWarning: 'upmed-api.tst.api.hcp_test.hcp_test' found in sys.modules after import of package 'upmed-api.tst.api.hcp_test', but prior to execution of 'upmed-api.tst.api.hcp_test.hcp_test'; this may result in unpredictable behaviour
+  warn(RuntimeWarning(msg))
+F..........
+======================================================================
+FAIL: test_editProfile (__main__.HCPTestCase)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/api/hcp_test/hcp_test.py", line 330, in test_editProfile
+    self.assertEqual(200, response.status_code)
+AssertionError: 200 != 401
+
+----------------------------------------------------------------------
+Ran 11 tests in 5.871s
+
+FAILED (failures=1)
+/usr/lib/python3.6/runpy.py:125: RuntimeWarning: 'upmed-api.tst.api.appointment_test.appointment_test' found in sys.modules after import of package 'upmed-api.tst.api.appointment_test', but prior to execution of 'upmed-api.tst.api.appointment_test.appointment_test'; this may result in unpredictable behaviour
+  warn(RuntimeWarning(msg))
+....
+----------------------------------------------------------------------
+Ran 4 tests in 2.864s
+
+OK

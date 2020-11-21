@@ -1,9 +1,7 @@
-from .strings import AppointmentId, DoctorId, PatientId
 from typing import Optional
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '..'))
+
+from .strings import AppointmentId, DoctorId, PatientId
+
 """
 Appointments Model
 """

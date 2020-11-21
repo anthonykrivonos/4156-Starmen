@@ -1,9 +1,5 @@
 from flask import Flask, Blueprint
 from typing import List
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '..'))
 
 
 class SuperBlueprint(Blueprint):

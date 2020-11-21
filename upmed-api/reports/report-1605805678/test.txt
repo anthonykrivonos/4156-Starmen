@@ -1,0 +1,43 @@
+============ upmed-web Coverage and Unit Report Generated on 1605805678 ============ \n\n
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/runpy.py", line 183, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/usr/lib/python3.6/runpy.py", line 109, in _get_module_details
+    __import__(pkg_name)
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/__init__.py", line 3, in <module>
+    from .api import *
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/api/__init__.py", line 1, in <module>
+    from .appointment_test import *
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/api/appointment_test/__init__.py", line 1, in <module>
+    from .appointment_test import *
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/api/appointment_test/appointment_test.py", line 4, in <module>
+    from src.util.firebase.db import Database
+ModuleNotFoundError: No module named 'src'
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/runpy.py", line 183, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/usr/lib/python3.6/runpy.py", line 109, in _get_module_details
+    __import__(pkg_name)
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/__init__.py", line 3, in <module>
+    from .api import *
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/api/__init__.py", line 1, in <module>
+    from .appointment_test import *
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/api/appointment_test/__init__.py", line 1, in <module>
+    from .appointment_test import *
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/api/appointment_test/appointment_test.py", line 4, in <module>
+    from src.util.firebase.db import Database
+ModuleNotFoundError: No module named 'src'
+Traceback (most recent call last):
+  File "/usr/lib/python3.6/runpy.py", line 183, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/usr/lib/python3.6/runpy.py", line 109, in _get_module_details
+    __import__(pkg_name)
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/__init__.py", line 3, in <module>
+    from .api import *
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/api/__init__.py", line 1, in <module>
+    from .appointment_test import *
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/api/appointment_test/__init__.py", line 1, in <module>
+    from .appointment_test import *
+  File "/mnt/c/Users/willp/Documents/4156/UpMed/upmed-api/tst/api/appointment_test/appointment_test.py", line 4, in <module>
+    from src.util.firebase.db import Database
+ModuleNotFoundError: No module named 'src'

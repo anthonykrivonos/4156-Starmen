@@ -1,7 +1,6 @@
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '..'))
+"""
+Day Model
+"""
 
 
 class Day:

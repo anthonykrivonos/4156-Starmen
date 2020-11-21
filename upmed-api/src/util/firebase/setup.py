@@ -1,21 +1,24 @@
 import os
 import atexit
-from os import path
+from simplecrypt import decrypt
 
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 
-from simplecrypt import decrypt
+from sys import path
+from os.path import join, dirname
+path.append(join(dirname(__file__), '../../..'))
 
-from ..env import Env
+from src.util.env import Env  # noqa
+
 
 # Paths to encrypted and decrypted certificates
-enc_cert_path = path.join(
+enc_cert_path = join(
     os.path.dirname(
         os.path.realpath(__file__)),
     'encrypted_cert.enc')
-dec_cert_path = path.join(
+dec_cert_path = join(
     os.path.dirname(
         os.path.realpath(__file__)),
     'decrypted_cert.json')

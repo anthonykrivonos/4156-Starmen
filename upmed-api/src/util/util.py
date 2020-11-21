@@ -1,11 +1,9 @@
-from twilio.rest import Client
-from .env import Env
 import datetime
 import jwt
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '..'))
+from twilio.rest import Client
+
+from .env import Env
+
 """
 Util and helper functions
 """

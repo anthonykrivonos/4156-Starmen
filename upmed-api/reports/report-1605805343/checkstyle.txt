@@ -1,0 +1,4 @@
+============ upmed-web Coverage and Unit Report Generated on 1605805343 ============ \n\n
+./src/api/hcp/hcp.py:510:80: E501 line too long (94 > 79 characters)
+./tst/api/appointment_test/appointment_test.py:178:80: E501 line too long (86 > 79 characters)
+2       E501 line too long (94 > 79 characters)

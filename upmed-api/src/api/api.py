@@ -1,34 +1,16 @@
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '..'))
-
-from util import SuperBlueprint
 from .appointment import appointment_endpoints
 from .patient import patient_endpoints
 from .hcp import hcp_endpoints
 
-"""
-Register appointment blueprints
----Heroku Imports----
-from .appointment import appointment_endpoints
-from .patient import patient_endpoints
-from .hcp import hcp_endpoints
-from util import SuperBlueprint
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '..'))
+from sys import path
+from os.path import join, dirname
+path.append(join(dirname(__file__), '../..'))
 
----Relative Imports-----
-from ..util import SuperBlueprint
+from src.util import SuperBlueprint  # noqa
 
-from .hcp import hcp_endpoints
-from .patient import patient_endpoints
-from .appointment import appointment_endpoints
 
-"""
-api_endpoints = SuperBlueprint('appointment', __name__, url_prefix='')
+# Blueprint containing all sub-blueprints
+api_endpoints = SuperBlueprint('api', __name__, url_prefix='')
 
 # /hcp
 api_endpoints.register_blueprint(hcp_endpoints, url_prefix='/hcp')

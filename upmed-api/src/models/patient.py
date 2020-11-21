@@ -1,13 +1,12 @@
+from typing import List, Optional
+
 from .health_event import HealthEvent
 from .strings import DoctorId, PatientId, AppointmentId
 from .enums import Status
-from typing import List, Optional
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '..'))
-"""Patient Data Model
-    """
+
+"""
+Patient Data Model
+"""
 
 
 class Patient:

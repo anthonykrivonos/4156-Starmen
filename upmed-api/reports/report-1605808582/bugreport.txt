@@ -1,0 +1,8 @@
+============ upmed-web Coverage and Unit Report Generated on 1605578220 ============ \n\n
+************* Module upmed-api.src.util.firebase.setup
+src/util/firebase/setup.py:5:0: E0401: Unable to import 'firebase_admin' (import-error)
+src/util/firebase/setup.py:6:0: E0401: Unable to import 'firebase_admin' (import-error)
+src/util/firebase/setup.py:7:0: E0401: Unable to import 'firebase_admin' (import-error)
+src/util/firebase/setup.py:9:0: E0401: Unable to import 'simplecrypt' (import-error)
+************* Module upmed-api.src.util.util
+src/util/util.py:1:0: E0401: Unable to import 'twilio.rest' (import-error)

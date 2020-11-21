@@ -24,6 +24,9 @@ in the `upmed-api/` directory.
 ```
 src/
     api/
+        appointment/
+            appointment.py
+                - contains all endpoints related to appointments
         hcp/
             hcp.py
                 - contains all endpoints related to HCPs

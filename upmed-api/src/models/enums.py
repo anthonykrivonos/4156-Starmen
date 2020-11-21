@@ -1,11 +1,8 @@
 from enum import Enum
-import sys
-import os
-from os.path import join
-sys.path.append(join(os.getcwd(), '..'))
 
-"""Enums Data Model
-    """
+"""
+Enums Model
+"""
 
 
 class Status(Enum):
