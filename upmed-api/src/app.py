@@ -18,10 +18,12 @@ if Env.USE_CORS():
     CORS(app)
 api_endpoints.bind_to_app(app)
 
+
 @app.route('/')
 def hello_world():
     target = os.environ.get('TARGET', 'World')
     return 'Hello {}!\n'.format(target)
+
 
 if __name__ == "__main__":
     app.run(port=Env.PORT())

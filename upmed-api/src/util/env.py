@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 env_path = join(dirname(realpath(__file__)), '../../.env')
 load_dotenv(dotenv_path=env_path)
 
+
 class Env:
     @staticmethod
     def PORT() -> str:
@@ -41,6 +42,7 @@ class Env:
     @staticmethod
     def USE_CORS() -> bool:
         return getenv("USE_CORS") == '1'
+
 
 # Ensure .env file is up to date, or exit promptly
 missing_envs: List[str] = []

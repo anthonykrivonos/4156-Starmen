@@ -1,7 +1,21 @@
 from flask import Blueprint, request, jsonify, make_response
-from src.api.appointment import appointment_helper
+
+
 from sys import path
 from os.path import join, dirname
+path.append(join(dirname(__file__), '../../..'))
+
+from src.util.firebase.db import Database  # noqa
+from src.util import Auth  # noqa
+from src.models.appointment import Appointment  # noqa
+
+
+pdb = Database()
+hcp_db = pdb.getHCP()
+patient_db = pdb.getPatients()
+appointmentsdb = pdb.getAppointments()
+auth = Auth()
+
 
 path.append(join(dirname(__file__), '../../..'))
 appointment_endpoints = Blueprint('appointment', __name__)

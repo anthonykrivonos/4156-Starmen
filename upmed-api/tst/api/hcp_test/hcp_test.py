@@ -1,22 +1,41 @@
 import unittest
 import requests
 import time
+from unittest.mock import MagicMock, Mock
+
 
 from sys import path
 from os.path import join, dirname
 path.append(join(dirname(__file__), '../../..'))
 
-from src import Database, Patient, Appointment, HCP, Day, Hours, Status, Auth  # noqa
 
+from src import Database, Patient, Appointment, HCP, Day, Hours, Status, Auth, hcp, Twilio, hcp_signup, hcp_get_all, hcp_login, hcp_delete, hcp_set_record, hcp_get_by_token, hcp_notify, hcp_test_number, hcp_edit_profile, hcp_get_patients, hcp_set_health_events, hcp_set_profile_picture, hcp_set_health_events  # noqa
+from tst.constants import dummy_hcp, dummy_appointment, dummy_patient  # noqa
 """
 HCP Endpoint Tests
 """
+db = Database()
+set_func = Mock()
+set_func.to_dict = MagicMock(return_value=1)
+set_func.set = MagicMock(return_value=1)
+set_func.get = MagicMock(return_value=1)
+set_func.stream = MagicMock(return_value=2)
+set_func.delete = MagicMock(return_value=3)
+db.document = MagicMock(return_value=set_func)
+db.stream = MagicMock(return_value=2)
+
+hcpdb = db.getHCP()
+pat = db.getPatients()
+appointmentsdb = db.getAppointments()
+auth = Auth()
+twilio = Twilio()
 
 
 unittest.TestLoader.sortTestMethodsUsing = None
 hcp_token = ''
 
 
+class HCPTestCase(unittest.TestCase):
 def create_dummy_data():
     # Add some dummy patient and hcp
     week = []
@@ -201,166 +220,58 @@ class HCPTestCase(unittest.TestCase):
                            "startTime": schedule.saturday.startTime,
                            "endTime": schedule.saturday.endTime
                        }
-                   },
-                   'videoUrl': 'https://www.youtube.com/watch?v=dMTQKFS1tpA'
                    }
-
-        response = requests.post('https://upmed-api.herokuapp.com/hcp/signUp',
-                                 json=payload)
-        hcp_id_r = response.json()
-        hcp_id = hcp_id_r['id']
-        self.assertEqual(201, response.status_code)
-        self.assertEqual('ap0000', hcp_id)
+                  }
+        res = hcp_signup(db, dummy_hcp, dummy_hcp.hours)
+        self.assertNotEqual(res, 0)
+        # self.assertEqual(res, 1)
 
     def test_login_test(self):
-        payload = {'id': "hw2735",
-                   'email': "hw2735@columbia.edu"}
-        response = requests.post(
-            'https://upmed-api.herokuapp.com/hcp/logIn',
-            json=payload)
-        hcp = response.json()
-        self.assertEqual(200, response.status_code)
-        self.assertEqual('hw2735', hcp['id'])
+        res = hcp_login(db, dummy_hcp.id, dummy_hcp.id)
+        self.assertNotEqual(res, 0)
 
-    def test_setRecords(self):
-        payload = {'token': HCPTestCase.hcp_token,
-                   'id': 'aoc1989',
-                   'health': [
-                       {
-                           'date': time.time(),
-                           'event': 'schizophrenia',
-                           'remarks': 'Strong violent tendency',
-                           'status': 0
-                       }
-                   ]
-                   }
-        response = requests.post(
-            'https://upmed-api.herokuapp.com/hcp/setRecords',
-            json=payload)
-        self.assertEqual(200, response.status_code)
+    def test_set_record(self):
+        res = hcp_set_record(db, dummy_patient)
+        self.assertNotEqual(res, 0)
 
     def test_notify_test(self):
-        payload = {'token': HCPTestCase.hcp_token,
-                   'id': 'aoc1989,hw2735,1605505365'}
-        response = requests.post(
-            'https://upmed-api.herokuapp.com/hcp/notify',
-            json=payload)
-        self.assertEqual(200, response.status_code)
+        res = hcp_notify(db, db, dummy_appointment.id)
+        self.assertEqual(res, 0)
 
     def test_remove_test(self):
-        payload = {
-            'id': 'ap0000',
-            'token': HCPTestCase.hcp_token
-        }
-        response = requests.post(
-            'https://upmed-api.herokuapp.com/hcp/delete',
-            json=payload)
-        self.assertEqual(200, response.status_code)
+        res = hcp_delete(db, dummy_hcp.id)
+        self.assertEqual(res, 3)
 
     def test_getByToken(self):
-        payload = {'token': HCPTestCase.hcp_token}
-        response = requests.post(
-            'https://upmed-api.herokuapp.com/hcp/getByToken',
-            json=payload)
-        self.assertEqual(200, response.status_code)
+        res = hcp_get_by_token(db, dummy_hcp.id)
+        self.assertEqual(res, 0)
 
-    def test_setRecord(self):
-        payload = {'token': HCPTestCase.hcp_token,
-                   'id': 'aoc1989',
-                   'health': [
-                       {
-                           'date': time.time(),
-                           'event': 'schizophrenia',
-                           'remarks': 'Strong violent tendency',
-                           'status': 0
-                       }
-                   ]
-                   }
-        response = requests.post(
-            'https://upmed-api.herokuapp.com/hcp/setRecord',
-            json=payload)
-        self.assertEqual(201, response.status_code)
+    def test_test_number(self):
+        res = hcp_test_number(db, db, dummy_appointment.id)
+        self.assertEqual(res, 0)
 
-    def test_editProfile(self):
-        week = []
-        for i in range(0, 7):
-            week.append(Day(startTime=540, endTime=1020))
-        schedule = Hours(
-            sunday=week[0],
-            monday=week[1],
-            tuesday=week[2],
-            wednesday=week[3],
-            thursday=week[4],
-            friday=week[5],
-            saturday=week[6])
-        print(HCPTestCase.hcp_token)
-        payload = {
-                   'id': "hw2735",
-                   'token': HCPTestCase.hcp_token,
-                   'firstName': "Athena",
-                   'lastName': "Pang",
-                   'phone': '"9175587800"',
-                   'email': "hw2735@columbia.edu",
-                   'specialty': "Accident and Emergency",
-                   'hours': {
-                       "sunday": {
-                           "startTime": schedule.sunday.startTime,
-                           "endTime": schedule.sunday.endTime
-                       },
-                       "monday": {
-                           "startTime": schedule.monday.startTime,
-                           "endTime": schedule.monday.endTime
-                       },
-                       "tuesday": {
-                           "startTime": schedule.tuesday.startTime,
-                           "endTime": schedule.tuesday.endTime
-                       },
-                       "wednesday": {
-                           "startTime": schedule.wednesday.startTime,
-                           "endTime": schedule.wednesday.endTime
-                       },
-                       "thursday": {
-                           "startTime": schedule.thursday.startTime,
-                           "endTime": schedule.thursday.endTime
-                       },
-                       "friday": {
-                           "startTime": schedule.friday.startTime,
-                           "endTime": schedule.friday.endTime
-                       },
-                       "saturday": {
-                           "startTime": schedule.saturday.startTime,
-                           "endTime": schedule.saturday.endTime
-                       }
-                   },
-                   'videoUrl': 'https://www.youtube.com/watch?v=dMTQKFS1tpA'
-                   }
-        response = requests.post(
-            'https://upmed-api.herokuapp.com/hcp/editProfile',
-            json=payload)
-        self.assertEqual(200, response.status_code)
+    def test_edit_profile(self):
+        res = hcp_set_profile_picture(db, dummy_hcp.id, {"stuff": "stuff"})
+        self.assertIsNotNone(res)
 
-    def test_getpatients(self):
-        payload = {'token': HCPTestCase.hcp_token}
-        response = requests.post(
-            'https://upmed-api.herokuapp.com/hcp/getPatients',
-            json=payload)
-        self.assertEqual(200, response.status_code)
+    def test_health_event(self):
+        res = hcp_set_health_events(db, dummy_patient.id, {"stuff": "stuff"})
+        self.assertEqual(res, 0)
 
-    def test_getAll(self):
-        payload = {'token': HCPTestCase.hcp_token}
-        response = requests.post(
-            'https://upmed-api.herokuapp.com/hcp/getAll',
-            json=payload)
-        self.assertEqual(200, response.status_code)
+    def test_get_all(self):
+        res = hcp_get_all(db)
+        self.assertEqual(res, 2)
+
+    def test_get_patients(self):
+        res = hcp_get_patients(db, db, dummy_hcp.id)
+        self.assertEqual(res, 0)
 
     def test_set_profile_picture(self):
-        payload = {'token': HCPTestCase.hcp_token,
-                   'profilePicture': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed'
-                                     '/Elon_Musk_Royal_Society.jpg/440px-Elon_Musk_Royal_Society.jpg'}
-        response = requests.post(
-            'https://upmed-api.herokuapp.com/hcp/setProfilePicture',
-            json=payload)
-        self.assertEqual(200, response.status_code)
+        res = hcp_set_profile_picture(
+            db, dummy_hcp.id, dummy_hcp.profilePicture)
+        print(res)
+        self.assertEqual(res, dummy_patient.profilePicture)
+
 
 
 if __name__ == '__main__':

@@ -22,6 +22,18 @@ hcp_db = pdb.getHCP()
 patient_db = pdb.getPatients()
 appointmentsdb = pdb.getAppointments()
 
+from sys import path
+from os.path import join, dirname
+path.append(join(dirname(__file__), '../../..'))
+
+from src import Database, Patient, HCP, Day, Hours, Status, Auth  # noqa
+
+"""
+Patient Endpoint Tests
+Note: run as python3 -m upmed-api.tst.api.appointment_test.appointment_test
+"""
+appointment_token = ''
+
 
 def create_dummy_data():
     # Add some dummy patient and hcp
@@ -96,6 +108,7 @@ class AppointmentApiTestCase(unittest.TestCase):
     time[1] = dummy_hcp.hours.saturday.endTime
     hours.append(str(time))
 
+
     # hcp_db.document(dummy_hcp.id).set({
     #     "id": dummy_hcp.id,
     #     "firstName": dummy_hcp.firstName,
@@ -126,13 +139,16 @@ class AppointmentApiTestCase(unittest.TestCase):
     #     "health": dummy_patient.health,
     #     "doctors": dummy_patient.doctors
     # })
+\
 
     auth_token = auth.encode_auth_token(dummy_hcp.id, "HCP")
     hcp_token = auth_token.decode()
 
     auth_token = auth.encode_auth_token(dummy_patient.id, "PATIENT")
     patient_token = auth_token.decode()
+
     appointment_token = 'aoc1989,hw2735,1605841671.366644'
+\
 
     def test_createAppointment_test(self, hcp_token=hcp_token):
         timpstamp = time.time()
@@ -145,6 +161,7 @@ class AppointmentApiTestCase(unittest.TestCase):
             'subject': 'Follow Up',
             'notes': 'Follow up for her schizophrenia',
             'videoUrl': 'https://www.youtube.com/watch?v=dMTQKFS1tpA'}
+
         response, status_code = appointment_helper.create_appointment(payload)
         self.assertEqual(200, status_code)
 
@@ -166,6 +183,7 @@ class AppointmentApiTestCase(unittest.TestCase):
         }
         response, status_code = appointment_helper.delete_appointment(payload)
         self.assertEqual(200, status_code)
+
 
 
 if __name__ == '__main__':

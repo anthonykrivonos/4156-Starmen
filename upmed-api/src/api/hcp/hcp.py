@@ -1,8 +1,9 @@
-import datetime
-from flask import Blueprint, request, jsonify, make_response
-
-from sys import path
 from os.path import join, dirname
+from sys import path
+from flask import Blueprint, request, jsonify, make_response
+import datetime
+from .hcp_helper import hcp_signup, hcp_login, hcp_delete, hcp_set_record, hcp_get_by_token, hcp_notify, hcp_get_all, hcp_test_number, hcp_edit_profile, hcp_get_patients, hcp_set_health_events, hcp_set_profile_picture, hcp_set_health_events
+
 path.append(join(dirname(__file__), '../../..'))
 
 from src.util.firebase.db import Database  # noqa
@@ -13,6 +14,11 @@ from src.models.day import Day  # noqa
 from src.models.health_event import HealthEvent  # noqa
 from src.models.patient import Patient  # noqa
 from src.models.appointment import Appointment  # noqa
+
+
+from sys import path
+from os.path import join, dirname
+path.append(join(dirname(__file__), '../../..'))
 
 
 # Setup HCP and Patient Document Collections
@@ -45,15 +51,8 @@ def login():
     try:
         pid = request.json['id']
         email = request.json['email']
-        res = hcpdb.document(str(pid)).get()
-        res = res.to_dict()
-        if res['email'] == email:
-            utype = "HCP"
-            auth_token = auth.encode_auth_token(pid, utype)
-            resp = {
-                "id": pid,
-                "token": auth_token.decode()
-            }
+        resp = hcp_login(hcpdb, pid, email)
+        if (resp != 0):
             return jsonify(resp), 200
         else:
             return "False", 404
@@ -191,26 +190,19 @@ def signup():
         time[1] = hcp.hours.saturday.endTime
         hours.append(str(time))
 
-        utype = "HCP"
-        hcpdb.document(hcp.id).set({
-            "id": hcp.id,
-            "firstName": hcp.firstName,
-            "lastName": hcp.lastName,
-            "phone": hcp.phone,
-            "email": hcp.email,
-            "profilePicture": hcp.profilePicture,
-            "calendar": hcp.calendar,
-            "specialty": hcp.specialty,
-            "title": hcp.title,
-            "hours": hours,
-            "patients": hcp.patients
-        })
-        auth_token = auth.encode_auth_token(hcp.id, utype)
-        response_object = {
-            'id': hcp.id,
-            'token': auth_token.decode()
-        }
-        return make_response(jsonify(response_object)), 201
+        # Helper function
+        res = hcp_signup(hcpdb, hcp, hours)
+        if (res != 0):
+            response_object = {
+                'id': hcp.id,
+                'token': res
+            }
+            return make_response(jsonify(response_object)), 201
+        else:
+            response_object = {
+                "message": "Unable to signup."
+            }
+            return make_response(jsonify(response_object)), 401
     except Exception as e:
         response_object = {
             'status': 'fail',
@@ -228,8 +220,11 @@ def remove():
     try:
         # Check for ID in URL query
         pid = post_data.get('id')
-        hcpdb.document(pid).delete()
-        return jsonify({"success": True}), 200
+        res = hcp_delete(hcpdb, pid)
+        if (res):
+            return jsonify({"success": True}), 200
+        else:
+            return jsonify({"success": False}), 400
     except Exception as e:
         return f"An Error Occured: {e}"
 
@@ -245,45 +240,7 @@ def getbytoken():
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
         if utype == "HCP":
-            schedule = make_week()
-            hcp = hcpdb.document(hid).get().to_dict()
-            resp = HCP(
-                id=hcp['id'],
-                firstName=hcp['firstName'],
-                lastName=hcp['lastName'],
-                phone=hcp['phone'],
-                email=hcp['email'],
-                specialty=hcp['specialty'],
-                profilePicture=hcp['profilePicture'],
-                calendar=[],
-                title=hcp['title'],
-                patients=[],
-                hours=schedule
-            )
-
-            newsched = hcp['hours']
-            res = newsched[0].strip('][').split(', ')
-
-            resp.hours.sunday.startTime = res[0]
-            resp.hours.sunday.endTime = res[1]
-            res = newsched[1].strip('][').split(', ')
-            resp.hours.monday.startTime = res[0]
-            resp.hours.monday.endTime = res[1]
-            res = newsched[2].strip('][').split(', ')
-            resp.hours.tuesday.startTime = res[0]
-            resp.hours.tuesday.endTime = res[1]
-            res = newsched[3].strip('][').split(', ')
-            resp.hours.wednesday.startTime = res[0]
-            resp.hours.wednesday.endTime = res[1]
-            res = newsched[4].strip('][').split(', ')
-            resp.hours.thursday.startTime = res[0]
-            resp.hours.thursday.endTime = res[1]
-            res = newsched[5].strip('][').split(', ')
-            resp.hours.friday.startTime = res[0]
-            resp.hours.friday.endTime = res[1]
-            res = newsched[6].strip('][').split(', ')
-            resp.hours.saturday.startTime = res[0]
-            resp.hours.saturday.endTime = res[1]
+            resp = hcp_get_by_token(hcpdb, hid)
 
             hours = {
                 "sunday": {
@@ -393,23 +350,11 @@ def set_health_event():
                 listevents = []
                 for i in resp.health:
                     listevents.append(i)
-                pat.document(resp.id).set({
-                    "id": resp.id,
-                    "firstName": resp.firstName,
-                    "lastName": resp.lastName,
-                    "phone": resp.phone,
-                    "email": resp.email,
-                    "dateOfBirth": resp.dateOfBirth,
-                    "sex": resp.sex,
-                    "profilePicture": resp.profilePicture,
-                    "height": resp.height,
-                    "weight": resp.weight,
-                    "drinker": resp.drinker,
-                    "smoker": resp.smoker,
-                    "calendar": resp.calendar,
-                    "health": resp.health,
-                    "doctors": resp.doctors
-                })
+                res = hcp_set_record(pat, resp)
+                if res:
+                    return make_response(jsonify(jsonevent)), 201
+                else:
+                    return make_response(jsonify(jsonevent)), 401
             except Exception as e:
                 return f"Unable to find {post_data.get('id')} because {e}", 404
 
@@ -447,51 +392,7 @@ def notify():
         if utype == "HCP":
             try:
                 appointment_id = post_data.get('id')
-                appointment_resp = appointmentsdb.document(
-                    str(appointment_id)).get().to_dict()
-                appointment = Appointment(
-                    id=appointment_resp['id'],
-                    date=appointment_resp['date'],
-                    duration=appointment_resp['duration'],
-                    doctor=appointment_resp['doctor'],
-                    patient=appointment_resp['patient'],
-                    subject=appointment_resp['subject'],
-                    notes=appointment_resp['notes'],
-                    videoUrl=appointment_resp['videoUrl']
-                )
-                patient = pat.document(
-                    str(appointment.patient)).get().to_dict()
-                resp = Patient(
-                    id=patient['id'],
-                    firstName=patient['firstName'],
-                    lastName=patient['lastName'],
-                    phone=patient['phone'],
-                    email=patient['email'],
-                    dateOfBirth=patient['dateOfBirth'],
-                    sex=patient['sex'],
-                    profilePicture=patient['profilePicture'],
-                    height=patient['height'],
-                    weight=patient['weight'],
-                    drinker=patient['drinker'],
-                    smoker=patient['smoker'],
-                    calendar=patient['calendar'],
-                    doctors=patient['doctors'],
-                    health=patient['health']
-                )
-
-                client = twilio.connect()
-                message = client.messages.create(
-                    body=f"Hi {resp.firstName} you have an appointment at "
-                         f"{datetime.datetime.fromtimestamp(appointment.date / 1e3)} join at "
-                    f"{appointment.videoUrl}",
-                    from_='+19036182297',
-                    to=f'+1{str(resp.phone).replace("", "")}')
-                print(message)
-                print(datetime.datetime.fromtimestamp(appointment.date / 1e3))
-                res = {
-                    "Success": True
-                }
-
+                res = hcp_notify(appointmentsdb, pat, appointment_id)
             except Exception as e:
                 return f"Unable to find {post_data.get('id')} because {e}", 400
 
@@ -527,61 +428,10 @@ def test_number():
         post_data = request.get_json()
         # print(f'{hid} and {utype}')
         if utype == "HCP":
-            try:
-                appointment_id = post_data.get('id')
-                appointment_resp = appointmentsdb.document(
-                    str(appointment_id)).get().to_dict()
-                appointment = Appointment(
-                    id=appointment_resp['id'],
-                    date=appointment_resp['date'],
-                    duration=appointment_resp['duration'],
-                    doctor=appointment_resp['doctor'],
-                    patient=appointment_resp['patient'],
-                    subject=appointment_resp['subject'],
-                    notes=appointment_resp['notes'],
-                    videoUrl=appointment_resp['videoUrl']
-                )
-                patient = pat.document(
-                    str(appointment.patient)).get().to_dict()
-                resp = Patient(
-                    id=patient['id'],
-                    firstName=patient['firstName'],
-                    lastName=patient['lastName'],
-                    phone=patient['phone'],
-                    email=patient['email'],
-                    dateOfBirth=patient['dateOfBirth'],
-                    sex=patient['sex'],
-                    profilePicture=patient['profilePicture'],
-                    height=patient['height'],
-                    weight=patient['weight'],
-                    drinker=patient['drinker'],
-                    smoker=patient['smoker'],
-                    calendar=patient['calendar'],
-                    doctors=patient['doctors'],
-                    health=patient['health']
-                )
-
-                client = twilio.connect()
-                message = client.messages.create(
-                    body=f"Hi {resp.firstName} you have an appointment at "
-                         f"{datetime.datetime.fromtimestamp(appointment.date / 1e3)} join at "
-                    f"{appointment.videoUrl}",
-                    from_='+19036182297',
-                    to=f'+1{str(resp.phone).replace("", "")}')
-                print(message)
-                print(datetime.datetime.fromtimestamp(appointment.date / 1e3))
-                res = {
-                    "Success": True
-                }
-
-            except Exception as e:
-                print(f"Unable to find {post_data.get('id')} because {e}")
-                res = {
-                    "Success": False
-                }
+            appointment_id = post_data.get('id')
+            res = hcp_test_number(appointmentsdb, pat, appointment_id)
+            if res:
                 return make_response(jsonify(res)), 200
-
-            return make_response(jsonify(res)), 200
         else:
             response_object = {
                 'Success': False,
@@ -609,172 +459,18 @@ def edit_hcp_profile():
         hid, utype = Auth.decode_auth_token(auth_token)
         # Get the ids of the HCPs of patient
         if utype == "HCP":
-            hcp_resp = hcpdb.document(str(hid)).get().to_dict()
-            post_data = request.get_json()
-            schedule = make_week()
             try:
-                hcp = HCP(
-                    id=post_data.get('id'),
-                    firstName=post_data.get('firstName'),
-                    lastName=post_data.get('lastName'),
-                    phone=str(post_data.get('phone')),
-                    email=post_data.get('email'),
-                    specialty='',
-                    profilePicture='',
-                    calendar=hcp_resp['calendar'],
-                    title='',
-                    patients=hcp_resp['patients'],
-                    hours=schedule
-                )
-                try:
-                    hcp.specialty = post_data.get('specialty')
-                except Exception as e:
-                    hcp.specialty = ''
-
-                try:
-                    hcp.title = post_data.get('title')
-                except Exception as e:
-                    hcp.title = ''
-
-                try:
-                    hcp.profilePicture = post_data.get('profilePicture')
-                except Exception as e:
-                    hcp.profilePicture = default_pic
-                if hcp.profilePicture is None:
-                    hcp.profilePicture = default_pic
-
-                newsched = post_data.get('hours')
-
-                if int(newsched['sunday']['startTime']) == \
-                        -1 and int(newsched['sunday']['endTime']) == -1:
-                    hcp.hours.sunday.startTime = -1
-                    hcp.hours.sunday.endTime = -1
-                elif 0 <= int(newsched['sunday']['startTime']) \
-                        <= int(newsched['sunday']['endTime']):
-                    hcp.hours.sunday.startTime = int(
-                        newsched['sunday']['startTime'])
-                    hcp.hours.sunday.endTime = int(
-                        newsched['sunday']['endTime'])
-
-                if int(newsched['monday']['startTime']) == \
-                        -1 and int(newsched['monday']['endTime']) == -1:
-                    hcp.hours.monday.startTime = -1
-                    hcp.hours.monday.endTime = -1
-                elif 0 <= int(newsched['monday']['startTime']) \
-                        <= int(newsched['monday']['endTime']):
-                    hcp.hours.monday.startTime = int(
-                        newsched['monday']['startTime'])
-                    hcp.hours.monday.endTime = int(
-                        newsched['monday']['endTime'])
-
-                if int(newsched['tuesday']['startTime']) == \
-                        -1 and int(newsched['tuesday']['endTime']) == -1:
-                    hcp.hours.tuesday.startTime = -1
-                    hcp.hours.tuesday.endTime = -1
-                elif 0 <= int(newsched['tuesday']['startTime']) \
-                        <= int(newsched['tuesday']['endTime']):
-                    hcp.hours.tuesday.startTime = int(
-                        newsched['tuesday']['startTime'])
-                    hcp.hours.tuesday.endTime = int(
-                        newsched['tuesday']['endTime'])
-
-                if int(newsched['wednesday']['startTime']) == \
-                        -1 and int(newsched['wednesday']['endTime']) == -1:
-                    hcp.hours.wednesday.startTime = -1
-                    hcp.hours.wednesday.endTime = -1
-                elif 0 <= int(newsched['wednesday']['startTime']) \
-                        <= int(newsched['wednesday']['endTime']):
-                    hcp.hours.wednesday.startTime = int(
-                        newsched['wednesday']['startTime'])
-                    hcp.hours.wednesday.endTime = int(
-                        newsched['wednesday']['endTime'])
-
-                if int(newsched['thursday']['startTime']) == \
-                        -1 and int(newsched['thursday']['endTime']) == -1:
-                    hcp.hours.thursday.startTime = -1
-                    hcp.hours.thursday.endTime = -1
-                elif 0 <= int(newsched['thursday']['startTime']) \
-                        <= int(newsched['thursday']['endTime']):
-                    hcp.hours.thursday.startTime = int(
-                        newsched['thursday']['startTime'])
-                    hcp.hours.thursday.endTime = int(
-                        newsched['thursday']['endTime'])
-
-                if int(newsched['friday']['startTime']) == \
-                        -1 and int(newsched['friday']['endTime']) == -1:
-                    hcp.hours.friday.startTime = -1
-                    hcp.hours.friday.endTime = -1
-                elif 0 <= int(newsched['friday']['startTime']) \
-                        <= int(newsched['friday']['endTime']):
-                    hcp.hours.friday.startTime = int(
-                        newsched['friday']['startTime'])
-                    hcp.hours.friday.endTime = int(
-                        newsched['friday']['endTime'])
-
-                if int(newsched['saturday']['startTime']) == \
-                        -1 and int(newsched['saturday']['endTime']) == -1:
-                    hcp.hours.sunday.saturday = -1
-                    hcp.hours.sunday.saturday = -1
-                elif 0 <= int(newsched['saturday']['startTime']) \
-                        <= int(newsched['saturday']['endTime']):
-                    hcp.hours.saturday.startTime = int(
-                        newsched['saturday']['startTime'])
-                    hcp.hours.saturday.endTime = int(
-                        newsched['saturday']['endTime'])
-
-                hours = []
-                time = []
-                time.append(hcp.hours.sunday.startTime)
-                time.append(hcp.hours.sunday.endTime)
-                hours.append(str(time))
-                time[0] = hcp.hours.monday.startTime
-                time[1] = hcp.hours.monday.endTime
-                hours.append(str(time))
-                time[0] = hcp.hours.tuesday.startTime
-                time[1] = hcp.hours.tuesday.endTime
-                hours.append(str(time))
-                time[0] = hcp.hours.wednesday.startTime
-                time[1] = hcp.hours.wednesday.endTime
-                hours.append(str(time))
-                time[0] = hcp.hours.thursday.startTime
-                time[1] = hcp.hours.thursday.endTime
-                hours.append(str(time))
-                time[0] = hcp.hours.friday.startTime
-                time[1] = hcp.hours.friday.endTime
-                hours.append(str(time))
-                time[0] = hcp.hours.saturday.startTime
-                time[1] = hcp.hours.saturday.endTime
-                hours.append(str(time))
-
-                if hid == hcp.id:
-                    hcpdb.document(hcp.id).set({
-                        "id": hcp.id,
-                        "firstName": hcp.firstName,
-                        "lastName": hcp.lastName,
-                        "phone": hcp.phone,
-                        "email": hcp.email,
-                        "profilePicture": hcp.profilePicture,
-                        "calendar": hcp.calendar,
-                        "specialty": hcp.specialty,
-                        "title": hcp.title,
-                        "hours": hours,
-                        "patients": hcp.patients,
-                    })
-                else:
-                    response_object = {
-                        'status': 'fail',
-                        'message': invalid_token
-                    }
-                    return make_response(jsonify(response_object)), 401
-                response_object = {
-                    "Success": True
-                }
-                return make_response(jsonify(response_object)), 200
+                post_data = request.get_json()
+                response_object = hcp_edit_profile(hcpdb, hid, post_data)
             except Exception as e:
                 response_object = {
                     'status': 'fail',
                     'message': f'Some error, {e} occurred. Please try again.'
                 }
+                return make_response(jsonify(response_object)), 401
+            if response_object['Success']:
+                return make_response(jsonify(response_object)), 200
+            else:
                 return make_response(jsonify(response_object)), 401
 
 
@@ -789,14 +485,8 @@ def getpatients():
         hid, utype = Auth.decode_auth_token(auth_token)
         # Get the ids of the HCPs of patient
         if utype == "HCP":
-            hcp_resp = hcpdb.document(str(hid)).get().to_dict()
-            res = {}
-            for i in hcp_resp['patients']:
-                pats = pat.document(str(i)).get().to_dict()
-                entry = {
-                    i: pats
-                }
-                res.update(entry)
+            print(hid)
+            res = hcp_get_patients(hcpdb, pat, hid)
             return make_response(jsonify(res)), 200
         else:
             response_object = {
@@ -826,63 +516,9 @@ def set_health_events():
         if utype == "HCP":
             try:
                 pid = post_data.get('id')
-                patient = pat.document(str(pid)).get().to_dict()
-                resp = Patient(
-                    id=patient['id'],
-                    firstName=patient['firstName'],
-                    lastName=patient['lastName'],
-                    phone=patient['phone'],
-                    email=patient['email'],
-                    dateOfBirth=patient['dateOfBirth'],
-                    sex=patient['sex'],
-                    profilePicture=patient['profilePicture'],
-                    height=patient['height'],
-                    weight=patient['weight'],
-                    drinker=patient['drinker'],
-                    smoker=patient['smoker'],
-                    calendar=patient['calendar'],
-                    doctors=patient['doctors'],
-                    health=[]
-                )
-
-                # Get a list of health events
-                for ev in post_data.get('health'):
-                    event = HealthEvent(
-                        date=ev['date'],
-                        event=ev['event'],
-                        remarks=ev['remarks'] if 'remarks' in ev else '',
-                        status=ev['status']
-                    )
-                    jsonevent = {
-                        "date": event.date,
-                        "event": event.event,
-                        "remarks": event.remarks,
-                        "status": event.status
-                    }
-                    resp.health.append(jsonevent)
-                listevents = []
-                for i in resp.health:
-                    listevents.append(i)
-                pat.document(resp.id).set({
-                    "id": resp.id,
-                    "firstName": resp.firstName,
-                    "lastName": resp.lastName,
-                    "phone": resp.phone,
-                    "email": resp.email,
-                    "dateOfBirth": resp.dateOfBirth,
-                    "sex": resp.sex,
-                    "profilePicture": resp.profilePicture,
-                    "height": resp.height,
-                    "weight": resp.weight,
-                    "drinker": resp.drinker,
-                    "smoker": resp.smoker,
-                    "calendar": resp.calendar,
-                    "health": resp.health,
-                    "doctors": resp.doctors
-                })
+                resp = hcp_set_health_events(pat, pid, post_data)
             except Exception as e:
                 return f"Unable to find {post_data.get('id')} because {e}", 404
-
             return make_response(jsonify(resp.health)), 200
         else:
             response_object = {
@@ -911,21 +547,7 @@ def get_all():
     auth_token = request.get_json().get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
-        hcps = hcpdb.stream()
-        # print(hcps)
-        hcps_return = []
-        for hcp in hcps:
-            h = hcp.to_dict()
-            hcp_obj = {
-                "id": h['id'],
-                "firstName": h['firstName'],
-                "lastName": h['lastName'],
-                "email": h['email'],
-                "phone": h['phone'],
-                "profilePicture": h['profilePicture']
-            }
-            print(f'{hcp.id}=> {hcp_obj}')
-            hcps_return.append(hcp_obj)
+        hcps_return = hcp_get_all(hcpdb)
         return jsonify(hcps_return), 200
     else:
         response_object = {
@@ -973,14 +595,13 @@ def set_profile_picture():
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
         pic = request.get_json().get('profilePicture')
-        hcpdb.document(str(hid)).update({
-            "profilePicture": pic
-        })
-        response_object = {
-            "Success": True,
-            "profilePicture": pic
-        }
-        return make_response(jsonify(response_object)), 200
+        res = hcp_set_profile_picture(hcpdb, hid, pic)
+        if res:
+            response_object = {
+                "Success": True,
+                "profilePicture": pic
+            }
+            return make_response(jsonify(response_object)), 200
     else:
         response_object = {
             'status': 'fail',
