@@ -1,8 +1,10 @@
-// import React from 'react'
-// import { render, screen } from '@testing-library/react'
+import React from 'react'
+import { render, screen } from '@testing-library/react'
 import { AppointmentPopup } from '../../../../../src/pages/profile/subpages/components/AppointmentPopup'
-
+import { Button, Loading, Popup, PopupProps } from '../../../../../src/components'
 import { Appointment, HCP, Patient } from '../../../../../src/models'
+import { Client, DateTime, Users } from '../../../../../src/utils'
+import styles from '../../../../../src/pages/profile/subpages/components/AppointmentPopup.module.sass'
 
 
 describe('AppointmentPopup', () => {
@@ -63,13 +65,20 @@ describe('AppointmentPopup', () => {
         appointment,
         doctor,
         patient,
-        isPatient: true
+        isPatient: false,
+        children: "im a kid",
+        open: true,
+        autoclose: true,
+        toggleRef: (toggler: (toggle: boolean) => void) => {},
+        onOpen: () => {},
+        onClose: () => {},
     }
 
-    test('AppointmentPopup', () => {
-        const result = AppointmentPopup(AppointmentPopupProps)
 
-		expect(result).toBeInTheDocument()
+        test('AppointmentPopup', () => {
+        render(<AppointmentPopup {...AppointmentPopupProps}/>)
+		    const linkElement = screen.getByText('Appointment Details')
+		    expect(linkElement).toBeInTheDocument()
 	})
 
 })

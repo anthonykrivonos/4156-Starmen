@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { Avatar } from '../../../src/components/elements/Avatar'
-import { Patient } from '../../../src/models'
+import { Patient, HCP } from '../../../src/models'
 
 describe('Avatar', () => {
 
@@ -24,7 +24,7 @@ describe('Avatar', () => {
             doctors: []
         } as Patient
 
-		render(<Avatar user={patient} size={"500"} />)
+		render(<Avatar user={patient} size={"500"} onClick={(user: Patient | HCP) => {}}/>)
 		const linkElement = screen.getByTitle('kenneth chuen')
 		expect(linkElement).toBeInTheDocument()
 	})

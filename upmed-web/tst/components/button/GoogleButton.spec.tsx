@@ -16,9 +16,9 @@ describe('GoogleButton', () => {
     const onFailure = (error: Error) => {}
 
     test('render.inDocument', () => {
-		render(<GoogleButton onSuccess={onSuccess} onFailure={onFailure}/>)
-		const linkElement = screen.getByText(/Log in with Google/i)
-		expect(linkElement).toBeInTheDocument()
-	})
+        render(<GoogleButton text={"yello"} className={"className"} onSuccess={onSuccess} onFailure={onFailure}/>)
+        const linkElement = screen.getByText(/yello/i)
+        expect(linkElement).toBeInTheDocument()
+	  })
 
 })

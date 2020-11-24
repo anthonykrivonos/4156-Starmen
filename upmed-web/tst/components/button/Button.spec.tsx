@@ -7,11 +7,11 @@ describe('Button', () => {
 
     test('render.inDocument', () => {
 
-        const button = <Button text={'button with text'} />
+        const button = <Button text={'button with text'} disabled={false} iconName={"icon name"}/>
 
-		render(button)
-		const linkElement = screen.getByText(/button with text/i)
-		expect(linkElement).toBeInTheDocument()
-	})
+        render(button)
+        const linkElement = screen.getByText(/button with text/i)
+        expect(linkElement).toBeInTheDocument()
+	  })
 
 })
