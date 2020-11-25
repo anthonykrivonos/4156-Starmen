@@ -8,7 +8,7 @@ path.append(join(dirname(__file__), '../../..'))
 from src.util.firebase.db import Database  # noqa
 from src.util import Auth  # noqa
 from src.models.appointment import Appointment  # noqa
-
+from src.api.appointment import appointment_helper
 
 pdb = Database()
 hcp_db = pdb.getHCP()
