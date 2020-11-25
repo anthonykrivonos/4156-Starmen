@@ -73,6 +73,7 @@ export const EditProfile = (props: ProfileSubpageProps) => {
 					props.user.profilePicture,
 				)
 			}
+			Users.expireCurrentUser()
 			window.location.reload()
 		} catch (e) {
 			setError('An error occurred.')

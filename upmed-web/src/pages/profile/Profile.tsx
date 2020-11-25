@@ -109,7 +109,7 @@ export const Profile = () => {
 		} else {
 			setLoading(false)
 		}
-	}, [didSetSubpageProps, history, location.pathname])
+	}, [location.pathname])
 
 	return showError ? (
 		<Error />

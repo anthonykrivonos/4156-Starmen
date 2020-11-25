@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { VIDEO } from '../../../../assets'
 
 import { Button, Loading, Popup, PopupProps } from '../../../../components'
 import { Appointment, HCP, Patient } from '../../../../models'
-import { Client, DateTime, Users } from '../../../../utils'
+import { Client, DateTime, Hasher, Users } from '../../../../utils'
 import styles from './AppointmentPopup.module.sass'
 
 interface AppointmentPopupProps extends PopupProps {
@@ -15,6 +17,10 @@ interface AppointmentPopupProps extends PopupProps {
 export const AppointmentPopup = (props: AppointmentPopupProps) => {
 	const [notifyLoading, setNotifyLoading] = useState(false)
 	const [notifyMessage, setNotifyMessage] = useState('')
+
+	const history = useHistory()
+
+	const endDate = props.appointment ? props.appointment.date + props.appointment.duration * 60 * 1000 : 0
 
 	const notify = async () => {
 		setNotifyLoading(true)
@@ -34,6 +40,16 @@ export const AppointmentPopup = (props: AppointmentPopupProps) => {
 			setNotifyMessage('An error occurred. Please try again later.')
 		}
 		setNotifyLoading(false)
+	}
+
+	const goToVideo = () => {
+		const appointmentHash = Hasher.encode({
+			appointmentId: props.appointment?.id,
+			doctor: props.doctor,
+			patient: props.patient,
+		})
+		const appointmentURL = `/appointment/${appointmentHash}`
+		history.push(appointmentURL)
 	}
 
 	return (
@@ -75,22 +91,33 @@ export const AppointmentPopup = (props: AppointmentPopupProps) => {
 							{props.appointment.notes}
 						</div>
 					)}
-					{!props.isPatient && props.patient && (
-						<div className={'mt-4 d-flex flex-row align-items-center'}>
+					<div className={'d-flex flex-row align-items-center justify-content-start mt-4'}>
+						{!props.isPatient && props.patient && (
+							<div className={'d-flex flex-row align-items-center mr-2'}>
+								<Button
+									text={'Notify Patient'}
+									onClick={notify}
+									disabled={notifyLoading || (notifyMessage !== '' && notifyMessage !== 'Sent!')}
+									className={styles.notify_button}
+								/>
+								{notifyLoading && <Loading size={'50px'} className={'w-25 ml-4'} />}
+								{notifyMessage && (
+									<div className={`ml-4 ${notifyMessage !== 'Sent!' ? 'color-quaternary' : ''}`}>
+										{notifyMessage}
+									</div>
+								)}
+							</div>
+						)}
+						{props.appointment && Date.now() < endDate && (
 							<Button
-								text={'Notify Patient'}
-								onClick={notify}
+								text={'Enter Room'}
+								iconName={VIDEO}
+								onClick={goToVideo}
 								disabled={notifyLoading || (notifyMessage !== '' && notifyMessage !== 'Sent!')}
-								className={styles.notify_button}
+								className={styles.video_button}
 							/>
-							{notifyLoading && <Loading size={'50px'} className={'w-25 ml-4'} />}
-							{notifyMessage && (
-								<div className={`ml-4 ${notifyMessage !== 'Sent!' ? 'color-quaternary' : ''}`}>
-									{notifyMessage}
-								</div>
-							)}
-						</div>
-					)}
+						)}
+					</div>
 				</div>
 			)}
 		</Popup>

@@ -231,6 +231,13 @@ class AppointmentClient {
 	public static getCalendar = async (token: string): Promise<Appointment[]> => {
 		return client('/appointment/getCalendar', { token })
 	}
+
+	public static video = async (id: AppointmentId, token: string): Promise<Appointment & { accessToken: string }> => {
+		return client('/appointment/video', {
+			appointmentId: id,
+			token,
+		})
+	}
 }
 
 export class Client {
@@ -240,7 +247,7 @@ export class Client {
 }
 
 const API_URL = 'https://upmed-api.herokuapp.com'
-// const API_URL = 'http://localhost:8080'
+// const API_URL = 'http://localhost:8000'
 
 /**
  * Creates a URI from the endpoint and API URL.

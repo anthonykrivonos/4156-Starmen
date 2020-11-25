@@ -76,7 +76,7 @@ export const Calendar = (props: ProfileSubpageProps) => {
 					})
 			}
 		}
-	}, [location.pathname, newDoctors, newLoaded, newPatients, props.isPatient])
+	}, [location.pathname])
 
 	useEffect(() => {
 		// Perform one-line validation on all the inputs

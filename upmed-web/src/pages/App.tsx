@@ -5,6 +5,7 @@ import { Footer, UMNavigationBar } from '../components'
 import { Home } from './home'
 import { SignIn, OnSignIn } from './account'
 import { Profile } from './profile'
+import { Appointment } from './appointment'
 import { Users } from '../utils'
 
 import './../index.sass'
@@ -35,8 +36,16 @@ const ROUTES: Route[] = [
 		name: 'Profile',
 		path: '/profile/*',
 		page: <Profile />,
-		auth: false,
+		auth: true,
 		navbar: false,
+		footer: false,
+	},
+	{
+		name: 'Appointment',
+		path: '/appointment/*',
+		page: <Appointment />,
+		auth: true,
+		navbar: true,
 		footer: false,
 	},
 	{

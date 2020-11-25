@@ -3,8 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Button } from '../button'
 import { NavigationBar } from './NavigationBar'
 import { STORAGE_KEYS } from '../../constants'
-import { Storage } from '../../utils'
-import { Users } from '../../utils/Users'
+import { Users, Storage } from '../../utils'
 import { Avatar } from '../elements'
 import { Patient, HCP } from '../../models'
 import './NavigationBar.sass'
@@ -20,10 +19,6 @@ export const UMNavigationBar = () => {
 	const [userToken, setUserToken] = useState(Storage.get(STORAGE_KEYS.USER_TOKEN) as string | null)
 
 	const [user, setUser] = useState(null as (Patient | HCP) | null)
-
-	useEffect(() => {
-		Users.getCurrentUser().then((u) => setUser(u))
-	})
 
 	useEffect(() => {
 		const newToken = Storage.get(STORAGE_KEYS.USER_TOKEN)
