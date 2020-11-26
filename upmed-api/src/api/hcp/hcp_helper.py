@@ -1,6 +1,6 @@
 import datetime
 from flask import Blueprint, request, jsonify, make_response
-
+import requests
 from sys import path
 from os.path import join, dirname
 path.append(join(dirname(__file__), '../../..'))
@@ -46,13 +46,19 @@ def hcp_login(db, pid, email):
         return f"An Error Occured: {e}"
 
 
-def hcp_signup(db, hcp, hours):
+def hcp_signup(db, hcp, hours, npi):
     """New HCP creates profile
 
     Returns:
             Response: JSON
     """
     utype = "HCP"
+    # Check NPI
+    response = requests.get("https://clinicaltables.nlm.nih.gov/api/npi_org/v3/search", params={"terms": str(npi),
+                                                                                                "sf": "NPI"})
+    if response.json()[0] != 1:
+        return 0
+
     res = db.document(hcp.id).set({
         "id": hcp.id,
         "firstName": hcp.firstName,
