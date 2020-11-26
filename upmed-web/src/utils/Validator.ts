@@ -22,6 +22,11 @@ export class Validator {
 		return value === '' || /^(()?\d{3}())?(-|\s)?\d{3}(-|\s)?\d{4}$/i.test(value)
 	}
 
+	// Returns true if the NPI is valid.
+	public static npi(value: string): boolean {
+		return value === '' || (value.length === 10 && /^\d+$/.test(value))
+	}
+
 	// Returns true if the YYYY-MM-DD date is valid.
 	public static stringDate(value: string): boolean {
 		return value === '' || /^(\d{4}-\d{2}-\d{2})$/i.test(value)

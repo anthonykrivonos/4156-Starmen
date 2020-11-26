@@ -15,4 +15,12 @@ describe('Formatter', () => {
         expect(Formatter.stringDate(new Date(2020, 8 - 1, 8))).equal('2020-08-08')
     })
 
+    it('npi.success', () => {
+        expect(Formatter.npi('12341aa234')).equal('12341234')
+        expect(Formatter.npi('aa12341234')).equal('12341234')
+        expect(Formatter.npi('12341234aa')).equal('12341234')
+        expect(Formatter.npi('aa')).equal('')
+        expect(Formatter.npi('')).equal('')
+    })
+
 })

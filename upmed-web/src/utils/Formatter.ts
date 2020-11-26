@@ -18,4 +18,8 @@ export class Formatter {
 
 		return [year, month, day].join('-')
 	}
+
+	public static npi(value: string): string {
+		return value.replace(/\D/g,'')
+	}
 }

@@ -65,4 +65,15 @@ describe('Validator', () => {
         expect(Validator.email('first@namegmailnet')).equal(false)
     })
 
+    it('npi.valid', () => {
+        expect(Validator.npi('1234567890')).equal(true)
+        expect(Validator.npi('')).equal(true)
+    })
+
+    it('npi.invalid', () => {
+        expect(Validator.npi('123456789')).equal(false)
+        expect(Validator.npi('123456789a')).equal(false)
+        expect(Validator.npi('abcdefghij')).equal(false)
+    })
+
 })

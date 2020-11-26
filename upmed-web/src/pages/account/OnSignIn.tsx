@@ -51,6 +51,7 @@ export const OnSignIn = () => {
 	const [drinker, setDrinker] = useState(Status.NEVER)
 	const [smoker, setSmoker] = useState(Status.NEVER)
 	const [hours, setHours] = useState(INITIAL_HOURS)
+	const [npi, setNPI] = useState('')
 	const [hoursValid, setHoursValid] = useState(true)
 
 	// Can the user create an account?
@@ -148,6 +149,7 @@ export const OnSignIn = () => {
 						lastName,
 						phone,
 						email,
+						npi,
 						specialty,
 						title,
 						profilePicture || undefined,
@@ -157,8 +159,12 @@ export const OnSignIn = () => {
 		} catch (e) {
 			setLoading(false)
 			clearTimeout(timeout)
-			setShowError(true)
-			setError(e)
+			if (e.toString().includes('Unable to signup.')) {
+				setShowError(false)
+				setError('You might be unauthorized to use this service.')
+			} else {
+				setShowError(true)
+			}
 		}
 	}
 
@@ -208,6 +214,7 @@ export const OnSignIn = () => {
 				(isPatient ? !Objects.isNullish(drinker) : true) &&
 				(isPatient ? !Objects.isNullish(smoker) : true) &&
 				// Doctor validation
+				(!isPatient ? (npi !== '' && Validator.npi(npi)) : true) &&
 				(!isPatient ? hoursValid : true) &&
 				(!isPatient ? (specialty ? Validator.text(specialty) : true) : true) &&
 				(!isPatient ? (title ? Validator.text(title) : true) : true),
@@ -360,6 +367,16 @@ export const OnSignIn = () => {
 						{!isPatient && (
 							<div className={styles.basic_info}>
 								<h4 className={`${styles.section_title} font-title`}>Professional Info</h4>
+								<TextInput
+									containerClassName={styles.input_short}
+									value={title}
+									label={'National Provider Identifier (NPI)'}
+									errorLabel={'Invalid NPI, must be 10 digits long.'}
+									validator={Validator.npi}
+									formatter={Formatter.npi}
+									onChange={(t) => setNPI(t)}
+									required
+								/>
 								<TextInput
 									containerClassName={styles.input_short}
 									value={title}
