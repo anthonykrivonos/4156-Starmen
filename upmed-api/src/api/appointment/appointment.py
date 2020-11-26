@@ -8,7 +8,7 @@ path.append(join(dirname(__file__), '../../..'))
 from src.util.firebase.db import Database  # noqa
 from src.util import Auth  # noqa
 from src.models.appointment import Appointment  # noqa
-from src.api.appointment import appointment_helper
+from src.api.appointment import appointment_helper  # noqa
 
 pdb = Database()
 hcp_db = pdb.getHCP()
@@ -35,14 +35,16 @@ def root():
 @appointment_endpoints.route('/getByToken', methods=['POST'])
 def get_by_token():
     post_data = request.get_json()
-    response, status_code = appointment_helper.appointment_get_by_token(post_data)
+    response, status_code = appointment_helper.appointment_get_by_token(
+        post_data)
     return make_response(jsonify(response), status_code)
 
 
 @appointment_endpoints.route('/getCalendar', methods=['POST'])
 def get_calendar():
     post_data = request.get_json()
-    response, status_code = appointment_helper.appointment_get_calendar(post_data)
+    response, status_code = appointment_helper.appointment_get_calendar(
+        post_data)
     return make_response(jsonify(response), status_code)
 
 
@@ -57,4 +59,11 @@ def create_appointment():
 def delete_appointment():
     post_data = request.get_json()
     response, status_code = appointment_helper.delete_appointment(post_data)
+    return make_response(jsonify(response), status_code)
+
+
+@appointment_endpoints.route('/video', methods=['POST'])
+def create_room():
+    post_data = request.get_json()
+    response, status_code = appointment_helper.video(post_data)
     return make_response(jsonify(response), status_code)

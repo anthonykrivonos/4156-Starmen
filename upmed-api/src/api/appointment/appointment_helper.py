@@ -1,8 +1,13 @@
 from src.util.firebase.db import Database  # noqa
-from src.util.util import Auth
+from src.util.util import Auth, Twilio #noqa
 from src.models.appointment import Appointment  # noqa
 from sys import path
 from os.path import join, dirname
+
+
+from twilio.jwt.access_token.grants import VideoGrant, ChatGrant
+from twilio.rest import Client
+from twilio.base.exceptions import TwilioRestException
 
 path.append(join(dirname(__file__), '../../..'))
 
@@ -12,6 +17,7 @@ pdb = Database()
 hcp_db = pdb.getHCP()
 patient_db = pdb.getPatients()
 appointmentsdb = pdb.getAppointments()
+twilio = Twilio()
 
 
 def appointment_get_by_token(post_data):
@@ -224,7 +230,7 @@ def create_appointment(post_data):
             return response_object, 401
 
         appointment_id = str(patient_id) + "," + \
-                         str(doctor_id) + "," + str(post_data.get('date'))
+            str(doctor_id) + "," + str(post_data.get('date'))
         try:
             new_appointment = Appointment(
                 id=appointment_id,
@@ -285,3 +291,77 @@ def create_appointment(post_data):
             'message': 'Error: Error in token authentication'
         }
         return response_object, 401
+
+
+def video(post_data):
+    """
+    Creates JWT Twlio Room token
+    Request:
+        appointmentId: string
+        hcpToken: string?
+        patientToken: string?
+    Response:
+        token: videoId
+        id: AppointmentId
+        date: number
+        duration: number
+        doctor: DoctorId
+        patient: PatientId
+        subject: string
+    """
+    auth_token = post_data.get('token')
+    if auth_token:
+        pid, _ = Auth.decode_auth_token(auth_token)
+
+        appointment_id = post_data.get('appointmentId')
+        appointments_output = appointmentsdb.document(
+            str(appointment_id)).get().to_dict()
+        print(appointments_output)
+        if not (pid == appointments_output['patient'] or pid == appointments_output['doctor']):
+            response_object ={
+                "Success": False,
+                "message": "Id not in appointment, unable to access room"
+            }
+            return response_object, 401
+
+        conversation = get_chatroom(str(appointment_id))
+
+        try:
+            conversation.participants.create(identity=pid)
+        except TwilioRestException as exc:
+            # do not error if the user is already in the conversation
+            if exc.status != 409:
+                raise
+
+        token = twilio.access_token(pid)
+        token.add_grant(VideoGrant(room=str(appointment_id)))
+        token.add_grant(ChatGrant(service_sid=conversation.chat_service_sid))
+
+        response_object = {
+            "accessToken": token.to_jwt().decode(),
+            "id": appointments_output['id'],
+            "date": appointments_output['date'],
+            "duration": appointments_output['duration'],
+            "doctor": appointments_output['doctor'],
+            "patient": appointments_output['patient'],
+            "subject": appointments_output['subject'],
+            "notes": appointments_output['notes']
+        }
+        return response_object, 200
+    else:
+        response_object = {
+            'Success': False,
+            'message': 'Failed to verify role'
+        }
+        return response_object, 401
+
+
+def get_chatroom(name):
+    client = twilio.connect()
+    for conversation in client.conversations.conversations.list():
+        if conversation.friendly_name == name:
+            return conversation
+
+    # a conversation with the given name does not exist ==> create a new one
+    return client.conversations.conversations.create(
+        friendly_name=name)

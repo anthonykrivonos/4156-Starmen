@@ -1,6 +1,7 @@
 import datetime
 import jwt
 from twilio.rest import Client
+from twilio.jwt.access_token import AccessToken
 
 from .env import Env
 
@@ -56,3 +57,8 @@ class Twilio():
         account_sid = Env.TWILIO_ACCOUNT_SID()
         auth_token = Env.TWILIO_AUTH_TOKEN()
         return Client(account_sid, auth_token)
+
+    @staticmethod
+    def access_token(identity):
+        return AccessToken(Env.TWILIO_ACCOUNT_SID(), Env.TWILIO_API_KEY_SID(),
+                           Env.TWILIO_API_KEY_SECRET(), identity=identity)

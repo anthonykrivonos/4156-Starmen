@@ -130,7 +130,9 @@ def getbytoken():
     auth_token = request.get_json().get('token')
     if auth_token:
         pid, utype = Auth.decode_auth_token(auth_token)
-        resp = pat_get_by_token(pat, pid)
+        resp, success = pat_get_by_token(pat, pid)
+        if not success:
+            return make_response(resp), 404
         response_object = {
             "id": resp.id,
             "firstName": resp.firstName,

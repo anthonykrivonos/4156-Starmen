@@ -109,27 +109,35 @@ def pat_delete(db, pid):
 
 
 def pat_get_by_token(db, pid):
-    patient = db.document(pid).get()
-    if (patient == 1):
-        return 0
-    resp = Patient(
-        id=pid,
-        firstName=patient['firstName'],
-        lastName=patient['lastName'],
-        phone=patient['phone'],
-        email=patient['email'],
-        dateOfBirth=patient['dateOfBirth'],
-        sex=patient['sex'],
-        profilePicture=patient['profilePicture'],
-        height=patient['height'],
-        weight=patient['weight'],
-        drinker=patient['drinker'],
-        smoker=patient['smoker'],
-        calendar=patient['calendar'],
-        doctors=patient['doctors'],
-        health=patient['health']
-    )
-    return resp
+    try:
+        patient = db.document(str(pid)).get()
+        if (patient == 1):
+            return 0
+        patient = patient.to_dict()
+        resp = Patient(
+            id=pid,
+            firstName=patient['firstName'],
+            lastName=patient['lastName'],
+            phone=patient['phone'],
+            email=patient['email'],
+            dateOfBirth=patient['dateOfBirth'],
+            sex=patient['sex'],
+            profilePicture=patient['profilePicture'],
+            height=patient['height'],
+            weight=patient['weight'],
+            drinker=patient['drinker'],
+            smoker=patient['smoker'],
+            calendar=patient['calendar'],
+            doctors=patient['doctors'],
+            health=patient['health']
+        )
+        return resp, True
+    except Exception as e:
+        response_object = {
+            'status': 'fail',
+            'message': 'Unable to find patient.'
+        }
+        return jsonify(response_object), False
 
 
 def pat_edit_profile(db, pid, post_data):
