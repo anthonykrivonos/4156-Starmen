@@ -1,17 +1,19 @@
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, make_response, json
+from algoliasearch.search_client import SearchClient  # noqa
 
 from sys import path
 from os.path import join, dirname
+
 path.append(join(dirname(__file__), '../../..'))
 
 from src.util.firebase.db import Database  # noqa
 from src.util.util import Auth  # noqa
+from src.util.env import Env  # noqa
 from src.models.patient import Patient  # noqa
 from src.models.appointment import Appointment  # noqa
 from src.models.hcp import HCP  # noqa
 from src.models.hours import Hours  # noqa
 from src.models.day import Day  # noqa
-
 
 auth = Auth()
 
@@ -36,7 +38,7 @@ def pat_login(db, pid, email):
         else:
             return 0
     except Exception as e:
-        return f"An Error Occured: {e}"
+        return f"An Error Occurred: {e}"
 
 
 def pat_signup(pat, patient):
@@ -64,6 +66,9 @@ def pat_signup(pat, patient):
         "doctors": patient.doctors
 
     })
+    # print("HERE")
+    add_pat(patient)
+    # print("HERE2")
     if (res):
         auth_token = auth.encode_auth_token(patient.id, utype)
     else:
@@ -316,9 +321,8 @@ def pat_get_all(pat):
         return 2
     pats_return = []
     for patient in pats:
-
         h = patient.to_dict()
-        print(f'{patient.id}=> {patient}')
+        print(f'{patient.id}=> {h["firstName"]}')
         pat_obj = {
             "id": h['id'],
             "firstName": h['firstName'],
@@ -363,3 +367,59 @@ def make_week():
         saturday=week[6]
     )
     return schedule
+
+
+def pat_search(text):
+    print(text)
+    api = Env.ALGOLIA()
+    admin = Env.ALGOLIA_ADMIN()
+    # print(api)
+    # add_pat(pat)
+    client = SearchClient.create(api, admin)
+    index = client.init_index('patients')
+    index.set_settings({"customRanking": ["desc(followers)"]})
+    index.set_settings({"searchableAttributes": ["firstName", "lastName", "phone",
+                                                 "email", "id"]})
+    res = index.search(text)
+
+    # Res is all hits of Patients with matching
+    hits = res['hits']
+
+    pats_return = []
+    # patient = pat.document(str(pid)).get()
+    for h in hits:
+        pat_obj = {
+            "id": h['id'],
+            "firstName": h['firstName'],
+            "lastName": h['lastName'],
+            "email": h['email'],
+            "phone": h['phone'],
+            "profilePicture": h['profilePicture']
+        }
+        pats_return.append(pat_obj)
+
+    return pats_return
+
+def add_pat(patient):
+    api = Env.ALGOLIA()
+    admin = Env.ALGOLIA_ADMIN()
+    client = SearchClient.create(api, admin)
+    index = client.init_index('patients')
+    res = {
+        "id": patient.id,
+        "firstName": patient.firstName,
+        "lastName": patient.lastName,
+        "phone": patient.phone,
+        "email": patient.email,
+        "profilePicture": patient.profilePicture
+    }
+    with open('js.json', 'w') as fp:
+        json.dump(res, fp)
+
+    batch = json.load(open('js.json'))
+    fp.close()
+    try:
+        index.save_object(batch, {'autoGenerateObjectIDIfNotExist': True})
+    except Exception as e:
+        print(f'Error: {e}')
+    return 0

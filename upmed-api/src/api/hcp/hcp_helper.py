@@ -1,5 +1,6 @@
 import datetime
-from flask import Blueprint, request, jsonify, make_response
+from flask import Blueprint, request, jsonify, json, make_response
+from algoliasearch.search_client import SearchClient  # noqa
 import requests
 from sys import path
 from os.path import join, dirname
@@ -7,6 +8,7 @@ path.append(join(dirname(__file__), '../../..'))
 
 from src.util.firebase.db import Database  # noqa
 from src.util.util import Auth, Twilio  # noqa
+from src.util.env import Env  # noqa
 from src.models.hcp import HCP  # noqa
 from src.models.hours import Hours  # noqa
 from src.models.day import Day  # noqa
@@ -72,6 +74,7 @@ def hcp_signup(db, hcp, hours, npi):
         "hours": hours,
         "patients": hcp.patients
     })
+    add_hcp(hcp)
     if (res):
         auth_token = auth.encode_auth_token(hcp.id, utype)
     else:
@@ -558,3 +561,61 @@ def make_week():
         saturday=week[6]
     )
     return schedule
+
+def hcp_search(text):
+    print(text)
+    api = Env.ALGOLIA()
+    admin = Env.ALGOLIA_ADMIN()
+    client = SearchClient.create(api, admin)
+    index = client.init_index('hcps')
+    index.set_settings({"customRanking": ["desc(followers)"]})
+    index.set_settings({"searchableAttributes": ["firstName", "lastName", "phone",
+                                                 "email", "id", "title", "specialty"]})
+    res = index.search(text)
+
+    # Res is all hits of Patients with matching
+    hits = res['hits']
+
+    hcp_return = []
+    for h in hits:
+        hcp_obj = {
+            "id": h['id'],
+            "firstName": h['firstName'],
+            "lastName": h['lastName'],
+            "email": h['email'],
+            "phone": h['phone'],
+            "title": h['title'],
+            "specialty": h['specialty'],
+            "profilePicture": h['profilePicture']
+        }
+        hcp_return.append(hcp_obj)
+
+    return hcp_return
+
+
+def add_hcp(hcp):
+    api = Env.ALGOLIA()
+    admin = Env.ALGOLIA_ADMIN()
+    client = SearchClient.create(api, admin)
+    index = client.init_index('hcps')
+    res = {
+        "id": hcp.id,
+        "firstName": hcp.firstName,
+        "lastName": hcp.lastName,
+        "phone": hcp.phone,
+        "email": hcp.email,
+        "title": hcp.title,
+        "specialty": hcp.specialty,
+        "profilePicture": hcp.profilePicture
+    }
+    with open('js.json', 'w') as fp:
+        json.dump(res, fp)
+
+    batch = json.load(open('js.json'))
+    fp.close()
+    # print(json.load('js.json'))
+    try:
+        index.save_object(batch, {'autoGenerateObjectIDIfNotExist': True})
+    except Exception as e:
+        print(f'Error: {e}')
+    return 0

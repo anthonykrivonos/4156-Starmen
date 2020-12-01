@@ -2,7 +2,7 @@ from os.path import join, dirname
 from sys import path
 from flask import Blueprint, request, jsonify, make_response
 import datetime
-from .hcp_helper import hcp_signup, hcp_login, hcp_delete, hcp_set_record, hcp_get_by_token, hcp_notify, hcp_get_all, hcp_test_number, hcp_edit_profile, hcp_get_patients, hcp_set_health_events, hcp_set_profile_picture, hcp_set_health_events
+from .hcp_helper import hcp_signup, hcp_login, hcp_delete, hcp_set_record, hcp_get_by_token, hcp_notify, hcp_get_all, hcp_test_number, hcp_edit_profile, hcp_get_patients, hcp_search, hcp_set_health_events, hcp_set_profile_picture, hcp_set_health_events
 
 path.append(join(dirname(__file__), '../../..'))
 
@@ -67,6 +67,7 @@ def signup():
     Returns:
             Response: JSON
     """
+
     post_data = request.get_json()
     schedule = make_week()
     try:
@@ -217,6 +218,7 @@ def remove():
             delete() : Delete a document from Firestore collection.
     """
     post_data = request.get_json()
+
     try:
         # Check for ID in URL query
         pid = post_data.get('id')
@@ -608,3 +610,41 @@ def set_profile_picture():
             'message': "invalid_token"
         }
         return make_response(jsonify(response_object)), 401
+
+
+@hcp_endpoints.route('/search', methods=['POST'])
+def search():
+    """
+    Searches for a Patient from input
+
+    Returns: Response: JSON
+    """
+    # Get Auth Token
+    auth_token = request.get_json().get('token')
+    if auth_token:
+        pid, utype = Auth.decode_auth_token(auth_token)
+        text = request.get_json().get('text')
+        if len(text) >=3:
+            res = hcp_search(text)
+
+        else:
+            response_object = {
+                "Success": False,
+                "Not long enough": text
+            }
+            return make_response(jsonify(response_object)), 400
+        if res:
+            return make_response(jsonify(res)), 200
+        else:
+            response_object = {
+                'status': 'fail',
+                'message': 'Unable to find patient with query'
+            }
+            return make_response(jsonify(response_object)), 404
+    else:
+        response_object = {
+            'status': 'fail',
+            'message': "invalid_token"
+        }
+        return make_response(jsonify(response_object)), 401
+

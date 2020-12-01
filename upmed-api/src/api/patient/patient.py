@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, make_response
 
-from .patient_helper import pat_delete, pat_edit_profile, pat_login, pat_get_by_token, pat_set_profile_picture, pat_signup, pat_get_all, pat_get_hcps, pat_get_records  # noqa
+from .patient_helper import pat_delete, pat_edit_profile, pat_login, pat_get_by_token, pat_set_profile_picture, pat_signup, pat_get_all, pat_get_hcps, pat_get_records, pat_search  # noqa
 
 from sys import path
 from os.path import join, dirname
@@ -60,6 +60,7 @@ def signup():
         Response: JSON
     """
     post_data = request.get_json()
+    # print(post_data)
     try:
         patient = Patient(
             id=post_data.get('id'),
@@ -270,3 +271,40 @@ def set_profile_picture():
             'message': "invalid_token"
         }
         return make_response(jsonify(response_object)), 401
+
+@patient_endpoints.route('/search', methods=['POST'])
+def search():
+    """
+    Searches for a Patient from input
+
+    Returns: Response: JSON
+    """
+    # Get Auth Token
+    auth_token = request.get_json().get('token')
+    if auth_token:
+        pid, utype = Auth.decode_auth_token(auth_token)
+        text = request.get_json().get('text')
+        if len(text) >=3:
+            res = pat_search(text)
+
+        else:
+            response_object = {
+                "Success": False,
+                "Not long enough": text
+            }
+            return make_response(jsonify(response_object)), 400
+        if res:
+            return make_response(jsonify(res)), 200
+        else:
+            response_object = {
+                'status': 'fail',
+                'message': 'Unable to find patient with query'
+            }
+            return make_response(jsonify(response_object)), 404
+    else:
+        response_object = {
+            'status': 'fail',
+            'message': "invalid_token"
+        }
+        return make_response(jsonify(response_object)), 401
+
