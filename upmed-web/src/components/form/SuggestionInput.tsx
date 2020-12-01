@@ -19,7 +19,9 @@ interface SuggestionInputProps {
 	className?: string
 	containerClassName?: string
 	suggestionLimit?: number
-	onChange?: (value: string) => void
+	selectOnChange?: boolean
+	onSelect?: (value: any) => void
+	onChange?: (value: any) => void
 	/** A function to asynchronously provide suggestions to the input. */
 	getSuggestions: (value: string) => Promise<any[]>
 	/** Function to get the suggestion value from a list of suggestions. */
@@ -27,8 +29,9 @@ interface SuggestionInputProps {
 }
 
 export const SuggestionInput = (props: SuggestionInputProps) => {
-	const [value, setValue] = useState('')
+	const [text, setText] = useState('')
 	const [suggestions, setSuggestions] = useState([] as any[])
+	const [suggestionsMap, setSuggestionsMap] = useState({} as any)
 
 	const getSuggestionValue = (v: any) => {
 		if (props.getSuggestionValue) {
@@ -37,9 +40,18 @@ export const SuggestionInput = (props: SuggestionInputProps) => {
 		return v
 	}
 
-	const onChange = (nextValue: string) => {
-		setValue(nextValue)
-		props.onChange && props.onChange(nextValue)
+	const onChange = (nextText: string) => {
+		if (props.selectOnChange && nextText && suggestions.length > 0) {
+			const val = suggestionsMap[getSuggestionValue(nextText)]
+			props.onSelect && props.onSelect(val)
+		}
+		setText(nextText)
+		props.onChange && props.onChange(nextText)
+	}
+
+	const onSelect = (value: any) => {
+		props.onSelect && props.onSelect(value)
+		onChange(getSuggestionValue(value))
 	}
 
 	const renderSuggestion: RenderSuggestion<any> = (suggestion: any, { isHighlighted }) => {
@@ -47,7 +59,7 @@ export const SuggestionInput = (props: SuggestionInputProps) => {
 			<div
 				key={getSuggestionValue(suggestion)}
 				onClick={() => {
-					onChange(getSuggestionValue(suggestion))
+					onSelect(suggestion)
 					onSuggestionsClearRequested()
 				}}
 				className={`${styles.suggestion} ${isHighlighted ? styles.highlighted : ''}`}
@@ -60,7 +72,7 @@ export const SuggestionInput = (props: SuggestionInputProps) => {
 	const renderSuggestionsContainer: RenderSuggestionsContainer = ({ containerProps, children, query }) => {
 		containerProps.className = ''
 		return (
-			<div {...containerProps} className={styles.suggestions}>
+			<div {...containerProps} className={styles.suggestions} style={{ opacity: suggestions.length > 0 ? '1' : '0' }}>
 				{suggestions.map((s) => renderSuggestion(s, { isHighlighted: false, query }))}
 			</div>
 		)
@@ -76,9 +88,19 @@ export const SuggestionInput = (props: SuggestionInputProps) => {
 
 	useEffect(() => {
 		if (!Objects.isNullish(props.value)) {
-			setValue(props.value!)
+			setText(props.value!)
 		}
 	}, [props.value])
+
+	useEffect(() => {
+		if (suggestions.length > 0) {
+			const newSuggestionsMap = {} as any
+			for (const suggestion of suggestions) {
+				newSuggestionsMap[getSuggestionValue(suggestion)] = suggestion
+			}
+			setSuggestionsMap(newSuggestionsMap)
+		}
+	}, [suggestions])
 
 	return (
 		<div className={props.containerClassName}>
@@ -95,7 +117,7 @@ export const SuggestionInput = (props: SuggestionInputProps) => {
 				renderSuggestionsContainer={renderSuggestionsContainer}
 				getSuggestionValue={getSuggestionValue}
 				renderSuggestion={renderSuggestion}
-				inputProps={{ onChange: (_, res) => onChange(res.newValue), value, className: styles.suggestion_input }}
+				inputProps={{ onChange: (_, res) => onChange(res.newValue), value: text, className: `${styles.suggestion_input} ${suggestions.length !== 0 ? styles.no_bottom_border : ''}` }}
 			/>
 		</div>
 	)
