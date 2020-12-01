@@ -48,10 +48,6 @@ class Env:
         return getenv("ALGOLIA_ADMIN")
 
     @staticmethod
-    def HEROKU_API_KEY() -> str:
-        return getenv("HEROKU_API_KEY")
-
-    @staticmethod
     def USE_CORS() -> bool:
         return getenv("USE_CORS") == '1'
 

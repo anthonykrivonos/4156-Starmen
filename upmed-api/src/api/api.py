@@ -1,7 +1,6 @@
 from .appointment import appointment_endpoints
 from .patient import patient_endpoints
 from .hcp import hcp_endpoints
-from .logs import logs_endpoints
 
 from sys import path
 from os.path import join, dirname
@@ -18,9 +17,6 @@ api_endpoints.register_blueprint(hcp_endpoints, url_prefix='/hcp')
 
 # /patients
 api_endpoints.register_blueprint(patient_endpoints, url_prefix='/patient')
-
-# /logs
-api_endpoints.register_blueprint(logs_endpoints, url_prefix='/logs')
 
 # /appointments
 api_endpoints.register_blueprint(

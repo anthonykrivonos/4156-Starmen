@@ -24,8 +24,6 @@ simple-crypt
 # JWT
 PyJWT
 
-# Heroku logs
-heroku3
 
 # Twilio API
 twilio
