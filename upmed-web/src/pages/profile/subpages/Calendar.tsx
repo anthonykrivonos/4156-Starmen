@@ -5,7 +5,7 @@ import { ProfileSubpageProps } from '../Profile'
 import FullCalendar, { EventInput } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 
-import { Button, Popup, TextInput, DateInput, RadioButtons, Loading, SuggestionInput } from '../../../components'
+import { Button, Popup, TextInput, DateInput, RadioButtons, Dropdown, Loading } from '../../../components'
 import { Appointment, HCP, Patient } from '../../../models'
 import { Client, DateTime, Objects, Users, Validator } from '../../../utils'
 
@@ -175,30 +175,6 @@ export const Calendar = (props: ProfileSubpageProps) => {
 		!props.isPatient && setPatient(undefined)
 	}
 
-	const patientSearch = async (text: string): Promise<Patient[]> => {
-		if (text.length < 3) {
-			return []
-		}
-		try {
-			return await Client.Patient.search(Users.getUserToken(), text)
-		} catch {}
-		return []
-	}
-
-	const hcpSearch = async (text: string): Promise<HCP[]> => {
-		if (text.length < 3) {
-			return []
-		}
-		try {
-			return await Client.HCP.search(Users.getUserToken(), text)
-		} catch {}
-		return []
-	}
-
-	const getSearchValue = (person: HCP | Patient) => {
-		return `${person.firstName} ${person.lastName} <${person.email}>`
-	}
-
 	return (
 		<div className={styles.calendar_outter}>
 			<div className={styles.calendar_top}>
@@ -250,23 +226,25 @@ export const Calendar = (props: ProfileSubpageProps) => {
 								timeSelect
 								required
 							/>
-							{props.isPatient && (
-								<SuggestionInput
-									label={'Doctor'}
+							{props.isPatient && newDoctors.length > 0 && (
+								<Dropdown
+									displayOptions={newDoctors.map((d) => `${d.lastName}, ${d.firstName} <${d.email}>`)}
+									onChange={(d) => setDoctor(d)}
+									options={newDoctors}
+									label={'Doctor/Provider'}
 									containerClassName={'mt-3 w-75'}
-									getSuggestions={hcpSearch}
-									getSuggestionValue={getSearchValue}
-									onSelect={d => setDoctor(d)}
 									required
 								/>
 							)}
-							{!props.isPatient && (
-								<SuggestionInput
+							{!props.isPatient && newPatients.length > 0 && (
+								<Dropdown
+									displayOptions={newPatients.map(
+										(p) => `${p.lastName}, ${p.firstName} <${p.email}>`,
+									)}
+									onChange={(p) => setPatient(p)}
+									options={newPatients}
 									label={'Patient'}
 									containerClassName={'mt-3 w-75'}
-									getSuggestions={patientSearch}
-									getSuggestionValue={getSearchValue}
-									onSelect={p => setPatient(p)}
 									required
 								/>
 							)}

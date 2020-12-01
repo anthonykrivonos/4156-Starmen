@@ -394,7 +394,6 @@ export const OnSignIn = () => {
 									required={false}
 									suggestionLimit={4}
 									getSuggestions={getSpecialties}
-									selectOnChange
 								/>
 								<HoursInputs
 									label={'Business Hours'}

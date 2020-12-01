@@ -73,6 +73,7 @@ export const Appointment = () => {
 						setAccessToken(apt.accessToken)
 					})
 					.catch((e) => {
+						console.error(e)
 						clearTimeout(timeout)
 						setLoading(false)
 						setError('Unable to Enter Room')
