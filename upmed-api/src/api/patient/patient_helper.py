@@ -371,7 +371,7 @@ def make_week():
 
 def pat_search(text):
     print(text)
-    api = Env.ALGOLIA()
+    api = Env.ALGOLIA_API()
     admin = Env.ALGOLIA_ADMIN()
     # print(api)
     # add_pat(pat)
@@ -401,7 +401,7 @@ def pat_search(text):
     return pats_return
 
 def add_pat(patient):
-    api = Env.ALGOLIA()
+    api = Env.ALGOLIA_API()
     admin = Env.ALGOLIA_ADMIN()
     client = SearchClient.create(api, admin)
     index = client.init_index('patients')

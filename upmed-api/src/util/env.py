@@ -40,8 +40,9 @@ class Env:
         return getenv("TWILIO_AUTH_TOKEN")
 
     @staticmethod
-    def ALGOLIA() -> str:
+    def ALGOLIA_API() -> str:
         return getenv("ALGOLIA_API")
+
     @staticmethod
     def ALGOLIA_ADMIN() -> str:
         return getenv("ALGOLIA_ADMIN")

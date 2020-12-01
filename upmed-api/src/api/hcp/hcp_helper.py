@@ -564,7 +564,7 @@ def make_week():
 
 def hcp_search(text):
     print(text)
-    api = Env.ALGOLIA()
+    api = Env.ALGOLIA_API()
     admin = Env.ALGOLIA_ADMIN()
     client = SearchClient.create(api, admin)
     index = client.init_index('hcps')
@@ -594,7 +594,7 @@ def hcp_search(text):
 
 
 def add_hcp(hcp):
-    api = Env.ALGOLIA()
+    api = Env.ALGOLIA_API()
     admin = Env.ALGOLIA_ADMIN()
     client = SearchClient.create(api, admin)
     index = client.init_index('hcps')
