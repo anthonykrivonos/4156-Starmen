@@ -104,6 +104,10 @@ class PatientClient {
 	public static getAll = (token: string): Promise<Patient[]> => {
 		return client('/patient/getAll', { token })
 	}
+
+	public static search = (token: string, text: string): Promise<Patient[]> => {
+		return client('/patient/search', { token, text })
+	}
 }
 
 class HCPClient {
@@ -200,6 +204,10 @@ class HCPClient {
 
 	public static getAll = (token: string): Promise<HCP[]> => {
 		return client('/hcp/getAll', { token })
+	}
+
+	public static search = (token: string, text: string): Promise<HCP[]> => {
+		return client('/hcp/search', { token, text })
 	}
 }
 
