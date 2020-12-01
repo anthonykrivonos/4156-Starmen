@@ -12,6 +12,12 @@
         "source": "/**",
         "destination": "/index.html"
       }
+    ],
+    "predeploy": [
+      "cd upmed-web && yarn lint",
+      "cd upmed-web && yarn format",
+      "cd upmed-web && yarn test",
+      "cd upmed-web && yarn jest"
     ]
   }
 }

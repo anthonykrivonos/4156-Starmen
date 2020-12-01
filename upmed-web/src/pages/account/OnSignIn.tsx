@@ -214,7 +214,7 @@ export const OnSignIn = () => {
 				(isPatient ? !Objects.isNullish(drinker) : true) &&
 				(isPatient ? !Objects.isNullish(smoker) : true) &&
 				// Doctor validation
-				(!isPatient ? (npi !== '' && Validator.npi(npi)) : true) &&
+				(!isPatient ? npi !== '' && Validator.npi(npi) : true) &&
 				(!isPatient ? hoursValid : true) &&
 				(!isPatient ? (specialty ? Validator.text(specialty) : true) : true) &&
 				(!isPatient ? (title ? Validator.text(title) : true) : true),

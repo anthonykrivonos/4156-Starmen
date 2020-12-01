@@ -72,7 +72,11 @@ export const SuggestionInput = (props: SuggestionInputProps) => {
 	const renderSuggestionsContainer: RenderSuggestionsContainer = ({ containerProps, children, query }) => {
 		containerProps.className = ''
 		return (
-			<div {...containerProps} className={styles.suggestions} style={{ opacity: suggestions.length > 0 ? '1' : '0' }}>
+			<div
+				{...containerProps}
+				className={styles.suggestions}
+				style={{ opacity: suggestions.length > 0 ? '1' : '0' }}
+			>
 				{suggestions.map((s) => renderSuggestion(s, { isHighlighted: false, query }))}
 			</div>
 		)
@@ -117,7 +121,11 @@ export const SuggestionInput = (props: SuggestionInputProps) => {
 				renderSuggestionsContainer={renderSuggestionsContainer}
 				getSuggestionValue={getSuggestionValue}
 				renderSuggestion={renderSuggestion}
-				inputProps={{ onChange: (_, res) => onChange(res.newValue), value: text, className: `${styles.suggestion_input} ${suggestions.length !== 0 ? styles.no_bottom_border : ''}` }}
+				inputProps={{
+					onChange: (_, res) => onChange(res.newValue),
+					value: text,
+					className: `${styles.suggestion_input} ${suggestions.length !== 0 ? styles.no_bottom_border : ''}`,
+				}}
 			/>
 		</div>
 	)

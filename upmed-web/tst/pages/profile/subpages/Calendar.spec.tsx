@@ -2,7 +2,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { Calendar } from '../../../../src/pages/profile/subpages/Calendar'
 import { Appointment, HCP, Patient } from '../../../../src/models'
-//import { Client, DateTime, Objects, Users, Validator } from '../../../utils'
+// import { Client, DateTime, Objects, Users, Validator } from '../../../utils'
 
 jest.mock('react-router-dom', () => ({
     useLocation: jest.fn().mockReturnValue({

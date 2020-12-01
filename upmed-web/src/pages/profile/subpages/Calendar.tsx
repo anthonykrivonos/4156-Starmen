@@ -256,7 +256,7 @@ export const Calendar = (props: ProfileSubpageProps) => {
 									containerClassName={'mt-3 w-75'}
 									getSuggestions={hcpSearch}
 									getSuggestionValue={getSearchValue}
-									onSelect={d => setDoctor(d)}
+									onSelect={(d) => setDoctor(d)}
 									required
 								/>
 							)}
@@ -266,7 +266,7 @@ export const Calendar = (props: ProfileSubpageProps) => {
 									containerClassName={'mt-3 w-75'}
 									getSuggestions={patientSearch}
 									getSuggestionValue={getSearchValue}
-									onSelect={p => setPatient(p)}
+									onSelect={(p) => setPatient(p)}
 									required
 								/>
 							)}

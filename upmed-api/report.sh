@@ -8,7 +8,7 @@ function header() {
 mkdir "reports/${FLDR}"
 
 # Checkstyle
-echo "Writing coverage and unit testing report to reports/${FLDR}/checkstyle.txt."
+echo "Writing checkstyle report to reports/${FLDR}/checkstyle.txt."
 # shellcheck disable=SC2046
 echo $(header "Checkstyle") >> "reports/${FLDR}/checkstyle.txt"
 pycodestyle --statistics ./src >> "reports/${FLDR}/checkstyle.txt"

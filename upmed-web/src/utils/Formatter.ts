@@ -20,6 +20,6 @@ export class Formatter {
 	}
 
 	public static npi(value: string): string {
-		return value.replace(/\D/g,'')
+		return value.replace(/\D/g, '')
 	}
 }

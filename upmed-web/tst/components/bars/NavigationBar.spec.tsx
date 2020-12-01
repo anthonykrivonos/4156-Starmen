@@ -18,10 +18,10 @@ jest.mock('react-router', () => ({
 
 describe('NavigationBar', () => {
 
-    const NavigationItem = {
-        title: "title",
-        url: "url"
-    }
+    // const NavigationItem = {
+    //     title: "title",
+    //     url: "url"
+    // }
 
     const NavigationBarProps = {
         homeRef: "homeRef",

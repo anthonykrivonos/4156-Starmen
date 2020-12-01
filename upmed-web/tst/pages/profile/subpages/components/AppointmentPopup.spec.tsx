@@ -1,10 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { AppointmentPopup } from '../../../../../src/pages/profile/subpages/components/AppointmentPopup'
-import { Button, Loading, Popup, PopupProps } from '../../../../../src/components'
 import { Appointment, HCP, Patient } from '../../../../../src/models'
-import { Client, DateTime, Users } from '../../../../../src/utils'
-import styles from '../../../../../src/pages/profile/subpages/components/AppointmentPopup.module.sass'
 
 
 describe('AppointmentPopup', () => {
