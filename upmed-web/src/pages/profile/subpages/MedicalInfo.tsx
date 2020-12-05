@@ -19,6 +19,7 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 	const [isCurrentlyEditingHealthEvents, setIsCurrentlyEditingHealthEvent] = useState(false)
 	const [healthEvents, setHealthEvents] = useState(props.healthEvents.sort((a, b) => b.date - a.date))
 	const [areHealthEventsValid, setAreHealthEventsValid] = useState(true)
+	const [canSaveHealthEvents, setCanSaveHealthEvents] = useState(false)
 
 	const getDoctorById = (id: DoctorId): HCP | null => {
 		for (const d of props.doctors) {
@@ -70,6 +71,15 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 		setIsCurrentlyEditingHealthEvent(true)
 	}
 
+	const saveHealthEvents = () => {
+		if (areHealthEventsValid && currentPatient && healthEvents) {
+			try {
+				Client.HCP.setRecords(Users.getUserToken(), currentPatient.id, healthEvents)
+			} catch {}
+			setCanSaveHealthEvents(false)
+		}
+	}
+
 	const updateHealthEvents = (
 		index: number,
 		event: string | null = null,
@@ -110,10 +120,9 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 					}
 				}
 				setAllPatients(newPatients)
-				try {
-					Client.HCP.setRecords(Users.getUserToken(), currentPatient.id, newHealthEvents)
-				} catch {}
 			}
+
+			setCanSaveHealthEvents(true)
 		}
 	}
 
@@ -135,6 +144,7 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 		}
 		setAllPatients(newPatients)
 		setAreHealthEventsValid(false)
+		setCanSaveHealthEvents(false)
 	}
 
 	const removeHealthEvent = (index: number) => {
@@ -157,12 +167,7 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 			}
 		}
 		setAllPatients(newPatients)
-
-		if (currentPatient) {
-			try {
-				Client.HCP.setRecords(Users.getUserToken(), currentPatient.id, newHealthEvents)
-			} catch {}
-		}
+		setCanSaveHealthEvents(true)
 	}
 
 	return isCurrentlyEditingHealthEvents && currentPatient ? (
@@ -215,12 +220,20 @@ export const MedicalInfo = (props: ProfileSubpageProps) => {
 						</div>
 						<h4 className={`font-title mt-4 mb-3`}>Health Records</h4>
 						<div className={styles.edit_health_events}>
-							<Button
-								text={'Add Health Record'}
-								onClick={addHealthEvent}
-								disabled={!areHealthEventsValid}
-								className={styles.add_health_event}
-							/>
+							<div>
+								<Button
+									text={canSaveHealthEvents ? 'Save Health Records' : 'Health Records Saved'}
+									onClick={saveHealthEvents}
+									disabled={!areHealthEventsValid || !canSaveHealthEvents}
+									className={styles.save_health_events}
+								/>
+								<Button
+									text={'Add Health Record'}
+									onClick={addHealthEvent}
+									disabled={!areHealthEventsValid}
+									className={styles.add_health_event}
+								/>
+							</div>
 							{healthEvents.map((hE, idx) => (
 								<div key={`edit-he-${hE.date}`} className={'row p-0 m-0 mb-2 pr-4 align-items-start'}>
 									<div className={'col-3 m-0 p-0 pr-2 align-items-center'}>
