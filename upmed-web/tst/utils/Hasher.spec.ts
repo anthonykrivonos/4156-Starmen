@@ -5,8 +5,9 @@ import { Hasher } from '../../src/utils'
 
 describe('Hasher', () => {
 
-    it('encode.success', () => {
+    it('encode', () => {
         expect(Hasher.encode('12345')).equal('IjEyMzQ1Ig==')
+        expect(Hasher.encode({ key: 'value' })).equal('eyJrZXkiOiJ2YWx1ZSJ9')
     })
 
     it('decode.success', () => {
