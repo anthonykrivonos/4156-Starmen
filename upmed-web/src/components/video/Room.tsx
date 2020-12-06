@@ -28,9 +28,9 @@ export const Room = (props: RoomProps) => {
 					return
 				}
 				if (props.doctor && props.doctor.id === u.id) {
-					setOtherUser(props.doctor)
-				} else {
 					setOtherUser(props.patient)
+				} else {
+					setOtherUser(props.doctor)
 				}
 			})
 			.catch()

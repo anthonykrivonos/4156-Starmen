@@ -332,6 +332,7 @@ export const OnSignIn = () => {
 										errorLabel={'Invalid height.'}
 										onChange={(t) => setHeight(Number(t))}
 										min={0}
+										max={244}
 										required
 									/>
 									<Counter
@@ -340,7 +341,7 @@ export const OnSignIn = () => {
 										label={'Weight (kg)'}
 										errorLabel={'Invalid weight.'}
 										onChange={(t) => setWeight(Number(t))}
-										min={0}
+										min={227}
 										required
 									/>
 								</div>

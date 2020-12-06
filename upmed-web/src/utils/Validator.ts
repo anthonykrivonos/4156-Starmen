@@ -1,4 +1,5 @@
 import Filter from 'bad-words'
+import { Day, Hours } from '../models'
 
 export class Validator {
 	// Returns true if there are no bad words.
@@ -9,7 +10,10 @@ export class Validator {
 
 	// Returns true if the name is valid, false otherwise.
 	public static realName(value: string): boolean {
-		return Validator.badWords(value) && /^[a-zA-Z ]+(?:-[a-zA-Z]+)*$/.test(value)
+		return (
+			value === '' ||
+			(value.trim() !== '' && Validator.badWords(value) && /^[a-zA-Z ]+(?:-[a-zA-Z]+)*$/.test(value))
+		)
 	}
 
 	// Returns true if the short text is valid, false otherwise.
@@ -40,5 +44,24 @@ export class Validator {
 				value.toLowerCase(),
 			)
 		)
+	}
+
+	// Returns true if the hours object is valid.
+	public static hours(value: Hours): boolean {
+		for (const day in value as any) {
+			const dayObj = (value as any)[day] as Day
+			if (
+				(value.hasOwnProperty(day) &&
+					((dayObj.startTime === -1 && dayObj.endTime !== -1) ||
+						(dayObj.startTime !== -1 && dayObj.endTime === -1))) ||
+				(dayObj.startTime < 0 && dayObj.startTime !== -1) ||
+				dayObj.startTime > 1440 ||
+				dayObj.startTime > dayObj.endTime ||
+				dayObj.endTime > 1440
+			) {
+				return false
+			}
+		}
+		return true
 	}
 }

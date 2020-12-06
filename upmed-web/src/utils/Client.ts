@@ -3,6 +3,7 @@
 import { Status, Patient, HCP, Hours, AppointmentId, PatientId, Appointment, HealthEvent, DoctorId } from '../models'
 import { DateTime } from './DateTime'
 import { Objects } from './Objects'
+import { Users } from './Users'
 
 class PatientClient {
 	public static logIn = (id: string, email: string): Promise<{ id: string; token: string }> => {
@@ -315,6 +316,10 @@ export const client = async (endpoint: string, body: any): Promise<any> => {
 		})
 		return await parseResponse(res)
 	} catch (e) {
+		if (e.toString().includes('401')) {
+			// Unauthorized error, log the user out
+			Users.clearUserToken()
+		}
 		throw new Error(`upmed-api Error: ${e.toString()}`)
 	}
 }

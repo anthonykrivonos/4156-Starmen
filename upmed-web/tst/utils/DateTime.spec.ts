@@ -65,15 +65,21 @@ describe('DateTime', () => {
     })
 
     it('minutesToHHMMAA', () => {
+        expect(DateTime.minutesToHHMMAA(0)).equal('12:00 AM')
         expect(DateTime.minutesToHHMMAA(60)).equal('01:00 AM')
         expect(DateTime.minutesToHHMMAA(780)).equal('01:00 PM')
         expect(DateTime.minutesToHHMMAA(90)).equal('01:30 AM')
+        expect(DateTime.minutesToHHMMAA(720)).equal('12:00 PM')
+        expect(DateTime.minutesToHHMMAA(840)).equal('02:00 PM')
     })
 
     it('hhmmAAToMinutes', () => {
+        expect(DateTime.hhmmAAToMinutes('12:00 AM')).equal(0)
         expect(DateTime.hhmmAAToMinutes('01:00 AM')).equal(60)
         expect(DateTime.hhmmAAToMinutes('01:00 PM')).equal(780)
         expect(DateTime.hhmmAAToMinutes('01:30 AM')).equal(90)
+        expect(DateTime.hhmmAAToMinutes('12:00 PM')).equal(720)
+        expect(DateTime.hhmmAAToMinutes('02:00 PM')).equal(840)
     })
 
     it('minutesToHHMM', () => {
@@ -95,13 +101,24 @@ describe('DateTime', () => {
         expect(DateTime.dateFromStringDate('2020-10-15').toString()).equal(dt.toString())
     })
 
-    it('getModifiedDate', () => {
+    it('getModifiedDate.change', () => {
         // October 15, 2020
         const dt1 = new Date()
         dt1.setFullYear(2020, 10 - 1 /* index version */, 15)
+        dt1.setHours(1)
+        dt1.setMinutes(59)
+        dt1.setSeconds(30)
         const dt2 = new Date()
         dt2.setFullYear(2019, 9 - 1 /* index version */, 14)
-        expect(DateTime.getModifiedDate(dt1, -1, -1, -1).toString()).equal(dt2.toString())
+        dt2.setHours(0)
+        dt2.setMinutes(58)
+        dt2.setSeconds(29)
+        expect(DateTime.getModifiedDate(dt1, -1, -1, -1, -1, -1, -1).toString()).equal(dt2.toString())
+    })
+
+    it('getModifiedDate.noChange', () => {
+        const dt1 = new Date()
+        expect(DateTime.getModifiedDate(dt1).toString()).equal(dt1.toString())
     })
 
     it('prettyDate', () => {
