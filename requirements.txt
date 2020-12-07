@@ -1,3 +1,4 @@
+simplecrypt
 # Web server
 flask
 gunicorn

@@ -1,0 +1,69 @@
+/mnt/c/Upmed/upmed-api/tst/../src/api/patient/patient_helper.py:390: ResourceWarning: unclosed file <_io.TextIOWrapper name='js.json' mode='r' encoding='UTF-8'>
+  batch = json.load(open('js.json'))
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.014s
+
+OK
+/usr/lib/python3.6/site-packages/jwt/api_jwt.py:81: DeprecationWarning: It is strongly recommended that you pass in a value for the "algorithms" argument when calling decode(). This argument will be mandatory in a future version.
+  DeprecationWarning
+/usr/lib/python3.6/site-packages/jwt/api_jws.py:145: DeprecationWarning: It is strongly recommended that you pass in a value for the "algorithms" argument when calling decode(). This argument will be mandatory in a future version.
+  DeprecationWarning
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.018s
+
+OK
+/mnt/c/Upmed/upmed-api/tst/../src/api/hcp/hcp_helper.py:603: ResourceWarning: unclosed file <_io.TextIOWrapper name='js.json' mode='r' encoding='UTF-8'>
+  batch = json.load(open('js.json'))
+..............
+----------------------------------------------------------------------
+Ran 14 tests in 0.136s
+
+OK
+/usr/lib/python3.6/site-packages/jwt/api_jwt.py:81: DeprecationWarning: It is strongly recommended that you pass in a value for the "algorithms" argument when calling decode(). This argument will be mandatory in a future version.
+  DeprecationWarning
+/usr/lib/python3.6/site-packages/jwt/api_jws.py:145: DeprecationWarning: It is strongly recommended that you pass in a value for the "algorithms" argument when calling decode(). This argument will be mandatory in a future version.
+  DeprecationWarning
+..............
+----------------------------------------------------------------------
+Ran 14 tests in 0.027s
+
+OK
+/usr/lib/python3.6/site-packages/jwt/api_jwt.py:81: DeprecationWarning: It is strongly recommended that you pass in a value for the "algorithms" argument when calling decode(). This argument will be mandatory in a future version.
+  DeprecationWarning
+/usr/lib/python3.6/site-packages/jwt/api_jws.py:145: DeprecationWarning: It is strongly recommended that you pass in a value for the "algorithms" argument when calling decode(). This argument will be mandatory in a future version.
+  DeprecationWarning
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.020s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.006s
+
+OK
+Name                                                  Stmts   Miss Branch BrPart  Cover   Missing
+-------------------------------------------------------------------------------------------------
+upmed-api/src/api/api.py                                 13      0      0      0   100%
+upmed-api/src/api/appointment/appointment.py             33      1      0      0    97%   32
+upmed-api/src/api/appointment/appointment_helper.py     153     12     38      3    90%   63-64, 171-172, 253->257, 258->262, 270-271, 314, 316->319, 343-349
+upmed-api/src/api/hcp/hcp.py                            297     21     86     23    89%   37, 51->54, 56, 86, 91, 96, 99->100, 100, 108->113, 113->115, 115, 117->122, 122->124, 124, 126->131, 131->133, 133, 135->140, 140->142, 142, 144->149, 149->151, 151, 153->158, 158->160, 160, 162->166, 192->199, 202-208, 223->226, 228, 351->354, 356, 423->exit, 449->463, 455->463, 462, 590->597, 601, 630->633, 637
+upmed-api/src/api/hcp/hcp_helper.py                     276     23     54     20    87%   38->47, 47-49, 63->64, 64, 79->83, 83, 156->157, 202-203, 210->211, 256-257, 283, 287, 291, 293->294, 294, 298->300, 300, 302->309, 309->311, 311, 313->320, 320->322, 322, 324->331, 331->333, 333, 335->342, 342->344, 344, 346->353, 353->355, 355, 357->364, 364->366, 366, 368->375, 398-400
+upmed-api/src/api/patient/patient.py                    128      8     28      6    91%   34, 52->55, 88-89, 96->exit, 121->exit, 123-124, 139->140, 140, 263->exit, 298->301, 301-305
+upmed-api/src/api/patient/patient_helper.py             155     16     24      4    88%   39-40, 68->69, 69, 74->77, 77, 82->83, 83, 134-139, 163-164, 191->192, 192, 326-338
+upmed-api/src/app.py                                     17      3      4      2    76%   17->19, 24-25, 28->29, 29
+upmed-api/src/models/appointment.py                      25      0      0      0   100%
+upmed-api/src/models/day.py                              11      0      0      0   100%
+upmed-api/src/models/enums.py                             7      0      0      0   100%
+upmed-api/src/models/hcp.py                              35      1      0      0    97%   82
+upmed-api/src/models/health_event.py                     12      0      0      0   100%
+upmed-api/src/models/hours.py                            23      0      0      0   100%
+upmed-api/src/models/patient.py                          41      0      0      0   100%
+upmed-api/src/models/strings.py                           4      0      0      0   100%
+upmed-api/src/util/firebase/db.py                        10      0      0      0   100%
+upmed-api/src/util/super_blueprint.py                    15      0      2      0   100%
+upmed-api/src/util/util.py                               27     10      2      0    59%   34-35, 48-51, 57-59, 63
+-------------------------------------------------------------------------------------------------
+TOTAL                                                  1282     95    238     58    89%

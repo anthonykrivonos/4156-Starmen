@@ -27,22 +27,22 @@ class Patient:
     doctors: List[DoctorId]
 
     def __init__(
-        self,
-        id: PatientId,
-        firstName: str,
-        lastName: str,
-        calendar: List[AppointmentId],
-        phone: str,
-        email: str,
-        dateOfBirth: str,
-        sex: str,
-        profilePicture: Optional[str],
-        height: int,
-        weight: int,
-        drinker: Status,
-        smoker: Status,
-        health: List[HealthEvent],
-        doctors: List[DoctorId],
+            self,
+            id: PatientId,
+            firstName: str,
+            lastName: str,
+            calendar: List[AppointmentId],
+            phone: str,
+            email: str,
+            dateOfBirth: str,
+            sex: str,
+            profilePicture: Optional[str],
+            height: int,
+            weight: int,
+            drinker: Status,
+            smoker: Status,
+            health: List[HealthEvent],
+            doctors: List[DoctorId],
     ):
         self.id = id
         self.firstName = firstName
@@ -59,3 +59,26 @@ class Patient:
         self.smoker = smoker
         self.health = health
         self.doctors = doctors
+
+    def to_dict(self):
+        output_dict = {
+            'id': self.id,
+            'firstName': self.firstName,
+            'lastName': self.lastName,
+            'calendar': self.calendar,
+            'phone': self.phone,
+            'email': self.email,
+            'dateOfBirth': self.dateOfBirth,
+            'sex': self.sex,
+            'profilePicture': self.profilePicture,
+            'height': self.height,
+            'weight': self.weight,
+            'drinker': self.drinker,
+            'smoker': self.smoker,
+            'health': self.health,
+            'doctors': self.doctors
+        }
+        return output_dict
+
+    def get(self):
+        return self

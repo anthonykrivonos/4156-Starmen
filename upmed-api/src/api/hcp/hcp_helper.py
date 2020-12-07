@@ -1,9 +1,10 @@
 import datetime
-from flask import Blueprint, request, jsonify, json, make_response
+from flask import json
 from algoliasearch.search_client import SearchClient  # noqa
 import requests
 from sys import path
 from os.path import join, dirname
+
 path.append(join(dirname(__file__), '../../..'))
 
 from src.util.firebase.db import Database  # noqa
@@ -56,9 +57,10 @@ def hcp_signup(db, hcp, hours, npi):
     """
     utype = "HCP"
     # Check NPI
-    response = requests.get("https://clinicaltables.nlm.nih.gov/api/npi_org/v3/search", params={"terms": str(npi),
-                                                                                                "sf": "NPI"})
-    if response.json()[0] != 1:
+    response = requests.get(
+        "https://clinicaltables.nlm.nih.gov/api/npi_org/v3/search",
+        params={"terms": str(npi), "sf": "NPI"})
+    if response.json()[0] != 0:
         return 0
 
     res = db.document(hcp.id).set({
@@ -74,12 +76,8 @@ def hcp_signup(db, hcp, hours, npi):
         "hours": hours,
         "patients": hcp.patients
     })
-    add_hcp(hcp)
-    if (res):
+    if res:
         auth_token = auth.encode_auth_token(hcp.id, utype)
-    else:
-        return 0
-    if (len(auth_token) > 0):
         return auth_token.decode()
     else:
         return 0
@@ -112,9 +110,7 @@ def hcp_set_record(db, resp):
 def hcp_get_by_token(db, hid):
     schedule = make_week()
     hcp = db.document(hid).get()
-    if (hcp == 1):
-        return 0
-    hcp = hcp.to_dict()
+    hcp = hcp.to_inc()
     resp = HCP(
         id=hcp['id'],
         firstName=hcp['firstName'],
@@ -128,10 +124,8 @@ def hcp_get_by_token(db, hid):
         patients=[],
         hours=schedule
     )
-
     newsched = hcp['hours']
     res = newsched[0].strip('][').split(', ')
-
     resp.hours.sunday.startTime = res[0]
     resp.hours.sunday.endTime = res[1]
     res = newsched[1].strip('][').split(', ')
@@ -191,13 +185,12 @@ def hcp_notify(adb, pdb, appointment_id):
             doctors=patient['doctors'],
             health=patient['health']
         )
-
         client = twilio.connect()
         message = client.messages.create(
             body=f"Hi {resp.firstName} you have an appointment at "
-            f"{datetime.datetime.fromtimestamp(appointment.date / 1e3)}"
-            f" join at "
-            f"{appointment.videoUrl}",
+                 f"{datetime.datetime.fromtimestamp(appointment.date / 1e3)}"
+                 f" join at "
+                 f"{appointment.videoUrl}",
             from_='+19036182297',
             to=f'+1{str(resp.phone).replace("", "")}')
         print(message)
@@ -207,7 +200,7 @@ def hcp_notify(adb, pdb, appointment_id):
         }
         return res
     except Exception as e:
-        return 0
+        return 0, e
 
 
 def hcp_test_number(adb, pdb, appointment_id):
@@ -250,9 +243,9 @@ def hcp_test_number(adb, pdb, appointment_id):
         client = twilio.connect()
         message = client.messages.create(
             body=f"Hi {resp.firstName} you have an appointment at "
-            f"{datetime.datetime.fromtimestamp(appointment.date / 1e3)}"
-            f" join at "
-            f"{appointment.videoUrl}",
+                 f"{datetime.datetime.fromtimestamp(appointment.date / 1e3)}"
+                 f" join at "
+                 f"{appointment.videoUrl}",
             from_='+19036182297',
             to=f'+1{str(resp.phone).replace("", "")}')
         print(message)
@@ -270,8 +263,6 @@ def hcp_test_number(adb, pdb, appointment_id):
 
 def hcp_edit_profile(db, hid, post_data):
     hcp_resp = db.document(str(hid)).get().to_dict()
-    if hcp_resp == 1:
-        return 0
     schedule = make_week()
     hcp = HCP(
         id=post_data.get('id'),
@@ -286,16 +277,15 @@ def hcp_edit_profile(db, hid, post_data):
         patients=hcp_resp['patients'],
         hours=schedule
     )
+
     try:
         hcp.specialty = post_data.get('specialty')
     except Exception as e:
         hcp.specialty = ''
-
     try:
         hcp.title = post_data.get('title')
     except Exception as e:
         hcp.title = ''
-
     try:
         hcp.profilePicture = post_data.get('profilePicture')
     except Exception as e:
@@ -303,108 +293,111 @@ def hcp_edit_profile(db, hid, post_data):
     if hcp.profilePicture is None:
         hcp.profilePicture = default_pic
 
-    newsched = post_data.get('hours')
+    try:
+        newsched = post_data.get('hours')
+        if int(newsched['sunday']['startTime']) == \
+                -1 and int(newsched['sunday']['endTime']) == -1:
+            hcp.hours.sunday.startTime = -1
+            hcp.hours.sunday.endTime = -1
+        elif 0 <= int(newsched['sunday']['startTime']) \
+                <= int(newsched['sunday']['endTime']):
+            hcp.hours.sunday.startTime = int(
+                newsched['sunday']['startTime'])
+            hcp.hours.sunday.endTime = int(
+                newsched['sunday']['endTime'])
 
-    if int(newsched['sunday']['startTime']) == \
-            -1 and int(newsched['sunday']['endTime']) == -1:
-        hcp.hours.sunday.startTime = -1
-        hcp.hours.sunday.endTime = -1
-    elif 0 <= int(newsched['sunday']['startTime']) \
-            <= int(newsched['sunday']['endTime']):
-        hcp.hours.sunday.startTime = int(
-            newsched['sunday']['startTime'])
-        hcp.hours.sunday.endTime = int(
-            newsched['sunday']['endTime'])
+        if int(newsched['monday']['startTime']) == \
+                -1 and int(newsched['monday']['endTime']) == -1:
+            hcp.hours.monday.startTime = -1
+            hcp.hours.monday.endTime = -1
+        elif 0 <= int(newsched['monday']['startTime']) \
+                <= int(newsched['monday']['endTime']):
+            hcp.hours.monday.startTime = int(
+                newsched['monday']['startTime'])
+            hcp.hours.monday.endTime = int(
+                newsched['monday']['endTime'])
 
-    if int(newsched['monday']['startTime']) == \
-            -1 and int(newsched['monday']['endTime']) == -1:
-        hcp.hours.monday.startTime = -1
-        hcp.hours.monday.endTime = -1
-    elif 0 <= int(newsched['monday']['startTime']) \
-            <= int(newsched['monday']['endTime']):
-        hcp.hours.monday.startTime = int(
-            newsched['monday']['startTime'])
-        hcp.hours.monday.endTime = int(
-            newsched['monday']['endTime'])
+        if int(newsched['tuesday']['startTime']) == \
+                -1 and int(newsched['tuesday']['endTime']) == -1:
+            hcp.hours.tuesday.startTime = -1
+            hcp.hours.tuesday.endTime = -1
+        elif 0 <= int(newsched['tuesday']['startTime']) \
+                <= int(newsched['tuesday']['endTime']):
+            hcp.hours.tuesday.startTime = int(
+                newsched['tuesday']['startTime'])
+            hcp.hours.tuesday.endTime = int(
+                newsched['tuesday']['endTime'])
 
-    if int(newsched['tuesday']['startTime']) == \
-            -1 and int(newsched['tuesday']['endTime']) == -1:
-        hcp.hours.tuesday.startTime = -1
-        hcp.hours.tuesday.endTime = -1
-    elif 0 <= int(newsched['tuesday']['startTime']) \
-            <= int(newsched['tuesday']['endTime']):
-        hcp.hours.tuesday.startTime = int(
-            newsched['tuesday']['startTime'])
-        hcp.hours.tuesday.endTime = int(
-            newsched['tuesday']['endTime'])
+        if int(newsched['wednesday']['startTime']) == \
+                -1 and int(newsched['wednesday']['endTime']) == -1:
+            hcp.hours.wednesday.startTime = -1
+            hcp.hours.wednesday.endTime = -1
+        elif 0 <= int(newsched['wednesday']['startTime']) \
+                <= int(newsched['wednesday']['endTime']):
+            hcp.hours.wednesday.startTime = int(
+                newsched['wednesday']['startTime'])
+            hcp.hours.wednesday.endTime = int(
+                newsched['wednesday']['endTime'])
 
-    if int(newsched['wednesday']['startTime']) == \
-            -1 and int(newsched['wednesday']['endTime']) == -1:
-        hcp.hours.wednesday.startTime = -1
-        hcp.hours.wednesday.endTime = -1
-    elif 0 <= int(newsched['wednesday']['startTime']) \
-            <= int(newsched['wednesday']['endTime']):
-        hcp.hours.wednesday.startTime = int(
-            newsched['wednesday']['startTime'])
-        hcp.hours.wednesday.endTime = int(
-            newsched['wednesday']['endTime'])
+        if int(newsched['thursday']['startTime']) == \
+                -1 and int(newsched['thursday']['endTime']) == -1:
+            hcp.hours.thursday.startTime = -1
+            hcp.hours.thursday.endTime = -1
+        elif 0 <= int(newsched['thursday']['startTime']) \
+                <= int(newsched['thursday']['endTime']):
+            hcp.hours.thursday.startTime = int(
+                newsched['thursday']['startTime'])
+            hcp.hours.thursday.endTime = int(
+                newsched['thursday']['endTime'])
 
-    if int(newsched['thursday']['startTime']) == \
-            -1 and int(newsched['thursday']['endTime']) == -1:
-        hcp.hours.thursday.startTime = -1
-        hcp.hours.thursday.endTime = -1
-    elif 0 <= int(newsched['thursday']['startTime']) \
-            <= int(newsched['thursday']['endTime']):
-        hcp.hours.thursday.startTime = int(
-            newsched['thursday']['startTime'])
-        hcp.hours.thursday.endTime = int(
-            newsched['thursday']['endTime'])
+        if int(newsched['friday']['startTime']) == \
+                -1 and int(newsched['friday']['endTime']) == -1:
+            hcp.hours.friday.startTime = -1
+            hcp.hours.friday.endTime = -1
+        elif 0 <= int(newsched['friday']['startTime']) \
+                <= int(newsched['friday']['endTime']):
+            hcp.hours.friday.startTime = int(
+                newsched['friday']['startTime'])
+            hcp.hours.friday.endTime = int(
+                newsched['friday']['endTime'])
 
-    if int(newsched['friday']['startTime']) == \
-            -1 and int(newsched['friday']['endTime']) == -1:
-        hcp.hours.friday.startTime = -1
-        hcp.hours.friday.endTime = -1
-    elif 0 <= int(newsched['friday']['startTime']) \
-            <= int(newsched['friday']['endTime']):
-        hcp.hours.friday.startTime = int(
-            newsched['friday']['startTime'])
-        hcp.hours.friday.endTime = int(
-            newsched['friday']['endTime'])
+        if int(newsched['saturday']['startTime']) == \
+                -1 and int(newsched['saturday']['endTime']) == -1:
+            hcp.hours.sunday.saturday = -1
+            hcp.hours.sunday.saturday = -1
+        elif 0 <= int(newsched['saturday']['startTime']) \
+                <= int(newsched['saturday']['endTime']):
+            hcp.hours.saturday.startTime = int(
+                newsched['saturday']['startTime'])
+            hcp.hours.saturday.endTime = int(
+                newsched['saturday']['endTime'])
 
-    if int(newsched['saturday']['startTime']) == \
-            -1 and int(newsched['saturday']['endTime']) == -1:
-        hcp.hours.sunday.saturday = -1
-        hcp.hours.sunday.saturday = -1
-    elif 0 <= int(newsched['saturday']['startTime']) \
-            <= int(newsched['saturday']['endTime']):
-        hcp.hours.saturday.startTime = int(
-            newsched['saturday']['startTime'])
-        hcp.hours.saturday.endTime = int(
-            newsched['saturday']['endTime'])
-
-    hours = []
-    time = []
-    time.append(hcp.hours.sunday.startTime)
-    time.append(hcp.hours.sunday.endTime)
-    hours.append(str(time))
-    time[0] = hcp.hours.monday.startTime
-    time[1] = hcp.hours.monday.endTime
-    hours.append(str(time))
-    time[0] = hcp.hours.tuesday.startTime
-    time[1] = hcp.hours.tuesday.endTime
-    hours.append(str(time))
-    time[0] = hcp.hours.wednesday.startTime
-    time[1] = hcp.hours.wednesday.endTime
-    hours.append(str(time))
-    time[0] = hcp.hours.thursday.startTime
-    time[1] = hcp.hours.thursday.endTime
-    hours.append(str(time))
-    time[0] = hcp.hours.friday.startTime
-    time[1] = hcp.hours.friday.endTime
-    hours.append(str(time))
-    time[0] = hcp.hours.saturday.startTime
-    time[1] = hcp.hours.saturday.endTime
-    hours.append(str(time))
+        hours = []
+        time = []
+        time.append(hcp.hours.sunday.startTime)
+        time.append(hcp.hours.sunday.endTime)
+        hours.append(str(time))
+        time[0] = hcp.hours.monday.startTime
+        time[1] = hcp.hours.monday.endTime
+        hours.append(str(time))
+        time[0] = hcp.hours.tuesday.startTime
+        time[1] = hcp.hours.tuesday.endTime
+        hours.append(str(time))
+        time[0] = hcp.hours.wednesday.startTime
+        time[1] = hcp.hours.wednesday.endTime
+        hours.append(str(time))
+        time[0] = hcp.hours.thursday.startTime
+        time[1] = hcp.hours.thursday.endTime
+        hours.append(str(time))
+        time[0] = hcp.hours.friday.startTime
+        time[1] = hcp.hours.friday.endTime
+        hours.append(str(time))
+        time[0] = hcp.hours.saturday.startTime
+        time[1] = hcp.hours.saturday.endTime
+        hours.append(str(time))
+    except Exception as e:
+        print(e)
+        hcp.hours = make_week()
 
     if hid == hcp.id:
         db.document(hcp.id).set({
@@ -417,13 +410,13 @@ def hcp_edit_profile(db, hid, post_data):
             "calendar": hcp.calendar,
             "specialty": hcp.specialty,
             "title": hcp.title,
-            "hours": hours,
+            "hours": hcp.hours,
             "patients": hcp.patients,
         })
     else:
         response_object = {
             'Success': False,
-            'message': "Ivalid Token"
+            'message': "Invalid Token"
         }
         return response_object
     response_object = {
@@ -434,8 +427,6 @@ def hcp_edit_profile(db, hid, post_data):
 
 def hcp_get_patients(hdb, pdb, hid):
     hcp_resp = hdb.document(str(hid)).get()
-    if hcp_resp == 1:
-        return 0
     hcp_resp = hcp_resp.to_dict()
     res = {}
     print(hcp_resp)
@@ -451,8 +442,6 @@ def hcp_get_patients(hdb, pdb, hid):
 
 def hcp_set_health_events(pat, pid, post_data):
     patient = pat.document(str(pid)).get()
-    if patient == 1:
-        return 0
     patient = patient.to_dict()
     resp = Patient(
         id=patient['id'],
@@ -512,8 +501,6 @@ def hcp_set_health_events(pat, pid, post_data):
 
 def hcp_get_all(hcpdb):
     hcps = hcpdb.stream()
-    if hcps == 2:
-        return 2
     hcps_return = []
     for hcp in hcps:
         h = hcp.to_dict()
@@ -562,6 +549,7 @@ def make_week():
     )
     return schedule
 
+
 def hcp_search(text):
     print(text)
     api = Env.ALGOLIA_API()
@@ -569,8 +557,9 @@ def hcp_search(text):
     client = SearchClient.create(api, admin)
     index = client.init_index('hcps')
     index.set_settings({"customRanking": ["desc(followers)"]})
-    index.set_settings({"searchableAttributes": ["firstName", "lastName", "phone",
-                                                 "email", "id", "title", "specialty"]})
+    index.set_settings(
+        {"searchableAttributes": ["firstName", "lastName", "phone",
+                                  "email", "id", "title", "specialty"]})
     res = index.search(text)
 
     # Res is all hits of Patients with matching
@@ -613,7 +602,6 @@ def add_hcp(hcp):
 
     batch = json.load(open('js.json'))
     fp.close()
-    # print(json.load('js.json'))
     try:
         index.save_object(batch, {'autoGenerateObjectIDIfNotExist': True})
     except Exception as e:

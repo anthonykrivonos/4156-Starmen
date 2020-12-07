@@ -19,4 +19,4 @@ class Day:
         res = []
         res.append(self.startTime)
         res.append(self.endTime)
-        return res
+        return str(res)

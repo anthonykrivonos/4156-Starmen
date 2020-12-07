@@ -1,0 +1,38 @@
+# .coveragerc to control coverage.py
+[run]
+branch = True
+cover_pylib = False
+source=upmed-api
+
+omit =
+    /root/.local/lib/python3.6/site-packages/click/_compat.py
+    */tst/*
+    */env/*
+    */upmed-web/*
+    */__init__.py
+    */logs/*
+    */setup.py
+    */env.py
+    */root/*
+    *root/*
+    *usr/*
+    *python3.6*
+
+
+
+[report]
+omit =
+    /root/.local/lib/python3.6/site-packages/click/_compat.py
+    */tst/*
+    */env/*
+    */upmed-web/*
+    */__init__.py
+    */logs/*
+    */setup.py
+    */env.py
+    */root/*
+    *root/*
+    *usr/*
+    *python3.6*
+
+ignore_errors = True

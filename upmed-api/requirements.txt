@@ -9,6 +9,7 @@ coverage
 # Linting/style checking
 pylint
 pycodestyle
+coverage
 
 # External database
 firebase-admin

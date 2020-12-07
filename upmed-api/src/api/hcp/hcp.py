@@ -1,8 +1,10 @@
 from os.path import join, dirname
 from sys import path
 from flask import Blueprint, request, jsonify, make_response
-import datetime
-from .hcp_helper import hcp_signup, hcp_login, hcp_delete, hcp_set_record, hcp_get_by_token, hcp_notify, hcp_get_all, hcp_test_number, hcp_edit_profile, hcp_get_patients, hcp_search, hcp_set_health_events, hcp_set_profile_picture, hcp_set_health_events
+from .hcp_helper import hcp_signup, hcp_login, hcp_delete, hcp_set_record,\
+    hcp_get_by_token, hcp_notify, hcp_get_all, \
+    hcp_test_number, hcp_edit_profile, hcp_get_patients, hcp_search, \
+    hcp_set_health_events, hcp_set_profile_picture \
 
 path.append(join(dirname(__file__), '../../..'))
 
@@ -16,11 +18,6 @@ from src.models.patient import Patient  # noqa
 from src.models.appointment import Appointment  # noqa
 
 
-from sys import path
-from os.path import join, dirname
-path.append(join(dirname(__file__), '../../..'))
-
-
 # Setup HCP and Patient Document Collections
 db = Database()
 hcpdb = db.getHCP()
@@ -28,7 +25,6 @@ pat = db.getPatients()
 appointmentsdb = db.getAppointments()
 auth = Auth()
 twilio = Twilio()
-
 
 hcp_endpoints = Blueprint('hcp', __name__)
 default_pic = 'https://www.flaticon.com/svg/static/icons/svg/387/387561.svg'
@@ -52,7 +48,7 @@ def login():
         pid = request.json['id']
         email = request.json['email']
         resp = hcp_login(hcpdb, pid, email)
-        if (resp != 0):
+        if resp != 0:
             return jsonify(resp), 200
         else:
             return "False", 404
@@ -69,6 +65,7 @@ def signup():
     """
 
     post_data = request.get_json()
+    print(post_data)
     schedule = make_week()
     try:
         hcp = HCP(
@@ -103,7 +100,7 @@ def signup():
             hcp.profilePicture = default_pic
 
         newsched = post_data.get('hours')
-
+        print(newsched)
         if newsched['sunday']['startTime'] == \
                 -1 and newsched['sunday']['endTime'] == -1:
             hcp.hours.sunday.startTime = -1
@@ -166,7 +163,6 @@ def signup():
                 <= newsched['saturday']['endTime']:
             hcp.hours.saturday.startTime = newsched['saturday']['startTime']
             hcp.hours.saturday.endTime = newsched['saturday']['endTime']
-
         hours = []
         time = []
         time.append(hcp.hours.sunday.startTime)
@@ -193,7 +189,7 @@ def signup():
 
         # Helper function
         res = hcp_signup(hcpdb, hcp, hours, post_data.get('npi'))
-        if (res != 0):
+        if res != 0:
             response_object = {
                 'id': hcp.id,
                 'token': res
@@ -223,7 +219,8 @@ def remove():
         # Check for ID in URL query
         pid = post_data.get('id')
         res = hcp_delete(hcpdb, pid)
-        if (res):
+        print(pid, res)
+        if res:
             return jsonify({"success": True}), 200
         else:
             return jsonify({"success": False}), 400
@@ -238,12 +235,12 @@ def getbytoken():
     Returns: Response: JSON
     """
     # Get Auth Token
-    auth_token = request.get_json().get('token')
+    auth_token = request.get_json()
+    auth_token = auth_token.get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
         if utype == "HCP":
             resp = hcp_get_by_token(hcpdb, hid)
-
             hours = {
                 "sunday": {
                     "startTime": resp.hours.sunday.startTime,
@@ -274,7 +271,6 @@ def getbytoken():
                     "endTime": resp.hours.saturday.endTime
                 }
             }
-
             response_object = {
                 "id": resp.id,
                 "firstName": resp.firstName,
@@ -310,15 +306,14 @@ def set_health_event():
     and the criteria of a health event
     :return: HealthEvent
     """
-    auth_token = request.get_json().get('token')
+    post_data = request.get_json()
+    auth_token = post_data.get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
-        post_data = request.get_json()
         if utype == "HCP":
             try:
                 pid = post_data.get('id')
                 patient = pat.document(str(pid)).get().to_dict()
-
                 event = HealthEvent(
                     date=post_data.get('date'),
                     event=post_data.get('event'),
@@ -359,8 +354,6 @@ def set_health_event():
                     return make_response(jsonify(jsonevent)), 401
             except Exception as e:
                 return f"Unable to find {post_data.get('id')} because {e}", 404
-
-            return make_response(jsonify(jsonevent)), 201
         else:
             response_object = {
                 'Success': False,
@@ -385,19 +378,16 @@ def notify():
         }
     :return: Response
     """
-
-    auth_token = request.get_json().get('token')
+    post_data = request.get_json()
+    auth_token = post_data.get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
-        post_data = request.get_json()
-        # print(f'{hid} and {utype}')
         if utype == "HCP":
             try:
                 appointment_id = post_data.get('id')
                 res = hcp_notify(appointmentsdb, pat, appointment_id)
             except Exception as e:
                 return f"Unable to find {post_data.get('id')} because {e}", 400
-
             return make_response(jsonify(res)), 200
         else:
             response_object = {
@@ -423,12 +413,10 @@ def test_number():
         }
     :return: Response
     """
-
-    auth_token = request.get_json().get('token')
+    post_data = request.get_json()
+    auth_token = post_data.get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
-        post_data = request.get_json()
-        # print(f'{hid} and {utype}')
         if utype == "HCP":
             appointment_id = post_data.get('id')
             res = hcp_test_number(appointmentsdb, pat, appointment_id)
@@ -456,24 +444,27 @@ def edit_hcp_profile():
         Returns:
                 Response: JSON
         """
-    auth_token = request.get_json().get('token')
+    post_data = request.get_json()
+    auth_token = post_data.get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
         # Get the ids of the HCPs of patient
         if utype == "HCP":
             try:
-                post_data = request.get_json()
                 response_object = hcp_edit_profile(hcpdb, hid, post_data)
+                if response_object['Success']:
+                    return make_response(jsonify(response_object)), 200
             except Exception as e:
                 response_object = {
                     'status': 'fail',
                     'message': f'Some error, {e} occurred. Please try again.'
                 }
                 return make_response(jsonify(response_object)), 401
-            if response_object['Success']:
-                return make_response(jsonify(response_object)), 200
-            else:
-                return make_response(jsonify(response_object)), 401
+    response_object = {
+        'status': 'fail',
+        'message': f'Fail to edit HCP profile'
+    }
+    return make_response(jsonify(response_object)), 401
 
 
 @hcp_endpoints.route('/getPatients', methods=['POST'])
@@ -487,7 +478,6 @@ def getpatients():
         hid, utype = Auth.decode_auth_token(auth_token)
         # Get the ids of the HCPs of patient
         if utype == "HCP":
-            print(hid)
             res = hcp_get_patients(hcpdb, pat, hid)
             return make_response(jsonify(res)), 200
         else:
@@ -511,10 +501,10 @@ def set_health_events():
     and the criteria of a health event
     :return: HealthEvent
     """
-    auth_token = request.get_json().get('token')
+    post_data = request.get_json()
+    auth_token = post_data.get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
-        post_data = request.get_json()
         if utype == "HCP":
             try:
                 pid = post_data.get('id')
@@ -564,7 +554,6 @@ def make_week():
     Makes a blank schedule
     :return: Hours object
     """
-
     week = []
     for _ in range(0, 7):
         week.append(Day(
@@ -572,7 +561,6 @@ def make_week():
             endTime=-1,
         )
         )
-
     schedule = Hours(
         sunday=week[0],
         monday=week[1],
@@ -593,10 +581,11 @@ def set_profile_picture():
     Returns: Response: JSON
     """
     # Get Auth Token
-    auth_token = request.get_json().get('token')
+    post_data = request.get_json()
+    auth_token = post_data.get('token')
     if auth_token:
         hid, utype = Auth.decode_auth_token(auth_token)
-        pic = request.get_json().get('profilePicture')
+        pic = post_data.get('profilePicture')
         res = hcp_set_profile_picture(hcpdb, hid, pic)
         if res:
             response_object = {
@@ -604,6 +593,12 @@ def set_profile_picture():
                 "profilePicture": pic
             }
             return make_response(jsonify(response_object)), 200
+        else:
+            response_object = {
+                'status': 'fail',
+                'message': "no response from helper function"
+            }
+            return make_response(jsonify(response_object)), 401
     else:
         response_object = {
             'status': 'fail',
@@ -624,9 +619,8 @@ def search():
     if auth_token:
         pid, utype = Auth.decode_auth_token(auth_token)
         text = request.get_json().get('text')
-        if len(text) >=3:
+        if len(text) >= 3:
             res = hcp_search(text)
-
         else:
             response_object = {
                 "Success": False,
@@ -647,4 +641,3 @@ def search():
             'message': "invalid_token"
         }
         return make_response(jsonify(response_object)), 401
-

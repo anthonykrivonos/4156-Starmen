@@ -18,15 +18,15 @@ class Appointment:
     videoUrl: Optional[str]
 
     def __init__(
-        self,
-        id: AppointmentId,
-        date: int,
-        duration: int,
-        doctor: DoctorId,
-        patient: PatientId,
-        subject: str,
-        notes: Optional[str],
-        videoUrl: Optional[str],
+            self,
+            id: AppointmentId,
+            date: int,
+            duration: int,
+            doctor: DoctorId,
+            patient: PatientId,
+            subject: str,
+            notes: Optional[str],
+            videoUrl: Optional[str],
     ):
         self.id = id
         self.date = date
@@ -36,3 +36,18 @@ class Appointment:
         self.subject = subject
         self.notes = notes
         self.videoUrl = videoUrl
+
+    def to_dict(self):
+        output_dict = {
+            'id': self.id,
+            'date': self.date,
+            'duration': self.duration,
+            'doctor': self.doctor,
+            'patient': self.patient,
+            'subject': self.subject,
+            'notes': self.notes,
+            'videoUrl': self.videoUrl}
+        return output_dict
+
+    def get(self):
+        return self

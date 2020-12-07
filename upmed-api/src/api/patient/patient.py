@@ -1,9 +1,12 @@
 from flask import Blueprint, request, jsonify, make_response
 
-from .patient_helper import pat_delete, pat_edit_profile, pat_login, pat_get_by_token, pat_set_profile_picture, pat_signup, pat_get_all, pat_get_hcps, pat_get_records, pat_search  # noqa
+from .patient_helper import pat_delete, pat_edit_profile, pat_login, \
+    pat_get_by_token, pat_set_profile_picture, \
+    pat_signup, pat_get_all, pat_get_hcps, pat_get_records, pat_search  # noqa
 
 from sys import path
 from os.path import join, dirname
+
 path.append(join(dirname(__file__), '../../..'))
 
 from src.util.firebase.db import Database  # noqa
@@ -12,7 +15,6 @@ from src.models.patient import Patient  # noqa
 from src.models.hcp import HCP  # noqa
 from src.models.hours import Hours  # noqa
 from src.models.day import Day  # noqa
-
 
 patient_endpoints = Blueprint('patient', __name__)
 
@@ -40,9 +42,9 @@ def login():
         Response: JSON
     """
     try:
-        pid = request.json['id']
-        email = request.json['email']
-        print(pid)
+        post_data = request.get_json()
+        pid = post_data.get('id')
+        email = post_data.get('email')
         resp = pat_login(pat, pid, email)
         if resp:
             return jsonify(resp), 200
@@ -60,7 +62,6 @@ def signup():
         Response: JSON
     """
     post_data = request.get_json()
-    # print(post_data)
     try:
         patient = Patient(
             id=post_data.get('id'),
@@ -88,8 +89,8 @@ def signup():
         # Parse phone number
         # phone = str(post_data.get('phone')).replace('-', '')
         patient.phone = str(post_data.get('phone'))
-        res = pat_signup(pat, patient)
-        if (res != 0):
+        res = pat_signup(pat, patient, False)
+        if res != 0:
             response_object = {
                 'id': patient.id,
                 'token': res
@@ -114,7 +115,7 @@ def remove():
         # Check for ID in URL query
         pid = post_data.get('id')
         res = pat_delete(pat, pid)
-        if (res):
+        if res:
             return jsonify({"success": True}), 200
     except Exception as e:
         return f"An Error Occured: {e}"
@@ -153,7 +154,7 @@ def getbytoken():
     else:
         response_object = {
             'status': 'fail',
-            'message': 'Ivalid token. Provide a valid auth token.'
+            'message': 'Invalid token. Provide a valid auth token.'
         }
         return make_response(jsonify(response_object)), 401
 
@@ -168,7 +169,6 @@ def get_records():
     auth_token = request.get_json().get('token')
     if auth_token:
         pid, utype = Auth.decode_auth_token(auth_token)
-        print(pid)
         response_object = pat_get_records(pat, pid)
         return make_response(jsonify(response_object)), 200
     else:
@@ -186,12 +186,10 @@ def edit_profile():
     Returns:
         Response: JSON
     """
-    auth_token = request.get_json().get('token')
+    post_data = request.get_json()
+    auth_token = post_data.get('token')
     if auth_token:
         pid, utype = Auth.decode_auth_token(auth_token)
-
-        post_data = request.get_json()
-        print(pid)
         res = pat_edit_profile(pat, pid, post_data)
         return make_response(jsonify(res)), 200
     else:
@@ -213,9 +211,6 @@ def gethcps():
     if auth_token:
         pid, utype = Auth.decode_auth_token(auth_token)
         # Get the ids of the HCPs of patient
-
-        # print(res)
-        print(pid)
         results = pat_get_hcps(pat, hcpdb, pid)
         return make_response(jsonify(results)), 200
     else:
@@ -272,6 +267,7 @@ def set_profile_picture():
         }
         return make_response(jsonify(response_object)), 401
 
+
 @patient_endpoints.route('/search', methods=['POST'])
 def search():
     """
@@ -284,7 +280,7 @@ def search():
     if auth_token:
         pid, utype = Auth.decode_auth_token(auth_token)
         text = request.get_json().get('text')
-        if len(text) >=3:
+        if len(text) >= 3:
             res = pat_search(text)
 
         else:
@@ -307,4 +303,3 @@ def search():
             'message': "invalid_token"
         }
         return make_response(jsonify(response_object)), 401
-

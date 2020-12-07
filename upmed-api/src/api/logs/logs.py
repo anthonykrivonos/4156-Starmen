@@ -8,6 +8,7 @@ from .logs_helper import get_logs
 
 logs_endpoints = Blueprint('logs', __name__)
 
+
 @logs_endpoints.route('/', methods=['GET'])
 def root():
     logs = get_logs()
@@ -17,5 +18,6 @@ def root():
         <div>
             %s
         </div>
-    """ % (datetime.today().strftime("%a %b %y @ %H:%M"), '<br/>'.join(logs.split('\n')))
+    """ % (datetime.today().strftime("%a %b %y @ %H:%M"),
+           '<br/>'.join(logs.split('\n')))
     return res

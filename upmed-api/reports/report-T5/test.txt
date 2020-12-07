@@ -1,0 +1,48 @@
+============ upmed-api Unit Test Report Generated on 1607225198 ============ \n\n
+/mnt/c/Upmed/upmed-api/tst/../src/api/patient/patient_helper.py:390: ResourceWarning: unclosed file <_io.TextIOWrapper name='js.json' mode='r' encoding='UTF-8'>
+  batch = json.load(open('js.json'))
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.013s
+
+OK
+/usr/lib/python3.6/site-packages/jwt/api_jwt.py:81: DeprecationWarning: It is strongly recommended that you pass in a value for the "algorithms" argument when calling decode(). This argument will be mandatory in a future version.
+  DeprecationWarning
+/usr/lib/python3.6/site-packages/jwt/api_jws.py:145: DeprecationWarning: It is strongly recommended that you pass in a value for the "algorithms" argument when calling decode(). This argument will be mandatory in a future version.
+  DeprecationWarning
+..........
+----------------------------------------------------------------------
+Ran 10 tests in 0.017s
+
+OK
+/mnt/c/Upmed/upmed-api/tst/../src/api/hcp/hcp_helper.py:603: ResourceWarning: unclosed file <_io.TextIOWrapper name='js.json' mode='r' encoding='UTF-8'>
+  batch = json.load(open('js.json'))
+..............
+----------------------------------------------------------------------
+Ran 14 tests in 0.139s
+
+OK
+/usr/lib/python3.6/site-packages/jwt/api_jwt.py:81: DeprecationWarning: It is strongly recommended that you pass in a value for the "algorithms" argument when calling decode(). This argument will be mandatory in a future version.
+  DeprecationWarning
+/usr/lib/python3.6/site-packages/jwt/api_jws.py:145: DeprecationWarning: It is strongly recommended that you pass in a value for the "algorithms" argument when calling decode(). This argument will be mandatory in a future version.
+  DeprecationWarning
+..............
+----------------------------------------------------------------------
+Ran 14 tests in 0.020s
+
+OK
+/usr/lib/python3.6/site-packages/jwt/api_jwt.py:81: DeprecationWarning: It is strongly recommended that you pass in a value for the "algorithms" argument when calling decode(). This argument will be mandatory in a future version.
+  DeprecationWarning
+/usr/lib/python3.6/site-packages/jwt/api_jws.py:145: DeprecationWarning: It is strongly recommended that you pass in a value for the "algorithms" argument when calling decode(). This argument will be mandatory in a future version.
+  DeprecationWarning
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.016s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.006s
+
+OK
+============ upmed-api Coverage Test Report Generated on 1607225198 ============ \n\n

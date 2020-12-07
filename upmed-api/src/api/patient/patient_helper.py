@@ -6,7 +6,6 @@ from os.path import join, dirname
 
 path.append(join(dirname(__file__), '../../..'))
 
-from src.util.firebase.db import Database  # noqa
 from src.util.util import Auth  # noqa
 from src.util.env import Env  # noqa
 from src.models.patient import Patient  # noqa
@@ -19,7 +18,7 @@ auth = Auth()
 
 
 def pat_login(db, pid, email):
-    """HCP Logins
+    """Patient Logins
 
     Returns:
             Response: JSON
@@ -41,7 +40,7 @@ def pat_login(db, pid, email):
         return f"An Error Occurred: {e}"
 
 
-def pat_signup(pat, patient):
+def pat_signup(pat, patient, mock):
     """New HCP creates profile
 
     Returns:
@@ -64,49 +63,48 @@ def pat_signup(pat, patient):
         "calendar": patient.calendar,
         "health": patient.health,
         "doctors": patient.doctors
-
     })
-    # print("HERE")
-    add_pat(patient)
-    # print("HERE2")
-    if (res):
+    if not mock:
+        add_pat(patient)
+    if res:
         auth_token = auth.encode_auth_token(patient.id, utype)
     else:
         return 0
-    if (len(auth_token) > 0):
+    if len(auth_token) > 0:
         return auth_token.decode()
     else:
         return 0
 
 
 def pat_get_records(pat, pid):
-    patient = pat.document(str(pid)).get()
-    if patient == 1:
-        return 0
-    patient = patient.to_dict()
-    print(patient)
-    resp = Patient(
-        id=patient['id'],
-        firstName=patient['firstName'],
-        lastName=patient['lastName'],
-        phone=patient['phone'],
-        email=patient['email'],
-        dateOfBirth=patient['dateOfBirth'],
-        sex=patient['sex'],
-        profilePicture=patient['profilePicture'],
-        height=patient['height'],
-        weight=patient['weight'],
-        drinker=patient['drinker'],
-        smoker=patient['smoker'],
-        calendar=patient['calendar'],
-        doctors=patient['doctors'],
-        health=patient['health']
-    )
-    response_object = []
-    for i in resp.health:
-        response_object.append(i)
-
-    return response_object
+    try:
+        patient = pat.document(str(pid)).get()
+        if patient == 1:
+            return 0
+        patient = patient.to_dict()
+        resp = Patient(
+            id=patient['id'],
+            firstName=patient['firstName'],
+            lastName=patient['lastName'],
+            phone=patient['phone'],
+            email=patient['email'],
+            dateOfBirth=patient['dateOfBirth'],
+            sex=patient['sex'],
+            profilePicture=patient['profilePicture'],
+            height=patient['height'],
+            weight=patient['weight'],
+            drinker=patient['drinker'],
+            smoker=patient['smoker'],
+            calendar=patient['calendar'],
+            doctors=patient['doctors'],
+            health=patient['health']
+        )
+        response_object = []
+        for i in resp.health:
+            response_object.append(i)
+        return response_object
+    except Exception:
+        return None
 
 
 def pat_delete(db, pid):
@@ -116,8 +114,6 @@ def pat_delete(db, pid):
 def pat_get_by_token(db, pid):
     try:
         patient = db.document(str(pid)).get()
-        if (patient == 1):
-            return 0
         patient = patient.to_dict()
         resp = Patient(
             id=pid,
@@ -140,63 +136,62 @@ def pat_get_by_token(db, pid):
     except Exception as e:
         response_object = {
             'status': 'fail',
-            'message': 'Unable to find patient.'
+            'message': 'Unable to find patient with error: ' + str(e)
         }
         return jsonify(response_object), False
 
 
 def pat_edit_profile(db, pid, post_data):
-    patient_resp = db.document(str(pid)).get()
-    if patient_resp == 1:
-        return 0
-    patient_resp = patient_resp.to_dict()
-    print(patient_resp)
-    patient = Patient(
-        id=patient_resp['id'],
-        firstName=post_data.get('firstName'),
-        lastName=post_data.get('lastName'),
-        phone=post_data.get('phone'),
-        email=post_data.get('email'),
-        dateOfBirth=patient_resp['dateOfBirth'],
-        sex=patient_resp['sex'],
-        profilePicture=patient_resp['profilePicture'],
-        height=post_data.get('height'),
-        weight=post_data.get('weight'),
-        drinker=post_data.get('drinker'),
-        smoker=post_data.get('smoker'),
-        calendar=patient_resp['calendar'],
-        doctors=patient_resp['doctors'],
-        health=patient_resp['health']
-    )
-
     try:
-        patient.profilePicture = post_data.get('profilePicture')
-    except KeyError:
-        patient.profilePicture = patient_resp['profilePicture']
+        patient_resp = db.document(str(pid)).get().to_dict()
+        patient = Patient(
+            id=patient_resp['id'],
+            firstName=post_data.get('firstName'),
+            lastName=post_data.get('lastName'),
+            phone=post_data.get('phone'),
+            email=post_data.get('email'),
+            dateOfBirth=patient_resp['dateOfBirth'],
+            sex=patient_resp['sex'],
+            profilePicture=patient_resp['profilePicture'],
+            height=post_data.get('height'),
+            weight=post_data.get('weight'),
+            drinker=post_data.get('drinker'),
+            smoker=post_data.get('smoker'),
+            calendar=patient_resp['calendar'],
+            doctors=patient_resp['doctors'],
+            health=patient_resp['health']
+        )
+        try:
+            patient.profilePicture = post_data.get('profilePicture')
+        except KeyError:
+            patient.profilePicture = patient_resp['profilePicture']
 
-    db.document(patient.id).set({
-        "id": patient.id,
-        "firstName": patient.firstName,
-        "lastName": patient.lastName,
-        "phone": patient.phone,
-        "email": patient.email,
-        "dateOfBirth": patient.dateOfBirth,
-        "sex": patient.sex,
-        "profilePicture": patient.profilePicture,
-        "height": patient.height,
-        "weight": patient.weight,
-        "drinker": patient.drinker,
-        "smoker": patient.smoker,
-        "calendar": patient.calendar,
-        "health": patient.health,
-        "doctors": patient.doctors
-
-    })
-    res = {
-        "Success": True
-    }
-    print(res)
-    return res
+        db.document(patient.id).set({
+            "id": patient.id,
+            "firstName": patient.firstName,
+            "lastName": patient.lastName,
+            "phone": patient.phone,
+            "email": patient.email,
+            "dateOfBirth": patient.dateOfBirth,
+            "sex": patient.sex,
+            "profilePicture": patient.profilePicture,
+            "height": patient.height,
+            "weight": patient.weight,
+            "drinker": patient.drinker,
+            "smoker": patient.smoker,
+            "calendar": patient.calendar,
+            "health": patient.health,
+            "doctors": patient.doctors
+        })
+        res = {
+            "Success": True
+        }
+        return res
+    except Exception:
+        res = {
+            "Success": False
+        }
+        return res
 
 
 def pat_get_hcps(pat, hcpdb, pid):
@@ -204,17 +199,11 @@ def pat_get_hcps(pat, hcpdb, pid):
     if patient_resp == 1:
         return 0
     patient_resp = patient_resp.to_dict()
-    print(patient_resp)
-    print(patient_resp['doctors'])
     results = {}
     for i in patient_resp['doctors']:
         week = []
         for _ in range(0, 7):
-            week.append(Day(
-                startTime=-1,
-                endTime=-1,
-            )
-            )
+            week.append(Day(startTime=-1, endTime=-1))
 
         schedule = Hours(
             sunday=week[0],
@@ -292,7 +281,6 @@ def pat_get_hcps(pat, hcpdb, pid):
                 "endTime": resp.hours.saturday.endTime
             }
         }
-
         response_object = {
             "id": resp.id,
             "firstName": resp.firstName,
@@ -306,23 +294,18 @@ def pat_get_hcps(pat, hcpdb, pid):
             "hours": hours,
             "patients": resp.patients
         }
-
         entry = {
             i: response_object
         }
-        # print(i)
         results.update(entry)
     return results
 
 
 def pat_get_all(pat):
     pats = pat.stream()
-    if pats == 2:
-        return 2
     pats_return = []
     for patient in pats:
         h = patient.to_dict()
-        print(f'{patient.id}=> {h["firstName"]}')
         pat_obj = {
             "id": h['id'],
             "firstName": h['firstName'],
@@ -331,7 +314,6 @@ def pat_get_all(pat):
             "phone": h['phone'],
             "profilePicture": h['profilePicture']
         }
-
         pats_return.append(pat_obj)
     return pats_return
 
@@ -348,15 +330,9 @@ def make_week():
     Makes a blank schedule
     :return: Hours object
     """
-
     week = []
     for _ in range(0, 7):
-        week.append(Day(
-            startTime=-1,
-            endTime=-1,
-        )
-        )
-
+        week.append(Day(startTime=-1, endTime=-1))
     schedule = Hours(
         sunday=week[0],
         monday=week[1],
@@ -370,7 +346,6 @@ def make_week():
 
 
 def pat_search(text):
-    print(text)
     api = Env.ALGOLIA_API()
     admin = Env.ALGOLIA_ADMIN()
     # print(api)
@@ -378,8 +353,9 @@ def pat_search(text):
     client = SearchClient.create(api, admin)
     index = client.init_index('patients')
     index.set_settings({"customRanking": ["desc(followers)"]})
-    index.set_settings({"searchableAttributes": ["firstName", "lastName", "phone",
-                                                 "email", "id"]})
+    index.set_settings({"searchableAttributes":
+                            ["firstName", "lastName", "phone",
+                             "email", "id"]})
     res = index.search(text)
 
     # Res is all hits of Patients with matching
@@ -397,8 +373,8 @@ def pat_search(text):
             "profilePicture": h['profilePicture']
         }
         pats_return.append(pat_obj)
-
     return pats_return
+
 
 def add_pat(patient):
     api = Env.ALGOLIA_API()

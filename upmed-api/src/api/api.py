@@ -5,10 +5,10 @@ from .logs import logs_endpoints
 
 from sys import path
 from os.path import join, dirname
+
 path.append(join(dirname(__file__), '../..'))
 
 from src.util import SuperBlueprint  # noqa
-
 
 # Blueprint containing all sub-blueprints
 api_endpoints = SuperBlueprint('api', __name__, url_prefix='')
