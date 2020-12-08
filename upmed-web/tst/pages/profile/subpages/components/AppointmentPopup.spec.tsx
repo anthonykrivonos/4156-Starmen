@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { AppointmentPopup } from '../../../../../src/pages/profile/subpages/components/AppointmentPopup'
 import { Appointment, HCP, Patient } from '../../../../../src/models'
 
+jest.mock('../../../../../src/utils/Client')
 
 describe('AppointmentPopup', () => {
 
@@ -71,11 +72,10 @@ describe('AppointmentPopup', () => {
         onClose: () => {},
     }
 
-
-        test('AppointmentPopup', () => {
+    test('AppointmentPopup', () => {
         render(<AppointmentPopup {...AppointmentPopupProps}/>)
-		    const linkElement = screen.getByText('Appointment Details')
-		    expect(linkElement).toBeInTheDocument()
+        const linkElement = screen.getByText('Appointment Details')
+        expect(linkElement).toBeInTheDocument()
 	})
 
 })

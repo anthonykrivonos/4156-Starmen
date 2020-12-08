@@ -1,0 +1,123 @@
+============ upmed-web Coverage and Unit Report Generated on 1607392803 ============
+$ nyc env TS_NODE_PROJECT="tsconfig.tst.json" mocha --require ts-node/register ./tst/**/*.spec.ts
+
+
+  DateTime
+    √ safeParseHours.equal
+    √ safeParseHours.unequal
+    √ hoursOffset.default
+    √ hoursOffset.match
+    √ getMinutes
+    √ minutesToHHMMAA
+    √ hhmmAAToMinutes
+    √ minutesToHHMM
+    √ hhmmToMinutes
+    √ dateFromStringDate
+    √ getModifiedDate.change
+    √ getModifiedDate.noChange
+    √ prettyDate
+
+  Formatter
+    √ phone.formatted
+    √ phone.unformatted
+    √ stringDate
+    √ npi
+
+  Hasher
+    √ encode
+    √ decode.success
+    √ decode.failure
+
+  Objects
+    √ isNullish.postive
+    √ isNullish.negative
+    √ isArray.postive
+    √ isArray.negative
+    √ isString.postive
+    √ isString.negative
+    √ isNumber.postive
+    √ isNumber.negative
+    √ objToArray.success
+    √ copy.nullish
+    √ copy.nonObject
+    √ copy.shallow
+    √ copy.nonShallow
+    √ copy.withoutProperty
+
+  URL
+    √ getFromQuery.present
+    √ getFromQuery.absent
+
+  Validator
+    √ badWords.valid (62ms)
+    √ badWords.invalid
+    √ realName.valid.full
+    √ realName.valid.short
+    √ realName.valid.single
+    √ realName.valid.empty
+    √ realName.invalid.nonAlpha
+    √ realName.invalid.nonAlphaSingle
+    √ realName.invalid.badWord
+    √ realName.invalid.spaces
+    √ text.valid.nonempty
+    √ text.valid.empty
+    √ text.invalid
+    √ phone.valid.nonempty
+    √ phone.valid.empty
+    √ phone.invalid.nonempty
+    √ phone.invalid.nonAlpha
+    √ stringDate.invalid
+    √ email.valid
+    √ email.invalid.noAtOrDot
+    √ email.invalid.AtYDotZ
+    √ email.invalid.XAtDotZ
+    √ email.invalid.XAtYDot
+    √ email.invalid.XYDotZ
+    √ email.invalid.XYZ
+    √ npi.valid.nonempty
+    √ npi.valid.empty
+    √ npi.invalid.notAllDigits
+    √ npi.invalid.extraCharacters
+    √ npi.invalid.lessThanTen
+    √ npi.invalid.greaterThanTen
+    √ hours.valid.normal
+    √ hours.valid.max
+    √ hours.valid.equalMin
+    √ hours.valid.equalMax
+    √ hours.valid.closed
+    √ hours.invalid.startTimeLessThanZero
+    √ hours.invalid.startTimeGreaterThanEndTime
+    √ hours.invalid.endTimeGreaterThan1440
+    √ hours.invalid.closedStartTimeMismatch
+    √ hours.invalid.closedEndTimeMismatch
+
+
+  77 passing (121ms)
+
+--------------------|---------|----------|---------|---------|-------------------
+File                | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+--------------------|---------|----------|---------|---------|-------------------
+All files           |     100 |      100 |     100 |     100 |                   
+ src/constants      |     100 |      100 |     100 |     100 |                   
+  calendar.ts       |     100 |      100 |     100 |     100 |                   
+  colors.ts         |     100 |      100 |     100 |     100 |                   
+  general.ts        |     100 |      100 |     100 |     100 |                   
+  index.ts          |     100 |      100 |     100 |     100 |                   
+  models.ts         |     100 |      100 |     100 |     100 |                   
+  storage.ts        |     100 |      100 |     100 |     100 |                   
+ src/utils          |     100 |      100 |     100 |     100 |                   
+  DateTime.ts       |     100 |      100 |     100 |     100 |                   
+  Formatter.ts      |     100 |      100 |     100 |     100 |                   
+  Hasher.ts         |     100 |      100 |     100 |     100 |                   
+  Objects.ts        |     100 |      100 |     100 |     100 |                   
+  URL.ts            |     100 |      100 |     100 |     100 |                   
+  Validator.ts      |     100 |      100 |     100 |     100 |                   
+  index.ts          |     100 |      100 |     100 |     100 |                   
+ tst/utils          |     100 |      100 |     100 |     100 |                   
+  DateTime.spec.ts  |     100 |      100 |     100 |     100 |                   
+  Formatter.spec.ts |     100 |      100 |     100 |     100 |                   
+  Hasher.spec.ts    |     100 |      100 |     100 |     100 |                   
+  Objects.spec.ts   |     100 |      100 |     100 |     100 |                   
+  URL.spec.ts       |     100 |      100 |     100 |     100 |                   
+  Validator.spec.ts |     100 |      100 |     100 |     100 |                   
+--------------------|---------|----------|---------|---------|-------------------

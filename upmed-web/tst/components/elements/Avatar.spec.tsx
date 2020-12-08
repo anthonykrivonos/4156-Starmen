@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { Avatar } from '../../../src/components/elements/Avatar'
 import { Patient, HCP } from '../../../src/models'
 
@@ -25,7 +25,10 @@ describe('Avatar', () => {
         } as Patient
 
 		render(<Avatar user={patient} size={"500"} onClick={(user: Patient | HCP) => {}}/>)
-		const linkElement = screen.getByTitle('kenneth chuen')
+        const linkElement = screen.getByTitle('kenneth chuen')
+        
+        fireEvent.click(linkElement)
+
 		expect(linkElement).toBeInTheDocument()
 	})
 

@@ -1,0 +1,1423 @@
+============ upmed-web Coverage and Component Unit Report Generated on 1607386729 ============
+$ jest --coverage --verbose --noStackTrace --watchAll=false --config ./jest.config.js ./tst/**/*.spec.tsx 2>&1
+  Invalid testPattern .\\tst\\**\\*.spec.tsx supplied. Running all tests instead.
+  Invalid testPattern .\\tst\\**\\*.spec.tsx supplied. Running all tests instead.
+  console.error
+    Warning: React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+
+      at printWarning (node_modules/react/cjs/react.development.js:220:30)
+
+  console.error
+    Warning: React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+
+      at printWarning (node_modules/react/cjs/react.development.js:220:30)
+
+  console.error
+    Warning: React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+
+      at printWarning (node_modules/react/cjs/react.development.js:220:30)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+  console.error
+    Error: Not implemented: window.open
+        at module.exports (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\not-implemented.js:9:17)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\browser\Window.js:728:7
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\account\OnSignIn.tsx:189:25
+        at processTicksAndRejections (internal/process/task_queues.js:97:5) undefined
+
+      at VirtualConsole.<anonymous> (node_modules/jsdom/lib/jsdom/virtual-console.js:29:45)
+
+PASS tst/pages/account/OnSignIn.spec.tsx (14.034 s)
+  OnSignIn
+    √ render.inDocument Patient (1290 ms)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Calendar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\profile\subpages\Calendar.tsx:32:32)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.SuggestionInput (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\form\SuggestionInput.tsx:33:26)
+        at div
+        at div
+        at div
+        at section
+        at main
+        at Object.<anonymous>.exports.EditProfile (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\profile\subpages\EditProfile.tsx:22:44)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+PASS tst/pages/profile/subpages/EditProfile.spec.tsx (15.004 s)
+  EditProfile
+    √ EditProfile Patient (1214 ms)
+    √ EditProfile Doctor (1131 ms)
+
+  console.error
+    Warning: React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+
+      at printWarning (node_modules/react/cjs/react.development.js:220:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Calendar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\profile\subpages\Calendar.tsx:32:32)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+PASS tst/pages/profile/subpages/Calendar.spec.tsx (16.47 s)
+  Calendar
+    √ Calendar Patient (1918 ms)
+    √ Calendar Doctor (1797 ms)
+
+PASS tst/pages/profile/subpages/MedicalInfo.spec.tsx
+  MedicalInfo
+    √ Patient (267 ms)
+    √ Doctor Add Record to Patient (2396 ms)
+    √ Doctor Click Appointment (105 ms)
+
+  console.error
+    Warning: <Link /> is using incorrect casing. Use PascalCase for React components, or lowercase for HTML elements.
+        at Link
+        at li
+        at ul
+        at div
+        at div
+        at nav
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+        at Object.<anonymous>.exports.UMNavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\UMNavigationBar.tsx:19:36)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.UMNavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\UMNavigationBar.tsx:19:36)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: <Link /> is using incorrect casing. Use PascalCase for React components, or lowercase for HTML elements.
+        at Link
+        at div
+        at li
+        at ul
+        at div
+        at div
+        at nav
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+        at Object.<anonymous>.exports.UMNavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\UMNavigationBar.tsx:19:36)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: <Link /> is using incorrect casing. Use PascalCase for React components, or lowercase for HTML elements.
+        at Link
+        at li
+        at ul
+        at div
+        at div
+        at nav
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+        at Object.<anonymous>.exports.UMNavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\UMNavigationBar.tsx:19:36)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.UMNavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\UMNavigationBar.tsx:19:36)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+PASS tst/components/bars/UMNavigationBar.spec.tsx
+  UMNavigationBar
+    √ UMNavigationBar render.inDocument no userToken (95 ms)
+    √ UMNavigationBar render.inDocument with userToken (71 ms)
+
+PASS tst/components/form/HoursInputs.spec.tsx
+  HoursInputs
+    √ HoursInput render.inDocument good (1429 ms)
+    √ HoursInput render.inDocument bad (1243 ms)
+    √ HoursInput render.inDocument no label/hours (357 ms)
+
+PASS tst/pages/profile/subpages/components/AppointmentPopup.spec.tsx
+  AppointmentPopup
+    √ AppointmentPopup (86 ms)
+
+PASS tst/utils/Validator.spec.ts
+  Validator
+    √ badWords.valid (195 ms)
+    √ badWords.invalid (39 ms)
+    √ realName.valid.full (30 ms)
+    √ realName.valid.short (5 ms)
+    √ realName.valid.single (33 ms)
+    √ realName.valid.empty (1 ms)
+    √ realName.invalid.nonAlpha (15 ms)
+    √ realName.invalid.nonAlphaSingle (3 ms)
+    √ realName.invalid.badWord (8 ms)
+    √ realName.invalid.spaces
+    √ text.valid.nonempty (64 ms)
+    √ text.valid.empty
+    √ text.invalid (3 ms)
+    √ phone.valid.nonempty
+    √ phone.valid.empty (1 ms)
+    √ phone.invalid.nonempty
+    √ phone.invalid.nonAlpha (1 ms)
+    √ stringDate.invalid
+    √ email.valid (1 ms)
+    √ email.invalid.noAtOrDot (1 ms)
+    √ email.invalid.AtYDotZ
+    √ email.invalid.XAtDotZ (1 ms)
+    √ email.invalid.XAtYDot
+    √ email.invalid.XYDotZ (1 ms)
+    √ email.invalid.XYZ
+    √ npi.valid.nonempty (1 ms)
+    √ npi.valid.empty
+    √ npi.invalid.notAllDigits
+    √ npi.invalid.extraCharacters
+    √ npi.invalid.lessThanTen (1 ms)
+    √ npi.invalid.greaterThanTen
+    √ hours.valid.normal
+    √ hours.valid.max (1 ms)
+    √ hours.valid.equalMin
+    √ hours.valid.equalMax (5 ms)
+    √ hours.valid.closed
+    √ hours.invalid.startTimeLessThanZero
+    √ hours.invalid.startTimeGreaterThanEndTime (1 ms)
+    √ hours.invalid.endTimeGreaterThan1440
+    √ hours.invalid.closedStartTimeMismatch (1 ms)
+    √ hours.invalid.closedEndTimeMismatch
+
+  console.error
+    Warning: React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+
+      at printWarning (node_modules/react/cjs/react.development.js:220:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Profile (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\profile\Profile.tsx:75:32)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+        at Object.<anonymous>.exports.Profile (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\profile\Profile.tsx:75:32)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Profile (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\profile\Profile.tsx:75:32)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.log
+    [36m<body>[39m
+      [36m<div>[39m
+        [36m<div[39m
+          [33mclass[39m=[32m"d-flex flex-column align-items-center justify-content-center undefined"[39m
+        [36m>[39m
+          [36m<div[39m
+            [33mclass[39m=[32m"text-center mb-4"[39m
+          [36m>[39m
+            [0mLoading...[0m
+          [36m</div>[39m
+          [36m<div[39m
+            [33mstyle[39m=[32m"fill: #035A82; height: 7vw; width: 7vw;"[39m
+          [36m>[39m
+            [36m<svg[39m
+              [33mviewBox[39m=[32m"0 0 32 32"[39m
+              [33mxmlns[39m=[32m"http://www.w3.org/2000/svg"[39m
+            [36m>[39m
+              [0m
+      [0m
+              [36m<circle[39m
+                [33mcx[39m=[32m"16"[39m
+                [33mcy[39m=[32m"3"[39m
+                [33mr[39m=[32m"0"[39m
+              [36m>[39m
+                [0m
+        [0m
+                [36m<animate[39m
+                  [33mattributeName[39m=[32m"r"[39m
+                  [33mbegin[39m=[32m"0"[39m
+                  [33mcalcMode[39m=[32m"spline"[39m
+                  [33mdur[39m=[32m"1s"[39m
+                  [33mkeySplines[39m=[32m"0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"[39m
+                  [33mrepeatCount[39m=[32m"indefinite"[39m
+                  [33mvalues[39m=[32m"0;3;0;0"[39m
+                [36m/>[39m
+                [0m
+      [0m
+              [36m</circle>[39m
+              [0m
+      [0m
+              [36m<circle[39m
+                [33mcx[39m=[32m"16"[39m
+                [33mcy[39m=[32m"3"[39m
+                [33mr[39m=[32m"0"[39m
+                [33mtransform[39m=[32m"rotate(45 16 16)"[39m
+              [36m>[39m
+                [0m
+        [0m
+                [36m<animate[39m
+                  [33mattributeName[39m=[32m"r"[39m
+                  [33mbegin[39m=[32m"0.125s"[39m
+                  [33mcalcMode[39m=[32m"spline"[39m
+                  [33mdur[39m=[32m"1s"[39m
+                  [33mkeySplines[39m=[32m"0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"[39m
+                  [33mrepeatCount[39m=[32m"indefinite"[39m
+                  [33mvalues[39m=[32m"0;3;0;0"[39m
+                [36m/>[39m
+                [0m
+      [0m
+              [36m</circle>[39m
+              [0m
+      [0m
+              [36m<circle[39m
+                [33mcx[39m=[32m"16"[39m
+                [33mcy[39m=[32m"3"[39m
+                [33mr[39m=[32m"0"[39m
+                [33mtransform[39m=[32m"rotate(90 16 16)"[39m
+              [36m>[39m
+                [0m
+        [0m
+                [36m<animate[39m
+                  [33mattributeName[39m=[32m"r"[39m
+                  [33mbegin[39m=[32m"0.25s"[39m
+                  [33mcalcMode[39m=[32m"spline"[39m
+                  [33mdur[39m=[32m"1s"[39m
+                  [33mkeySplines[39m=[32m"0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"[39m
+                  [33mrepeatCount[39m=[32m"indefinite"[39m
+                  [33mvalues[39m=[32m"0;3;0;0"[39m
+                [36m/>[39m
+                [0m
+      [0m
+              [36m</circle>[39m
+              [0m
+      [0m
+              [36m<circle[39m
+                [33mcx[39m=[32m"16"[39m
+                [33mcy[39m=[32m"3"[39m
+                [33mr[39m=[32m"0"[39m
+                [33mtransform[39m=[32m"rotate(135 16 16)"[39m
+              [36m>[39m
+                [0m
+        [0m
+                [36m<animate[39m
+                  [33mattributeName[39m=[32m"r"[39m
+                  [33mbegin[39m=[32m"0.375s"[39m
+                  [33mcalcMode[39m=[32m"spline"[39m
+                  [33mdur[39m=[32m"1s"[39m
+                  [33mkeySplines[39m=[32m"0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"[39m
+                  [33mrepeatCount[39m=[32m"indefinite"[39m
+                  [33mvalues[39m=[32m"0;3;0;0"[39m
+                [36m/>[39m
+                [0m
+      [0m
+              [36m</circle>[39m
+              [0m
+      [0m
+              [36m<circle[39m
+                [33mcx[39m=[32m"16"[39m
+                [33mcy[39m=[32m"3"[39m
+                [33mr[39m=[32m"0"[39m
+                [33mtransform[39m=[32m"rotate(180 16 16)"[39m
+              [36m>[39m
+                [0m
+        [0m
+                [36m<animate[39m
+                  [33mattributeName[39m=[32m"r"[39m
+                  [33mbegin[39m=[32m"0.5s"[39m
+                  [33mcalcMode[39m=[32m"spline"[39m
+                  [33mdur[39m=[32m"1s"[39m
+                  [33mkeySplines[39m=[32m"0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"[39m
+                  [33mrepeatCount[39m=[32m"indefinite"[39m
+                  [33mvalues[39m=[32m"0;3;0;0"[39m
+                [36m/>[39m
+                [0m
+      [0m
+              [36m</circle>[39m
+              [0m
+      [0m
+              [36m<circle[39m
+                [33mcx[39m=[32m"16"[39m
+                [33mcy[39m=[32m"3"[39m
+                [33mr[39m=[32m"0"[39m
+                [33mtransform[39m=[32m"rotate(225 16 16)"[39m
+              [36m>[39m
+                [0m
+        [0m
+                [36m<animate[39m
+                  [33mattributeName[39m=[32m"r"[39m
+                  [33mbegin[39m=[32m"0.625s"[39m
+                  [33mcalcMode[39m=[32m"spline"[39m
+                  [33mdur[39m=[32m"1s"[39m
+                  [33mkeySplines[39m=[32m"0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"[39m
+                  [33mrepeatCount[39m=[32m"indefinite"[39m
+                  [33mvalues[39m=[32m"0;3;0;0"[39m
+                [36m/>[39m
+                [0m
+      [0m
+              [36m</circle>[39m
+              [0m
+      [0m
+              [36m<circle[39m
+                [33mcx[39m=[32m"16"[39m
+                [33mcy[39m=[32m"3"[39m
+                [33mr[39m=[32m"0"[39m
+                [33mtransform[39m=[32m"rotate(270 16 16)"[39m
+              [36m>[39m
+                [0m
+        [0m
+                [36m<animate[39m
+                  [33mattributeName[39m=[32m"r"[39m
+                  [33mbegin[39m=[32m"0.75s"[39m
+                  [33mcalcMode[39m=[32m"spline"[39m
+                  [33mdur[39m=[32m"1s"[39m
+                  [33mkeySplines[39m=[32m"0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"[39m
+                  [33mrepeatCount[39m=[32m"indefinite"[39m
+                  [33mvalues[39m=[32m"0;3;0;0"[39m
+                [36m/>[39m
+                [0m
+      [0m
+              [36m</circle>[39m
+              [0m
+      [0m
+              [36m<circle[39m
+                [33mcx[39m=[32m"16"[39m
+                [33mcy[39m=[32m"3"[39m
+                [33mr[39m=[32m"0"[39m
+                [33mtransform[39m=[32m"rotate(315 16 16)"[39m
+              [36m>[39m
+                [0m
+        [0m
+                [36m<animate[39m
+                  [33mattributeName[39m=[32m"r"[39m
+                  [33mbegin[39m=[32m"0.875s"[39m
+                  [33mcalcMode[39m=[32m"spline"[39m
+                  [33mdur[39m=[32m"1s"[39m
+                  [33mkeySplines[39m=[32m"0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"[39m
+                  [33mrepeatCount[39m=[32m"indefinite"[39m
+                  [33mvalues[39m=[32m"0;3;0;0"[39m
+                [36m/>[39m
+                [0m
+      [0m
+              [36m</circle>[39m
+              [0m
+      [0m
+              [36m<circle[39m
+                [33mcx[39m=[32m"16"[39m
+                [33mcy[39m=[32m"3"[39m
+                [33mr[39m=[32m"0"[39m
+                [33mtransform[39m=[32m"rotate(180 16 16)"[39m
+              [36m>[39m
+                [0m
+        [0m
+                [36m<animate[39m
+                  [33mattributeName[39m=[32m"r"[39m
+                  [33mbegin[39m=[32m"0.5s"[39m
+                  [33mcalcMode[39m=[32m"spline"[39m
+                  [33mdur[39m=[32m"1s"[39m
+                  [33mkeySplines[39m=[32m"0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8"[39m
+                  [33mrepeatCount[39m=[32m"indefinite"[39m
+                  [33mvalues[39m=[32m"0;3;0;0"[39m
+                [36m/>[39m
+                [0m
+      [0m
+              [36m</circle>[39m
+              [0m
+    [0m
+            [36m</svg>[39m
+            [0m
+    [0m
+          [36m</div>[39m
+        [36m</div>[39m
+      [36m</div>[39m
+    [36m</body>[39m
+
+      at logDOM (node_modules/@testing-library/dom/dist/pretty-dom.js:82:13)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Profile (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\profile\Profile.tsx:75:32)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Profile (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\profile\Profile.tsx:75:32)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+PASS tst/pages/profile/Profile.spec.tsx
+  Profile
+    √ Profile render.inDocument Patient (68 ms)
+    √ Profile render.inDocument Doctor (59 ms)
+
+  console.error
+    Warning: React.createElement: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+
+      at printWarning (node_modules/react/cjs/react.development.js:220:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Appointment (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\appointment\Appointment.tsx:15:32)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Appointment (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\appointment\Appointment.tsx:15:32)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Appointment (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\appointment\Appointment.tsx:15:32)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.warn
+    2020-12-08 00:19:33.274Z | WARN in [createLocalTracks #1]: Call to getUserMedia failed: Error: getUserMedia is not supported
+        at Object.getUserMedia (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\@twilio\webrtc\lib\getusermedia.js:21:25)
+        at Object.createLocalTracks (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\createlocaltracks.js:124:134)
+        at getLocalTracks (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\connect.js:788:18)
+        at onCreate (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\cancelableroompromise.js:20:5)
+        at CancelablePromise.Object.defineProperty.value (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\util\cancelablepromise.js:51:9)
+        at new Promise (<anonymous>)
+        at new CancelablePromise (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\util\cancelablepromise.js:50:14)
+        at createCancelableRoomPromise (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\cancelableroompromise.js:18:10)
+        at Object.connect (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\connect.js:274:31)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\video\Room.tsx:47:9
+        at invokePassiveEffectCreate (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:23487:20)
+        at HTMLUnknownElement.callCallback (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:3945:14)
+        at HTMLUnknownElement.callTheUserObjectsOperation (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\generated\EventListener.js:26:30)
+        at innerInvokeEventListeners (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:318:25)
+        at invokeEventListeners (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:274:3)
+        at HTMLUnknownElementImpl._dispatch (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:221:9)
+        at HTMLUnknownElementImpl.dispatchEvent (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:94:17)
+        at HTMLUnknownElement.dispatchEvent (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:231:34)
+        at Object.invokeGuardedCallbackDev (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
+        at invokeGuardedCallback (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
+        at flushPassiveEffectsImpl (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:23574:9)
+        at unstable_runWithPriority (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\scheduler\cjs\scheduler.development.js:646:12)
+        at runWithPriority$1 (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:11276:10)
+        at flushPassiveEffects (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:23447:14)
+        at performSyncWorkOnRoot (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:22269:3)
+        at scheduleUpdateOnFiber (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:21881:7)
+        at updateContainer (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:25482:3)
+        at legacyRenderSubtreeIntoContainer (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:26037:5)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:26147:7
+        at unbatchedUpdates (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:22431:12)
+        at Object.unmountComponentAtNode (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:26146:5)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\@testing-library\react\dist\pure.js:142:23
+        at batchedUpdates$1 (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:22380:12)
+        at act (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1042:14)
+        at cleanupAtContainer (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\@testing-library\react\dist\pure.js:141:26)
+        at Set.forEach (<anonymous>)
+        at cleanup (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\@testing-library\react\dist\pure.js:135:21)
+        at Object.<anonymous> (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\@testing-library\react\dist\index.js:31:25)
+        at Object.asyncJestLifecycle (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:58:37)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\queueRunner.js:45:12
+        at new Promise (<anonymous>)
+        at mapper (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\queueRunner.js:28:19)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\queueRunner.js:75:41
+        at processTicksAndRejections (internal/process/task_queues.js:97:5)
+
+      at Log.log (node_modules/twilio-video/es5/util/log.js:138:23)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Appointment (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\appointment\Appointment.tsx:15:32)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Appointment (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\appointment\Appointment.tsx:15:32)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+(node:19508) UnhandledPromiseRejectionWarning: Error: getUserMedia is not supported
+(node:19508) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+(node:19508) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+PASS tst/pages/appointment/Appointment.spec.tsx
+  Appointment
+    √ Appointment render.inDocument loading (119 ms)
+    √ Appointment fail promise (49 ms)
+    √ Appointment no hash (208 ms)
+    √ Appointment no id decoded (96 ms)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Profile (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\profile\Profile.tsx:72:18)
+        at Route (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-router\cjs\react-router.js:470:29)
+        at Switch (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-router\cjs\react-router.js:676:29)
+        at Router (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-router\cjs\react-router.js:99:30)
+        at BrowserRouter (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-router-dom\cjs\react-router-dom.js:67:35)
+        at App (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\App.tsx:63:3)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Profile (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\profile\Profile.tsx:72:18)
+        at Route (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-router\cjs\react-router.js:470:29)
+        at Switch (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-router\cjs\react-router.js:676:29)
+        at Router (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-router\cjs\react-router.js:99:30)
+        at BrowserRouter (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-router-dom\cjs\react-router-dom.js:67:35)
+        at App (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\pages\App.tsx:63:3)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+PASS tst/pages/App.spec.tsx
+  App
+    √ App render.inDocument token (258 ms)
+    √ App render.inDocument no token (118 ms)
+
+PASS tst/components/bars/Sidebar.spec.tsx
+  Sidebar
+    √ Sidebar render.inDocument Patient (45 ms)
+    √ Sidebar render.inDocument Doctor (55 ms)
+
+PASS tst/components/video/Participant.spec.tsx
+  Participant
+    √ stop jest from being mad (4 ms)
+
+  console.log
+    nothing
+
+      at Object.<anonymous> (tst/components/video/Participant.spec.tsx:70:17)
+
+(node:29384) UnhandledPromiseRejectionWarning: Error: getUserMedia is not supported
+(node:29384) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+(node:29384) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:29384) UnhandledPromiseRejectionWarning: Error: getUserMedia is not supported
+(node:29384) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 4)
+(node:29384) UnhandledPromiseRejectionWarning: Error: getUserMedia is not supported
+(node:29384) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 6)
+  console.warn
+    2020-12-08 00:19:36.021Z | WARN in [createLocalTracks #1]: Call to getUserMedia failed: Error: getUserMedia is not supported
+        at Object.getUserMedia (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\@twilio\webrtc\lib\getusermedia.js:21:25)
+        at Object.createLocalTracks (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\createlocaltracks.js:124:134)
+        at getLocalTracks (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\connect.js:788:18)
+        at onCreate (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\cancelableroompromise.js:20:5)
+        at CancelablePromise.Object.defineProperty.value (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\util\cancelablepromise.js:51:9)
+        at new Promise (<anonymous>)
+        at new CancelablePromise (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\util\cancelablepromise.js:50:14)
+        at createCancelableRoomPromise (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\cancelableroompromise.js:18:10)
+        at Object.connect (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\connect.js:274:31)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\video\Room.tsx:47:9
+        at invokePassiveEffectCreate (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:23487:20)
+        at HTMLUnknownElement.callCallback (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:3945:14)
+        at HTMLUnknownElement.callTheUserObjectsOperation (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\generated\EventListener.js:26:30)
+        at innerInvokeEventListeners (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:318:25)
+        at invokeEventListeners (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:274:3)
+        at HTMLUnknownElementImpl._dispatch (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:221:9)
+        at HTMLUnknownElementImpl.dispatchEvent (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:94:17)
+        at HTMLUnknownElement.dispatchEvent (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:231:34)
+        at Object.invokeGuardedCallbackDev (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
+        at invokeGuardedCallback (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
+        at flushPassiveEffectsImpl (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:23574:9)
+        at unstable_runWithPriority (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\scheduler\cjs\scheduler.development.js:646:12)
+        at runWithPriority$1 (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:11276:10)
+        at flushPassiveEffects (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:23447:14)
+        at Object.<anonymous>.flushWork (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom-test-utils.development.js:992:10)
+        at act (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1107:9)
+        at Object.render (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\@testing-library\react\dist\pure.js:95:26)
+        at Object.<anonymous> (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\tst\components\video\Room.spec.tsx:74:3)
+        at Object.asyncJestTest (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:106:37)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\queueRunner.js:45:12
+        at new Promise (<anonymous>)
+        at mapper (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\queueRunner.js:28:19)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\queueRunner.js:75:41
+        at processTicksAndRejections (internal/process/task_queues.js:97:5)
+
+      at Log.log (node_modules/twilio-video/es5/util/log.js:138:23)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Room (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\video\Room.tsx:19:40)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Room (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\video\Room.tsx:19:40)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.warn
+    2020-12-08 00:19:36.108Z | WARN in [createLocalTracks #2]: Call to getUserMedia failed: Error: getUserMedia is not supported
+        at Object.getUserMedia (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\@twilio\webrtc\lib\getusermedia.js:21:25)
+        at Object.createLocalTracks (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\createlocaltracks.js:124:134)
+        at getLocalTracks (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\connect.js:788:18)
+        at onCreate (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\cancelableroompromise.js:20:5)
+        at CancelablePromise.Object.defineProperty.value (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\util\cancelablepromise.js:51:9)
+        at new Promise (<anonymous>)
+        at new CancelablePromise (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\util\cancelablepromise.js:50:14)
+        at createCancelableRoomPromise (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\cancelableroompromise.js:18:10)
+        at Object.connect (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\connect.js:274:31)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\video\Room.tsx:47:9
+        at invokePassiveEffectCreate (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:23487:20)
+        at HTMLUnknownElement.callCallback (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:3945:14)
+        at HTMLUnknownElement.callTheUserObjectsOperation (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\generated\EventListener.js:26:30)
+        at innerInvokeEventListeners (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:318:25)
+        at invokeEventListeners (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:274:3)
+        at HTMLUnknownElementImpl._dispatch (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:221:9)
+        at HTMLUnknownElementImpl.dispatchEvent (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:94:17)
+        at HTMLUnknownElement.dispatchEvent (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:231:34)
+        at Object.invokeGuardedCallbackDev (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
+        at invokeGuardedCallback (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
+        at flushPassiveEffectsImpl (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:23574:9)
+        at unstable_runWithPriority (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\scheduler\cjs\scheduler.development.js:646:12)
+        at runWithPriority$1 (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:11276:10)
+        at flushPassiveEffects (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:23447:14)
+        at Object.<anonymous>.flushWork (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom-test-utils.development.js:992:10)
+        at act (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1107:9)
+        at Object.render (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\@testing-library\react\dist\pure.js:95:26)
+        at Object.<anonymous> (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\tst\components\video\Room.spec.tsx:83:3)
+        at Object.asyncJestTest (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:106:37)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\queueRunner.js:45:12
+        at new Promise (<anonymous>)
+        at mapper (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\queueRunner.js:28:19)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\queueRunner.js:75:41
+        at processTicksAndRejections (internal/process/task_queues.js:97:5)
+
+      at Log.log (node_modules/twilio-video/es5/util/log.js:138:23)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Room (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\video\Room.tsx:19:40)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.Room (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\video\Room.tsx:19:40)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.warn
+    2020-12-08 00:19:36.134Z | WARN in [createLocalTracks #3]: Call to getUserMedia failed: Error: getUserMedia is not supported
+        at Object.getUserMedia (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\@twilio\webrtc\lib\getusermedia.js:21:25)
+        at Object.createLocalTracks (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\createlocaltracks.js:124:134)
+        at getLocalTracks (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\connect.js:788:18)
+        at onCreate (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\cancelableroompromise.js:20:5)
+        at CancelablePromise.Object.defineProperty.value (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\util\cancelablepromise.js:51:9)
+        at new Promise (<anonymous>)
+        at new CancelablePromise (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\util\cancelablepromise.js:50:14)
+        at createCancelableRoomPromise (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\cancelableroompromise.js:18:10)
+        at Object.connect (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\twilio-video\es5\connect.js:274:31)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\video\Room.tsx:47:9
+        at invokePassiveEffectCreate (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:23487:20)
+        at HTMLUnknownElement.callCallback (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:3945:14)
+        at HTMLUnknownElement.callTheUserObjectsOperation (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\generated\EventListener.js:26:30)
+        at innerInvokeEventListeners (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:318:25)
+        at invokeEventListeners (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:274:3)
+        at HTMLUnknownElementImpl._dispatch (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:221:9)
+        at HTMLUnknownElementImpl.dispatchEvent (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\events\EventTarget-impl.js:94:17)
+        at HTMLUnknownElement.dispatchEvent (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jsdom\lib\jsdom\living\generated\EventTarget.js:231:34)
+        at Object.invokeGuardedCallbackDev (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:3994:16)
+        at invokeGuardedCallback (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:4056:31)
+        at flushPassiveEffectsImpl (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:23574:9)
+        at unstable_runWithPriority (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\scheduler\cjs\scheduler.development.js:646:12)
+        at runWithPriority$1 (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:11276:10)
+        at flushPassiveEffects (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom.development.js:23447:14)
+        at Object.<anonymous>.flushWork (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom-test-utils.development.js:992:10)
+        at act (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\react-dom\cjs\react-dom-test-utils.development.js:1107:9)
+        at Object.render (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\@testing-library\react\dist\pure.js:95:26)
+        at Object.<anonymous> (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\tst\components\video\Room.spec.tsx:91:3)
+        at Object.asyncJestTest (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\jasmineAsyncInstall.js:106:37)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\queueRunner.js:45:12
+        at new Promise (<anonymous>)
+        at mapper (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\queueRunner.js:28:19)
+        at C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\node_modules\jest-jasmine2\build\queueRunner.js:75:41
+        at processTicksAndRejections (internal/process/task_queues.js:97:5)
+
+      at Log.log (node_modules/twilio-video/es5/util/log.js:138:23)
+
+PASS tst/components/video/Room.spec.tsx
+  Room
+    √ Room render.inDocument null user (116 ms)
+    √ Room render.inDocument patient (28 ms)
+    √ Room render.inDocument doctor (22 ms)
+
+PASS tst/pages/account/SignIn.spec.tsx
+  OnSignIn
+    √ render.inDocument (102 ms)
+
+PASS tst/components/form/Dropdown.spec.tsx
+  Dropdown
+    √ Dropdown render.inDocument no options (117 ms)
+    √ Dropdown render.inDocument with options (76 ms)
+    √ Dropdown render.inDocument with options2 (54 ms)
+
+PASS tst/components/form/DateInput.spec.tsx
+  DateInput
+    √ render.inDocument (43 ms)
+
+PASS tst/components/form/Counter.spec.tsx
+  Counter
+    √ Counter render.inDocument with min/max (54 ms)
+    √ Counter render.inDocument with nothing (26 ms)
+    √ Counter render.inDocument only min (26 ms)
+    √ Counter render.inDocument only max (18 ms)
+
+PASS tst/components/form/SuggestionInput.spec.tsx
+  SuggestionInput
+    √ render.inDocument (109 ms)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.SuggestionInput (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\form\SuggestionInput.tsx:33:26)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+PASS tst/components/form/TextInput.spec.tsx
+  TextInput
+    √ render.inDocument (71 ms)
+    √ render.inDocument with row=1 (22 ms)
+
+PASS tst/components/elements/Popup.spec.tsx
+  Popup
+    √ Popup render.inDocument open (76 ms)
+    √ Popup render.inDocument not open (12 ms)
+
+PASS tst/components/elements/Avatar.spec.tsx
+  Avatar
+    √ render.inDocument (18 ms)
+
+PASS tst/utils/Hasher.spec.ts
+  Hasher
+    √ encode (2 ms)
+    √ decode.success (3 ms)
+    √ decode.failure (1 ms)
+
+PASS tst/utils/DateTime.spec.ts
+  DateTime
+    √ safeParseHours.equal (2 ms)
+    √ safeParseHours.unequal (1 ms)
+    √ hoursOffset.default
+    √ hoursOffset.match (1 ms)
+    √ getMinutes
+    √ minutesToHHMMAA (3 ms)
+    √ hhmmAAToMinutes (1 ms)
+    √ minutesToHHMM (1 ms)
+    √ hhmmToMinutes (2 ms)
+    √ dateFromStringDate (1 ms)
+    √ getModifiedDate.change
+    √ getModifiedDate.noChange (1 ms)
+    √ prettyDate
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: Can't perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+  console.error
+    Warning: An update to null inside a test was not wrapped in act(...).
+    
+    When testing, code that causes React state updates should be wrapped into act(...):
+    
+    act(() => {
+      /* fire events that update state */
+    });
+    /* assert on the output */
+    
+    This ensures that you're testing the behavior the user would see in the browser. Learn more at https://reactjs.org/link/wrap-tests-with-act
+        at Object.<anonymous>.exports.NavigationBar (C:\Users\Kenneth\Desktop\4156-Starmen\upmed-web\src\components\bars\NavigationBar.tsx:20:34)
+
+      at printWarning (node_modules/react-dom/cjs/react-dom.development.js:67:30)
+
+PASS tst/components/bars/NavigationBar.spec.tsx
+  NavigationBar
+    √ NavigationBar render.inDocument (43 ms)
+    √ NavigationBar trigger resize (88 ms)
+    √ NavigationBar toggleNavBar (30 ms)
+
+PASS tst/components/form/RadioButtons.spec.tsx
+  RadioButtons
+    √ render.inDocument (41 ms)
+    √ render.inDocument diff options (18 ms)
+    √ render.inDocument no label (14 ms)
+
+PASS tst/components/elements/Error.spec.tsx
+  Error
+    √ render.inDocument (20 ms)
+
+PASS tst/components/button/GoogleButton.spec.tsx
+  GoogleButton
+    √ render.inDocument (47 ms)
+
+PASS tst/components/animations/Loading.spec.tsx
+  Loading
+    √ render.inDocument (60 ms)
+    √ render.inDocument Default size (33 ms)
+
+PASS tst/utils/Objects.spec.ts
+  Objects
+    √ isNullish.postive
+    √ isNullish.negative (1 ms)
+    √ isArray.postive
+    √ isArray.negative (1 ms)
+    √ isString.postive (1 ms)
+    √ isString.negative (2 ms)
+    √ isNumber.postive (1 ms)
+    √ isNumber.negative
+    √ objToArray.success (1 ms)
+    √ copy.nullish
+    √ copy.nonObject
+    √ copy.shallow (1 ms)
+    √ copy.nonShallow
+    √ copy.withoutProperty (1 ms)
+
+PASS tst/components/button/Button.spec.tsx
+  Button
+    √ Button render.inDocument no OnClick (40 ms)
+    √ Button render.inDocument with OnClick (59 ms)
+
+PASS tst/utils/Formatter.spec.ts
+  Formatter
+    √ phone.formatted (1 ms)
+    √ phone.unformatted
+    √ stringDate (1 ms)
+    √ npi (1 ms)
+
+PASS tst/utils/URL.spec.ts
+  URL
+    √ getFromQuery.present (2 ms)
+    √ getFromQuery.absent
+
+-----------------------------------|---------|----------|---------|---------|-------------------
+File                               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-----------------------------------|---------|----------|---------|---------|-------------------
+All files                          |   96.21 |    90.75 |   85.45 |   96.83 |                   
+ components                        |     100 |      100 |     100 |     100 |                   
+  index.ts                         |     100 |      100 |     100 |     100 |                   
+ components/animations             |     100 |      100 |     100 |     100 |                   
+  Loading.tsx                      |     100 |      100 |     100 |     100 |                   
+  index.ts                         |     100 |      100 |     100 |     100 |                   
+ components/bars                   |     100 |       90 |     100 |     100 |                   
+  NavigationBar.tsx                |     100 |    82.86 |     100 |     100 | 26,31,64-69,96    
+  Sidebar.tsx                      |     100 |      100 |     100 |     100 |                   
+  UMNavigationBar.tsx              |     100 |      100 |     100 |     100 |                   
+  index.ts                         |     100 |      100 |     100 |     100 |                   
+ components/button                 |   94.83 |     87.5 |      75 |   95.74 |                   
+  Button.tsx                       |   97.92 |      100 |   88.89 |     100 |                   
+  GoogleButton.tsx                 |      75 |       25 |   33.33 |      75 | 21,32             
+  index.ts                         |     100 |      100 |     100 |     100 |                   
+ components/elements               |   90.74 |    57.69 |   72.73 |   91.11 |                   
+  Avatar.tsx                       |     100 |      100 |     100 |     100 |                   
+  Error.tsx                        |   93.33 |      100 |   66.67 |     100 |                   
+  Footer.tsx                       |     100 |      100 |     100 |     100 |                   
+  Popup.tsx                        |      80 |    21.43 |      60 |   76.47 | 28-29,33-34       
+  index.ts                         |     100 |      100 |     100 |     100 |                   
+ components/form                   |    98.2 |    94.71 |   95.56 |   98.96 |                   
+  Counter.tsx                      |   94.74 |      100 |      75 |     100 |                   
+  DateInput.tsx                    |     100 |      100 |     100 |     100 |                   
+  Dropdown.tsx                     |     100 |      100 |     100 |     100 |                   
+  HoursInputs.tsx                  |     100 |    97.14 |     100 |     100 | 88                
+  RadioButtons.tsx                 |     100 |      100 |     100 |     100 |                   
+  TextInput.tsx                    |   97.14 |    86.67 |     100 |   96.77 | 140-141           
+  index.ts                         |     100 |      100 |     100 |     100 |                   
+ components/video                  |     100 |      100 |     100 |     100 |                   
+  index.ts                         |     100 |      100 |     100 |     100 |                   
+ pages                             |    91.3 |      100 |   83.33 |   94.74 |                   
+  App.tsx                          |     100 |      100 |     100 |     100 |                   
+  index.ts                         |       0 |      100 |       0 |       0 | 1                 
+ pages/account                     |     100 |      100 |     100 |     100 |                   
+  index.ts                         |     100 |      100 |     100 |     100 |                   
+ pages/appointment                 |   94.83 |    93.75 |   66.67 |   95.35 |                   
+  Appointment.tsx                  |   94.74 |    93.75 |   66.67 |   95.24 | 49,101            
+  index.tsx                        |     100 |      100 |     100 |     100 |                   
+ pages/home                        |     100 |      100 |     100 |     100 |                   
+  Home.tsx                         |     100 |      100 |     100 |     100 |                   
+  index.tsx                        |     100 |      100 |     100 |     100 |                   
+ pages/profile                     |      92 |    94.12 |      50 |   91.38 |                   
+  Profile.tsx                      |   91.89 |    94.12 |      50 |   91.23 | 125-136           
+  index.tsx                        |     100 |      100 |     100 |     100 |                   
+ pages/profile/subpages            |     100 |      100 |     100 |     100 |                   
+  index.tsx                        |     100 |      100 |     100 |     100 |                   
+ pages/profile/subpages/components |     100 |      100 |     100 |     100 |                   
+  index.ts                         |     100 |      100 |     100 |     100 |                   
+-----------------------------------|---------|----------|---------|---------|-------------------
+Test Suites: 33 passed, 33 total
+Tests:       132 passed, 132 total
+Snapshots:   0 total
+Time:        39.954 s
+Ran all test suites.

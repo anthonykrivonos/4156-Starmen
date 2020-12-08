@@ -1,0 +1,73 @@
+============ upmed-web Linting Report Generated on 1607386729 ============
+$ tslint -p tsconfig.json
+C:/Users/Kenneth/Desktop/4156-Starmen/upmed-web/tst/components/bars/NavigationBar.spec.tsx:24:11
+ERROR: 24:11   no-unused-declaration  Unused declarations are forbidden
+
+C:/Users/Kenneth/Desktop/4156-Starmen/upmed-web/tst/components/button/GoogleButton.spec.tsx:4:10
+ERROR: 4:10    no-unused-declaration  Unused declarations are forbidden
+
+C:/Users/Kenneth/Desktop/4156-Starmen/upmed-web/tst/components/elements/Popup.spec.tsx:2:37
+ERROR: 2:37    no-unused-declaration  Unused declarations are forbidden
+
+C:/Users/Kenneth/Desktop/4156-Starmen/upmed-web/tst/components/form/RadioButtons.spec.tsx:4:10
+ERROR: 4:10    no-unused-declaration  Unused declarations are forbidden
+
+C:/Users/Kenneth/Desktop/4156-Starmen/upmed-web/tst/components/video/Participant.spec.tsx:2:8
+ERROR: 2:8     no-unused-declaration  Unused declarations are forbidden
+ERROR: 3:10    no-unused-declaration  Unused declarations are forbidden
+ERROR: 3:21    no-unused-declaration  Unused declarations are forbidden
+ERROR: 3:29    no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:10    no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:32    no-unused-declaration  Unused declarations are forbidden
+ERROR: 6:10    no-unused-declaration  Unused declarations are forbidden
+ERROR: 6:16    no-unused-declaration  Unused declarations are forbidden
+ERROR: 8:10    no-unused-declaration  Unused declarations are forbidden
+ERROR: 8:17    no-unused-declaration  Unused declarations are forbidden
+ERROR: 9:10    no-unused-declaration  Unused declarations are forbidden
+ERROR: 11:10   no-unused-declaration  Unused declarations are forbidden
+ERROR: 23:7    no-unused-declaration  Unused declarations are forbidden
+ERROR: 37:7    no-unused-declaration  Unused declarations are forbidden
+
+C:/Users/Kenneth/Desktop/4156-Starmen/upmed-web/tst/components/video/Room.spec.tsx:3:10
+ERROR: 3:10    no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:8     no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:25    no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:51    no-unused-declaration  Unused declarations are forbidden
+ERROR: 7:17    no-unused-declaration  Unused declarations are forbidden
+
+C:/Users/Kenneth/Desktop/4156-Starmen/upmed-web/tst/pages/account/OnSignIn.spec.tsx:4:18
+ERROR: 4:18    no-unused-declaration  Unused declarations are forbidden
+ERROR: 4:34    no-unused-declaration  Unused declarations are forbidden
+ERROR: 4:45    no-unused-declaration  Unused declarations are forbidden
+ERROR: 4:61    no-unused-declaration  Unused declarations are forbidden
+ERROR: 111:15  no-unused-declaration  Unused declarations are forbidden
+ERROR: 112:15  no-unused-declaration  Unused declarations are forbidden
+
+C:/Users/Kenneth/Desktop/4156-Starmen/upmed-web/tst/pages/appointment/Appointment.spec.tsx:2:10
+ERROR: 2:10    no-unused-declaration  Unused declarations are forbidden
+ERROR: 7:7     no-unused-declaration  Unused declarations are forbidden
+
+C:/Users/Kenneth/Desktop/4156-Starmen/upmed-web/tst/pages/profile/Profile.spec.tsx:59:7
+ERROR: 59:7    no-unused-declaration  Unused declarations are forbidden
+ERROR: 68:7    no-unused-declaration  Unused declarations are forbidden
+
+C:/Users/Kenneth/Desktop/4156-Starmen/upmed-web/tst/pages/profile/subpages/EditProfile.spec.tsx:5:10
+ERROR: 5:10    no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:21    no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:32    no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:41    no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:51    no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:59    no-unused-declaration  Unused declarations are forbidden
+
+C:/Users/Kenneth/Desktop/4156-Starmen/upmed-web/tst/pages/profile/subpages/MedicalInfo.spec.tsx:98:15
+ERROR: 98:15   no-shadowed-variable   Shadowed name: 'doctor'
+ERROR: 100:15  no-shadowed-variable   Shadowed name: 'appointment'
+
+C:/Users/Kenneth/Desktop/4156-Starmen/upmed-web/tst/pages/profile/subpages/components/AppointmentPopup.spec.tsx:5:10
+ERROR: 5:10    no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:18    no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:28    no-unused-declaration  Unused declarations are forbidden
+ERROR: 5:35    no-unused-declaration  Unused declarations are forbidden
+ERROR: 6:8     no-unused-declaration  Unused declarations are forbidden
+
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.

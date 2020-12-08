@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import React, { useState, useEffect, useRef, RefObject } from 'react'
 import { Track, Participant as ParticipantClass } from 'twilio-video'
 

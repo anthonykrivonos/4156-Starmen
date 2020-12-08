@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { DateInput } from '../../../src/components/form/DateInput'
 
 describe('DateInput', () => {
@@ -19,7 +19,12 @@ describe('DateInput', () => {
     test('render.inDocument', () => {
 
 		render(<DateInput {...dateInputProps}/>)
-		const linkElement = screen.getByText(/date label/i)
+        const linkElement = screen.getByText(/date label/i)
+        
+        const datepicker = screen.getByDisplayValue('1969/12/31 07:00 PM')
+
+        fireEvent.change(datepicker, { target: { value: '1969/12/31 08:00 PM' } })
+
 		expect(linkElement).toBeInTheDocument()
 	})
 

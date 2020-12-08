@@ -69,19 +69,6 @@ export class TextInput extends Component<TextInputProps> {
 		}
 	}
 
-	/** Publically return the text value. */
-	public getValue = () => {
-		return this.state.value
-	}
-
-	/** Publically set the text value. */
-	public setValue = (value: string) => {
-		if (this.props.formatter) {
-			value = this.props.formatter(value)
-		}
-		return this.setState({ value })
-	}
-
 	public render() {
 		const {
 			label,

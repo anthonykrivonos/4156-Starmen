@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import React, { useState, useEffect } from 'react'
 
 import { ProfileSubpageProps } from '../Profile'

@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import React, { useState, useEffect } from 'react'
 import Video, { Room as RoomClass, Participant as ParticipantClass } from 'twilio-video'
 

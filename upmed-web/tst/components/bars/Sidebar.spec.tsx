@@ -5,12 +5,39 @@ import { Sidebar } from '../../../src/components/bars/Sidebar'
 describe('Sidebar', () => {
 
     const buttonA = {
-        text: "string"
+        text: "string",
+        icon: <span>Element</span>,
+        isBottom: false,
+        centered: false,
+        active: false,
+	    onClick: () => {},
     }
 
     const buttonB = {
         text: "butt",
-        isBottom: true
+        icon: <span>Element</span>,
+        isBottom: true,
+        centered: true,
+        active: true,
+	    onClick: () => {},
+    }
+
+    const buttonC = {
+        text: "butt",
+        // icon: <span>Element</span>,
+        isBottom: true,
+        centered: false,
+        active: true,
+	    onClick: () => {},
+    }
+
+    const buttonD = {
+        text: "string",
+        // icon: <span>Element</span>,
+        isBottom: false,
+        centered: true,
+        active: true,
+	    onClick: () => {},
     }
 
     const patient = {
@@ -54,14 +81,14 @@ describe('Sidebar', () => {
         hours: HOURS_GOOD,
     }
 
-    it('render.inDocument Patient', () => {
-		render(<Sidebar buttons={[buttonA, buttonB]} user={patient} isPatient={true}/>)
+    it('Sidebar render.inDocument Patient', () => {
+		render(<Sidebar buttons={[buttonA, buttonB, buttonC, buttonD]} user={patient} isPatient={true}/>)
 		const linkElement = screen.getByText(/upmed/i)
 		expect(linkElement).toBeInTheDocument()
     })
     
-    it('render.inDocument Doctor', () => {
-		render(<Sidebar buttons={[buttonA, buttonB]} user={doctor} isPatient={false}/>)
+    it('Sidebar render.inDocument Doctor', () => {
+		render(<Sidebar buttons={[buttonA, buttonB, buttonC, buttonD]} user={doctor} isPatient={false}/>)
 		const linkElement = screen.getByText(/upmed/i)
 		expect(linkElement).toBeInTheDocument()
 	})
