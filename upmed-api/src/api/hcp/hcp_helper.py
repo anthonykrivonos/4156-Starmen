@@ -60,7 +60,7 @@ def hcp_signup(db, hcp, hours, npi):
     response = requests.get(
         "https://clinicaltables.nlm.nih.gov/api/npi_org/v3/search",
         params={"terms": str(npi), "sf": "NPI"})
-    if response.json()[0] != 0:
+    if response.json()[0] == 0:
         return 0
 
     res = db.document(hcp.id).set({
@@ -110,7 +110,7 @@ def hcp_set_record(db, resp):
 def hcp_get_by_token(db, hid):
     schedule = make_week()
     hcp = db.document(hid).get()
-    hcp = hcp.to_inc()
+    hcp = hcp.to_dict()
     resp = HCP(
         id=hcp['id'],
         firstName=hcp['firstName'],
