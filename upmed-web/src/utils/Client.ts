@@ -192,15 +192,15 @@ class HCPClient {
 	}
 
 	public static setRecords = (token: string, id: PatientId, health: HealthEvent[]): Promise<HealthEvent[]> => {
-		return client('/hcp/setRecords', { token, id, health }) as any
+		return client('/hcp/setRecords', { token, id, health })
 	}
 
-	public static notify = (token: string, id: AppointmentId): Promise<{ success: boolean }> => {
-		return client('/hcp/notify', { token, id }) as any
+	public static notify = (token: string, id: AppointmentId): Promise<{ Success: boolean }> => {
+		return client('/hcp/notify', { token, id })
 	}
 
-	public static testNumber = (token: string, id: AppointmentId): Promise<{ success: boolean }> => {
-		return client('/hcp/testNumber', { token, id }) as any
+	public static testNumber = (token: string, id: AppointmentId): Promise<{ Success: boolean }> => {
+		return client('/hcp/testNumber', { token, id })
 	}
 
 	public static getAll = (token: string): Promise<HCP[]> => {

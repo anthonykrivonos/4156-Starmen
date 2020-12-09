@@ -111,7 +111,7 @@ export const Calendar = (props: ProfileSubpageProps) => {
 				// Feature: notification
 				try {
 					const test = await Client.HCP.testNumber(Users.getUserToken(), currentAppointment.id)
-					if (test.success) {
+					if (test.Success) {
 						Client.HCP.notify(Users.getUserToken(), patient.id)
 					}
 				} catch {}

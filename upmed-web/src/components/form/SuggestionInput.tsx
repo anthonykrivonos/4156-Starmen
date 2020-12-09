@@ -55,10 +55,10 @@ export const SuggestionInput = (props: SuggestionInputProps) => {
 		onChange(getSuggestionValue(value))
 	}
 
-	const renderSuggestion: RenderSuggestion<any> = (suggestion: any, { isHighlighted }) => {
+	const renderSuggestion: RenderSuggestion<any> = (suggestion: any, { isHighlighted, query }) => {
 		return (
 			<div
-				key={getSuggestionValue(suggestion)}
+				key={`${query}-${getSuggestionValue(suggestion)}`}
 				onClick={() => {
 					onSelect(suggestion)
 					onSuggestionsClearRequested()
@@ -78,7 +78,7 @@ export const SuggestionInput = (props: SuggestionInputProps) => {
 				className={styles.suggestions}
 				style={{ opacity: suggestions.length > 0 ? '1' : '0' }}
 			>
-				{suggestions.map((s) => renderSuggestion(s, { isHighlighted: false, query }))}
+				{suggestions.map((s, i) => renderSuggestion(s, { isHighlighted: false, query: `${i}` }))}
 			</div>
 		)
 	}

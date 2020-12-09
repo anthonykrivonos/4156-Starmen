@@ -27,7 +27,7 @@ export const AppointmentPopup = (props: AppointmentPopupProps) => {
 		setNotifyLoading(true)
 		try {
 			const test = await Client.HCP.testNumber(Users.getUserToken(), props.appointment!.id)
-			if (!test.success) {
+			if (!test.Success) {
 				setNotifyMessage(
 					`Looks like ${
 						props.patient ? props.patient.firstName : 'your patient'
@@ -109,7 +109,7 @@ export const AppointmentPopup = (props: AppointmentPopupProps) => {
 								)}
 							</div>
 						)}
-						{props.appointment && Date.now() < endDate && (
+						{!notifyMessage && props.appointment && Date.now() < endDate && (
 							<Button
 								text={'Enter Room'}
 								iconName={VIDEO}

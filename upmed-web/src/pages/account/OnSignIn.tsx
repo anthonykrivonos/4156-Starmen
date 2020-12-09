@@ -371,7 +371,7 @@ export const OnSignIn = () => {
 								<h4 className={`${styles.section_title} font-title`}>Professional Info</h4>
 								<TextInput
 									containerClassName={styles.input_short}
-									value={title}
+									value={npi}
 									label={'National Provider Identifier (NPI)'}
 									errorLabel={'Invalid NPI, must be 10 digits long.'}
 									validator={Validator.npi}
