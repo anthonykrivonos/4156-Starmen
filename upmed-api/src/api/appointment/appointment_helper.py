@@ -1,13 +1,14 @@
+import calendar
+import datetime
+from os.path import join, dirname
+from sys import path
+
+from twilio.base.exceptions import TwilioRestException
+from twilio.jwt.access_token.grants import VideoGrant, ChatGrant
+
+from src.models.appointment import Appointment  # noqa
 from src.util.firebase.db import Database  # noqa
 from src.util.util import Auth, Twilio  # noqa
-from src.models import Hours, Day
-from src.models.appointment import Appointment  # noqa
-from sys import path
-from os.path import join, dirname
-
-from twilio.jwt.access_token.grants import VideoGrant, ChatGrant
-from twilio.base.exceptions import TwilioRestException
-import datetime, calendar
 
 path.append(join(dirname(__file__), '../../..'))
 

@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, make_response, json
+from flask import jsonify, json
 from algoliasearch.search_client import SearchClient  # noqa
 
 from sys import path

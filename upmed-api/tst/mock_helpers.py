@@ -165,6 +165,9 @@ class MockClientIndex(object):
         }
         return output
 
+    def save_object(self, *args):
+        pass
+
 
 class MockSearchClient(object):
 
@@ -172,7 +175,7 @@ class MockSearchClient(object):
         tmp = MockClientIndex
         return tmp
 
-    def save_object(self, batch, dictionary):
+    def save_object(self, *args):
         pass
 
 

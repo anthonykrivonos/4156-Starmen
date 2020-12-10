@@ -216,7 +216,6 @@ def remove():
         # Check for ID in URL query
         pid = post_data.get('id')
         res = hcp_delete(hcpdb, pid)
-        print(pid, res)
         if res:
             return jsonify({"success": True}), 200
         else:
