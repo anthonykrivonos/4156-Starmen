@@ -77,6 +77,7 @@ def hcp_signup(db, hcp, hours, npi):
         "patients": hcp.patients
     })
     if res:
+        add_hcp(hcp)
         auth_token = auth.encode_auth_token(hcp.id, utype)
         return auth_token.decode()
     else:
