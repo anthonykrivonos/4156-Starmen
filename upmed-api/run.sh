@@ -24,7 +24,6 @@ python3 -m upmed-api.tst.api.appointment_test.appointment_test
 python3 -m upmed-api.tst.api.appointment_test.appointment_endpoint_test
 
 # Coverage Checking
-echo "Writing Coverage report to reports/${FLDR}/coverage.txt."
 # shellcheck disable=SC2046
 echo $(header "Coverage Test") >> "upmed-api/reports/${FLDR}/test.txt"
 coverage run -a --branch -m upmed-api.tst.api.patient_test.patient_test 2>> "upmed-api/reports/${FLDR}/coverage.txt"

@@ -59,13 +59,11 @@ def login():
 @hcp_endpoints.route('/signUp', methods=['POST'])
 def signup():
     """New HCP creates profile
-
     Returns:
             Response: JSON
     """
 
     post_data = request.get_json()
-    print(post_data)
     schedule = make_week()
     try:
         hcp = HCP(
@@ -100,7 +98,6 @@ def signup():
             hcp.profilePicture = default_pic
 
         newsched = post_data.get('hours')
-        print(newsched)
         if newsched['sunday']['startTime'] == \
                 -1 and newsched['sunday']['endTime'] == -1:
             hcp.hours.sunday.startTime = -1

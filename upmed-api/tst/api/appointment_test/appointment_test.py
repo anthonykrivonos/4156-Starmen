@@ -1,5 +1,5 @@
 import unittest
-import time
+import time, datetime
 from src import Patient, HCP, Day, Hours, Status, Appointment, Auth  # noqa
 from tst.mock_helpers import *
 from unittest.mock import MagicMock, Mock, patch
@@ -34,7 +34,10 @@ class AppointmentTestCase(unittest.TestCase):
     def test_createAppointment_test(self, mock1, mock2, mock3):
         from src.api.appointment import appointment_helper
         # Define initial payload
-        timpstamp = time.time()
+        # Test normal case
+        timpstamp = datetime.datetime(2020, 12, 9, 12, 30)
+        timpstamp = datetime.datetime.timestamp(timpstamp)
+        mock1.return_value = MockDocument(mockhcp.hcp)
         payload = {
             'token': mockhcp.auth_token,
             'date': timpstamp,
@@ -44,8 +47,6 @@ class AppointmentTestCase(unittest.TestCase):
             'subject': 'Follow Up',
             'notes': 'Follow up for her schizophrenia',
             'videoUrl': 'https://www.youtube.com/watch?v=dMTQKFS1tpA'}
-
-        # Test normal case
         response, status_code = appointment_helper.create_appointment(payload)
         self.assertTrue(mock1.called, "hcp_db.document not being called")
         self.assertTrue(mock2.called, "patient_db.document not being called")
@@ -74,6 +75,23 @@ class AppointmentTestCase(unittest.TestCase):
         payload['token'] = auth.encode_auth_token(mockpatient.patient.id, "LAWYER")
         response, status_code = appointment_helper.create_appointment(payload)
         self.assertEqual(401, status_code)
+
+        # Appointment time out of office hours
+        timpstamp = datetime.datetime(2020, 12, 9, 22, 30)
+        timpstamp = datetime.datetime.timestamp(timpstamp)
+        mock1.return_value = MockDocument(mockhcp.hcp)
+        payload = {
+            'token': mockhcp.auth_token,
+            'date': timpstamp,
+            'duration': 45,
+            'hcpid': 'hw2735',
+            'patient': 'aoc1989',
+            'subject': 'Follow Up',
+            'notes': 'Follow up for her schizophrenia',
+            'videoUrl': 'https://www.youtube.com/watch?v=dMTQKFS1tpA'}
+        response, status_code = appointment_helper.create_appointment(payload)
+        self.assertEqual(401, status_code)
+
 
     @patch("src.appointment.appointment_helper.appointmentsdb.document")
     @patch("src.appointment.appointment_helper.patient_db.document")

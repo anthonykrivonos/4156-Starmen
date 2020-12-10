@@ -185,6 +185,9 @@ class MockDocument(object):
     def get(self):
         return self.stored_value
 
+    def update(self, *args):
+        pass
+
 
 class MockEndpoint(object):
     values: (0, 0)

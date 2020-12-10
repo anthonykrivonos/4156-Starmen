@@ -348,21 +348,17 @@ def make_week():
 def pat_search(text):
     api = Env.ALGOLIA_API()
     admin = Env.ALGOLIA_ADMIN()
-    # print(api)
-    # add_pat(pat)
     client = SearchClient.create(api, admin)
     index = client.init_index('patients')
     index.set_settings({"customRanking": ["desc(followers)"]})
     index.set_settings({"searchableAttributes":
                             ["firstName", "lastName", "phone",
                              "email", "id"]})
-    res = index.search(text)
 
     # Res is all hits of Patients with matching
+    res = index.search(text)
     hits = res['hits']
-
     pats_return = []
-    # patient = pat.document(str(pid)).get()
     for h in hits:
         pat_obj = {
             "id": h['id'],

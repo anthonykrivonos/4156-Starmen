@@ -1,11 +1,13 @@
 from src.util.firebase.db import Database  # noqa
 from src.util.util import Auth, Twilio  # noqa
+from src.models import Hours, Day
 from src.models.appointment import Appointment  # noqa
 from sys import path
 from os.path import join, dirname
 
 from twilio.jwt.access_token.grants import VideoGrant, ChatGrant
 from twilio.base.exceptions import TwilioRestException
+import datetime, calendar
 
 path.append(join(dirname(__file__), '../../..'))
 
@@ -206,7 +208,6 @@ def create_appointment(post_data):
         patient_id = pid
         # Check whether user is HCP or Patient
         if utype == "HCP":
-            # Get the existing appointments:
             patient_id = post_data.get('patient')
         elif utype == "PATIENT":
             doctor_id = post_data.get('hcpid')
@@ -218,55 +219,75 @@ def create_appointment(post_data):
             return response_object, 401
 
         appointment_id = str(patient_id) + "," + \
-            str(doctor_id) + "," + str(post_data.get('date'))
+                         str(doctor_id) + "," + str(post_data.get('date'))
         try:
-            new_appointment = Appointment(
-                id=appointment_id,
-                date=post_data.get('date'),
-                duration=post_data.get('duration'),
-                doctor=str(doctor_id),
-                patient=str(patient_id),
-                subject=post_data.get('subject'),
-                notes=post_data.get('notes'),
-                videoUrl=post_data.get('videoUrl')
-            )
-            appointmentsdb.document(new_appointment.id).set({
-                "id": new_appointment.id,
-                "date": new_appointment.date,
-                "duration": new_appointment.duration,
-                "doctor": str(doctor_id),
-                "patient": str(patient_id),
-                "subject": new_appointment.subject,
-                "notes": new_appointment.notes,
-                "videoUrl": new_appointment.videoUrl
-            })
-            # Add the appointment id to both respective patient and HCP
-            # database
-            patient_ref = patient_db.document(str(patient_id))
+            # Get the existing appointments from HCP:
             hcp_ref = hcp_db.document(str(doctor_id))
-            # Get the existing list of appointments and append it
-            patient_calendar = patient_ref.get().to_dict()['calendar']
-            patient_calendar.append(appointment_id)
-            patient_ref.update({u'calendar': patient_calendar})
+            hcp_ref_details = hcp_ref.get().to_dict()
 
-            patient_doctors = patient_ref.get().to_dict()['doctors']
-            if str(doctor_id) not in patient_doctors:
-                patient_doctors.append(doctor_id)
-                patient_ref.update({u'doctors': patient_doctors})
+            # Get the office hours of HCP
+            appt_date = post_data.get('date')
+            appt_date = datetime.datetime.fromtimestamp(appt_date)
+            appt_date_minutes = appt_date.hour * 60 + appt_date.minute
+            appt_date_end = appt_date_minutes + int(post_data.get('duration'))
+            day_number = appt_date.weekday()
 
-            hcp_patients = hcp_ref.get().to_dict()['patients']
-            if str(patient_id) not in hcp_patients:
-                hcp_patients.append(patient_id)
-                hcp_ref.update({u'patients': hcp_patients})
+            office_hours = hcp_ref_details['hours']
+            res = office_hours[calendar.day_name[day_number].lower()]
+            if (appt_date_minutes >= res['startTime']) and (appt_date_end <= res['endTime']):
+                new_appointment = Appointment(
+                    id=appointment_id,
+                    date=post_data.get('date'),
+                    duration=post_data.get('duration'),
+                    doctor=str(doctor_id),
+                    patient=str(patient_id),
+                    subject=post_data.get('subject'),
+                    notes=post_data.get('notes'),
+                    videoUrl=post_data.get('videoUrl')
+                )
+                appointmentsdb.document(new_appointment.id).set({
+                    "id": new_appointment.id,
+                    "date": new_appointment.date,
+                    "duration": new_appointment.duration,
+                    "doctor": str(doctor_id),
+                    "patient": str(patient_id),
+                    "subject": new_appointment.subject,
+                    "notes": new_appointment.notes,
+                    "videoUrl": new_appointment.videoUrl
+                })
+                # Add the appointment id to both respective patient and HCP
+                # database
+                patient_ref = patient_db.document(str(patient_id))
 
-            hcp_calendar = hcp_ref.get().to_dict()['calendar']
-            hcp_calendar.append(appointment_id)
-            hcp_ref.update({u'calendar': hcp_calendar})
+                # Get the existing list of appointments and append it
+                patient_calendar = patient_ref.get().to_dict()['calendar']
+                patient_calendar.append(appointment_id)
+                patient_ref.update({u'calendar': patient_calendar})
 
-            response_object = {
-                "appointmentId": new_appointment.id
-            }
-            return response_object, 200
+                patient_doctors = patient_ref.get().to_dict()['doctors']
+                if str(doctor_id) not in patient_doctors:
+                    patient_doctors.append(doctor_id)
+                    patient_ref.update({u'doctors': patient_doctors})
+
+                hcp_patients = hcp_ref_details['patients']
+                if str(patient_id) not in hcp_patients:
+                    hcp_patients.append(patient_id)
+                    hcp_ref.update({u'patients': hcp_patients})
+
+                hcp_calendar = hcp_ref_details['calendar']
+                hcp_calendar.append(appointment_id)
+                hcp_ref.update({u'calendar': hcp_calendar})
+
+                response_object = {
+                    "appointmentId": new_appointment.id
+                }
+                return response_object, 200
+            else:
+                response_object = {
+                    'status': 'fail',
+                    'message': 'appointment start or end time out of office hours'
+                }
+                return response_object, 401
         except Exception as e:
             return f"Failure due to {e}", 404
     else:

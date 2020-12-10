@@ -9,7 +9,7 @@ from src.api.hcp.hcp_helper import *  # noqa
 from src.models import Patient, Appointment, HCP, Day, Hours, Status  # noqa
 from src.api.hcp.hcp_helper import hcp_signup, hcp_login, hcp_delete, hcp_set_record, hcp_get_by_token, hcp_notify, hcp_get_all, hcp_test_number, hcp_edit_profile, hcp_get_patients, hcp_search, hcp_set_health_events, hcp_set_profile_picture, add_hcp, hcp_set_health_events  # noqa
 
-from tst.mock_helpers import MockHCP, MockAppointment, MockPatient, MockSearchClient  # noqa
+from tst.mock_helpers import MockHCP, MockAppointment, MockPatient, MockSearchClient, MockHCP2  # noqa
 
 """
 HCP Endpoint Tests
@@ -35,76 +35,16 @@ twilio_set_func.connect.messages.create = MagicMock(return_value=default_value_1
 
 
 class HCPTestCase(unittest.TestCase):
-    # Mock statements for template use
-    # db = Mock()
-    # set_func = Mock()
-    # set_func.to_dict = MagicMock(return_value=default_value_1)
-    # set_func.set = MagicMock(return_value=default_value_1)
-    # set_func.update = MagicMock(return_value=default_value_1)
-    # set_func.get = MagicMock(return_value=default_value_1)
-    # set_func.stream = MagicMock(return_value=default_value_2)
-    # set_func.delete = MagicMock(return_value=default_value_3)
-    # db.stream = MagicMock(return_value=default_value_2)
-    # db.document = MagicMock(return_value=set_func)
 
-    def test_signup_test(self):
+    @patch("src.hcp_helper.requests.get")
+    def test_signup_test(self, mock_request):
         db = Mock()
         set_func = Mock()
         set_func.to_dict = MagicMock(return_value=default_value_1)
         set_func.set = MagicMock(return_value=default_value_1)
         db.document = MagicMock(return_value=set_func)
-        week = []
-        for i in range(0, 7):
-            week.append(Day(startTime=540, endTime=1020))
-        schedule = Hours(
-            sunday=week[0],
-            monday=week[1],
-            tuesday=week[2],
-            wednesday=week[3],
-            thursday=week[4],
-            friday=week[5],
-            saturday=week[6])
-
-        payload = {'id': "ap0000",
-                   'firstName': "Athena",
-                   'lastName': "Pang",
-                   'phone': '"9175587800"',
-                   'email': "ap0000@columbia.edu",
-                   'specialty': "Accident and Emergency",
-                   'hours': {
-                       "sunday": {
-                           "startTime": schedule.sunday.startTime,
-                           "endTime": schedule.sunday.endTime
-                       },
-                       "monday": {
-                           "startTime": schedule.monday.startTime,
-                           "endTime": schedule.monday.endTime
-                       },
-                       "tuesday": {
-                           "startTime": schedule.tuesday.startTime,
-                           "endTime": schedule.tuesday.endTime
-                       },
-                       "wednesday": {
-                           "startTime": schedule.wednesday.startTime,
-                           "endTime": schedule.wednesday.endTime
-                       },
-                       "thursday": {
-                           "startTime": schedule.thursday.startTime,
-                           "endTime": schedule.thursday.endTime
-                       },
-                       "friday": {
-                           "startTime": schedule.friday.startTime,
-                           "endTime": schedule.friday.endTime
-                       },
-                       "saturday": {
-                           "startTime": schedule.saturday.startTime,
-                           "endTime": schedule.saturday.endTime
-                       }
-                   }
-                   }
         res = hcp_signup(db, mockhcp.hcp, mockhcp.hcp.hours, 'JON')
         self.assertNotEqual(res, 0)
-        # self.assertEqual(res, 1)
 
     def test_login_test(self):
         func = Mock()
@@ -140,7 +80,6 @@ class HCPTestCase(unittest.TestCase):
         adb.document = MagicMock(return_value=set_func2)
 
         res = hcp_notify(adb, db, mockappointment.appointment.id)
-        print(res)
         self.assertTrue(mock.called, "twilio not being called")
         self.assertTrue(res['Success'], 0)
 
@@ -155,7 +94,8 @@ class HCPTestCase(unittest.TestCase):
     def test_getByToken(self):
         set_func = Mock()
         db = Mock()
-        set_func.get = MagicMock(return_value=mockhcp.hcp)
+        mockhcp2 = MockHCP2()
+        set_func.get = MagicMock(return_value=mockhcp2)
         db.document = MagicMock(return_value=set_func)
 
         res = hcp_get_by_token(db, mockhcp.hcp.id)
@@ -198,8 +138,6 @@ class HCPTestCase(unittest.TestCase):
             'hours': mockhcp.hcp.hours.to_dict()
         }
         res = hcp_edit_profile(db, mockhcp.hcp.id, payload)
-        print("the response is: =====================")
-        print(res)
 
         self.assertTrue(res['Success'])
         payload = {
@@ -214,8 +152,6 @@ class HCPTestCase(unittest.TestCase):
             'hours': mockhcp.hcp.hours.to_dict()
         }
         res = hcp_edit_profile(db, mockhcp.hcp.id, payload)
-        print("the response is: =====================")
-        print(res)
         self.assertFalse(res['Success'])
 
     def test_health_event(self):

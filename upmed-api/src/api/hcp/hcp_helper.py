@@ -193,8 +193,8 @@ def hcp_notify(adb, pdb, appointment_id):
                  f"{appointment.videoUrl}",
             from_='+19036182297',
             to=f'+1{str(resp.phone).replace("", "")}')
-        print(message)
-        print(datetime.datetime.fromtimestamp(appointment.date / 1e3))
+        # print(message)
+        # print(datetime.datetime.fromtimestamp(appointment.date / 1e3))
         res = {
             "Success": True
         }
@@ -248,8 +248,8 @@ def hcp_test_number(adb, pdb, appointment_id):
                  f"{appointment.videoUrl}",
             from_='+19036182297',
             to=f'+1{str(resp.phone).replace("", "")}')
-        print(message)
-        print(datetime.datetime.fromtimestamp(appointment.date / 1e3))
+        # print(message)
+        # print(datetime.datetime.fromtimestamp(appointment.date / 1e3))
         res = {
             "Success": True
         }
@@ -426,13 +426,13 @@ def hcp_edit_profile(db, hid, post_data):
 
 
 def hcp_get_patients(hdb, pdb, hid):
+    res = {}
     hcp_resp = hdb.document(str(hid)).get()
     hcp_resp = hcp_resp.to_dict()
-    res = {}
-    print(hcp_resp)
+    if hcp_resp is None:
+        return res
     for i in hcp_resp['patients']:
         pats = pdb.document(str(i)).get().to_dict()
-        print(pats)
         entry = {
             i: pats
         }
@@ -551,7 +551,6 @@ def make_week():
 
 
 def hcp_search(text):
-    print(text)
     api = Env.ALGOLIA_API()
     admin = Env.ALGOLIA_ADMIN()
     client = SearchClient.create(api, admin)
