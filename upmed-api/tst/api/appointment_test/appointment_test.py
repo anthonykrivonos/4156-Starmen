@@ -16,6 +16,7 @@ Note: run as python3 -m upmed-api.tst.api.appointment_test.appointment_test
 appointment_token = 'aoc1989,hw2735,1605841671.366644'
 mockpatient = MockPatient()
 mockhcp = MockHCP()
+mockhcp2 = MockHCP2()
 mockappointment = MockAppointment()
 mockconversation = MockConversation()
 mocktwiliotoken = MockTwilioToken()
@@ -37,7 +38,7 @@ class AppointmentTestCase(unittest.TestCase):
         # Test normal case
         timpstamp = datetime.datetime(2020, 12, 9, 12, 30)
         timpstamp = datetime.datetime.timestamp(timpstamp)
-        mock1.return_value = MockDocument(mockhcp.hcp)
+        mock1.return_value = MockDocument(mockhcp2)
         payload = {
             'token': mockhcp.auth_token,
             'date': timpstamp,
@@ -79,7 +80,7 @@ class AppointmentTestCase(unittest.TestCase):
         # Appointment time out of office hours
         timpstamp = datetime.datetime(2020, 12, 9, 22, 30)
         timpstamp = datetime.datetime.timestamp(timpstamp)
-        mock1.return_value = MockDocument(mockhcp.hcp)
+        mock1.return_value = MockDocument(mockhcp2)
         payload = {
             'token': mockhcp.auth_token,
             'date': timpstamp,

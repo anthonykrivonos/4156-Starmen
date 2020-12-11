@@ -411,7 +411,7 @@ def hcp_edit_profile(db, hid, post_data):
             "calendar": hcp.calendar,
             "specialty": hcp.specialty,
             "title": hcp.title,
-            "hours": hcp.hours,
+            "hours": hours,
             "patients": hcp.patients,
         })
     else:
@@ -513,7 +513,7 @@ def hcp_get_all(hcpdb):
             "phone": h['phone'],
             "profilePicture": h['profilePicture']
         }
-        print(f'{hcp.id}=> {hcp_obj}')
+        # print(f'{hcp.id}=> {hcp_obj}')
         hcps_return.append(hcp_obj)
     return hcps_return
 
