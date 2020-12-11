@@ -59,3 +59,10 @@ def delete_appointment():
     post_data = request.get_json()
     response, status_code = appointment_helper.delete_appointment(post_data)
     return make_response(jsonify(response), status_code)
+
+
+@appointment_endpoints.route('/video', methods=['POST'])
+def video_appointment():
+    post_data = request.get_json()
+    response, status_code = appointment_helper.video(post_data)
+    return make_response(jsonify(response), status_code)
