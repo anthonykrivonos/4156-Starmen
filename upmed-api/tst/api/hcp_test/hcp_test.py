@@ -10,7 +10,7 @@ from src.api.hcp.hcp_helper import hcp_signup, hcp_login, hcp_delete, hcp_set_re
     hcp_get_all, hcp_test_number, hcp_edit_profile, hcp_get_patients, hcp_search, hcp_set_profile_picture, \
     add_hcp, hcp_set_health_events  # noqa
 
-from tst.mock_helpers import MockHCP, MockAppointment, MockPatient, MockSearchClient, MockHCP2  # noqa
+from tst.mock_helpers import MockHCP, MockAppointment, MockPatient, MockSearchClient, MockHCP2, MockSearchClient2  # noqa
 
 """
 HCP Endpoint Tests
@@ -27,6 +27,7 @@ mockpatient = MockPatient()
 mockhcp = MockHCP()
 mockappointment = MockAppointment()
 searchclient = MockSearchClient()
+searchclient2 = MockSearchClient2
 
 unittest.TestLoader.sortTestMethodsUsing = None
 hcp_token = ''
@@ -121,7 +122,8 @@ class HCPTestCase(unittest.TestCase):
         self.assertTrue(mock.called, "twilio not being called")
         self.assertTrue(res['Success'], 0)
 
-    def test_edit_profile(self):
+    @patch("src.hcp_helper.SearchClient.create", return_value=searchclient2)
+    def test_edit_profile(self, mock):
         db = Mock()
         set_func = Mock()
         set_func.to_dict = MagicMock(return_value=mockhcp.hcp.to_dict())

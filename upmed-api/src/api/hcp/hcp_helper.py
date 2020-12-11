@@ -277,7 +277,6 @@ def hcp_edit_profile(db, hid, post_data):
         patients=hcp_resp['patients'],
         hours=schedule
     )
-    print('Getting ALGOLIA')
     # Replace in Algolia
     # 1. Get objects from ALgolia
     api = Env.ALGOLIA_API()
@@ -292,12 +291,8 @@ def hcp_edit_profile(db, hid, post_data):
 
     # Res is all hits of Patients with matching
     hits = res['hits'][0]
-    # print(hits)
     h = hits['objectID']
-    # print(h)
     # Delete stale entry
-
-    print(f'objid: {h}')
     index.delete_object(h)
 
     try:
