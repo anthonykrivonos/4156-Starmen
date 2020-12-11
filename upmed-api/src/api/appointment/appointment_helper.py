@@ -228,8 +228,9 @@ def create_appointment(post_data):
             appt_date = post_data.get('date')
             appt_time = int(int(appt_date) / 1000)
             appt_date = datetime.datetime.fromtimestamp(appt_time)
-            appt_date_minutes = appt_date.hour * 60 + appt_date.minute
+            appt_start_time = appt_date.hour * 60 + appt_date.minute
             # Used if need to check for ending time
+            # appt_end_time = appt_start_time + int(post_data.get('duration'))
             day_number = appt_date.weekday() + 1
             if day_number > 6:
                 day_number = 0
@@ -241,7 +242,7 @@ def create_appointment(post_data):
                     'message': 'Whole day is closed'
                 }
                 return response_object, 401
-            if appt_date_minutes >= int(res[0]):
+            if (appt_start_time >= int(res[0])) and (appt_start_time <= int(res[1])):
                 new_appointment = Appointment(
                     id=appointment_id,
                     date=post_data.get('date'),
@@ -292,8 +293,8 @@ def create_appointment(post_data):
             else:
                 response_object = {
                     'status': 'fail',
-                    'message': 'appointment start '
-                               'or end time out of office hours'
+                    'message': 'appointment starting '
+                               'time out of office hours'
                 }
                 return response_object, 401
         except Exception as e:
