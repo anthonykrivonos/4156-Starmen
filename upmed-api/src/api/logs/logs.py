@@ -16,10 +16,12 @@ logs_endpoints = Blueprint('logs', __name__)
 def root():
     logs = logs_helper.get_logs()
     res = """
-        <h1>Upmed Logs</h1>
-        <h4>Last Updated %s</h4>
-        <div>
-            %s
+        <div style="font-family:monospace;">
+            <h1>Upmed Logs</h1>
+            <h4>Last Updated %s</h4>
+            <div>
+                %s
+            </div>
         </div>
     """ % (datetime.today().strftime("%a %b %y @ %H:%M"),
            '<br/>'.join(logs.split('\n')))

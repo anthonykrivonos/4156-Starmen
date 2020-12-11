@@ -1,3 +1,4 @@
+import sys
 import datetime
 import jwt
 from twilio.rest import Client
@@ -8,6 +9,10 @@ from .env import Env
 """
 Util and helper functions
 """
+
+
+def is_unit_test():
+    return 'unittest' in sys.modules.keys()
 
 
 class Auth:

@@ -9,6 +9,7 @@ from os.path import join, dirname
 path.append(join(dirname(__file__), '../../..'))
 
 from src.util.env import Env  # noqa
+from src.util.util import is_unit_test  # noqa
 
 logs_path = join(
     os.path.dirname(
@@ -37,31 +38,37 @@ def get_logs():
 Begin tailing logs on run
 """
 app = None
+th = None
 
 
 def get_heroku_app():
+    global app
     heroku_conn = heroku3.from_key(Env.HEROKU_API_KEY())
-    super.app = heroku_conn.apps()['upmed-api']
+    app = heroku_conn.apps()['upmed-api']
 
 
 def watch_logs():
+    global app
     if app is not None:
+        # Get initial logs
+        with open(logs_path, "a") as f:
+            f.write(app.get_log())
+
+        # Continue watching logs
         for line in app.stream_log(lines=1):
             with open(logs_path, "a") as f:
                 f.write(line.decode("utf-8") + "\n")
 
 
-th = threading.Thread(target=watch_logs)
-th.start()
-
-"""
-Delete logs before server closes
-"""
-
-
 def delete_logs_on_exit():
+    global th
     os.remove(logs_path)
-    th.join()
+    if th is not None:
+        th.join()
 
 
-atexit.register(delete_logs_on_exit)
+if not is_unit_test():
+    get_heroku_app()
+    th = threading.Thread(target=watch_logs)
+    th.start()
+    atexit.register(delete_logs_on_exit)
