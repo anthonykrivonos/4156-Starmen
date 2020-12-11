@@ -36,8 +36,9 @@ twilio_set_func.connect.messages.create = MagicMock(return_value=default_value_1
 
 class HCPTestCase(unittest.TestCase):
 
+    @patch("src.hcp_helper.add_hcp")
     @patch("src.hcp_helper.requests.get")
-    def test_signup_test(self, mock_request):
+    def test_signup_test(self, mock_request, mock_addhcp):
         db = Mock()
         set_func = Mock()
         set_func.to_dict = MagicMock(return_value=default_value_1)

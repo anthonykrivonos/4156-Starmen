@@ -1,10 +1,11 @@
+import datetime
 import unittest
-import time, datetime
+from os.path import join, dirname
+from sys import path
+from unittest.mock import patch
+
 from src import Patient, HCP, Day, Hours, Status, Appointment, Auth  # noqa
 from tst.mock_helpers import *
-from unittest.mock import MagicMock, Mock, patch
-from sys import path
-from os.path import join, dirname
 
 path.append(join(dirname(__file__), '../../..'))
 auth = Auth()
@@ -92,7 +93,6 @@ class AppointmentTestCase(unittest.TestCase):
             'videoUrl': 'https://www.youtube.com/watch?v=dMTQKFS1tpA'}
         response, status_code = appointment_helper.create_appointment(payload)
         self.assertEqual(401, status_code)
-
 
     @patch("src.appointment.appointment_helper.appointmentsdb.document")
     @patch("src.appointment.appointment_helper.patient_db.document")

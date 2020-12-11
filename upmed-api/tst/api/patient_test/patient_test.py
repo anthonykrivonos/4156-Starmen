@@ -31,17 +31,6 @@ Patient Endpoint Tests
 
 
 class PatientTestCase(unittest.TestCase):
-    # Mock statements for template use
-    # db = Mock()
-    # set_func = Mock()
-    # set_func.to_dict = MagicMock(return_value=default_value_1)
-    # set_func.set = MagicMock(return_value=default_value_1)
-    # set_func.update = MagicMock(return_value=default_value_1)
-    # set_func.get = MagicMock(return_value=default_value_1)
-    # set_func.stream = MagicMock(return_value=default_value_2)
-    # set_func.delete = MagicMock(return_value=default_value_3)
-    # db.stream = MagicMock(return_value=default_value_2)
-    # db.document = MagicMock(return_value=set_func)
 
     @patch("src.patient_helper.add_pat")
     def test_signup_test(self, mock1):
