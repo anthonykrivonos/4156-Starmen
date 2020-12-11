@@ -51,7 +51,7 @@ export const OnSignIn = () => {
 	const [sex, setSex] = useState('M')
 	const [drinker, setDrinker] = useState(Status.NEVER)
 	const [smoker, setSmoker] = useState(Status.NEVER)
-	const [hours, setHours] = useState(INITIAL_HOURS)
+	const [hours, setHours] = useState(HOURS_ALL_DAY)
 	const [npi, setNPI] = useState('')
 	const [hoursValid, setHoursValid] = useState(true)
 
@@ -404,7 +404,7 @@ export const OnSignIn = () => {
 										setHours(hrs)
 										setHoursValid(valid)
 									}}
-									initialHours={HOURS_ALL_DAY}
+									initialHours={hours}
 									className={styles.input_mid}
 									required
 								/>
