@@ -229,14 +229,14 @@ def create_appointment(post_data):
             appt_time = int(int(appt_date) / 1000)
             appt_date = datetime.datetime.fromtimestamp(appt_time)
             appt_date_minutes = appt_date.hour * 60 + appt_date.minute
-            appt_date_end = appt_date_minutes + int(post_data.get('duration'))
+            # Used if need to check for ending time
+            # appt_date_end = appt_date_minutes + int(post_data.get('duration'))
             day_number = appt_date.weekday() + 1
             if day_number > 6:
                 day_number = 0
             office_hours = hcp_ref_details['hours']
             res = office_hours[day_number].strip('][').split(', ')
-            if (appt_date_minutes >= int(res[0]))\
-                    and (appt_date_end <= int(res[1])):
+            if appt_date_minutes >= int(res[0]):
                 new_appointment = Appointment(
                     id=appointment_id,
                     date=post_data.get('date'),
