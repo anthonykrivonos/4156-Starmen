@@ -4,10 +4,11 @@ from sys import path
 from os.path import join, dirname
 
 path.append(join(dirname(__file__), '../../..'))
-from src.api.patient.patient_helper import *  # noqa
-from src.api.hcp.hcp_helper import *  # noqa
-from src.models import Patient, Appointment, HCP, Day, Hours, Status  # noqa
-from src.api.hcp.hcp_helper import hcp_signup, hcp_login, hcp_delete, hcp_set_record, hcp_get_by_token, hcp_notify, hcp_get_all, hcp_test_number, hcp_edit_profile, hcp_get_patients, hcp_search, hcp_set_health_events, hcp_set_profile_picture, add_hcp, hcp_set_health_events  # noqa
+
+from src.models import Patient, HCP # noqa
+from src.api.hcp.hcp_helper import hcp_signup, hcp_login, hcp_delete, hcp_set_record, hcp_get_by_token, hcp_notify, \
+    hcp_get_all, hcp_test_number, hcp_edit_profile, hcp_get_patients, hcp_search, hcp_set_profile_picture, \
+    add_hcp, hcp_set_health_events  # noqa
 
 from tst.mock_helpers import MockHCP, MockAppointment, MockPatient, MockSearchClient, MockHCP2  # noqa
 

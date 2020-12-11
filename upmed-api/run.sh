@@ -9,7 +9,7 @@ echo "done."
 # Coverage
 echo "Running bug checking."
 # shellcheck disable=SC2046
-pylint -v -E --ignore=[,models,tst] -j 0 --suggestion-mode=y -e --report=yes upmed-api
+pylint -v -E --ignore=[,models,tst] -j 0 --suggestion-mode=y -e --report=yes src
 echo "done."
 
 # Reporting

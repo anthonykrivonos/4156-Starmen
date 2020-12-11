@@ -8,13 +8,13 @@ class Database:
     """
 
     def getPatients(self):
-        return db.collection('patients')
+        return self.db.collection('patients')
 
     def getHCP(self):
-        return db.collection('hcp')
+        return self.db.collection('hcp')
 
     def getAppointments(self):
-        return db.collection('appointments')
+        return self.db.collection('appointments')
 
     def __init__(self):
         self.db = db

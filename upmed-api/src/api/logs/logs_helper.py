@@ -5,9 +5,11 @@ import heroku3
 
 from sys import path
 from os.path import join, dirname
-from src.util.env import Env  # noqa
 
 path.append(join(dirname(__file__), '../../..'))
+
+from src.util.env import Env  # noqa
+
 logs_path = join(
     os.path.dirname(
         os.path.realpath(__file__)),

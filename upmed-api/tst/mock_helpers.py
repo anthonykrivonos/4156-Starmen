@@ -2,8 +2,9 @@ from sys import path
 from os.path import join, dirname
 from typing import List
 
-path.append(join(dirname(__file__), '..'))  # noqa
-from src import Patient, HCP, Appointment, Day, Hours, Status, HealthEvent  # noqa
+path.append(join(dirname(__file__), '../..'))
+
+from src import Patient, HCP, Appointment, Day, Hours, Status  # noqa
 from src import Auth  # noqa
 
 

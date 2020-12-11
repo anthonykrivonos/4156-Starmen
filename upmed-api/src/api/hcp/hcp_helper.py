@@ -1,13 +1,12 @@
 import datetime
 from flask import json
-from algoliasearch.search_client import SearchClient  # noqa
+from algoliasearch.search_client import SearchClient
 import requests
 from sys import path
 from os.path import join, dirname
 
 path.append(join(dirname(__file__), '../../..'))
 
-from src.util.firebase.db import Database  # noqa
 from src.util.util import Auth, Twilio  # noqa
 from src.util.env import Env  # noqa
 from src.models.hcp import HCP  # noqa

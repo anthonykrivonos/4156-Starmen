@@ -1,4 +1,3 @@
-import calendar
 import datetime
 from os.path import join, dirname
 from sys import path
@@ -6,11 +5,11 @@ from sys import path
 from twilio.base.exceptions import TwilioRestException
 from twilio.jwt.access_token.grants import VideoGrant, ChatGrant
 
+path.append(join(dirname(__file__), '../../..'))
+
 from src.models.appointment import Appointment  # noqa
 from src.util.firebase.db import Database  # noqa
 from src.util.util import Auth, Twilio  # noqa
-
-path.append(join(dirname(__file__), '../../..'))
 
 # Setup HCP and Patient Document Collections
 auth = Auth
@@ -218,8 +217,8 @@ def create_appointment(post_data):
             }
             return response_object, 401
 
-        appointment_id = str(patient_id) + "," + \
-                         str(doctor_id) + "," + str(post_data.get('date'))
+        appointment_id = str(patient_id) + "," +\
+            str(doctor_id) + "," + str(post_data.get('date'))
         try:
             # Get the existing appointments from HCP:
             hcp_ref = hcp_db.document(str(doctor_id))
@@ -235,7 +234,8 @@ def create_appointment(post_data):
                 day_number = 0
             office_hours = hcp_ref_details['hours']
             res = office_hours[day_number].strip('][').split(', ')
-            if (appt_date_minutes >= int(res[0])) and (appt_date_end <= int(res[1])):
+            if (appt_date_minutes >= int(res[0]))\
+                    and (appt_date_end <= int(res[1])):
                 new_appointment = Appointment(
                     id=appointment_id,
                     date=post_data.get('date'),
@@ -286,7 +286,8 @@ def create_appointment(post_data):
             else:
                 response_object = {
                     'status': 'fail',
-                    'message': 'appointment start or end time out of office hours'
+                    'message': 'appointment start '
+                               'or end time out of office hours'
                 }
                 return response_object, 401
         except Exception as e:

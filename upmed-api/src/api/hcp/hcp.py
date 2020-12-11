@@ -15,7 +15,6 @@ from src.models.hours import Hours  # noqa
 from src.models.day import Day  # noqa
 from src.models.health_event import HealthEvent  # noqa
 from src.models.patient import Patient  # noqa
-from src.models.appointment import Appointment  # noqa
 
 
 # Setup HCP and Patient Document Collections

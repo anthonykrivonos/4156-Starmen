@@ -1,14 +1,13 @@
-from .appointment import appointment_endpoints
-from .patient import patient_endpoints
-from .hcp import hcp_endpoints
-from .logs import logs_endpoints
-
 from sys import path
 from os.path import join, dirname
 
-path.append(join(dirname(__file__), '../..'))
+path.append(join(dirname(__file__), '../../..'))
 
-from src.util import SuperBlueprint  # noqa
+from src.util.super_blueprint import SuperBlueprint  # noqa
+from src.api.appointment.appointment import appointment_endpoints  # noqa
+from src.api.patient.patient import patient_endpoints  # noqa
+from src.api.hcp.hcp import hcp_endpoints  # noqa
+from src.api.logs.logs import logs_endpoints  # noqa
 
 # Blueprint containing all sub-blueprints
 api_endpoints = SuperBlueprint('api', __name__, url_prefix='')

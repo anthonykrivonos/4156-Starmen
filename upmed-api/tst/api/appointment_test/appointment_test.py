@@ -1,13 +1,13 @@
 import datetime
 import unittest
-from os.path import join, dirname
-from sys import path
 from unittest.mock import patch
-
-from src import Patient, HCP, Day, Hours, Status, Appointment, Auth  # noqa
-from tst.mock_helpers import *
+from sys import path
+from os.path import join, dirname
 
 path.append(join(dirname(__file__), '../../..'))
+
+from tst.mock_helpers import *  # noqa
+
 auth = Auth()
 
 """

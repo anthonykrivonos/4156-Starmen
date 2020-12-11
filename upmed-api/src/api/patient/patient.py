@@ -7,14 +7,12 @@ from .patient_helper import pat_delete, pat_edit_profile, pat_login, \
 from sys import path
 from os.path import join, dirname
 
+path.append(dirname(__file__))
 path.append(join(dirname(__file__), '../../..'))
 
 from src.util.firebase.db import Database  # noqa
 from src.util.util import Auth  # noqa
 from src.models.patient import Patient  # noqa
-from src.models.hcp import HCP  # noqa
-from src.models.hours import Hours  # noqa
-from src.models.day import Day  # noqa
 
 patient_endpoints = Blueprint('patient', __name__)
 

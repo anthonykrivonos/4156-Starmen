@@ -9,7 +9,6 @@ path.append(join(dirname(__file__), '../../..'))
 from src.util.util import Auth  # noqa
 from src.util.env import Env  # noqa
 from src.models.patient import Patient  # noqa
-from src.models.appointment import Appointment  # noqa
 from src.models.hcp import HCP  # noqa
 from src.models.hours import Hours  # noqa
 from src.models.day import Day  # noqa
@@ -351,9 +350,15 @@ def pat_search(text):
     client = SearchClient.create(api, admin)
     index = client.init_index('patients')
     index.set_settings({"customRanking": ["desc(followers)"]})
-    index.set_settings({"searchableAttributes":
-                            ["firstName", "lastName", "phone",
-                             "email", "id"]})
+    index.set_settings({
+        "searchableAttributes": [
+            "firstName",
+            "lastName",
+            "phone",
+            "email",
+            "id"
+        ]
+    })
 
     # Res is all hits of Patients with matching
     res = index.search(text)

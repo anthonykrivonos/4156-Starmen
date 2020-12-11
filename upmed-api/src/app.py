@@ -17,6 +17,7 @@ app = Flask(__name__)
 if Env.USE_CORS():
     CORS(app)
 api_endpoints.bind_to_app(app)
+app.app_context().push()
 
 
 @app.route('/')

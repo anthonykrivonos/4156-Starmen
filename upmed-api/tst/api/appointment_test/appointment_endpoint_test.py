@@ -1,9 +1,11 @@
 import unittest
-from src import Patient, HCP, Day, Hours, Status, Appointment, Auth  # noqa
-from src.api.appointment.appointment import *
-from tst.mock_helpers import *
-from unittest.mock import MagicMock, Mock, patch
+from unittest.mock import patch
+from sys import path
+from os.path import join, dirname
 
+path.append(join(dirname(__file__), '../../..'))
+
+from src.api.appointment.appointment import *  # noqa
 
 class AppointmentEndpoints(unittest.TestCase):
     @patch("src.appointment.request")

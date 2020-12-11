@@ -1,8 +1,12 @@
 import unittest
-from src import Patient, HCP, Day, Hours, Status, Appointment, Auth  # noqa
-from src.api.patient.patient import *
-from tst.mock_helpers import *
+from sys import path
+from os.path import join, dirname
 from unittest.mock import patch
+
+path.append(join(dirname(__file__), '../../..'))
+
+from src.api.patient.patient import *  # noqa
+from tst.mock_helpers import *  # noqa
 
 appointment_token = 'aoc1989,hw2735,1605841671.366644'
 mockpatient = MockPatient()

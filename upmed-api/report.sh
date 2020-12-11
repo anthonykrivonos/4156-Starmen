@@ -18,7 +18,7 @@ echo "done."
 echo "Writing Bug report report to reports/${FLDR}/bugreport.txt."
 # shellcheck disable=SC2046
 echo $(header "Bug Checking") >> "reports/${FLDR}/bugreport.txt"
-pylint -v -E --ignore=[,models,tst] -j 0 --suggestion-mode=y -e --report=yes upmed-api >> "reports/${FLDR}/bugreport.txt"
+pylint -v -E --ignore=[,models,tst] -j 0 --suggestion-mode=y -e --report=yes src >> "reports/${FLDR}/bugreport.txt"
 echo "done."
 
 # Reporting

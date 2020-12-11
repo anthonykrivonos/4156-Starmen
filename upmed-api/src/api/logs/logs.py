@@ -1,9 +1,12 @@
-import heroku3
 from datetime import datetime
-
 from flask import Blueprint
+from sys import path
+from os.path import join, dirname
 
-from .logs_helper import get_logs
+path.append(dirname(__file__))
+path.append(join(dirname(__file__), '../../..'))
+
+from . import logs_helper  # noqa
 
 
 logs_endpoints = Blueprint('logs', __name__)
@@ -11,7 +14,7 @@ logs_endpoints = Blueprint('logs', __name__)
 
 @logs_endpoints.route('/', methods=['GET'])
 def root():
-    logs = get_logs()
+    logs = logs_helper.get_logs()
     res = """
         <h1>Upmed Logs</h1>
         <h4>Last Updated %s</h4>

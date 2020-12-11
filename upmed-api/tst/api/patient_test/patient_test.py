@@ -2,10 +2,10 @@ import unittest
 from sys import path
 from os.path import join, dirname
 
-path.append(join(dirname(__file__), '../../..'))  # noqa
+path.append(join(dirname(__file__), '../../..'))
+
 from unittest.mock import MagicMock, Mock, patch
-from src import Patient, HCP, Day, Hours, Status, Appointment, Auth  # noqa
-from src import pat_delete, pat_edit_profile, pat_login, pat_get_by_token, pat_set_profile_picture, pat_signup, \
+from src import Auth, pat_delete, pat_edit_profile, pat_login, pat_get_by_token, pat_set_profile_picture, pat_signup, \
     pat_get_all, pat_get_hcps, pat_get_records, pat_search, add_pat  # noqa
 from tst.mock_helpers import MockHCP, MockPatient, MockAppointment, MockSearchClient, MockHCP2  # noqa
 

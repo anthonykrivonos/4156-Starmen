@@ -8,7 +8,7 @@ with open("./requirements.txt") as req_file:
 
 setup_requirements, test_requirements = [], []
 setup(
-    name='upmed-web',
+    name='src',
     version='0.0.1',
     python_requires=">=3.8",
     packages=find_packages(exclude=["tests"]),
