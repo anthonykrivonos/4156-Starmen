@@ -38,7 +38,7 @@ class AppointmentTestCase(unittest.TestCase):
         # Define initial payload
         # Test normal case
         timpstamp = datetime.datetime(2020, 12, 9, 12, 30)
-        timpstamp = datetime.datetime.timestamp(timpstamp)
+        timpstamp = datetime.datetime.timestamp(timpstamp) * 1000
         mock1.return_value = MockDocument(mockhcp2)
         payload = {
             'token': mockhcp.auth_token,
@@ -80,7 +80,7 @@ class AppointmentTestCase(unittest.TestCase):
 
         # Appointment time out of office hours
         timpstamp = datetime.datetime(2020, 12, 9, 22, 30)
-        timpstamp = datetime.datetime.timestamp(timpstamp)
+        timpstamp = datetime.datetime.timestamp(timpstamp) * 1000
         mock1.return_value = MockDocument(mockhcp2)
         payload = {
             'token': mockhcp.auth_token,

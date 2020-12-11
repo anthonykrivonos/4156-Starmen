@@ -226,7 +226,7 @@ def create_appointment(post_data):
 
             # Get the office hours of HCP
             appt_date = post_data.get('date')
-            appt_date = datetime.datetime.fromtimestamp(appt_date)
+            appt_date = datetime.datetime.fromtimestamp(int(int(appt_date) / 1000))
             appt_date_minutes = appt_date.hour * 60 + appt_date.minute
             appt_date_end = appt_date_minutes + int(post_data.get('duration'))
             day_number = appt_date.weekday() + 1
