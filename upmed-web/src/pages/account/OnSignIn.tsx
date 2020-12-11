@@ -12,7 +12,7 @@ import {
 	SuggestionInput,
 	Error as ErrorPage,
 } from '../../components'
-import { HOURS_ALL_DAY, SPECIALTIES, TIMEOUT_MS } from '../../constants'
+import { HOURS_ALL_DAY, INITIAL_HOURS, SPECIALTIES, TIMEOUT_MS } from '../../constants'
 import { Hasher, URL, Validator, Formatter, Users, Objects, DateTime, Client } from '../../utils'
 import styles from './OnSignIn.module.sass'
 import { Status } from '../../models'
