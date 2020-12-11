@@ -230,7 +230,6 @@ def create_appointment(post_data):
             appt_date = datetime.datetime.fromtimestamp(appt_time)
             appt_date_minutes = appt_date.hour * 60 + appt_date.minute
             # Used if need to check for ending time
-            # appt_date_end = appt_date_minutes + int(post_data.get('duration'))
             day_number = appt_date.weekday() + 1
             if day_number > 6:
                 day_number = 0
