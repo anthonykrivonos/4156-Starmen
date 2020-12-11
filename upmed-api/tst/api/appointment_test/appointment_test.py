@@ -79,7 +79,7 @@ class AppointmentTestCase(unittest.TestCase):
         self.assertEqual(401, status_code)
 
         # Appointment time out of office hours
-        timpstamp = datetime.datetime(2020, 12, 9, 22, 30)
+        timpstamp = datetime.datetime(2020, 12, 9, 3, 30)
         timpstamp = datetime.datetime.timestamp(timpstamp) * 1000
         mock1.return_value = MockDocument(mockhcp2)
         payload = {
