@@ -55,8 +55,11 @@ export const HoursInputs = (props: HoursInputsProps) => {
 	}
 
 	const onDaySelect = (day: string) => {
+		day = day.toLowerCase()
 		if (getHours(day) && getHours(day).startTime === TIME_ABSENT) {
-			updateHours(day, 0, 1440)
+			const startTime = (props.initialHours as any)[day].startTime
+			const endTime = (props.initialHours as any)[day].endTime
+			updateHours(day, startTime, endTime)
 		} else {
 			updateHours(day, TIME_ABSENT, TIME_ABSENT)
 		}

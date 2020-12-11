@@ -306,6 +306,7 @@ export const client = async (endpoint: string, body: any): Promise<any> => {
 		throw new Error('client Error: endpoint must start with a forward slash')
 	}
 	const uri = getUri(endpoint)
+	console.log(body)
 	try {
 		const res = await fetch(uri, {
 			method: 'POST',
@@ -316,6 +317,7 @@ export const client = async (endpoint: string, body: any): Promise<any> => {
 		})
 		return await parseResponse(res)
 	} catch (e) {
+		console.error(e)
 		if (e.toString().includes('401')) {
 			// Unauthorized error, log the user out
 			Users.clearUserToken()
