@@ -180,6 +180,34 @@ class MockSearchClient(object):
         pass
 
 
+class MockClientIndex2(object):
+
+    def set_settings(self):
+        pass
+
+    def search(self):
+        output = {
+            'hits': [{'objectID': 0}, {'objectID': 1}]
+        }
+        return output
+
+    def save_object(self, *args):
+        pass
+
+    def delete_object(self, *args):
+        pass
+
+
+class MockSearchClient2(object):
+
+    def init_index(self, *args):
+        tmp = MockClientIndex2
+        return tmp
+
+    def save_object(self, *args):
+        pass
+
+
 class MockDocument(object):
     stored_value: None
 

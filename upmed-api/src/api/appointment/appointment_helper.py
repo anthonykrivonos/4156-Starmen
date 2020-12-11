@@ -236,6 +236,12 @@ def create_appointment(post_data):
                 day_number = 0
             office_hours = hcp_ref_details['hours']
             res = office_hours[day_number].strip('][').split(', ')
+            if int(res[0]) == -1 and int(res[1]) == -1:
+                response_object = {
+                    'status': 'fail',
+                    'message': 'Whole day is closed'
+                }
+                return response_object, 401
             if appt_date_minutes >= int(res[0]):
                 new_appointment = Appointment(
                     id=appointment_id,

@@ -165,6 +165,32 @@ def pat_edit_profile(db, pid, post_data):
         except KeyError:
             patient.profilePicture = patient_resp['profilePicture']
 
+        api = Env.ALGOLIA_API()
+        admin = Env.ALGOLIA_ADMIN()
+        client = SearchClient.create(api, admin)
+        index = client.init_index('patients')
+        index.set_settings({"customRanking": ["desc(followers)"]})
+        index.set_settings({
+            "searchableAttributes": [
+                "firstName",
+                "lastName",
+                "phone",
+                "email",
+                "id"
+            ]
+        })
+
+        # Res is all hits of Patients with matching
+        res = index.search(patient.id)
+        hits = res['hits'][0]
+        # print(hits)
+        h = hits['objectID']
+        # print(h)
+        # Delete stale entry
+
+        print(f'objid: {h}')
+        index.delete_object(h)
+        add_pat(patient)
         db.document(patient.id).set({
             "id": patient.id,
             "firstName": patient.firstName,
