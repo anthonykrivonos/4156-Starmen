@@ -186,7 +186,6 @@ def signup():
 
         # Helper function
         res = hcp_signup(hcpdb, hcp, hours, post_data.get('npi'))
-        print(res)
         if res != 0:
             response_object = {
                 'id': hcp.id,

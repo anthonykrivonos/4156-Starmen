@@ -135,31 +135,31 @@ class AppointmentTestCase(unittest.TestCase):
 
         # Normal Case
         payload = {'token': mockhcp.auth_token,
-                   'id': appointment_token}
+                   'appointmentId': appointment_token}
         mock1.return_value = mockappointment.appointment
         response, status_code = appointment_helper.appointment_get_by_token(payload)
         self.assertEqual(200, status_code)
 
         # Empty token
         payload = {'token': None,
-                   'id': appointment_token}
+                   'appointmentId': appointment_token}
         response, status_code = appointment_helper.appointment_get_by_token(payload)
         self.assertEqual(401, status_code)
 
         # Wrong token
         payload = {'token': auth.encode_auth_token('pyy2020', "NURSE"),
-                   'id': appointment_token}
+                   'appointmentId': appointment_token}
         response, status_code = appointment_helper.appointment_get_by_token(payload)
         self.assertEqual(401, status_code)
 
         # Missing token
-        payload = {'id': appointment_token}
+        payload = {'appointmentId': appointment_token}
         response, status_code = appointment_helper.appointment_get_by_token(payload)
         self.assertEqual(401, status_code)
 
         # No appointment id
         payload = {'token': mockhcp.auth_token,
-                   'id': None}
+                   'appointmentId': None}
         response, status_code = appointment_helper.appointment_get_by_token(payload)
         self.assertEqual(401, status_code)
 
